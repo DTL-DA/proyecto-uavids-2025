@@ -1,0 +1,17 @@
+{
+ "DNN": {
+  "Par\u00e1metros": 12677,
+  "Muestras por segundo": 33676,
+  "Segundos por \u00e9poca": 2.2
+ },
+ "CNN 1D": {
+  "Par\u00e1metros": 39493,
+  "Muestras por segundo": 16629,
+  "Segundos por \u00e9poca": 4.4
+ },
+ "LSTM": {
+  "Par\u00e1metros": 17477,
+  "Muestras por segundo": 10091,
+  "Segundos por \u00e9poca": 7.3
+ }
+}

@@ -1,0 +1,172 @@
+﻿clave,carpeta,titulo,anio,doi,caracteres,via,errores
+10.1109/jiot.2023.3237661,000,A Secure Intrusion Detection Platform Using Blockchain and Radial Basis Function Neural Networks for Internet of Drones,2023,10.1109/jiot.2023.3237661,0,,
+10.1109/jiot.2022.3200121,001,CGAN-Based Collaborative Intrusion Detection for UAV Networks: A Blockchain-Empowered Distributed Federated Learning Approach,2022,10.1109/jiot.2022.3200121,0,,
+10.3390/electronics10212633,002,Internet of Drones Intrusion Detection Using Deep Learning,2021,10.3390/electronics10212633,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1109/tits.2023.3339728,003,Cyber-Physical Intrusion Detection System for Unmanned Aerial Vehicles,2023,10.1109/tits.2023.3339728,0,,
+10.3390/s23198077,004,Secure and Privacy-Preserving Intrusion Detection and Prevention in the Internet of Unmanned Aerial Vehicles,2023,10.3390/s23198077,78171,Europe PMC,
+10.32604/cmc.2022.020066,005,Optimal Deep Reinforcement Learning for Intrusion Detection in UAVs,2021,10.32604/cmc.2022.020066,0,,
+10.1038/s41598-023-45065-8,006,IoT empowered smart cybersecurity framework for intrusion detection in internet of drones,2023,10.1038/s41598-023-45065-8,89327,Europe PMC,
+10.3390/s19245529,007,Intrusion Detection of UAVs Based on the Deep Belief Network Optimized by PSO,2019,10.3390/s19245529,45118,Europe PMC,
+10.1109/jiot.2024.3426511,008,Real-Time Collaborative Intrusion Detection System in UAV Networks Using Deep Learning,2024,10.1109/jiot.2024.3426511,0,,
+10.3390/drones6110342,009,An Intrusion Detection Model for Drone Communication Network in SDN Environment,2022,10.3390/drones6110342,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.3389/fdata.2021.782902,010,Top-Down Machine Learning-Based Architecture for Cyberattacks Identification and Classification in IoT Communication Networks,2022,10.3389/fdata.2021.782902,78392,Europe PMC,
+10.1002/9781394168002.ch15,011,Network Intrusion Detection of Drones Using Recurrent Neural Networks,2023,10.1002/9781394168002.ch15,0,,
+10.1109/access.2024.3359043,012,Enhanced Black Widow Optimization With Hybrid Deep Learning Enabled Intrusion Detection in Internet of Things-Based Smart Farming,2024,10.1109/access.2024.3359043,62064,https://ieeexplore.ieee.org/ielx7/6287639/6514899/10415191.pdf,
+10.1109/access.2024.3349469,013,A Novel Intrusion Detection System Based on Artificial Neural Network and Genetic Algorithm With a New Dimensionality Reduction Technique for UAV Communication,2024,10.1109/access.2024.3349469,85642,https://ieeexplore.ieee.org/ielx7/6287639/6514899/10379797.pdf,
+10.1109/dasc52595.2021.9594321,014,Enhancing the Security of Unmanned Aerial Systems using Digital-Twin Technology and Intrusion Detection,2021,10.1109/dasc52595.2021.9594321,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1016/j.compeleceng.2023.108704,015,Sea turtle foraging algorithm with hybrid deep learning-based intrusion detection for the internet of drones environment,2023,10.1016/j.compeleceng.2023.108704,0,,
+10.1109/jiot.2024.3360231,016,Intrusion Detection for Unmanned Aerial Vehicles Security: A Tiny Machine Learning Model,2024,10.1109/jiot.2024.3360231,0,,
+10.1109/access.2024.3471806,017,Novel Approach for Intrusion Detection Attacks on Small Drones Using ConvLSTM Model,2024,10.1109/access.2024.3471806,0,,
+10.1109/jsen.2023.3244831,018,A Highly Interpretable Framework for Generic Low-Cost UAV Attack Detection,2023,10.1109/jsen.2023.3244831,0,,
+10.3390/drones9010046,019,Enhanced Intrusion Detection in Drone Networks: A Cross-Layer Convolutional Attention Approach for Drone-to-Drone and Drone-to-Base Station Communications,2025,10.3390/drones9010046,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.3390/computers14070291,020,A Lightweight Intrusion Detection System for IoT and UAV Using Deep Neural Networks with Knowledge Distillation,2025,10.3390/computers14070291,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1002/ett.4212,021,Unknown network attack detection based on open‐set recognition and active learning in drone network,2021,10.1002/ett.4212,0,,
+10.1145/3414045.3415951,022,Autonomous detection of malicious events using machine learning models in drone networks,2020,10.1145/3414045.3415951,0,,
+10.1016/j.eij.2024.100501,023,Improving intrusion detection using LSTM-RNN to protect drones’ networks,2024,10.1016/j.eij.2024.100501,0,,
+10.3390/app14135487,024,Multiple Intrusion Detection Using Shapley Additive Explanations and a Heterogeneous Ensemble Model in an Unmanned Aerial Vehicle’s Controller Area Network,2024,10.3390/app14135487,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1109/tvt.2023.3302814,025,Deep Attention Recognition for Attack Identification in 5G UAV Scenarios: Novel Architecture and End-to-End Evaluation,2023,10.1109/tvt.2023.3302814,69331,https://arxiv.org/pdf/2303.12947,
+10.1007/s00521-025-11276-5,026,A lightweight and efficient intrusion detection system (IDS) for unmanned aerial vehicles,2025,10.1007/s00521-025-11276-5,0,,
+10.1109/tce.2025.3642083,027,MoARNN-AM: Multi-Objective Automated Recurrent Neural Network With Attention Mechanism for Cyber-Attack Detection of UAV,2025,10.1109/tce.2025.3642083,0,,
+10.1109/wccct60665.2024.10541665,028,Deep Learning Based Network intrusion detection for unmanned aerial vehicle (UAV),2024,10.1109/wccct60665.2024.10541665,0,,
+10.1109/icc51166.2024.10622703,029,An Intelligent and Interpretable Intrusion Detection System for Unmanned Aerial Vehicles,2024,10.1109/icc51166.2024.10622703,0,,
+10.21203/rs.3.rs-271920/v1,030,Securing Against DoS/DDoS Attacks in Internet of Flying Things using Experience-based Deep Learning Algorithm,2021,10.21203/rs.3.rs-271920/v1,36187,https://www.researchsquare.com/article/rs-271920/v1.pdf?c=1614912059000,
+10.4018/978-1-5225-9611-0.ch011,031,Traffic Analysis of UAV Networks Using Enhanced Deep Feed Forward Neural Networks (EDFFNN),2019,10.4018/978-1-5225-9611-0.ch011,0,,
+10.1109/cns59707.2023.10288962,032,Machine Learning-Based Intrusion Detection for Swarm of Unmanned Aerial Vehicles,2023,10.1109/cns59707.2023.10288962,0,,
+10.1016/j.aej.2024.02.048,033,Enhanced Dwarf Mongoose optimization algorithm with deep learning-based attack detection for drones,2024,10.1016/j.aej.2024.02.048,0,,
+10.32604/jcs.2023.042486,034,Improving Intrusion Detection in UAV Communication Using an LSTM-SMOTE Classification Method,2022,10.32604/jcs.2023.042486,38942,https://file.techscience.com/files/jcs/2022/TSP_JCS-4-4/TSP_JCS_42486/TSP_JCS_42486.pdf,
+10.3389/fenrg.2024.1491332,035,Enhancing unmanned aerial vehicle and smart grid communication security using a ConvLSTM model for intrusion detection,2024,10.3389/fenrg.2024.1491332,130073,https://www.frontiersin.org/journals/energy-research/articles/10.3389/fenrg.2024.1491332/pdf,
+10.1016/j.aej.2024.11.016,036,Mathematical modelling-based blockchain with attention deep learning model for cybersecurity in IoT-consumer electronics,2024,10.1016/j.aej.2024.11.016,0,,
+10.1109/milcom61039.2024.10773671,037,Graph Neural Network-Based Intrusion Detection System for a Swarm of UAVs,2024,10.1109/milcom61039.2024.10773671,0,,
+10.1109/access.2024.3392618,038,Enhancing Security in IoT-Assisted UAV Networks Using Adaptive Mongoose Optimization Algorithm With Deep Learning,2024,10.1109/access.2024.3392618,60869,https://ieeexplore.ieee.org/ielx7/6287639/6514899/10506908.pdf,
+10.1109/lcn58197.2023.10223340,039,Adaptive Neuro-Fuzzy Inference System-based Lightweight Intrusion Detection System for UAVs,2023,10.1109/lcn58197.2023.10223340,0,,
+10.22266/ijies2025.0531.33,040,A Deep Learning Paradigm for Intrusion Detection in Unmanned Aerial Vehicle Networks Using Extended LSTM,2025,10.22266/ijies2025.0531.33,91280,https://doi.org/10.22266/ijies2025.0531.33,
+10.3390/drones10020125,041,Securing UAV Swarms with Vision Transformers: A Byzantine-Robust Federated Learning Framework for Cross-Modal Intrusion Detection,2026,10.3390/drones10020125,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1109/tce.2026.3667039,042,Multi-Agent Federated Edge Learning for UAV-IDS in Smart City IoT Environment,2026,10.1109/tce.2026.3667039,0,,
+10.1109/ojcs.2025.3616394,043,FedWGCA: A Federated Learning Based AAV Intrusion Detection With Gradient Clipping and Attention-Based Neural Networks,2025,10.1109/ojcs.2025.3616394,0,,
+10.1109/icccnt61001.2024.10726101,044,LSTM-based Deep Learning Model for Cyber-attack Detection Systems in the Internet of Drones,2024,10.1109/icccnt61001.2024.10726101,0,,
+10.1109/access.2024.3386570,045,Modified Marine Predators Algorithm With Deep Learning-Driven Security Solution for IoT-Assisted UAV Networks,2024,10.1109/access.2024.3386570,51447,https://ieeexplore.ieee.org/ielx7/6287639/6514899/10495038.pdf,
+10.7717/peerj-cs.3500,046,RoboLSTM-IDS: multi-dataset evaluation of deep learning framework for UAV network,2026,10.7717/peerj-cs.3500,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1109/tce.2026.3658881,047,GenFed-IDS: A Lightweight Federated Generative AI Framework for UAV Anomaly Detection in Rescue Operations,2026,10.1109/tce.2026.3658881,0,,
+10.1109/jiot.2025.3610367,048,EIDS-DTL: Edge-Based Intrusion Detection System for IoUAVs Using Metaheuristic Task Optimization and Deep Transfer Learning,2025,10.1109/jiot.2025.3610367,0,,
+10.1109/icc52391.2025.11160712,049,Ensemble Learning-Based Intrusion Detection System for Aerial Base Stations Against Adversarial Evasion Attacks,2025,10.1109/icc52391.2025.11160712,0,,
+10.1109/icecet61485.2024.10698453,050,Deep Learning Based Intrusion Detection for Cybersecurity in Unmanned Aerial Vehicles Network,2024,10.1109/icecet61485.2024.10698453,0,,
+10.1109/tiv.2023.3325553,051,FENet: A Feature Explanation Network with a Hierarchical Interpretable Architecture for Intelligent Decision-Making,2023,10.1109/tiv.2023.3325553,0,,
+10.17762/ijritcc.v11i6s.6960,052,Decentralized Machine Learning based Energy Efficient Routing and Intrusion Detection in Unmanned Aerial Network (UAV),2023,10.17762/ijritcc.v11i6s.6960,61634,https://ijritcc.org/index.php/ijritcc/article/download/6960/5999,
+10.3390/app16073204,053,NeSySwarm-IDS: End-to-End Differentiable Neuro-Symbolic Logic for Privacy-Preserving Intrusion Detection in UAV Swarms,2026,10.3390/app16073204,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1109/iwcmc65282.2025.11059673,054,UAV DoS Attack Detection using a Hybrid Transformer-LSTM Approach,2025,10.1109/iwcmc65282.2025.11059673,0,,
+10.3389/fcomp.2025.1545282,055,Integrating artificial intelligence for improved security of IoT-drones through cyber-physical attack detection,2025,10.3389/fcomp.2025.1545282,71431,https://www.frontiersin.org/journals/computer-science/articles/10.3389/fcomp.2025.1545282/pdf,
+10.7546/crabs.2024.08.09,056,Radial Basis Function Neural Networks (RBFNN) for Secure Intrusion Detection in the Internet of Drones (IoD),2024,10.7546/crabs.2024.08.09,18590,https://www.proceedings.bas.bg/index.php/cr/article/download/593/573,
+10.1051/e3sconf/202447203015,057,Multi-shift spatio-temporal features assisted deep neural network for detecting the intrusion of wild animals using surveillance cameras,2024,10.1051/e3sconf/202447203015,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.3934/math.2024348,058,Hybrid arithmetic optimization algorithm with deep learning model for secure Unmanned Aerial Vehicle networks,2024,10.3934/math.2024348,51766,http://www.aimspress.com/aimspress-data/math/2024/3/PDF/math-09-03-348.pdf,
+10.1109/sds64317.2024.10883892,059,A Robust Federated Deep Learning-Based Framework to Mitigate Routing Attacks in Flying Ad Hoc Networks,2024,10.1109/sds64317.2024.10883892,0,,
+10.1109/gcwkshps68340.2025.11590964,060,Quantum Machine Learning for UAV Swarm Intrusion Detection,2025,10.1109/gcwkshps68340.2025.11590964,45920,https://arxiv.org/pdf/2509.01812,
+10.1109/dasc66011.2025.11257309,061,An Efficient Privacy-preserving Intrusion Detection Scheme for UAV Swarm Networks,2025,10.1109/dasc66011.2025.11257309,62620,https://arxiv.org/pdf/2511.22791,
+10.1109/cits70307.2026.11637173,062,XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles,2026,10.1109/cits70307.2026.11637173,47234,https://arxiv.org/pdf/2605.13922,
+10.1038/s41598-026-55446-4,063,BPBiLSTM-IDS: a lightweight intrusion detection framework for cyber-physical UAV networks,2026,10.1038/s41598-026-55446-4,66626,Europe PMC,
+10.1186/s13635-026-00234-w,064,Advanced explainable ensemble models for multi-class intrusion detection in heterogeneous drone and industrial networks,2026,10.1186/s13635-026-00234-w,0,,
+10.1109/icaiic68212.2026.11454237,065,Hybrid Blockchain-Assisted Federated Learning Intrusion Detection System for DoS Attacks in UAV Sensor Network,2026,10.1109/icaiic68212.2026.11454237,0,,
+10.3389/fphy.2025.1660104,066,Intrusion detection model of UAV system based on machine learning and neural network,2026,10.3389/fphy.2025.1660104,97703,https://public-pages-files-2025.frontiersin.org/journals/physics/articles/10.3389/fphy.2025.1660104/pdf,
+10.1109/access.2025.3642632,067,Intrusion Detection Systems for the Internet of Drones Security Using Multi-Teacher Knowledge Distillation,2025,10.1109/access.2025.3642632,0,,
+10.1109/tnsm.2024.3448312,068,IoTDL2AIDS: Toward IoT-Based System Architecture Supporting Distributed LSTM Learning for Adaptive IDS on UAS,2024,10.1109/tnsm.2024.3448312,0,,
+10.1109/mcsoc60832.2023.00044,069,FPGA Accelerated Decentralized Reinforcement Learning for Anomaly Detection in UAV Networks,2023,10.1109/mcsoc60832.2023.00044,0,,
+10.3390/sym18081292,070,Fed-CGIDS-UAV: Federated Causal Graph Learning for Cross-Domain Intrusion Detection in Cyber-Physical Drone Networks,2026,10.3390/sym18081292,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.3390/drones10070503,071,"Dual-Impact Feature Selection for Adversarially Robust, Functionality-Preserving UAV Intrusion Detection",2026,10.3390/drones10070503,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1038/s41598-026-52524-5,072,Residual-aware lightweight deep learning framework for high-fidelity intrusion detection in UAV swarm networks,2026,10.1038/s41598-026-52524-5,138864,Europe PMC,
+10.1109/jiot.2026.3665688,073,Enhancing UAV Intrusion Detection Against Adversarial Samples Based on AdvGAN and Decision Boundary Reconstruction,2026,10.1109/jiot.2026.3665688,0,,
+10.1016/j.trpro.2026.04.074,074,A Hierarchical Federated Learning Framework for Adaptive UAV Security in Smart Cities,2026,10.1016/j.trpro.2026.04.074,0,,
+10.1109/jiot.2025.3630488,075,Generalizable Topology-Aware GNN-Based Intrusion Detection System for UAV Swarms,2025,10.1109/jiot.2025.3630488,0,,
+10.1109/prdc67299.2025.00014,076,GALAXY: Generalized Attention-Based LSTM Architecture with External Query for Intrusion Detection in UAV Communication,2025,10.1109/prdc67299.2025.00014,0,,
+10.1002/spy2.70112,077,Towards Securing UAV‐Assisted Edge Computing: A Trust‐Based Intrusion Detection Framework With Multi‐Source Feedback,2025,10.1002/spy2.70112,0,,
+10.1016/j.rineng.2025.106838,078,Integrating convolutional stacked long short-term memory with bio-inspired algorithm for secure unmanned aerial vehicle communication in SDN environment,2025,10.1016/j.rineng.2025.106838,0,,
+10.1109/raeeucci63961.2025.11048324,079,A Hybrid Multilayer Perceptron and Firefly Optimization for Network Intrusion Detection System,2025,10.1109/raeeucci63961.2025.11048324,0,,
+10.47000/tjmcs.1568820,080,Evaluation of Machine Learning Models for Attack Detection in Unmanned Aerial Vehicle Networks,2024,10.47000/tjmcs.1568820,41275,https://dergipark.org.tr/en/download/article-file/4294376,
+10.1109/icemce64157.2024.10862571,081,Optimization of UAV Intrusion Detection Based on LSTM-RNN,2024,10.1109/icemce64157.2024.10862571,0,,
+10.17762/ijritcc.v11i9.8338,082,A Deep CNN Framework for UAV Intrusion Detection in Intelligent Systems,2023,10.17762/ijritcc.v11i9.8338,62318,https://ijritcc.org/index.php/ijritcc/article/download/8338/6586,
+10.1109/smarttechcon57526.2023.10391679,083,A Novel Distributed Anomaly Intrusion Detection Model for Drone Swarm Network in Smart Nations,2023,10.1109/smarttechcon57526.2023.10391679,0,,
+10.1109/nana56854.2022.00048,084,Lightweight and Efficient Distributed Cooperative Intrusion Detection System for Intelligent Swarms,2022,10.1109/nana56854.2022.00048,0,,
+10.47000/tjmcs.1828534,085,Federated Learning for Intrusion Detection in UAV Networks,2026,10.47000/tjmcs.1828534,76431,https://dergipark.org.tr/en/download/article-file/5442930,
+10.1109/rast69551.2026.11672533,086,Evaluating Incremental Deep Learning for Cyberattack Detection in UAV Communication Networks,2026,10.1109/rast69551.2026.11672533,0,,
+10.1109/pimrc59610.2024.10817244,087,Enhanced Intrusion Detection System for Multiclass Classification in UAV Networks,2024,10.1109/pimrc59610.2024.10817244,63134,https://arxiv.org/pdf/2406.10417,
+10.48550/arxiv.2607.17025,088,Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation,2026,10.48550/arxiv.2607.17025,75631,https://arxiv.org/pdf/2607.17025,
+10.55041/ijsrem68442,089,Auto Healing Intrusion Detection System with Reinforcement Learning for Proactive Defence in Autonomous IIoT Environment,2026,10.55041/ijsrem68442,28384,https://ijsrem.com/download/auto-healing-intrusion-detection-system-with-reinforcement-learning-for-proactive-defence-in-autonomous-iiot-environment/fulltext.pdf,
+10.4018/979-8-2600-0685-6.ch009,090,Defense-Aware Edge Intelligence Framework for Mitigating Adversarial Attacks in Autonomous UAV and Vehicular Networks,2026,10.4018/979-8-2600-0685-6.ch009,0,,
+10.1145/3842435.3843954,091,Attention-Guided UAV Intrusion Detection with BSO-Based Feature Selection,2026,10.1145/3842435.3843954,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.70102/afts.2026.1836.229,092,ASSESSING LEARNING-BASED MODELS FOR INTRUSION DETECTION IN UAV NETWORKS,2026,10.70102/afts.2026.1836.229,63143,https://arhivzatehnickenauke.com/article/1255/pdf/download,
+deepreinforcedadaptivegraphoptimizationnetworkforintelligent,093,Deep Reinforced Adaptive Graph Optimization Network for Intelligent Intrusion Detection in UAV Communication Networks,2026,,38606,https://indianengineeringjournal.com/index.php/journal/article/download/270/25,
+10.65073/3122-3508.1026,094,Adaptive UAV Network Defense Against Cyber Threats Using GT-TGC-DRL Hybrid Framework,2026,10.65073/3122-3508.1026,0,,
+10.1109/idap71869.2026.11728089,095,Machine Learning-Based Cyber Attack Detection in UAV Networks and Performance Evaluation,2026,10.1109/idap71869.2026.11728089,0,,
+explainabledeepensemblelearningformulticlasscyberattackdetec,096,Explainable Deep Ensemble Learning for Multi-Class Cyberattack Detection in Heterogeneous Drone–Industrial IoT Networks,2026,,35738,https://aimjournals.com/index.php/ijaair/article/download/954/858/1977,
+edgeawaregatv2bilstmframeworkforspatiotemporalintrusiondetec,097,Edge-Aware GATv2-BiLSTM Framework for Spatiotemporal Intrusion Detection in Autonomous UAV Command-and-Control Networks,2026,,86127,https://ijisae.org/index.php/IJISAE/article/download/8549/7538,
+10.1109/tits.2026.3703012,098,UAV Fleet Intrusion Detection and Fault Diagnosis for ITS Operations,2026,10.1109/tits.2026.3703012,0,,
+10.1109/iccmc69250.2026.11625008,099,Designing Graph Attention Transformer-based Secured Malicious Node Detection and Isolation Model in FANET with Deep Consensus Blockchain and Authentication Procedures,2026,10.1109/iccmc69250.2026.11625008,0,,
+10.1109/csrswtc71154.2026.11669582,100,Hybrid Intelligent Security Framework for UAV-IoT Networks Using Explainable AI and Federated Learning,2026,10.1109/csrswtc71154.2026.11669582,0,,
+10.1109/icc59461.2026.11587659,101,PQ-TabNet: A Post-Quantum Secure Framework for Intrusion Detection in UAV Networks,2026,10.1109/icc59461.2026.11587659,0,,
+10.1109/sm69703.2026.11614123,102,Design and Evaluation of an ML-Driven Technique for UAV Threat Detection,2026,10.1109/sm69703.2026.11614123,0,,
+10.1109/icads69450.2026.11545511,103,Spectral Attention GNN Framework for Secure Telemetry in UAV and Satellite Communication Systems,2026,10.1109/icads69450.2026.11545511,0,,
+10.1109/icce67443.2026.11449873,104,A Lightweight Intrusion Detection System for Unmanned Aerial Vehicles Using CNN,2026,10.1109/icce67443.2026.11449873,0,,
+enhancinguavsecurityahybridmachinelearningapproachtointrusio,105,ENHANCING UAV SECURITY: A HYBRID MACHINE LEARNING APPROACH TO INTRUSION DETECTION IN UAV NETWORKS,2026,,0,,
+10.1109/tcomm.2026.3693173,106,Enhance UAV Network Resilience by Malicious Traffic Detection: A Twin Graph Encoder Approach,2026,10.1109/tcomm.2026.3693173,0,,
+10.1109/ojcoms.2026.3698792,107,A Federated Learning-Based Hybrid Architecture for Multi-Class Attack Detection in UAVs Communications,2026,10.1109/ojcoms.2026.3698792,0,,
+10.1049/cmu2.70226,108,SBOA–TFT: A Bio‐Inspired Temporal Fusion Framework for Transparent Intrusion Detection in Flying Ad Hoc Networks,2026,10.1049/cmu2.70226,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1109/jiot.2026.3746624,109,Toward Explainable and Generalizable Intrusion Detection for UAV Networks: A Comparative Multi-Dataset Evaluation,2026,10.1109/jiot.2026.3746624,0,,
+10.1109/gcwkshps68340.2025.11591214,110,MTL4UAV: A Multi-Task Learning Framework for UAV Attack Detection and Classification,2025,10.1109/gcwkshps68340.2025.11591214,0,,
+lightweightmlbaseddroneintrusiondetectionsystemthroughmodelc,111,Lightweight ML-Based Drone Intrusion Detection System through Model Compression,2025,,0,,
+10.1109/ciees66347.2025.11300034,112,Deep Learning-Based Architectures for UAV Network Attack Detection,2025,10.1109/ciees66347.2025.11300034,0,,
+10.1109/icecie66637.2025.11363799,113,Hybrid Convolutional–Bidirectional LSTM Model for Intrusion Detection in Unmanned Aerial Vehicle Cyber-Physical Networks,2025,10.1109/icecie66637.2025.11363799,0,,
+10.21123/2411-7986.5039,114,A Comparative of Detecting Physical and Cyber Attacks on Drones Using Machine Learning and Deep Learning Techniques,2025,10.21123/2411-7986.5039,0,,Acceso abierto: <HTTPError 403: 'Forbidden'>
+10.1109/etncc66224.2025.11299731,115,Adaptive AI-Driven Intrusion Detection Systems for Unmanned Aerial Vehicles Networks,2025,10.1109/etncc66224.2025.11299731,0,,
+10.1109/icscsa66339.2025.11171281,116,Hybrid Multi-Head Attention and Multi-Scale CNN for Drone Network Intrusion Detection,2025,10.1109/icscsa66339.2025.11171281,0,,
+10.1109/space65882.2025.11170598,117,Machine Learning Algorithms to Strengthen Cyber Defense Mechanisms in Unmanned Aerial Vehicles,2025,10.1109/space65882.2025.11170598,0,,
+10.1109/icaiem66060.2025.11139345,118,Research on Lightweight AI Models for UAV Identity Authentication and Intrusion Detection in the Low-Altitude Economy,2025,10.1109/icaiem66060.2025.11139345,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/compsystech65493.2025.11136929,119,A Guided Kolmogorov-Arnold Network for Enhanced Security in Assistive UAV Technologies,2025,10.1109/compsystech65493.2025.11136929,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/gcon65540.2025.11173397,120,DDoS Attack Detection using Machine Learning for UAV Networks,2025,10.1109/gcon65540.2025.11173397,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/icsc65596.2025.11140483,121,A Lightweight and Efficient Intrusion Detection System for Drone Networks,2025,10.1109/icsc65596.2025.11140483,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/icvadv63329.2025.10961570,122,Drone Cyber Attack Detection Through Machine Learning,2025,10.1109/icvadv63329.2025.10961570,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/msn63567.2024.00173,123,Intrusion Detection Method of Unmanned Aerial Vehicles Based on Lightweight Transformer,2024,10.1109/msn63567.2024.00173,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.12794/metadc2416009,124,Intrusion Detection System for Drones,2024,10.12794/metadc2416009,0,,"Acceso abierto: URLError(SSLCertVerificationError(1, '[SSL: CERTIF | arXiv: <HTTPError 429: 'Unknown Error'>"
+lightweightintrusiondetectionforiodinfrastructureusingdeeple,125,Lightweight Intrusion Detection for IoD Infrastructure using Deep Learning,2024,,41996,https://jcbi.org/index.php/Main/article/download/433/334,
+10.70675/9327dab4zf089z4dbez8942zf3e3a822a69c,126,Intrusion detection in a fleet of drones,2022,10.70675/9327dab4zf089z4dbez8942zf3e3a822a69c,0,,"Acceso abierto: URLError(TimeoutError(10060, 'Se produjo un error  | arXiv: <HTTPError 429: 'Unknown Error'>"
+10.62791/20214,127,Decentralized reinforcement learning with FPGA acceleration for anomaly detection in UAV network,2022,10.62791/20214,0,https://doi.org/10.62791/20214,arXiv: <HTTPError 429: 'Unknown Error'>
+10.3390/electronics15132945,128,Time-Series Modeling-Based Early Detection of DDoS Attacks in Drone Networks,2026,10.3390/electronics15132945,0,,Acceso abierto: <HTTPError 403: 'Forbidden'> | arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/ic3it69043.2026.11567536,129,A Comprehensive Framework for Real-Time Detection of Cyberattacks in Drone Networks,2026,10.1109/ic3it69043.2026.11567536,0,https://doi.org/10.1109/ic3it69043.2026.11567536,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/icetems66917.2026.11470300,130,Sky Shield: ML-Driven DDoS for Detection &Defense in Multi-UAV Communication Networks,2026,10.1109/icetems66917.2026.11470300,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/icicv68925.2026.11554612,131,Towards Secure UAV Ecosystems: A GAN-Assisted CNN–BiLSTM Hybrid Deep Learning Framework for 6G Edge Networks,2026,10.1109/icicv68925.2026.11554612,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.32604/cmc.2026.080874,132,HADAR-UAV: Risk-Calibrated One-Class Learning Framework for Zero-Day Intrusion Detection in Unmanned Aerial Vehicle Networks,2026,10.32604/cmc.2026.080874,0,https://www.techscience.com/cmc/online/detail/27579/pdf,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/s00521-022-07015-9,133,High-performance intrusion detection system for networked UAVs via deep learning,2022,10.1007/s00521-022-07015-9,0,https://doi.org/10.1007/s00521-022-07015-9,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.eswa.2024.124215,134,Real-time fusion multi-tier DNN-based collaborative IDPS with complementary features for secure UAV-enabled 6G networks,2024,10.1016/j.eswa.2024.124215,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-3-030-78811-7_22,135,Intelligent Intrusion Detection System for a Group of UAVs,2021,10.1007/978-3-030-78811-7_22,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/s12652-022-04362-2,136,Energy-aware ACO-DNN optimization model for intrusion detection of unmanned aerial vehicle (UAVs),2022,10.1007/s12652-022-04362-2,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.vehcom.2024.100726,137,Unmanned aerial vehicle intrusion detection: Deep-meta-heuristic system,2024,10.1016/j.vehcom.2024.100726,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.comnet.2025.111157,138,UGL: A comprehensive hybrid model integrating GCN and LSTM for enhanced intrusion detection in UAV controller area networks,2025,10.1016/j.comnet.2025.111157,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.future.2024.07.051,139,"A study on characterizing energy, latency and security for Intrusion Detection Systems on heterogeneous embedded platforms",2024,10.1016/j.future.2024.07.051,0,,Acceso abierto: <HTTPError 403: 'Forbidden'> | arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-3-031-31108-6_3,140,A Comparative Study of Attribute Selection Algorithms on Intrusion Detection System in UAVs: A Case Study of UKM-IDS20 Dataset,2023,10.1007/978-3-031-31108-6_3,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.compeleceng.2022.108368,141,Oppositional poor and rich optimization with deep learning enabled secure internet of drone communication system,2022,10.1016/j.compeleceng.2022.108368,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.adhoc.2026.104251,142,Spatio-temporal graph neural networks for zero-day intrusion detection in low-altitude autonomous UAV swarms,2026,10.1016/j.adhoc.2026.104251,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/s12083-024-01753-4,143,Secure communication routing and attack detection in UAV networks using Gannet Walruses optimization algorithm and Sheppard Convolutional Spinal Network,2024,10.1007/s12083-024-01753-4,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.vehcom.2026.101094,144,Resilient UAV Network Security: Cross-Attentive Alignment of Sparse and Temporal Features for Adversarial Intrusion Detection,2026,10.1016/j.vehcom.2026.101094,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.5281/zenodo.22764611,145,Spatio-Temporal Graph Neural Networks for UAV Swarm Intrusion Detection,2026,10.5281/zenodo.22764611,0,https://doi.org/10.5281/zenodo.22764611,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-3-032-37218-5_17,146,Evaluation of Machine Learning Approaches for Intrusion Detection in UAV Networks,2026,10.1007/978-3-032-37218-5_17,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.5281/zenodo.22026998,147,Graph Neural Networks for Zero-Day Intrusion Detection in UAV Swarms,2026,10.5281/zenodo.22026998,0,https://doi.org/10.5281/zenodo.22026998,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.adhoc.2026.104348,148,FED-FAN: Federated learning-based intrusion detection system for Flying Ad-hoc Networks,2026,10.1016/j.adhoc.2026.104348,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-3-032-22542-9_7,149,A Machine Learning Approach for Intrusion Detection in Drone Communication Networks,2026,10.1007/978-3-032-22542-9_7,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/s11277-026-12177-z,150,A Deep Learning-Based Collaborative Intrusion Detection System for UAV-Enabled Integrated Sensing and Communication,2026,10.1007/s11277-026-12177-z,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/s13369-026-11493-7,151,ADUX: Improving Adversarial Attack Detection in UAV Networks Using XAI,2026,10.1007/s13369-026-11493-7,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.5281/zenodo.20677110,152,Spatio-Temporal Neural Networks for UAV Swarm Intrusion Detection,2026,10.5281/zenodo.20677110,0,https://doi.org/10.5281/zenodo.20677110,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/s13042-026-03108-2,153,DDoS attack detection using semi-supervised hyperparameter optimized federated learning in software defined internet of drones,2026,10.1007/s13042-026-03108-2,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/iccsic69301.2026.11521704,154,A Hybrid CNN Framework for Intrusion Detection in Unmanned Aerial Vehicles,2026,10.1109/iccsic69301.2026.11521704,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1109/akgec68790.2026.11485701,155,Federated GNN-DTCN-LSTM Based Lightweight Intrusion Detection System for UAV/FANET Environments Using Feature Optimization,2026,10.1109/akgec68790.2026.11485701,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-3-032-08977-9_14,156,Robust UAV Intrusion Detection via Federated Learning: A Comparison of NN and CNN-LSTM Models,2026,10.1007/978-3-032-08977-9_14,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-981-95-8329-4_24,157,A Federated Learning Framework with LSTM-RNN for UAV Network Intrusion Detection,2026,10.1007/978-981-95-8329-4_24,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.2139/ssrn.7285240,158,ConNeL-IDS: Continual Cross-Domain Intrusion Detection for Heterogeneous Aerial Vehicular Networks,2026,10.2139/ssrn.7285240,0,,Acceso abierto: <HTTPError 403: 'Forbidden'> | arXiv: <HTTPError 429: 'Unknown Error'>
+10.2139/ssrn.7365900,159,A Deep Learning Framework for Real-Time Intrusion Detection in Drone Networks,2026,10.2139/ssrn.7365900,0,,Acceso abierto: <HTTPError 403: 'Forbidden'> | arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-3-032-22426-2_41,160,Lightweight Intrusion Detection System for UAV-Based Search and Rescue Operations Using Machine and Deep Learning Models,2026,10.1007/978-3-032-22426-2_41,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-3-032-22426-2_47,161,Performance Benchmarking of ROBOTa Optimized Machine and Deep Learning Models for UAV IDS,2026,10.1007/978-3-032-22426-2_47,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-3-032-22426-2_27,162,Benchmarking ML-Based Intrusion Detection Systems for Secure Drone Delivery Operations in the Remote Terrains,2026,10.1007/978-3-032-22426-2_27,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.2139/ssrn.7411186,163,Certified and Adaptive Lightweight Convolutional Intrusion Detection forOn-Board UAV Network Defence in Electronic-Warfare-Contested Environments,2026,10.2139/ssrn.7411186,0,,Acceso abierto: <HTTPError 403: 'Forbidden'> | arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-981-96-5988-3_12,164,Collaborative AI-Driven Intrusion Detection and Response for UAV Networks,2025,10.1007/978-981-96-5988-3_12,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.sysarc.2026.104038,165,H-MicroKAN: An energy-aware hierarchical Kolmogorov–Arnold Network for TinyML UAV intrusion detection with conditional inference,2026,10.1016/j.sysarc.2026.104038,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1007/978-981-92-6513-8_7,166,Data-Driven Intrusion Detection for UAV Networks: A Machine-Learning System for Multi-attack Recognition,2026,10.1007/978-981-92-6513-8_7,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.comnet.2026.112806,167,A communication-efficient semi-supervised federated intrusion detection method for dynamic UAV swarm networks,2026,10.1016/j.comnet.2026.112806,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.iot.2026.102095,168,An AI-driven framework for intrusion detection and predictive threat modeling in UAV ecosystem,2026,10.1016/j.iot.2026.102095,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.1016/j.iot.2026.102059,169,A lightweight UAV intrusion detection model based on physical consistency constraints and frequency-domain perturbations,2026,10.1016/j.iot.2026.102059,0,,arXiv: <HTTPError 429: 'Unknown Error'>
+10.2139/ssrn.6328787,170,Energy-Aware Hierarchical Kolmogorov–Arnold Networks for TinyML-Based UAV Intrusion Detection on Microcontrollers,2026,10.2139/ssrn.6328787,0,,Acceso abierto: <HTTPError 403: 'Forbidden'> | arXiv: <HTTPError 429: 'Unknown Error'>

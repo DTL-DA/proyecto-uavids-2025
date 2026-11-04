@@ -1,0 +1,24 @@
+{
+ "estado": "confirmada por el autor el 3 de noviembre de 2026; el nombre de la unidad se alineó con el enunciado el 4 de noviembre de 2026, sin cambiar la partición",
+ "tipo_problema": "1. Clasificación con datos tabulares, multiclase de cinco categorías",
+ "metrica_primaria": "F1 macro en el conjunto de prueba",
+ "metricas_secundarias": [
+  "accuracy",
+  "balanced accuracy",
+  "precision, recall y F1 (macro, ponderado y por clase)",
+  "AUC-ROC macro",
+  "AUC-PR macro",
+  "MCC",
+  "ECE"
+ ],
+ "margen_delta": 0.01,
+ "alfa": 0.05,
+ "unidad_independencia": "serie: flujos consecutivos según FlowID, aproximada con bloques de 1000 flujos contiguos",
+ "particion": {
+  "entrenamiento": 0.64,
+  "validacion": 0.16,
+  "prueba": 0.2,
+  "semilla": 42,
+  "estrategia": "estratificada por clase y agrupada por bloques"
+ }
+}

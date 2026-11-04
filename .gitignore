@@ -1,0 +1,22 @@
+# Solo se versiona el entregable
+/*
+!/.gitignore
+!/README.md
+!/requirements.txt
+!/Entregable 1 - UAVIDS-2025.ipynb
+!/Entregable_1_UAVIDS_2025/
+
+# Se descargan o se regeneran al ejecutar el cuaderno
+/Entregable_1_UAVIDS_2025/datos/
+/Entregable_1_UAVIDS_2025/resultados/datos_preparados.npz
+/Entregable_1_UAVIDS_2025/resultados/resultados_listos.txt
+
+# Texto de terceros: buscar_literatura.py vuelve a consultar las fuentes
+/Entregable_1_UAVIDS_2025/literatura/exportaciones/*
+!/Entregable_1_UAVIDS_2025/literatura/exportaciones/2026-11-03_resumen.json
+
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+_build/
+*.log
