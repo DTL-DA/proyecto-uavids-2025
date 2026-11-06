@@ -10,6 +10,7 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -66,7 +67,15 @@ def openalex(doi, carpeta):
 def arxiv(titulo, carpeta):
     limpio = re.sub(r"[^A-Za-z0-9 ]", " ", titulo)
     consulta = urllib.parse.quote(f'ti:"{" ".join(limpio.split()[:12])}"')
-    xml, _ = traer(f"http://export.arxiv.org/api/query?search_query={consulta}&max_results=3")
+    # arXiv responde 429 si las consultas van muy seguidas
+    for espera in (4, 30, 60, 120):
+        time.sleep(espera)
+        try:
+            xml, _ = traer(f"http://export.arxiv.org/api/query?search_query={consulta}&max_results=3")
+            break
+        except urllib.error.HTTPError as error:
+            if error.code != 429 or espera == 120:
+                raise
     ns = {"a": "http://www.w3.org/2005/Atom"}
     for e in ET.fromstring(xml).findall("a:entry", ns):
         hallado = re.sub(r"[^a-z0-9]", "", e.find("a:title", ns).text.lower())

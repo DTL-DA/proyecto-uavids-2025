@@ -21,8 +21,8 @@ SIN_DOI = {"sin-doi:dragon": "Deep Reinforced Adaptive Graph Optimization Networ
 # modelos: arquitecturas de Deep Learning usadas como referencia o comparación, normalizadas por familia
 ESTUDIOS = [
     {"doi": "10.1109/cns66487.2025.11194990", "dataset": "UAVIDS-2025", "entrada": "flujos de red simulados", "propuesto": "conjunto de datos y comparación de modelos", "modelos": ["DNN/MLP", "CNN", "LSTM"],
-     "detalle": "DNN 16-128-64-32-5 con dropout de 0,2; CNN 1D de 32 y 64 filtros; LSTM de 64 unidades", "valores": "F1: DNN 93 %, CNN 93 %, LSTM 94 %; regresión logística 82 %, XGBoost 96 %",
-     "particion": "aleatoria estratificada 80/20", "repeticiones": "no reportadas", "dispersion": "no", "prueba": "ninguna", "nota": "Valores del repositorio de los autores; el artículo no se recuperó a texto completo"},
+     "detalle": "DNN 16-128-64-32-5; CNN 1D de 32 y 64 filtros; LSTM de 64 unidades; las tres con dropout de 0,2", "valores": "F1: DNN 93 %, CNN 93 %, LSTM 94 %; regresión logística 82 %, XGBoost 96 %",
+     "particion": "aleatoria estratificada 80/20", "repeticiones": "no reportadas", "dispersion": "no", "prueba": "ninguna", "nota": "El artículo reporta los resultados; la arquitectura está en el código de los autores"},
     {"doi": "10.3390/s19245529", "dataset": "KDD Cup 99", "entrada": "flujos de red", "propuesto": "DBN optimizada con PSO", "modelos": ["DNN/MLP"], "detalle": "ANN y DNN", "valores": "Exactitud: ANN 90,79 %, DNN 91,36 %; propuesto 92,44 %",
      "particion": "aleatoria; usa 10 % del archivo", "repeticiones": "no reportadas", "dispersion": "no", "prueba": "ninguna", "nota": "Conjunto genérico, no de drones"},
     {"doi": "10.1038/s41598-023-45065-8", "dataset": "CICIDS2017 y otros", "entrada": "flujos de red", "propuesto": "marco de RNN para Internet de drones", "modelos": ["RNN", "LSTM", "BiLSTM", "GRU", "DNN/MLP"], "detalle": "RNN, LSTM y Bi-LSTM de 64 unidades, GRU y perceptrón",
@@ -78,6 +78,16 @@ EXCLUIDOS_TEXTO_COMPLETO = [
 ]
 
 
+# Estudios Q1 leídos con el acceso de la biblioteca de la Universidad del Norte
+BIBLIOTECA = json.loads((CARPETA / "estudios_biblioteca.json").read_text(encoding="utf-8"))
+ESTUDIOS += BIBLIOTECA["incluidos"]
+EXCLUIDOS_TEXTO_COMPLETO += BIBLIOTECA["excluidos"]
+# Estudios Q1 de la verificación de cobertura de sinónimos, que no están entre los registros de las bases
+COBERTURA = json.loads((CARPETA / "estudios_cobertura.json").read_text(encoding="utf-8"))
+ESTUDIOS += COBERTURA["incluidos"]
+EXCLUIDOS_TEXTO_COMPLETO += COBERTURA["excluidos"]
+
+
 def clave(titulo):
     return re.sub(r"[^a-z0-9]", "", (titulo or "").lower())[:70]
 
@@ -94,7 +104,7 @@ for r in registros:
     r["texto_completo"] = ("recuperado" if recuperados.get(k, 0) > 3000 else "no recuperado") if r["cribado"] == "elegible" else ""
     if r["doi"] == "10.1109/cns66487.2025.11194990":
         # El artículo del conjunto de datos no menciona Deep Learning en el resumen, y el filtro automático lo retiró
-        r["cribado"], r["motivo_cribado"], r["texto_completo"] = "elegible", "artículo del conjunto de datos, rescatado del filtro automático", "repositorio de los autores"
+        r["cribado"], r["motivo_cribado"], r["texto_completo"] = "elegible", "artículo del conjunto de datos, rescatado del filtro automático", "recuperado"
 
 ruta_meta = CARPETA / "estudios_metadatos.json"
 metadatos = json.loads(ruta_meta.read_text(encoding="utf-8")) if ruta_meta.exists() else {}
@@ -145,7 +155,8 @@ with ruta_registros.open("w", encoding="utf-8-sig", newline="") as f:
 elegibles = [r for r in registros if r["cribado"] == "elegible"]
 evaluados = [r for r in elegibles if r["texto_completo"] != "no recuperado"]
 print("estudios incluidos:", total, "| excluidos a texto completo:", len(EXCLUIDOS_TEXTO_COMPLETO), "| con UAVIDS-2025:", len(con_dataset))
-assert len(evaluados) == total + len(EXCLUIDOS_TEXTO_COMPLETO), (len(evaluados), total + len(EXCLUIDOS_TEXTO_COMPLETO))
+n_cobertura = len(COBERTURA["incluidos"]) + len(COBERTURA["excluidos"])
+assert len(evaluados) + n_cobertura == total + len(EXCLUIDOS_TEXTO_COMPLETO), (len(evaluados), n_cobertura, total + len(EXCLUIDOS_TEXTO_COMPLETO))
 print("PRISMA | depurados:", len(registros), "| filtro automático:", sum(1 for r in registros if r["cribado"] == ""), "| cribados:", sum(1 for r in registros if r["cribado"]),
       "| excluidos en cribado:", sum(1 for r in registros if r["cribado"] == "excluido"), "| buscados a texto completo:", len(elegibles), "| no recuperados:", len(elegibles) - len(evaluados), "| evaluados:", len(evaluados))
 print("no recuperados por editorial:", Counter(r["doi"].split("/")[0] if r["doi"] else "sin DOI" for r in elegibles if r["texto_completo"] == "no recuperado").most_common(4))

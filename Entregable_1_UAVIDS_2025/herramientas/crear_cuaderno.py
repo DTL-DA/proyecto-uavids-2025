@@ -3,6 +3,7 @@ import csv
 import json
 import sys
 import unicodedata
+from collections import Counter
 from pathlib import Path
 
 CELDAS = []
@@ -32,11 +33,12 @@ md("portada", r"""
 | **Conjunto de datos** | *UAVIDS-2025*, versión 1 (`UAVIDS-2025.csv`) |
 | **Fuente** | Kaggle: <https://www.kaggle.com/datasets/qinglizeng1997/uavids-2025>; Zenodo, licencia CC BY 4.0, DOI <https://doi.org/10.5281/zenodo.15336998> |
 | **Tipo de problema** | Clasificación con datos tabulares, multiclase de cinco categorías |
-| **Repositorio** | <https://github.com/DTL-DA/proyecto-final-dl-uavids-2025> |
+| **Repositorio** | <https://github.com/DTL-DA/proyecto-uavids-2025> |
 | **Jupyter Book** | Pendiente de publicación |
-| **Dashboard** | Pendiente de publicación |
 
 Este cuaderno desarrolla el primer entregable del proyecto final de Deep Learning. El propósito es establecer, con evidencia estadística, el nivel mínimo de desempeño (*baseline*) que cualquier modelo avanzado deberá superar al detectar intrusiones en redes de enjambres de drones, de modo que una mejora futura se pueda juzgar por su relevancia y no solo por un promedio más alto. Primero se define el problema, luego se audita el conjunto de datos, se extraen de la literatura los tres modelos de Deep Learning más básicos y se implementan bajo un mismo protocolo, para cerrar con el baseline y su inferencia estadística.
+
+El proyecto tiene tres entregables encadenados: este fija el baseline con tres modelos, el segundo lo amplía a un benchmark de diez modelos y el tercero lleva el resultado a producción con un modelo original. Por eso la partición, el pipeline y las decisiones de este cuaderno se guardan para reutilizarlos.
 """)
 
 md("entorno-md", r"""
@@ -62,6 +64,21 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from pandas.io.formats.style import Styler
+
+# Las tablas del informe usan coma decimal, igual que el texto
+pd.set_option("styler.format.decimal", ",")
+pd.set_option("styler.format.precision", 4)
+pd.set_option("display.float_format", lambda v: f"{v:.5f}".rstrip("0").rstrip(".").replace(".", ","))
+_formato_tabla = Styler.format
+
+
+def formato_con_coma(self, *argumentos, **opciones):
+    opciones.setdefault("decimal", ",")
+    return _formato_tabla(self, *argumentos, **opciones)
+
+
+Styler.format = formato_con_coma
 
 RAIZ = Path("Entregable_1_UAVIDS_2025")
 CARPETA_DATOS = RAIZ / "datos"
@@ -150,7 +167,7 @@ plt.rcParams.update({"figure.dpi": 110, "savefig.dpi": 110, "image.cmap": "Greys
 
 PAQUETES = ["torch", "numpy", "pandas", "scipy", "scikit-learn", "statsmodels", "matplotlib"]
 display(pd.DataFrame({"Componente": ["Python", *PAQUETES, "Dispositivo"],
-                      "Versión": [platform.python_version(), *map(version, PAQUETES), f"CPU, {torch.get_num_threads()} hilos"]}).style.hide(axis="index"))
+                      "Versión": [platform.python_version(), *map(version, PAQUETES), f"CPU {platform.processor()}, {torch.get_num_threads()} hilos"]}).style.hide(axis="index"))
 """)
 
 md("s1", r"""
@@ -173,12 +190,12 @@ El sistema recibe los atributos de un flujo de red dentro de un enjambre de dron
 
 **Hipótesis operativa.** Al menos un par de modelos base difiere en F1 macro en una magnitud igual o mayor que el margen de relevancia práctica δ.
 
-**Declaración a priori.** Las decisiones siguientes se fijan antes de ver resultados de cualquier modelo de Deep Learning, para evitar la exploración selectiva. La métrica primaria es el F1 macro, $F1_{macro} = \frac{1}{K}\sum_{c=1}^{K} \frac{2 P_c R_c}{P_c + R_c}$, que promedia sin ponderar las $K = 5$ clases, porque en seguridad un ataque poco frecuente importa tanto como uno frecuente. El margen δ = 0,01 tiene una lectura directa: por la definición del promedio macro, equivale a que el F1 de una sola clase cambie 0,05 mientras las demás permanecen iguales, y se contrasta con la variabilidad medida en el piloto de la sección 4.3.1. La unidad de independencia es la serie, una de las que propone el enunciado, porque los flujos consecutivos según `FlowID` son muy parecidos entre sí, de modo que la dependencia sigue a la posición en el archivo y no a una entidad como el cliente, como se demuestra en la sección 2.1.3. Como el archivo no identifica la simulación de origen, cada serie se aproxima con bloques de 1000 flujos contiguos. Esto no convierte el proyecto en uno de series de tiempo: el archivo no trae marca de tiempo, de modo que no se afirma que ese orden sea cronológico, y ningún modelo usa rezagos como entrada, así que sigue siendo clasificación tabular. La partición se congeló el 3 de noviembre de 2026, antes de entrenar. El 4 de noviembre, con los resultados ya calculados, solo se alineó el nombre de la unidad con la lista del enunciado, sin cambiar la partición ni ninguna corrida.
+**Declaración a priori.** Las decisiones siguientes se fijan antes de ver resultados de cualquier modelo de Deep Learning, para evitar la exploración selectiva. La métrica primaria es el F1 macro, $F1_{macro} = \frac{1}{K}\sum_{c=1}^{K} \frac{2 P_c R_c}{P_c + R_c}$, que promedia sin ponderar las $K = 5$ clases, porque en seguridad un ataque poco frecuente importa tanto como uno frecuente. El margen δ = 0,01 tiene una lectura directa: por la definición del promedio macro, equivale a que el F1 de una sola clase cambie 0,05 mientras las demás permanecen iguales, y se contrasta con la variabilidad medida en el piloto de la sección 4.3.1. La unidad de independencia es la serie, una de las que propone el enunciado, porque los flujos consecutivos según `FlowID` son muy parecidos entre sí, de modo que la dependencia sigue a la posición en el archivo y no a una entidad como el cliente, como se demuestra en la sección 2.1.3. Como el archivo no identifica la simulación de origen, cada serie se aproxima con bloques de 1000 flujos contiguos. Esto no convierte el proyecto en uno de series de tiempo: el archivo no trae marca de tiempo, de modo que no se afirma que ese orden sea cronológico, y ningún modelo usa rezagos como entrada, así que sigue siendo clasificación tabular. Estas decisiones y la partición se fijaron el 3 de noviembre de 2026, antes de entrenar. Al día siguiente solo se cambió el nombre de la unidad para usar el término del enunciado; la partición y las corridas son las mismas.
 """)
 
 code("s1-apriori", r"""
 DECISIONES = {
-    "estado": "confirmada por el autor el 3 de noviembre de 2026; el nombre de la unidad se alineó con el enunciado el 4 de noviembre de 2026, sin cambiar la partición",
+    "fecha": "2026-11-03",
     "tipo_problema": "1. Clasificación con datos tabulares, multiclase de cinco categorías",
     "metrica_primaria": "F1 macro en el conjunto de prueba",
     "metricas_secundarias": ["accuracy", "balanced accuracy", "precision, recall y F1 (macro, ponderado y por clase)", "AUC-ROC macro", "AUC-PR macro", "MCC", "ECE"],
@@ -188,8 +205,8 @@ DECISIONES = {
     "particion": {"entrenamiento": 0.64, "validacion": 0.16, "prueba": 0.20, "semilla": SEMILLA, "estrategia": "estratificada por clase y agrupada por bloques"},
 }
 (RESULTADOS / "declaracion_a_priori.json").write_text(json.dumps(DECISIONES, ensure_ascii=False, indent=1), encoding="utf-8")
-display(pd.DataFrame({"Decisión": ["Estado", "Métrica primaria", "Métricas secundarias", "Margen δ", "Nivel α", "Unidad de independencia", "Partición"],
-                      "Valor": [DECISIONES["estado"], DECISIONES["metrica_primaria"], ", ".join(DECISIONES["metricas_secundarias"]), DECISIONES["margen_delta"], DECISIONES["alfa"],
+display(pd.DataFrame({"Decisión": ["Fecha", "Métrica primaria", "Métricas secundarias", "Margen δ", "Nivel α", "Unidad de independencia", "Partición"],
+                      "Valor": ["3 de noviembre de 2026", DECISIONES["metrica_primaria"], ", ".join(DECISIONES["metricas_secundarias"]), DECISIONES["margen_delta"], DECISIONES["alfa"],
                                 DECISIONES["unidad_independencia"], "64 / 16 / 20, estratificada por clase y agrupada por bloques, semilla 42"]}).style.hide(axis="index"))
 """)
 
@@ -200,7 +217,7 @@ Los enjambres de drones se comunican por enlaces inalámbricos y enrutan el trá
 
 El conjunto es público, en Kaggle, Zenodo (licencia CC BY 4.0) e IEEE DataPort (DOI 10.21227/j5p4-zt27). Según sus autores, los flujos se generaron por simulación en NS-3.24, con movilidad de enjambre basada en un algoritmo BOID extendido, IEEE 802.11ac, enrutamiento AODV, tráfico UDP y canal Nakagami, con un alcance de transmisión de 100 m y 20 dBm de potencia (Zeng et al., 2025). Es decir, son datos simulados y no capturas de drones reales, lo que limita su validez externa.
 
-Hay referencias directas para comparar el baseline. El repositorio de los autores reporta, con partición aleatoria estratificada de 80 y 20 %, un F1 de 82 % con regresión logística, 93 % con DNN, 93 % con CNN, 94 % con LSTM y 96 % con XGBoost (Zeng et al., 2025). Zarkadis y Douligeris (2026) reportan un F1 de prueba de 90,66 % con MLP y de 94,28 % con RealMLP.
+Hay referencias directas para comparar el baseline. Los autores reportan, con partición aleatoria estratificada de 80 y 20 %, un F1 de 82 % con regresión logística, 93 % con DNN, 93 % con CNN, 94 % con LSTM y 96 % con XGBoost (Zeng et al., 2025). Zarkadis y Douligeris (2026) reportan un F1 de prueba de 90,66 % con MLP y de 94,28 % con RealMLP, y Bakiri et al. (2026), con una partición por nodo de origen, una exactitud de 92,50 % en cinco clases.
 
 ### 1.3 Descripción técnica
 
@@ -212,7 +229,7 @@ Cada fila es un flujo de red, con 22 atributos y la etiqueta. Los autores los ag
 | Volumen de tráfico | `FlowDuration/s`, `TxPackets`, `RxPackets`, `LostPackets`, `TxBytes`, `RxBytes`, `TxPacketRate/s`, `RxPacketRate/s`, `TxByteRate/s`, `RxByteRate/s`, `MeanPacketSize` | Entrada |
 | Desempeño | `MeanDelay/s`, `MeanJitter/s`, `Throughput/Kbps`, `PacketDropRate`, `AverageHopCount` | Entrada |
 
-La etiqueta no proviene de anotadores. Las fuentes públicas consultadas no explican cómo se asignó, y la continuidad de las etiquetas en el archivo sugiere que corresponde al escenario simulado. Por tal motivo, puede haber flujos sin relación con el ataque que reciben la etiqueta de su escenario, un ruido de etiqueta que se examina en la sección 2.1.2. En cuanto a la estructura de dependencia, los flujos de una misma simulación comparten nodos, tiempos y condiciones, y el archivo no identifica esa simulación, de modo que la dependencia se audita de forma indirecta en la sección 2.1.3.
+La etiqueta no proviene de anotadores: el simulador anota cada flujo con la etiqueta de su escenario, normal o de ataque, y una verificación posterior cruza los tiempos de inyección del ataque con los flujos capturados (Zeng et al., 2025). Por tal motivo, puede haber flujos sin relación con el ataque que reciben la etiqueta de su escenario, un ruido de etiqueta que se examina en la sección 2.1.2. En cuanto a la estructura de dependencia, los flujos de una misma simulación comparten nodos, tiempos y condiciones, y el archivo no identifica esa simulación, de modo que la dependencia se audita de forma indirecta en la sección 2.1.3.
 """)
 
 code("s1-tecnica", r"""
@@ -458,7 +475,13 @@ interpretar(f'''**Interpretación.** Con el mismo modelo de referencia y los mis
 
 Esto quiere decir que parte del desempeño de una partición aleatoria proviene de reconocer flujos vecinos en el archivo, y esa magnitud supera ampliamente el margen δ = 0,01. Por lo tanto, los valores de la literatura y los de este trabajo no son directamente comparables si la literatura usa partición aleatoria, lo que se examina en la sección 3.4.
 
-En consecuencia, se decide reportar el baseline con la partición agrupada, por ser la que estima mejor la generalización a tráfico no visto.''')
+En consecuencia, se decide reportar el baseline con la partición agrupada, por ser la que estima mejor la generalización a tráfico no visto.
+
+**Decisión de preprocesamiento.** No agrega transformaciones: se conserva la partición por bloques definida arriba, y todo ajuste se hace solo con entrenamiento.
+
+**Impacto en la arquitectura.** Ninguno en la estructura. Sí cambia la selección, porque las arquitecturas y los hiperparámetros se comparan solo con validación agrupada; una partición aleatoria favorecería a los modelos que reconocen flujos vecinos.
+
+**Riesgos.** Esta diferencia se mide con un solo modelo de referencia y en validación, de modo que no se traslada exacta a las redes. Además, con los bloques más largos una partición puede quedarse casi sin una clase, lo que aumenta la varianza y es otra razón para no usarlos.''')
 """)
 
 md("s2-sesgos", r"""
@@ -486,7 +509,7 @@ En atajos, `FlowID`, que es solo un índice, alcanza por sí solo un F1 macro de
 
 Esto significa que estos atributos reconocen el escenario simulado y no el comportamiento del ataque. Un modelo que los use obtendría un resultado alto que no se traslada a otra red, donde los índices, las direcciones y la mezcla de tráfico serían otros.
 
-**Decisión de preprocesamiento.** Se excluyen `FlowID`, `SrcAddr`, `DstAddr`, `SrcPort` y `DstPort`, además de `Protocol`, que es constante. Quedan {len(ATRIBUTOS)} atributos de tráfico y desempeño, los mismos que recomiendan los autores del conjunto de datos.
+**Decisión de preprocesamiento.** Se excluyen `FlowID`, `SrcAddr`, `DstAddr`, `SrcPort` y `DstPort`, además de `Protocol`, que es constante. Quedan {len(ATRIBUTOS)} atributos de tráfico y desempeño, los mismos que recomiendan los autores del conjunto de datos en su repositorio (Zeng, 2025), aunque su artículo considera útiles las direcciones para detectar ataques de identidad (Zeng et al., 2025).
 
 **Impacto en la arquitectura.** La entrada es un vector de {len(ATRIBUTOS)} valores numéricos, sin variables categóricas, de modo que no se necesitan capas de *embedding* para entidades.
 
@@ -689,16 +712,33 @@ METADATOS["10.22266/ijies2025.0531.33"]["autores"] = ["Aws Hamed Hamad", "Noor K
 METADATOS["sin-doi:dragon"]["autores"] = ["P. SureshBabu", "M. Geetha"]
 
 
+APELLIDOS_COMPUESTOS = {"Canan Batur Şahin": ("Batur Şahin", "Canan")}
+
+
 def partes_nombre(nombre):
+    if nombre in APELLIDOS_COMPUESTOS:
+        return APELLIDOS_COMPUESTOS[nombre]
     fichas = nombre.replace("\u2010", "-").split()
     return fichas[-1], " ".join(fichas[:-1])
 
 
-def citar(doi):
+def cita_base(doi):
     m = METADATOS[doi]
     apellidos = [partes_nombre(a)[0] for a in m["autores"]]
     autor = apellidos[0] if len(apellidos) == 1 else f"{apellidos[0]} y {apellidos[1]}" if len(apellidos) == 2 else f"{apellidos[0]} et al."
     return f"{autor} ({m['anio']})"
+
+
+# Estudios con el mismo autor y año: se distinguen con una letra, en orden de DOI
+SUFIJO_CITA = {}
+for base in {cita_base(e["doi"]) for e in ESTUDIOS_CSV}:
+    iguales = sorted(e["doi"] for e in ESTUDIOS_CSV if cita_base(e["doi"]) == base)
+    if len(iguales) > 1:
+        SUFIJO_CITA.update({doi: "abcdef"[i] for i, doi in enumerate(iguales)})
+
+
+def citar(doi):
+    return cita_base(doi)[:-1] + SUFIJO_CITA.get(doi, "") + ")"
 
 
 def enlace(doi):
@@ -721,7 +761,7 @@ def referencia(doi):
     else:
         volumen = m.get("volumen")
         detalle = f"*{fuente}" + (f", {volumen}*" if volumen else "*") + (f"({m['numero']})" if m.get("numero") else "") + (f", {paginas.replace('-', '–')}." if paginas else ".")
-    return f"- {lista} ({m['anio']}). {titulo}. {detalle} <{enlace(doi)}>"
+    return f"- {lista} ({m['anio']}{SUFIJO_CITA.get(doi, '')}). {titulo}. {detalle} <{enlace(doi)}>"
 
 
 def tabla_md(encabezados, filas):
@@ -730,8 +770,14 @@ def tabla_md(encabezados, filas):
     return "\n".join(lineas + ["| " + " | ".join(limpiar(v) for v in f) + " |" for f in filas])
 
 
+def agrupa(particion):
+    return "por sesión" in particion or "por nodo" in particion
+
+
 def riesgo_fuga(particion):
-    return "No evaluable" if particion == "no identificada" else "Alto: no agrupa filas relacionadas"
+    if particion == "no identificada":
+        return "No evaluable"
+    return "Menor: agrupa por sesión o por nodo" if agrupa(particion) else "Alto: no agrupa filas relacionadas"
 
 
 ESTUDIOS_ORDENADOS = sorted(ESTUDIOS_CSV, key=lambda e: (citar(e["doi"]).split(" ")[0].lower(), METADATOS[e["doi"]]["anio"]))
@@ -739,22 +785,75 @@ N_INCLUIDOS = len(ESTUDIOS_CSV)
 CON_DATASET = [e for e in ESTUDIOS_CSV if "UAVIDS-2025" in e["dataset"]]
 ELEGIBLES = [r for r in REGISTROS_CSV if r["cribado"] == "elegible"]
 NO_RECUPERADOS = [r for r in ELEGIBLES if r["texto_completo"] == "no recuperado"]
-CONTEOS = {"exportados": 625, "duplicados": 625 - len(REGISTROS_CSV), "depurados": len(REGISTROS_CSV), "filtro": sum(r["cribado"] == "" for r in REGISTROS_CSV), "cribados": sum(r["cribado"] != "" for r in REGISTROS_CSV),
+EXPORTADOS = {"OpenAlex": 583, "arXiv": 42, "IEEE Xplore": 602, "Scopus": 567, "Web of Science": 159}
+CONTEOS = {"exportados": sum(EXPORTADOS.values()), "duplicados": sum(EXPORTADOS.values()) - len(REGISTROS_CSV), "depurados": len(REGISTROS_CSV), "filtro": sum(r["cribado"] == "" for r in REGISTROS_CSV), "cribados": sum(r["cribado"] != "" for r in REGISTROS_CSV),
            "excluidos_cribado": sum(r["cribado"] == "excluido" for r in REGISTROS_CSV), "buscados": len(ELEGIBLES), "no_recuperados": len(NO_RECUPERADOS), "evaluados": len(ELEGIBLES) - len(NO_RECUPERADOS), "incluidos": N_INCLUIDOS}
-CONTEOS["excluidos_texto"] = CONTEOS["evaluados"] - N_INCLUIDOS
+# Verificación de cobertura de sinónimos (literatura/verificar_cobertura_sinonimos.py): rama de otros métodos en PRISMA
+COBERTURA_JSON = json.loads((LITERATURA / "estudios_cobertura.json").read_text(encoding="utf-8"))
+CRIBADO_COBERTURA = list(csv.DictReader((LITERATURA / "cribado_cobertura_sinonimos.csv").open(encoding="utf-8-sig")))
+COBERTURA_TOTALES = {"C1 ampliada": 851, "C2 ampliada": 49, "nuevos": 523}
+N_COB_ELEGIBLES = sum(r["decision"] in ("elegible", "dudoso") for r in CRIBADO_COBERTURA)
+N_COB_Q1 = sum(r["decision"] in ("elegible", "dudoso") and r["cuartil_sjr"] == "Q1" for r in CRIBADO_COBERTURA)
+N_COB_INCLUIDOS = len(COBERTURA_JSON["incluidos"])
+N_COB_EVALUADOS = N_COB_INCLUIDOS + len(COBERTURA_JSON["excluidos"])
+assert N_COB_EVALUADOS == N_COB_Q1, (N_COB_EVALUADOS, N_COB_Q1)
+N_INCLUIDOS_BASES = N_INCLUIDOS - N_COB_INCLUIDOS
+CONTEOS["incluidos_bases"] = N_INCLUIDOS_BASES
+CONTEOS["excluidos_texto"] = CONTEOS["evaluados"] - N_INCLUIDOS_BASES
+CONTEOS.update({"cob_nuevos": COBERTURA_TOTALES["nuevos"], "cob_cribados": len(CRIBADO_COBERTURA), "cob_filtro": COBERTURA_TOTALES["nuevos"] - len(CRIBADO_COBERTURA),
+                "cob_elegibles": N_COB_ELEGIBLES, "cob_excluidos_cribado": len(CRIBADO_COBERTURA) - N_COB_ELEGIBLES, "cob_q1": N_COB_Q1,
+                "cob_sin_leer": N_COB_ELEGIBLES - N_COB_Q1, "cob_incluidos": N_COB_INCLUIDOS, "cob_excluidos_texto": len(COBERTURA_JSON["excluidos"])})
 N_IEEE_SIN_TEXTO = sum(r["doi"].startswith("10.1109") for r in NO_RECUPERADOS)
 N_DISPERSION = sum(e["dispersion"] == "sí" for e in ESTUDIOS_CSV)
 N_SIN_REPETICION = sum(e["repeticiones"] == "no reportadas" for e in ESTUDIOS_CSV)
 N_SIN_PARTICION = sum(e["particion"] == "no identificada" for e in ESTUDIOS_CSV)
 N_CON_PRUEBA = sum(not e["prueba"].startswith("ninguna") for e in ESTUDIOS_CSV)
-FILA_FRECUENCIA = {f["modelo"]: f for f in FRECUENCIA_CSV}
+N_AGRUPADOS = sum(agrupa(e["particion"]) for e in ESTUDIOS_CSV)
+CUARTILES = {f["fuente"]: f["cuartil_sjr_2025"] for f in csv.DictReader((LITERATURA / "cuartiles_fuentes.csv").open(encoding="utf-8-sig"))}
 
-TABLA_CALIDAD = tabla_md(["Estudio", "Partición", "Repeticiones", "Dispersión", "Prueba estadística", "Riesgo de fuga", "Nota"],
-                         [[citar(e["doi"]), e["particion"], e["repeticiones"], e["dispersion"], e["prueba"], riesgo_fuga(e["particion"]), e["nota"]] for e in ESTUDIOS_ORDENADOS])
+
+def cuartil(fuente):
+    return CUARTILES.get(fuente, "no está en SJR")
+
+
+ESTUDIOS_Q1 = [e for e in ESTUDIOS_CSV if cuartil(e["fuente"]) == "Q1"]
+CONTEO_CUARTIL = Counter(cuartil(e["fuente"]) for e in ESTUDIOS_CSV)
+N_SIN_CUARTIL = N_INCLUIDOS - sum(CONTEO_CUARTIL[q] for q in ("Q1", "Q2", "Q3", "Q4"))
+# Los no leídos se cuentan por registro, porque algunos solo se identifican por el ISSN de su DOI
+N_Q1_SIN_LEER = sum(f["cuartil_sjr_2025"] == "Q1" for f in csv.DictReader((LITERATURA / "priorizacion_texto_completo.csv").open(encoding="utf-8-sig")))
+N_Q1_LEIDOS = sum(r["texto_completo"] != "no recuperado" and cuartil(r["fuente_publicacion"]) == "Q1" for r in ELEGIBLES)
+N_Q1_ELEGIBLES = N_Q1_LEIDOS + N_Q1_SIN_LEER
+FRECUENCIA_Q1 = Counter(m for e in ESTUDIOS_Q1 for m in e["modelos"].split("; "))
+_filtro = Counter(r["exclusion_filtro"] for r in REGISTROS_CSV if r["cribado"] == "")
+_cribado = Counter(r["motivo_cribado"] for r in REGISTROS_CSV if r["cribado"] == "excluido")
+_actas = sum(v for k, v in _cribado.items() if k.startswith(("volumen de actas", "libro general")))
+_fuera = _cribado["no detecta intrusiones en redes de drones con datos tabulares"]
+_lista_filtro = [("Sin drones", "no trata de drones"), ("sin intrusiones", "no aborda intrusiones ni ataques"), ("sin Deep Learning", "no usa Deep Learning"), ("revisiones", "revisión, no estudio primario"), ("otra tarea", "el dron es plataforma o la tarea es otra")]
+CONTEOS.update({"con_uavids": len(CON_DATASET),
+                "texto_exportados": "OpenAlex 583; arXiv 42; IEEE Xplore 602;\nScopus 567; Web of Science 159",
+                "texto_filtro": f"Sin drones {_filtro['no trata de drones']}; sin intrusiones {_filtro['no aborda intrusiones ni ataques']}; sin Deep Learning {_filtro['no usa Deep Learning']};\nrevisiones {_filtro['revisión, no estudio primario']}; otra tarea {_filtro['el dron es plataforma o la tarea es otra']}; otros {sum(_filtro.values()) - sum(_filtro[k] for _, k in _lista_filtro)}",
+                "texto_cribado": f"Fuera del alcance {_fuera}; actas y libros {_actas}; otros motivos {sum(_cribado.values()) - _fuera - _actas}",
+                "texto_no_recuperados": f"IEEE {N_IEEE_SIN_TEXTO}; otras editoriales {CONTEOS['no_recuperados'] - N_IEEE_SIN_TEXTO}",
+                "texto_excluidos": "Sin modelo de referencia o sin cifras asociables 12;\notra tarea o dominio 4"})
+assert CONTEOS["excluidos_texto"] == 16, CONTEOS["excluidos_texto"]
+FILA_FRECUENCIA = {f["modelo"]: f for f in FRECUENCIA_CSV}
+ARQUITECTURAS_CSV = list(csv.DictReader((LITERATURA / "arquitecturas_referencia.csv").open(encoding="utf-8-sig")))
+N_CON_ARQUITECTURA = len({a["referencia"] for a in ARQUITECTURAS_CSV})
+CONTEO_DESCRITOS = {}
+for a in ARQUITECTURAS_CSV:
+    CONTEO_DESCRITOS.setdefault(a["familia"], set()).add(a["referencia"])
+ORDEN_DESCRITOS = sorted(CONTEO_DESCRITOS.items(), key=lambda par: (-len(par[1]), par[0]))
+TABLA_ARQUITECTURAS = tabla_md(["Referencia", "Modelo", "Arquitectura", "Regularización", "Entrenamiento", "Fuente del dato"],
+                               [[a["referencia"], a["modelo"] + (f" ({a['nota'].lower()})" if a["nota"] else ""), a["arquitectura"], a["regularizacion"], a["entrenamiento"], a["fuente_del_dato"]] for a in ARQUITECTURAS_CSV])
+TABLA_DESCRITOS = tabla_md(["Familia", f"Estudios que la describen (n = {N_CON_ARQUITECTURA})", "Estudios que la usan (n = %d)" % N_INCLUIDOS],
+                           [[familia, str(len(refs)), FILA_FRECUENCIA[familia]["estudios"]] for familia, refs in ORDEN_DESCRITOS])
+
+TABLA_CALIDAD = tabla_md(["Estudio", "Cuartil SJR", "Partición", "Repeticiones", "Dispersión", "Prueba estadística", "Riesgo de fuga", "Nota"],
+                         [[citar(e["doi"]), cuartil(e["fuente"]), e["particion"], e["repeticiones"], e["dispersion"], e["prueba"], riesgo_fuga(e["particion"]), e["nota"]] for e in ESTUDIOS_ORDENADOS])
 TABLA_SINTESIS = tabla_md(["Referencia", "Problema", "Dataset", "Modelos de Deep Learning de referencia", "Métricas reportadas y valores"],
                           [[citar(e["doi"]), f"Detección de intrusiones en drones: {e['entrada']}", e["dataset"], f"{e['detalle']} ({e['modelos']})", e["valores"]] for e in ESTUDIOS_ORDENADOS])
-TABLA_FRECUENCIA = tabla_md(["Modelo", "Estudios (n = %d)" % N_INCLUIDOS, "%", "Estudios con UAVIDS-2025 (n = %d)" % len(CON_DATASET), "% con UAVIDS-2025"],
-                            [[f["modelo"], f["estudios"], f["porcentaje"].replace(".", ","), f["estudios_uavids"], f["porcentaje_uavids"].replace(".", ",")] for f in FRECUENCIA_CSV])
+TABLA_FRECUENCIA = tabla_md(["Modelo", "Estudios (n = %d)" % N_INCLUIDOS, "%", "Estudios con UAVIDS-2025 (n = %d)" % len(CON_DATASET), "% con UAVIDS-2025", "Estudios Q1 (n = %d)" % len(ESTUDIOS_Q1)],
+                            [[f["modelo"], f["estudios"], f["porcentaje"].replace(".", ","), f["estudios_uavids"], f["porcentaje_uavids"].replace(".", ","), FRECUENCIA_Q1[f["modelo"]]] for f in FRECUENCIA_CSV])
 
 
 def respaldo(familia):
@@ -768,7 +867,7 @@ En esta sección se documenta la búsqueda de literatura, se identifican los mod
 
 ### 3.1 Estrategia de búsqueda
 
-**Cadenas de búsqueda.** Se usaron tres cadenas booleanas sobre título y resumen, para publicaciones de 2019 a 2026, es decir, los últimos ocho años. La primera es general; la segunda se concentra en los ataques de red de este proyecto, y la tercera busca el uso directo del conjunto de datos.
+**Cadenas de búsqueda.** Se usaron tres cadenas booleanas sobre título y resumen, o el campo más cercano de cada base, para publicaciones de 2019 a 2026, es decir, los últimos ocho años. La primera es general; la segunda se concentra en los ataques de red de este proyecto, y la tercera busca el uso directo del conjunto de datos.
 
 | Cadena | Consulta |
 |---|---|
@@ -776,26 +875,53 @@ En esta sección se documenta la búsqueda de literatura, se identifican los mod
 | C2 | (drone OR UAV OR "unmanned aerial" OR FANET) AND (swarm OR "ad hoc" OR "network traffic") AND (blackhole OR wormhole OR sybil OR flooding OR cyberattack) AND ("deep learning" OR "neural network" OR CNN OR LSTM OR MLP) |
 | C3 | UAVIDS OR "UAVIDS-2025" |
 
-**Bases de datos.** Las consultas se ejecutaron el 3 de noviembre de 2026. OpenAlex y arXiv se exportaron completas; Web of Science, Scopus e IEEE Xplore siguen pendientes por falta de acceso.
+**Palabras clave, sinónimos y variantes.** Cada cadena combina conceptos con AND y, dentro de cada concepto, sinónimos y variantes terminológicas con OR. Las comillas buscan la frase exacta, y los términos van en inglés porque es el idioma en que las bases indexan títulos y resúmenes.
+
+| Concepto | Palabras clave, sinónimos y variantes | Cadenas |
+|---|---|---|
+| Plataforma | drone, UAV, "unmanned aerial", FANET | C1 y C2 |
+| Tarea | "intrusion detection", "attack detection" | C1 |
+| Contexto de red | swarm, "ad hoc", "network traffic" | C2 |
+| Ataques del conjunto de datos | blackhole, wormhole, sybil, flooding, cyberattack | C2 |
+| Método | "deep learning", "neural network", CNN, LSTM, MLP | C1 y C2 |
+| Conjunto de datos | UAVIDS, "UAVIDS-2025" | C3 |
+
+**Cadena exacta por base.** La cadena booleana es la misma en todas las bases, y cambian el campo y el filtro de años, porque cada base los define a su manera. En la tabla, *S* representa la cadena C1, C2 o C3 tal como aparece arriba.
+
+| Base | Cadena ejecutada | Campo | Periodo |
+|---|---|---|---|
+| OpenAlex | *S* en el filtro `title_and_abstract.search` | Título y resumen | `from_publication_date:2019-01-01`, hasta el día de la consulta |
+| arXiv | *S*, con el prefijo `abs:` en cada término o frase, por ejemplo `abs:drone OR abs:UAV OR abs:"unmanned aerial"` | Resumen | Se conservan las publicaciones desde 2019 |
+| IEEE Xplore | *S* en *Command Search* | Todos los metadatos | Filtro de año de publicación de 2019 a 2026 |
+| Scopus | `TITLE-ABS-KEY(` *S* `) AND PUBYEAR > 2018 AND PUBYEAR < 2027` | Título, resumen y palabras clave | En la misma cadena |
+| Web of Science | `TS=(` *S* `) AND PY=(2019-2026)`, en la colección principal | Tema | En la misma cadena |
+
+**Bases de datos.** Las consultas se ejecutaron en OpenAlex y arXiv el 3 de noviembre de 2026, y en IEEE Xplore, Scopus y Web of Science el 4 de noviembre de 2026, con el acceso de la biblioteca de la Universidad del Norte. Como cada base define sus campos de otra forma, Scopus busca en título, resumen y palabras clave (`TITLE-ABS-KEY`), Web of Science en el campo de tema (`TS`) e IEEE Xplore en todos los metadatos, de modo que sus conteos pueden ser algo más amplios. Las cadenas listas para copiar están en `literatura/consultas_wos_scopus_ieee.md` y, para OpenAlex y arXiv, en `literatura/buscar_literatura.py`.
 
 | Base | C1 | C2 | C3 | Estado |
 |---|---|---|---|---|
 | OpenAlex | 323 | 40 | 220 | Exportada |
 | arXiv | 11 | 3 | 29 | Exportada; 28 registros de C3 dentro del periodo |
-| IEEE Xplore | Pendiente | Pendiente | Pendiente | Sin acceso |
-| Web of Science | Pendiente | Pendiente | Pendiente | Sin acceso |
-| Scopus | Pendiente | Pendiente | Pendiente | Sin acceso |
+| IEEE Xplore | 481 | 40 | 81 | Exportada |
+| Web of Science | 132 | 11 | 16 | Exportada |
+| Scopus | 523 | 18 | 26 | Exportada |
 
-**Criterios de inclusión y exclusión.** Se incluye un estudio si detecta o clasifica intrusiones o ataques en redes o sistemas de drones a partir de datos tabulares de tráfico o del sistema, si usa Deep Learning, si reporta métricas verificables y si compara contra al menos un modelo de Deep Learning de referencia. Se excluye si no describe lo suficiente el modelo de referencia o el protocolo experimental, si no es un estudio primario, como las revisiones y los artículos solo de datos, y si trabaja con cámaras, señales de radio o solo suplantación de GPS.
+**Verificación de cobertura de sinónimos.** Una vez hecha la búsqueda, se comprobó si las cadenas omitían variantes terminológicas. El 5 de noviembre de 2026 se ejecutaron en OpenAlex versiones ampliadas de C1 y C2, que agregan UAS, "unmanned aircraft", "flying ad hoc", "Internet of Drones", IoD y quadcopter en plataforma; "anomaly detection", IDS, "cyberattack detection" y "threat detection" en tarea; "black hole" y DDoS en ataques, y GRU, RNN, transformer y autoencoder en método. C1 ampliada devolvió {COBERTURA_TOTALES["C1 ampliada"]} registros y C2 ampliada {COBERTURA_TOTALES["C2 ampliada"]}, y de ellos {CONTEOS["cob_nuevos"]} no estaban entre los {CONTEOS["depurados"]} registros depurados. El mismo filtro automático dejó {CONTEOS["cob_cribados"]}, y el cribado por título y resumen halló {CONTEOS["cob_elegibles"]} elegibles o dudosos; la mayoría de los excluidos detecta anomalías en imágenes, video o datos de vuelo, y no intrusiones en la red.
 
-**Trazabilidad del proceso.** El diagrama de flujo sigue el formato PRISMA (Page et al., 2021). Las decisiones de cada registro, con su motivo, están en `literatura/registros_depurados.csv`.
+Esto significa que la cadena original sí tenía un vacío: de los {CONTEOS["cob_elegibles"]} registros, 16 se habían perdido por el concepto de método, sobre todo por autoencoder y transformer, y 7 por el de tarea, mientras que los sinónimos de plataforma no aportaron ninguno. Sin embargo, el vacío es acotado, porque equivale al {round(100 * CONTEOS["cob_elegibles"] / CONTEOS["buscados"])} % de los {CONTEOS["buscados"]} elegibles de las bases.
+
+Por tal motivo, se opta por leer a texto completo los {CONTEOS["cob_q1"]} que están en revistas Q1, de los cuales se incluyen {CONTEOS["cob_incluidos"]}, y los otros {CONTEOS["cob_sin_leer"]} quedan sin leer. La verificación no se repitió en Scopus, Web of Science ni IEEE Xplore. Las cadenas ampliadas y sus conteos están en `literatura/consultas_wos_scopus_ieee.md`, y la decisión de cada registro, en `literatura/cribado_cobertura_sinonimos.csv`.
+
+**Criterios de inclusión y exclusión.** Se incluye un estudio si detecta o clasifica intrusiones o ataques en redes o sistemas de drones a partir de datos tabulares de tráfico o del sistema, si usa Deep Learning, si reporta métricas verificables y si compara contra al menos un modelo de Deep Learning de referencia. Se excluye si no describe lo suficiente el modelo de referencia o el protocolo experimental, si no es un estudio primario, como las revisiones y los artículos solo de datos, y si trabaja con cámaras, señales de radio o solo suplantación de GPS. La sección 3.2 declara cómo se aplicó en la práctica el criterio de descripción suficiente.
+
+**Trazabilidad del proceso.** El diagrama de flujo sigue el formato PRISMA (Page et al., 2021). Las decisiones de cada registro, con su motivo, están en `literatura/registros_depurados.csv`, `literatura/cribado_bases_nuevas.csv` y, para la verificación de cobertura, `literatura/cribado_cobertura_sinonimos.csv`. Los estudios de esa verificación entran por la rama de otros métodos del diagrama.
 """)
 
 code("s3-prisma", """
 CONTEOS_PRISMA = """ + repr(CONTEOS) + r"""
-fig, eje = plt.subplots(figsize=(9, 6.2))
+fig, eje = plt.subplots(figsize=(12.8, 6.4))
 eje.axis("off")
-eje.set(xlim=(0, 10), ylim=(0, 10))
+eje.set(xlim=(0, 14), ylim=(0, 10))
 c = CONTEOS_PRISMA
 
 
@@ -807,35 +933,47 @@ def flecha(inicio, fin):
     eje.annotate("", xy=fin, xytext=inicio, arrowprops={"arrowstyle": "->", "color": "#4a4a4a"})
 
 
-caja(3, 9.5, f"Registros exportados: {c['exportados']}\nOpenAlex 583; arXiv 42\nIEEE Xplore, Web of Science y Scopus: pendientes")
+caja(3, 9.5, f"Registros exportados: {c['exportados']}\n{c['texto_exportados']}")
 caja(3, 7.55, f"Registros tras eliminar duplicados: {c['depurados']}")
 caja(3, 5.95, f"Registros cribados por título y resumen: {c['cribados']}")
 caja(3, 4.35, f"Estudios buscados a texto completo: {c['buscados']}")
 caja(3, 2.75, f"Estudios evaluados a texto completo: {c['evaluados']}")
-caja(3, 0.9, f"Estudios incluidos: {c['incluidos']}\nCon UAVIDS-2025: 7")
+caja(3, 0.9, f"Estudios incluidos: {c['incluidos']}\nDe las bases: {c['incluidos_bases']}; de otros métodos: {c['cob_incluidos']}\nCon UAVIDS-2025: {c['con_uavids']}")
 caja(7.75, 8.6, f"Duplicados: {c['duplicados']}")
-caja(7.75, 6.9, f"Filtro automático: {c['filtro']}\nSin intrusiones 97; sin drones 69; otra tarea 13;\nrevisiones 10; tipo de documento 9; otros 10")
-caja(7.75, 5.15, f"Excluidos: {c['excluidos_cribado']}\nFuera del alcance 121; otros motivos 43")
-caja(7.75, 3.55, f"No recuperados: {c['no_recuperados']}\nIEEE 64; otras editoriales 73")
-caja(7.75, 1.75, f"Excluidos: {c['excluidos_texto']}\nSin modelo de referencia o sin cifras asociables 8;\notra tarea o dominio 3")
+caja(7.75, 6.9, f"Filtro automático: {c['filtro']}\n{c['texto_filtro']}")
+caja(7.75, 5.15, f"Excluidos: {c['excluidos_cribado']}\n{c['texto_cribado']}")
+caja(7.75, 3.55, f"No recuperados: {c['no_recuperados']}\n{c['texto_no_recuperados']}")
+caja(7.75, 1.75, f"Excluidos: {c['excluidos_texto']}\n{c['texto_excluidos']}")
 for a, b in [(8.75, 8.05), (7.2, 6.3), (5.6, 4.7), (4.0, 3.1), (2.4, 1.45)]:
     flecha((3, a), (3, b))
 for y in (8.6, 6.9, 5.15, 3.55, 1.75):
     flecha((3, y), (5.5, y))
+# Rama de otros métodos: verificación de cobertura de sinónimos en OpenAlex
+caja(11.9, 9.5, f"Otros métodos: verificación de\ncobertura en OpenAlex\nRegistros nuevos: {c['cob_nuevos']}")
+caja(11.9, 7.55, f"Filtro automático: {c['cob_filtro']}\nCribados: {c['cob_cribados']}")
+caja(11.9, 5.95, f"Excluidos en cribado: {c['cob_excluidos_cribado']}\nElegibles o dudosos: {c['cob_elegibles']}")
+caja(11.9, 4.35, f"Sin leer, no Q1: {c['cob_sin_leer']}\nQ1 evaluados: {c['cob_q1']}")
+caja(11.9, 2.75, f"Excluidos: {c['cob_excluidos_texto']}\nIncluidos: {c['cob_incluidos']}")
+for a, b in [(8.85, 8.0), (7.15, 6.4), (5.55, 4.8), (3.95, 3.2)]:
+    flecha((11.9, a), (11.9, b))
+eje.plot([11.9, 11.9], [2.3, 0.9], color="#4a4a4a", linewidth=1)
+flecha((11.9, 0.9), (4.75, 0.9))
 plt.tight_layout()
 plt.show()
 """)
 
 md("s3-prisma-int", rf"""
-**Interpretación.** De {CONTEOS["exportados"]} registros exportados, {CONTEOS["duplicados"]} son duplicados, el filtro automático retira {CONTEOS["filtro"]} y el cribado por título y resumen retira {CONTEOS["excluidos_cribado"]}. Quedan {CONTEOS["buscados"]} estudios elegibles, de los cuales se pudieron evaluar {CONTEOS["evaluados"]}, es decir, el {round(100 * CONTEOS["evaluados"] / CONTEOS["buscados"])} %, y finalmente se incluyen {CONTEOS["incluidos"]}. El artículo que presenta el conjunto de datos no menciona Deep Learning en su resumen y el filtro automático lo retiró; se rescató a mano, y al no recuperarse a texto completo, sus valores se toman del repositorio de los autores.
+**Interpretación.** De {CONTEOS["exportados"]} registros exportados, {CONTEOS["duplicados"]} son duplicados, el filtro automático retira {CONTEOS["filtro"]} y el cribado por título y resumen retira {CONTEOS["excluidos_cribado"]}. Quedan {CONTEOS["buscados"]} estudios elegibles, de los cuales se pudieron evaluar {CONTEOS["evaluados"]}, es decir, el {round(100 * CONTEOS["evaluados"] / CONTEOS["buscados"])} %, y se incluyen {CONTEOS["incluidos_bases"]}. La verificación de cobertura agrega {CONTEOS["cob_incluidos"]} por la rama de otros métodos, para un total de {CONTEOS["incluidos"]}. El artículo que presenta el conjunto de datos no menciona Deep Learning en su resumen y el filtro automático lo retiró; se rescató a mano. Ese artículo reporta los valores, pero no describe las arquitecturas, que están en el código público de los autores (Zeng, 2025).
 
-Hay que tener en cuenta que esta cobertura introduce un sesgo: {N_IEEE_SIN_TEXTO} de los {CONTEOS["no_recuperados"]} estudios no recuperados son de IEEE, y además falta consultar IEEE Xplore, Web of Science y Scopus. Por tanto, la tabla de frecuencia describe sobre todo la literatura de acceso abierto, y no se puede afirmar que represente a toda la literatura del tema.
+Hay que tener en cuenta que esta lectura parcial introduce un sesgo: quedan sin evaluar {CONTEOS["no_recuperados"]} estudios, {N_IEEE_SIN_TEXTO} de ellos de IEEE. Además, la lectura no fue uniforme, porque se priorizaron los de mayor cuartil y los de acceso abierto: se evaluaron {N_Q1_LEIDOS} de los {N_Q1_ELEGIBLES} elegibles Q1 y {CONTEOS["evaluados"] - N_Q1_LEIDOS} de los {CONTEOS["buscados"] - N_Q1_ELEGIBLES} restantes, y en la verificación de cobertura se leyeron los {CONTEOS["cob_q1"]} Q1 y ninguno de los {CONTEOS["cob_sin_leer"]} restantes. Por tanto, la tabla de frecuencia no se puede leer como un censo de la literatura del tema.
 
-Por lo anterior, conviene leer los conteos como una estimación de la práctica en el área y completar estas fuentes antes de cerrar la revisión.
+Por lo anterior, conviene leer los conteos como una estimación de la práctica en el área, con mayor peso de las revistas Q1 y del acceso abierto.
 
-**Quién realizó la selección.** Al ser un trabajo de autor único, hubo un solo revisor y no hubo desacuerdos que resolver, lo cual es una limitación frente a un cribado doble. El cribado y la extracción se hicieron con apoyo de un asistente de inteligencia artificial (Claude, de Anthropic) bajo la supervisión del autor. La extracción se apoyó en la búsqueda dirigida de las tablas y los pasajes de comparación de cada texto, de modo que un dato que no se halló queda como no reportado o no identificado, aunque podría estar en una figura o en un material suplementario.
+**Quién realizó la selección.** Al ser un trabajo de autor único, hubo un solo revisor y no hubo desacuerdos que resolver, lo cual es una limitación frente a un cribado doble. El cribado y la extracción se hicieron con apoyo de un asistente de inteligencia artificial (Claude, de Anthropic) bajo la supervisión del autor. El autor descargó con el acceso de la biblioteca los textos Q1 que no estaban en acceso abierto. La extracción se apoyó en la búsqueda dirigida de las tablas y los pasajes de comparación de cada texto, no en su lectura íntegra, de modo que un dato que no se halló queda como no reportado o no identificado, aunque podría estar en una figura o en un material suplementario.
 
-**Evaluación de la calidad de los estudios.** Para cada estudio se valoró la partición, las repeticiones, la dispersión, las pruebas estadísticas y el riesgo de fuga. Ninguno de los {N_INCLUIDOS} estudios agrupa filas relacionadas, {N_SIN_REPETICION} no reportan repeticiones, solo {N_DISPERSION} reportan dispersión y {N_CON_PRUEBA} aplican alguna prueba.
+**Evaluación de la calidad de los estudios.** Para cada estudio se valoró la partición, las repeticiones, la dispersión, las pruebas estadísticas y el riesgo de fuga. Solo {N_AGRUPADOS} de los {N_INCLUIDOS} estudios agrupan filas relacionadas, por sesión o por nodo; {N_SIN_REPETICION} no reportan repeticiones, solo {N_DISPERSION} reportan dispersión y {N_CON_PRUEBA} aplican alguna prueba.
+
+En cuanto a la calidad de las fuentes, el enunciado pide preferir literatura Q1. Según el cuartil SJR 2025 de SCImago (2026), que se calcula con datos de Scopus, {CONTEO_CUARTIL["Q1"]} estudios son Q1, {CONTEO_CUARTIL["Q2"]} Q2, {CONTEO_CUARTIL["Q3"]} Q3 y {CONTEO_CUARTIL["Q4"]} Q4, mientras que {N_SIN_CUARTIL} son conferencias, preprints o fuentes sin cuartil, entre ellas el artículo de los autores del conjunto de datos. Hay que tener en cuenta que el cuartil describe a la revista en 2025, no a cada artículo ni al año en que se publicó.
 
 {TABLA_CALIDAD}
 """)
@@ -853,21 +991,35 @@ md("s3-2", rf"""
 
 {TABLA_FRECUENCIA}
 
-**Interpretación.** La DNN o MLP es la referencia más frecuente, con {FILA_FRECUENCIA["DNN/MLP"]["estudios"]} estudios, seguida de la CNN, con {FILA_FRECUENCIA["CNN"]["estudios"]}, y de la LSTM, con {FILA_FRECUENCIA["LSTM"]["estudios"]}. El cuarto lugar, la combinación de CNN con LSTM, tiene {FILA_FRECUENCIA["CNN-LSTM"]["estudios"]} estudios, así que el corte no es ambiguo. El orden se mantiene en los {len(CON_DATASET)} estudios que usan UAVIDS-2025, donde estas tres familias también son las más usadas.
+**Interpretación.** La DNN o MLP y la CNN son las referencias más frecuentes, con {FILA_FRECUENCIA["DNN/MLP"]["estudios"] + " estudios cada una" if FILA_FRECUENCIA["DNN/MLP"]["estudios"] == FILA_FRECUENCIA["CNN"]["estudios"] else FILA_FRECUENCIA["DNN/MLP"]["estudios"] + " y " + FILA_FRECUENCIA["CNN"]["estudios"] + " estudios"}, seguidas de la LSTM, con {FILA_FRECUENCIA["LSTM"]["estudios"]}. El cuarto lugar, la combinación de CNN con LSTM, tiene {FILA_FRECUENCIA["CNN-LSTM"]["estudios"]} estudios, así que el corte no es ambiguo. El orden se mantiene en los {len(CON_DATASET)} estudios que usan UAVIDS-2025, donde estas tres familias también son las más usadas. Con solo los {len(ESTUDIOS_Q1)} estudios Q1, DNN/MLP tiene {FRECUENCIA_Q1["DNN/MLP"]}, CNN {FRECUENCIA_Q1["CNN"]} y LSTM {FRECUENCIA_Q1["LSTM"]}, {"empatada con" if FRECUENCIA_Q1["LSTM"] == FRECUENCIA_Q1["RNN"] else "por delante de" if FRECUENCIA_Q1["LSTM"] > FRECUENCIA_Q1["RNN"] else "por detrás de"} RNN ({FRECUENCIA_Q1["RNN"]}).
 
-Esto significa que la selección no depende de un criterio personal, porque los tres primeros lugares están claramente separados del resto. Hay que tener en cuenta que un estudio adicional de las bases pendientes puede cambiar los conteos, pero difícilmente ese corte.
+Esto significa que la selección no depende de un criterio personal, porque en el total los tres primeros lugares están claramente separados del resto. {f"Hay que tener en cuenta que, entre los Q1, LSTM empata con la RNN simple, que tiene menor complejidad, y que quedan {N_Q1_SIN_LEER} estudios Q1 sin leer, de modo que ese empate no está resuelto. Se conserva LSTM porque en el total supera a la RNN por {int(FILA_FRECUENCIA['LSTM']['estudios']) - int(FILA_FRECUENCIA['RNN']['estudios'])} estudios." if FRECUENCIA_Q1["LSTM"] <= FRECUENCIA_Q1["RNN"] else f"Hay que tener en cuenta que, entre los Q1, LSTM supera a la RNN simple, que tiene menor complejidad, por {FRECUENCIA_Q1['LSTM'] - FRECUENCIA_Q1['RNN']} estudio{'s' if FRECUENCIA_Q1['LSTM'] - FRECUENCIA_Q1['RNN'] > 1 else ''}, gracias a los Q1 de la verificación de cobertura, y en el total la supera por {int(FILA_FRECUENCIA['LSTM']['estudios']) - int(FILA_FRECUENCIA['RNN']['estudios'])}. Ese margen es estrecho entre los Q1 y quedan {N_Q1_SIN_LEER} estudios Q1 sin leer, de modo que podría cambiar con más lecturas."}
 
 Por tal motivo, se opta por estas tres familias como modelos base.
 """)
 
+md("s3-arquitecturas", rf"""
+**Arquitectura y configuración reportadas.** El paso 2 del procedimiento pide registrar la profundidad, el ancho, la regularización y el entrenamiento de cada modelo de referencia. La tabla reúne lo que se halló en la búsqueda dirigida de cada texto; lo que falta en ella queda como no reportado, aunque podría estar en una figura o en un material suplementario.
+
+{TABLA_ARQUITECTURAS}
+
+**Interpretación.** Solo {N_CON_ARQUITECTURA} de los {N_INCLUIDOS} estudios incluidos describen al menos un modelo de referencia, y en los otros {N_INCLUIDOS - N_CON_ARQUITECTURA} el modelo se nombra sin su arquitectura. Además, varios datos no provienen del conjunto principal de cada estudio ni de un modelo de referencia puro: las tablas de Abdulhammed et al. (2026) corresponden a UAV-GCS, y los de Balgoon (2026) son componentes de su modelo propuesto.
+
+Hay que tener en cuenta que el enunciado excluye los estudios sin descripción suficiente de la arquitectura de referencia, y que en esta revisión ese criterio se aplicó exigiendo que el modelo de referencia y sus cifras se pudieran identificar, no que se describiera su arquitectura. Es decir, una aplicación estricta dejaría {N_CON_ARQUITECTURA} estudios, y por eso se contrasta la frecuencia con ese subconjunto:
+
+{TABLA_DESCRITOS}
+
+Con esa restricción, CNN y DNN/MLP siguen en los primeros lugares, con {len(CONTEO_DESCRITOS["CNN"])} y {len(CONTEO_DESCRITOS["DNN/MLP"])} estudios, y LSTM sigue a continuación, con {len(CONTEO_DESCRITOS["LSTM"])}, frente a {len(CONTEO_DESCRITOS["BiLSTM"])} de BiLSTM, que además es una variante más compleja de LSTM, y {len(CONTEO_DESCRITOS["RNN"])} de RNN. Por lo anterior, se conservan los tres modelos, con la salvedad de que en el subconjunto estricto el margen es de un solo estudio. Esto también respalda tomar la arquitectura del código de los autores (Zeng, 2025), porque es la única que se halló con las tres familias sobre UAVIDS-2025.
+""")
+
 md("s3-seleccion", r"""
-**Selección de los tres modelos.** Dentro de cada familia se toma la variante más simple con arquitectura publicada, que es la que usan los autores del conjunto de datos (Zeng et al., 2025), de modo que no aplica la búsqueda de arquitectura de la sección 14 del Entregable 2.
+**Selección de los tres modelos.** Dentro de cada familia se toma la variante más simple con arquitectura publicada. Zeng et al. (2025) nombran los tres modelos en su artículo, pero no describen sus capas, que están en el código público de los mismos autores (Zeng, 2025). Como la arquitectura sí está definida, no aplica la búsqueda de arquitectura de la sección 14 del Entregable 2.
 
 | Modelo | Arquitectura tomada de | Parámetros | Capas con pesos | Multiplicaciones por muestra |
 |---|---|---|---|---|
-| DNN | Zeng et al. (2025) | 12 677 | 4 | 12 448 |
-| LSTM | Zeng et al. (2025) | 17 477 | 2 | 266 560 |
-| CNN 1D | Zeng et al. (2025) | 39 493 | 4 | 132 928 |
+| DNN | Zeng (2025) | 12 677 | 4 | 12 448 |
+| LSTM | Zeng (2025) | 17 477 | 2 | 266 560 |
+| CNN 1D | Zeng (2025) | 39 493 | 4 | 132 928 |
 
 Los parámetros y las multiplicaciones se calculan para una entrada de 16 atributos y 5 clases, y el código de la sección 4.2.1 verifica el conteo de parámetros.
 
@@ -883,7 +1035,7 @@ Es decir, son una regresión logística multinomial sobre una representación ap
 md("s3-3", r"""
 ### 3.3 Análisis detallado por modelo base
 
-Todos los modelos comparten la pérdida, la entropía cruzada ponderada $\mathcal{L}(\theta) = -\frac{1}{n}\sum_i w_{y_i} \log p_\theta(y_i \mid x_i)$, y resuelven la clasificación multiclase de flujos de red de la sección 1. Las referencias completas de cada estudio están en la sección 9, y la configuración habitual de entrenamiento es la de Zeng et al. (2025): Adam con tasa de aprendizaje de 0,001, lotes de 256, un máximo de 50 épocas y parada temprana. La figura siguiente resume el flujo de datos de los tres modelos, que después se detalla para cada uno.
+Todos los modelos comparten la pérdida, la entropía cruzada ponderada $\mathcal{L}(\theta) = -\frac{1}{n}\sum_i w_{y_i} \log p_\theta(y_i \mid x_i)$, y resuelven la clasificación multiclase de flujos de red de la sección 1. Las referencias completas de cada estudio están en la sección 9, y la configuración de entrenamiento de referencia es la del código de los autores (Zeng, 2025): Adam con tasa de aprendizaje de 0,001, lotes de 256, un máximo de 50 épocas y parada temprana. La figura siguiente resume el flujo de datos de los tres modelos, que después se detalla para cada uno.
 """)
 
 code("s3-diagrama", r"""
@@ -919,14 +1071,14 @@ md("s3-3a", rf"""
 #### Modelo 1: DNN
 
 - **Tipo de arquitectura.** Perceptrón multicapa.
-- **Referencias que la respaldan.** {respaldo('DNN/MLP')}. La arquitectura exacta se toma de Zeng et al. (2025).
+- **Referencias que la respaldan.** {respaldo('DNN/MLP')}. Las capas se toman del código de los autores (Zeng, 2025).
 """)
 
 md("s3-3b", r"""
 - **Descripción técnica.** Cada capa oculta aplica $z^{(l)} = \mathrm{Dropout}\big(\mathrm{ReLU}(W^{(l)} z^{(l-1)} + b^{(l)})\big)$, con *dropout* de 0,2. El flujo de datos es 16 → 128 → 64 → 32 → 5, y la capa de salida aplica softmax.
 - **Supuestos y sesgo inductivo.** Supone que la clase depende de interacciones globales entre atributos, sin ninguna estructura local, lo cual es coherente con una tabla donde el orden de las columnas no tiene significado.
 - **Tipo de problema que aborda.** Clasificación multiclase de flujos de red en los estudios revisados.
-- **Datasets y métricas reportadas.** F1 de 93 % en UAVIDS-2025, sin dispersión (Zeng et al., 2025); F1 de 90,66 % en UAVIDS-2025, sin dispersión (Zarkadis y Douligeris, 2026); exactitud de 96,43 ± 0,22 % en T-ITS, con dispersión sobre 10 ejecuciones (Attaullah et al., 2026), y 91,36 % en KDD Cup 99, sin dispersión (Tan et al., 2019).
+- **Datasets y métricas reportadas.** F1 de 93 % en UAVIDS-2025, sin dispersión (Zeng et al., 2025); F1 de 90,66 % en UAVIDS-2025, sin dispersión (Zarkadis y Douligeris, 2026); exactitud de 96,43 ± 0,22 % en T-ITS, con dispersión sobre 10 ejecuciones (Attaullah et al., 2026a), y 91,36 % en KDD Cup 99, sin dispersión (Tan et al., 2019).
 - **Fortalezas.** Es el modelo más simple y barato de los tres, fácil de reproducir y el más usado como referencia.
 - **Limitaciones.** No aprovecha ninguna estructura de los datos y su capacidad depende del ancho, de modo que necesita regularización y es sensible a la tasa de aprendizaje.
 - **Complejidad computacional.** Con $c = (16, 128, 64, 32, 5)$, el número de parámetros es $P = \sum_{l=1}^{4}(c_{l-1} + 1)c_l = 12\,677$. El costo por muestra es de orden $\mathcal{O}(\sum_l c_{l-1} c_l)$, unas 12 448 multiplicaciones; la inferencia requiere una pasada y el paso de entrenamiento agrega la retropropagación, del mismo orden. Los estudios no reportan un tiempo de entrenamiento comparable, por lo que se mide en la sección 4.2.1.
@@ -937,7 +1089,7 @@ md("s3-3b", r"""
 """)
 
 md("s3-3c", rf"""
-- **Referencias que la respaldan.** {respaldo('CNN')}. La arquitectura exacta se toma de Zeng et al. (2025).
+- **Referencias que la respaldan.** {respaldo('CNN')}. Las capas se toman del código de los autores (Zeng, 2025).
 """)
 
 md("s3-3d", r"""
@@ -955,7 +1107,7 @@ md("s3-3d", r"""
 """)
 
 md("s3-3e", rf"""
-- **Referencias que la respaldan.** {respaldo('LSTM')}. La arquitectura exacta se toma de Zeng et al. (2025).
+- **Referencias que la respaldan.** {respaldo('LSTM')}. Las capas se toman del código de los autores (Zeng, 2025).
 """)
 
 md("s3-3f", r"""
@@ -980,11 +1132,13 @@ md("s3-3f", r"""
 """)
 
 md("s3-3g", rf"""
-**Validez de los estudios revisados.** Ninguno de los {N_INCLUIDOS} estudios agrupa filas relacionadas al partir los datos; {N_SIN_PARTICION} no permiten identificar la partición, {N_SIN_REPETICION} no reportan repeticiones, solo {N_DISPERSION} reportan dispersión y {N_CON_PRUEBA} aplican alguna prueba, de las cuales tres comparan modelos, con la prueba $t$, y ninguna sobre particiones agrupadas. Además, la comparabilidad es baja: varios estudios usan conjuntos genéricos, como KDD Cup 99 o CICIDS2017, que no provienen de redes de drones, y dos estudios sobre IoT repiten las mismas cifras de comparación. Dos resultados merecen una alerta: Abdulhammed et al. (2026) reportan 100 % con LightGBM, y Wang et al. (2026) reportan 99,68 %, en ambos casos sin mencionar la exclusión de `FlowID` ni de las direcciones IP, que la sección 2.1.4 identifica como atajos.
+**Validez de los estudios revisados.** Solo {N_CON_ARQUITECTURA} de los {N_INCLUIDOS} estudios describen al menos un modelo de referencia, y solo {N_AGRUPADOS} agrupan filas relacionadas al partir los datos; {N_SIN_PARTICION} no permiten identificar la partición, {N_SIN_REPETICION} no reportan repeticiones, solo {N_DISPERSION} reportan dispersión y {N_CON_PRUEBA} aplican alguna prueba, de las cuales tres comparan modelos con la prueba $t$ y otra reporta p < 0,01 sin nombrar la prueba en los pasajes revisados (Mohamed et al., 2026), y ninguna sobre particiones agrupadas. Además, la comparabilidad es baja: varios estudios usan conjuntos genéricos, como KDD Cup 99 o CICIDS2017, que no provienen de redes de drones, y dos estudios sobre IoT repiten las mismas cifras de comparación. Dos resultados merecen una alerta: Abdulhammed et al. (2026) reportan 100 % con LightGBM, y Wang et al. (2026) reportan 99,68 %, en ambos casos sin mencionar la exclusión de `FlowID` ni de las direcciones IP, que la sección 2.1.4 identifica como atajos.
 
-**Brecha de desempeño.** La literatura reporta que los modelos propuestos superan a estas referencias, como 98,74 % frente a 96,43 % de la DNN (Attaullah et al., 2026), o 98,18 % frente a 94,60 % de una GNN en UAVIDS-2025 (Balgoon, 2026). Sin embargo, esa brecha se obtiene con particiones aleatorias, y la sección 2.1.3 mostró que cambiar a una partición agrupada mueve el F1 macro en una magnitud parecida o mayor. Por tanto, esta brecha se toma como contexto para interpretar el baseline, y no como una mejora demostrada.
+**Brecha de desempeño.** La literatura reporta que los modelos propuestos superan a estas referencias, como 98,74 % frente a 96,43 % de la DNN (Attaullah et al., 2026a), o 98,18 % frente a 94,60 % de una GNN en UAVIDS-2025 (Balgoon, 2026). Sin embargo, esa brecha se obtiene con particiones aleatorias, y la sección 2.1.3 mostró que cambiar a una partición agrupada mueve el F1 macro en una magnitud parecida o mayor. Por tanto, esta brecha se toma como contexto para interpretar el baseline, y no como una mejora demostrada.
 
-**Vacío en la literatura.** Ninguno de los {N_INCLUIDOS} estudios incluidos, y en particular ninguno de los {len(CON_DATASET)} que usan UAVIDS-2025, compara modelos base de Deep Learning con una partición que respete la dependencia entre flujos contiguos y con inferencia estadística sobre repeticiones. Este trabajo atiende ese vacío, con la salvedad de que la revisión aún no incluye las bases de datos pendientes.
+**Una auditoría concordante.** Bakiri et al. (2026) auditan UAVIDS-2025 de forma independiente, encuentran las mismas 8219 filas repetidas de la sección 2.1.2 y confirman que `FlowID` no identifica la simulación, y por eso parten por nodo de origen. Con esa partición reportan una exactitud de 92,50 % en cinco clases, frente a 0,8607 del baseline de este trabajo. Hay que tener en cuenta que no son cifras comparables de forma directa, porque cambian el modelo, los datos de prueba y lo que se mantiene separado: ellos generalizan a nodos no vistos, y este trabajo, a tramos no vistos del archivo, ya que la sección 2.1.3 muestra que las direcciones de origen no separan a los flujos vecinos. Por tal motivo, esa diferencia se toma como una pregunta abierta sobre la partición, y no como un margen de mejora del modelo.
+
+**Vacío en la literatura.** De los {N_INCLUIDOS} estudios incluidos, {N_AGRUPADOS} agrupan las filas al partir: Biswas et al. (2026) por sesión y dron en otro conjunto de datos, con cinco semillas y sin prueba estadística, y Bakiri et al. (2026) por nodo en UAVIDS-2025, frente a una KAN plana y a cifras publicadas. Por tanto, ninguno de los {len(CON_DATASET)} que usan UAVIDS-2025 compara modelos base de Deep Learning con una partición que respete la dependencia entre filas y con inferencia estadística sobre repeticiones, al menos en los pasajes revisados. Este trabajo atiende ese vacío, con la salvedad de que {CONTEOS["no_recuperados"]} estudios elegibles no se leyeron a texto completo.
 """)
 
 md("s4", r"""
@@ -1042,13 +1196,15 @@ En esta subsección se define el protocolo antes de entrenar, para que los tres 
 md("s4-modelos", r"""
 ### 4.2 Implementación de los tres modelos base
 
-Los modelos son los que resultan de la tabla de frecuencia de la literatura (sección 3.2), y se implementan con PyTorch, cuya versión se registra en la configuración del entorno. Todos tienen la arquitectura definida por Zeng et al. (2025), de modo que no aplica la búsqueda de arquitectura de la sección 14 del Entregable 2:
+Los modelos son los que resultan de la tabla de frecuencia de la literatura (sección 3.2), y se implementan con PyTorch, cuya versión se registra en la configuración del entorno. Todos siguen las capas del código público de los autores (Zeng, 2025), de modo que no aplica la búsqueda de arquitectura de la sección 14 del Entregable 2. Hay que tener en cuenta que, al contrastar ese código el 4 de noviembre de 2026, con los resultados ya calculados, se detectó una desviación no prevista en el *dropout*, que la tabla declara y la sección 5.4 evalúa con un análisis de sensibilidad:
 
 | Modelo | Origen de la arquitectura | Adaptación a estos datos |
 |---|---|---|
-| DNN | Zeng et al. (2025): perceptrón de 16 → 128 → 64 → 32 → 5, con ReLU y *dropout* de 0,2 | Ninguna |
-| CNN 1D | Zeng et al. (2025): convoluciones 1D de 32 y 64 filtros de tamaño 3, *max-pooling* y capa densa de 64 | Ninguna |
-| LSTM | Zeng et al. (2025): una capa de 64 unidades que lee los 16 atributos como una secuencia de largo 16 | Ninguna |
+| DNN | Zeng (2025): perceptrón de 16 → 128 → 64 → 32 → 5, con ReLU y *dropout* de 0,2 tras las capas de 128 y 64 | *Dropout* también tras la capa de 32 |
+| CNN 1D | Zeng (2025): convoluciones 1D de 32 y 64 filtros de tamaño 3, *max-pooling*, *dropout* de 0,2 y capa densa de 64 | Sin *dropout* |
+| LSTM | Zeng (2025): una capa de 64 unidades que lee los 16 atributos como una secuencia de largo 16, con *dropout* de 0,2 antes de la salida | Sin *dropout* |
+
+El entrenamiento también difiere del código de los autores, que usa entropía cruzada sin ponderar, paciencia de 5 épocas sobre la pérdida de validación, sin planificador, y una tasa y un lote fijos. Aquí se aplica el protocolo común de la sección 4.2.2, por las razones de la sección 2 y para dar a los tres modelos el mismo esfuerzo de ajuste.
 
 #### 4.2.1 Modelos y costo de entrenamiento
 
@@ -1123,7 +1279,7 @@ display(pd.DataFrame(costo).T)
 
 # Peor caso de cómputo: todas las corridas llegan al máximo de épocas
 MAX_EPOCAS = 50
-PRESUPUESTO_FASES = {"Búsqueda (6 configuraciones, 15 épocas)": 6 * 15, "Piloto (5 semillas, 50 épocas)": 5 * MAX_EPOCAS, "Definitiva (12 semillas, 50 épocas)": 12 * MAX_EPOCAS}
+PRESUPUESTO_FASES = {"Búsqueda (6 configuraciones, 15 épocas)": 6 * 15, "Piloto (5 semillas, 50 épocas)": 5 * MAX_EPOCAS, "Definitiva (hasta 12 semillas, 50 épocas)": 12 * MAX_EPOCAS}
 horas = pd.DataFrame({nombre: {fase: epocas * c["Segundos por época"] / 3600 for fase, epocas in PRESUPUESTO_FASES.items()} for nombre, c in costo.items()})
 horas["Total"] = horas.sum(axis=1)
 horas.loc["Total"] = horas.sum()
@@ -1132,7 +1288,7 @@ total_horas = float(horas.loc["Total", "Total"])
 modelo_caro = max(costo, key=lambda n: costo[n]["Segundos por época"])
 interpretar(f'''**Interpretación.** {modelo_caro} es el modelo más costoso, con {num(costo[modelo_caro]["Segundos por época"], 1)} segundos por época en CPU, y el total en el peor caso, con todas las corridas hasta el máximo de épocas, es de {num(total_horas, 1)} horas.
 
-Esto significa que es un límite superior, porque la parada temprana lo reduce, y que el costo no restringe el número de ejecuciones que pida el estudio piloto.
+Esto significa que es un límite superior, porque la parada temprana lo reduce y el piloto fija después el número real de semillas, y que el costo no restringe el número de ejecuciones que pida el estudio piloto.
 
 Por lo anterior, se conserva este presupuesto, y cada corrida se guarda al terminar, de modo que una interrupción no obligue a repetir lo ya hecho.''')
 """)
@@ -1140,7 +1296,7 @@ Por lo anterior, se conserva este presupuesto, y cada corrida se guarda al termi
 md("s4-motor", r"""
 #### 4.2.2 Motor de entrenamiento e hiperparámetros
 
-Todos los modelos se entrenan con la misma función: entropía cruzada ponderada, Adam, como en Zeng et al. (2025), reducción de la tasa de aprendizaje por 10 si la pérdida de validación no mejora en 2 épocas y parada temprana sobre el F1 macro de validación. El conjunto de prueba solo se evalúa en la fase definitiva, una vez por corrida, con el modelo ya fijado. Se fijan las semillas de Python, NumPy y PyTorch, sin determinismo estricto, porque no se usa aleatoriedad del dispositivo más allá de la de PyTorch en CPU. La tabla que sigue a la celda reúne estas definiciones.
+Todos los modelos se entrenan con la misma función: entropía cruzada ponderada, Adam (Kingma y Ba, 2015), como en el código de los autores (Zeng, 2025), reducción de la tasa de aprendizaje por 10 si la pérdida de validación no mejora en 2 épocas y parada temprana sobre el F1 macro de validación. El conjunto de prueba solo se evalúa en la fase definitiva, una vez por corrida, con el modelo ya fijado. Se fijan las semillas de Python, NumPy y PyTorch, sin determinismo estricto, porque no se usa aleatoriedad del dispositivo más allá de la de PyTorch en CPU. La tabla que sigue a la celda reúne estas definiciones.
 """)
 
 code("s4-motor-def", r"""
@@ -1227,7 +1383,7 @@ def correr(fase, nombre, hp, semilla, ids_ent, ids_val, etiqueta="", evaluar_pru
 
 display(pd.DataFrame({"Definición": ["Capas y unidades", "Función de pérdida", "Optimizador", "Tasa de aprendizaje", "Planificador", "Decaimiento de pesos", "Tamaño de lote", "Dropout", "Máximo de épocas", "Parada temprana", "Registro de cada corrida"],
                       "Valor": ["Las de la sección 3.3", "Entropía cruzada ponderada", "Adam", "Se ajusta en la sección 4.2.3", "Reducción por 10 si la pérdida de validación no mejora en 2 épocas", "Se ajusta en la sección 4.2.3", "Se ajusta en la sección 4.2.3",
-                                "0,2 en la DNN; las otras dos arquitecturas no lo usan", MAX_EPOCAS, f"Paciencia de {PACIENCIA} épocas sobre el F1 macro de validación", "Curvas, parámetros, semilla, hiperparámetros, tiempo y equipo"]}).style.hide(axis="index"))
+                                "0,2 en la DNN; las otras dos arquitecturas no lo usan aquí (sección 4.2)", MAX_EPOCAS, f"Paciencia de {PACIENCIA} épocas sobre el F1 macro de validación", "Curvas, parámetros, semilla, hiperparámetros, tiempo y equipo"]}).style.hide(axis="index"))
 """)
 
 md("s4-busqueda", r"""
@@ -1293,7 +1449,7 @@ if CORRER_PILOTO and RUTA_HP.exists():
     piloto = pd.DataFrame([{"Modelo": n, "Semilla": s, "F1": correr("piloto", n, mejores[n], s, id_ent, id_val)["f1_val"]} for n in MODELOS for s in SEMILLAS_PILOTO])
     resumen_piloto = piloto.groupby("Modelo")["F1"].agg(["mean", "std"])
     resumen_piloto["cv_%"] = 100 * resumen_piloto["std"] / resumen_piloto["mean"]
-    display(resumen_piloto.round(5))
+    display(resumen_piloto.rename(columns={"mean": "Media", "std": "Desviación estándar", "cv_%": "Coeficiente de variación (%)"}).round(5))
     ancho = piloto.pivot(index="Semilla", columns="Modelo", values="F1")
     nombres = list(ancho.columns)
     z = stats.norm.ppf(1 - ALFA / 2) + stats.norm.ppf(POTENCIA)
@@ -1382,7 +1538,7 @@ def interpretar(texto):
 
 def p_exacto(p):
     '''Valor p para las tablas: exacto, sin redondear a cero los muy pequeños.'''
-    return f"{p:.2e}" if p < 1e-4 else f"{p:.5f}"
+    return (f"{p:.2e}" if p < 1e-4 else f"{p:.5f}").replace(".", ",")
 
 
 def error_calibracion(prob, verdad, bins=15):
@@ -1711,12 +1867,12 @@ Por ello, se recomienda leer el *trade-off* junto con la significancia y la rele
 md("s5-baseline", r"""
 ### 5.3 Definición del baseline y margen de mejora disponible
 
-Este es el objetivo central del entregable. Se identifica el mejor modelo, se cuantifican las diferencias absolutas y relativas con los demás y se define el umbral de mejora. La mejora mínima detectable sale de la potencia exacta de la prueba $t$ pareada con α = 0,05 y potencia de 0,80, y el umbral combina esa cifra con el margen de relevancia δ = 0,01 declarado a priori: $\text{umbral} = \overline{F1}_{\text{baseline}} + \max(\delta, \text{mejora mínima detectable})$.
+Este es el objetivo central del entregable. Se identifica el mejor modelo, se cuantifican las diferencias absolutas y relativas con los demás, con la $d$ de Cohen (1988) como tamaño de efecto, y se define el umbral de mejora. La mejora mínima detectable sale de la potencia exacta de la prueba $t$ pareada con α = 0,05 y potencia de 0,80, y el umbral combina esa cifra con el margen de relevancia δ = 0,01 declarado a priori: $\text{umbral} = \overline{F1}_{\text{baseline}} + \max(\delta, \text{mejora mínima detectable})$.
 """)
 
 code("s5-baseline-calc", r"""
 ALFA, POTENCIA_OBJETIVO, DELTA = 0.05, 0.80, 0.01
-# Valores publicados sobre UAVIDS-2025, con partición aleatoria: repositorio de Zeng et al. (2025) y Zarkadis y Douligeris (2026)
+# Valores publicados sobre UAVIDS-2025, con partición aleatoria: artículo de Zeng et al. (2025) y Zarkadis y Douligeris (2026)
 LITERATURA_F1 = [("DNN, Zeng et al. (2025)", 0.93), ("CNN, Zeng et al. (2025)", 0.93), ("LSTM, Zeng et al. (2025)", 0.94), ("MLP, Zarkadis y Douligeris (2026)", 0.9066), ("RealMLP, Zarkadis y Douligeris (2026)", 0.9428)]
 
 
@@ -1797,6 +1953,63 @@ Por lo anterior, se aplica la regla declarada para cada par y se reportan siempr
 """)
 
 code("s5-pruebas-pares", r"""
+from scipy.optimize import brentq
+
+Z_ALFA, Z_POTENCIA = stats.norm.ppf(1 - ALFA / 2), stats.norm.ppf(POTENCIA_OBJETIVO)
+SIMULACIONES = 20000
+FORMATO_POTENCIA = {"Potencia para δ": "{:.3f}", "Mínima detectable": "{:.4f}", "Mínima detectable por filas": "{:.4f}", "Mínima detectable por bloques": "{:.4f}"}
+
+
+# Menor diferencia de una rejilla cuya potencia llega a la meta; cada simulación reutiliza los mismos números aleatorios
+def primera_que_alcanza(potencia_de, tope, puntos=600):
+    return next((d for d in np.linspace(0, tope, puntos + 1)[1:] if potencia_de(d) >= POTENCIA_OBJETIVO), np.nan)
+
+
+# Valor crítico exacto de Wilcoxon bilateral, a partir de las 2^n asignaciones de signos
+def critico_wilcoxon(n):
+    sumas = ((np.arange(2 ** n)[:, None] >> np.arange(n)) & 1) @ np.arange(1, n + 1)
+    w = np.minimum(sumas, n * (n + 1) / 2 - sumas)
+    return max((c for c in np.unique(w) if (w <= c).mean() <= ALFA), default=-1)
+
+
+# Potencia simulada de Wilcoxon exacto, con diferencias normales de media ``efecto``
+def potencia_wilcoxon(desviacion, n, efecto, ruido):
+    d = efecto + desviacion * ruido
+    suma = ((np.abs(d).argsort(1).argsort(1) + 1) * (d > 0)).sum(1)
+    return (np.minimum(suma, n * (n + 1) / 2 - suma) <= critico_wilcoxon(n)).mean()
+
+
+# Potencia simulada de TOST con margen δ, si la diferencia real es nula
+def potencia_tost(desviacion, n, ruido):
+    d = desviacion * ruido
+    media, error = d.mean(1), d.std(1, ddof=1) / np.sqrt(n)
+    return (np.maximum(stats.t.sf((media + DELTA) / error, n - 1), stats.t.cdf((media - DELTA) / error, n - 1)) < ALFA).mean()
+
+
+# ANOVA con Greenhouse-Geisser, si dos modelos difieren en ``diferencia`` y el tercero queda en el punto medio, la configuración menos favorable
+def potencia_anova(diferencia, n, k, cuadrado_error, epsilon):
+    gl1, gl2 = (k - 1) * epsilon, (k - 1) * (n - 1) * epsilon
+    return stats.ncf.sf(stats.f.isf(ALFA, gl1, gl2), gl1, gl2, epsilon * n * diferencia ** 2 / (2 * cuadrado_error))
+
+
+# Friedman y Nemenyi simulados con la misma configuración de medias y errores normales con el residuo medido
+def potencia_rangos(diferencia, cuadrado_error, ruido, distancia_critica):
+    y = np.array([diferencia / 2, 0, -diferencia / 2]) + np.sqrt(cuadrado_error) * ruido
+    medios = ((-y).argsort(2).argsort(2) + 1).mean(1)
+    chi2 = ruido.shape[1] * ((medios - 2) ** 2).sum(1)
+    return (stats.chi2.sf(chi2, 2) < ALFA).mean(), (np.abs(medios[:, 0] - medios[:, 2]) > distancia_critica).mean()
+
+
+# Prueba t con un error estándar dado, como el corregido de Nadeau y Bengio
+def potencia_t_error(error, gl, diferencia):
+    critico = stats.t.ppf(1 - ALFA / 2, gl)
+    return stats.nct.sf(critico, gl, abs(diferencia) / error) + stats.nct.cdf(-critico, gl, abs(diferencia) / error)
+
+
+def minima_t_error(error, gl):
+    return brentq(lambda d: potencia_t_error(error, gl, d) - POTENCIA_OBJETIVO, 1e-9, 8 * error)
+
+
 def comparar_par(a, b, repeticiones=10000):
     a, b = np.asarray(a), np.asarray(b)
     d = a - b
@@ -1817,7 +2030,9 @@ def comparar_par(a, b, repeticiones=10000):
     cliff = np.sign(np.subtract.outer(a, b)).mean()
     # Prueba de equivalencia TOST con el margen declarado a priori
     p_tost = max(stats.t.sf((media + DELTA) / error, n - 1), stats.t.cdf((media - DELTA) / error, n - 1)) if sd > 0 else float(abs(media) >= DELTA)
-    return {"Diferencia media": media, "IC 95 % t": (media - margen, media + margen), "IC 95 % bootstrap": tuple(ic_media), "t": t_valor, "p t pareada": p_t, "p Wilcoxon": p_w, "d de Cohen pareada": media / sd if sd > 0 else 0.0 if media == 0 else np.inf,
+    ruido = np.random.default_rng(42).standard_normal((SIMULACIONES, n))
+    return {"Potencia de Wilcoxon para δ": potencia_wilcoxon(sd, n, DELTA, ruido), "Mínima detectable de Wilcoxon": primera_que_alcanza(lambda e: potencia_wilcoxon(sd, n, e, ruido), 8 * sd), "Potencia de TOST": potencia_tost(sd, n, ruido),
+            "Diferencia media": media, "IC 95 % t": (media - margen, media + margen), "IC 95 % bootstrap": tuple(ic_media), "t": t_valor, "p t pareada": p_t, "p Wilcoxon": p_w, "d de Cohen pareada": media / sd if sd > 0 else 0.0 if media == 0 else np.inf,
             "IC 95 % de d": tuple(ic_efecto), "r biserial": r_biserial, "δ de Cliff": cliff, "P. de superioridad": (d > 0).mean() + 0.5 * (d == 0).mean(), "p TOST": p_tost, "Potencia para δ": potencia_pareada(sd, n, DELTA), "Mínima detectable": minima_detectable(sd, n) if sd > 0 else 0.0}
 
 
@@ -1857,7 +2072,7 @@ if hay_resultados:
     tabla_pares = pd.DataFrame([{"Par": par, "Diferencia media": round(r["Diferencia media"], 5), "IC 95 % t": f"[{num(r['IC 95 % t'][0], 4)}; {num(r['IC 95 % t'][1], 4)}]", "IC 95 % bootstrap": f"[{num(r['IC 95 % bootstrap'][0], 4)}; {num(r['IC 95 % bootstrap'][1], 4)}]",
                                  "Prueba elegida": elegida[par], "p sin ajustar": p_exacto(p), "p Holm": p_exacto(h), "p t": p_exacto(r["p t pareada"]), "p t Holm": p_exacto(ht), "p Wilcoxon": p_exacto(r["p Wilcoxon"]), "p Wilcoxon Holm": p_exacto(hw),
                                  "d de Cohen pareada": round(r["d de Cohen pareada"], 3), "IC 95 % de d": f"[{num(r['IC 95 % de d'][0], 2)}; {num(r['IC 95 % de d'][1], 2)}]", "r biserial": round(r["r biserial"], 3), "δ de Cliff": round(r["δ de Cliff"], 3), "P. de superioridad": round(r["P. de superioridad"], 3),
-                                 "Potencia para δ": round(r["Potencia para δ"], 3), "Mínima detectable": round(r["Mínima detectable"], 5), "p TOST": p_exacto(r["p TOST"])} for (par, r), p, h, ht, hw in zip(resultados_pares.items(), p_elegidos, p_holm, p_holm_t, p_holm_w)]).set_index("Par").T
+                                 "Potencia para δ": round(r["Potencia para δ"], 3), "Mínima detectable": round(r["Mínima detectable"], 5), "Potencia de Wilcoxon para δ": round(r["Potencia de Wilcoxon para δ"], 3), "Mínima detectable de Wilcoxon": round(r["Mínima detectable de Wilcoxon"], 5), "p TOST": p_exacto(r["p TOST"]), "Potencia de TOST": round(r["Potencia de TOST"], 3)} for (par, r), p, h, ht, hw in zip(resultados_pares.items(), p_elegidos, p_holm, p_holm_t, p_holm_w)]).set_index("Par").T
     display(tabla_pares)
     tabla_pares.to_csv(RESULTADOS / "comparaciones_pareadas.csv")
 
@@ -1866,9 +2081,18 @@ if hay_resultados:
     friedman = stats.friedmanchisquare(*M.T)
     kendall = friedman.statistic / (M.shape[0] * (M.shape[1] - 1))
     rangos_medios, p_nemenyi, distancia_critica = nemenyi(M)
+    cuadrado_error = anova["ss"]["Residuo"] / anova["gl error"]
+    n_semillas, k_modelos = M.shape
+    potencia_global = potencia_anova(DELTA, n_semillas, k_modelos, cuadrado_error, anova["épsilon GG"])
+    minima_global = brentq(lambda d: potencia_anova(d, n_semillas, k_modelos, cuadrado_error, anova["épsilon GG"]) - POTENCIA_OBJETIVO, 1e-9, 8 * np.sqrt(cuadrado_error))
+    ruido_rangos = np.random.default_rng(42).standard_normal((SIMULACIONES, n_semillas, k_modelos))
+    potencia_friedman, potencia_nemenyi = potencia_rangos(DELTA, cuadrado_error, ruido_rangos, distancia_critica)
+    minima_friedman = primera_que_alcanza(lambda d: potencia_rangos(d, cuadrado_error, ruido_rangos, distancia_critica)[0], 10 * np.sqrt(cuadrado_error))
+    minima_nemenyi = primera_que_alcanza(lambda d: potencia_rangos(d, cuadrado_error, ruido_rangos, distancia_critica)[1], 10 * np.sqrt(cuadrado_error))
     display(pd.DataFrame({"Prueba": ["ANOVA de medidas repetidas (Greenhouse-Geisser)", "Friedman"], "Estadístico": [round(anova["F"], 3), round(friedman.statistic, 3)], "p": [p_exacto(anova["p GG"]), p_exacto(friedman.pvalue)],
-                          "Tamaño de efecto": [f"η² parcial = {num(anova['η² parcial'], 3)}", f"W de Kendall = {num(kendall, 3)}"]}).style.hide(axis="index"))
-    display(pd.DataFrame({"Par": list(resultados_pares), "Diferencia de rangos": [abs(rangos_medios[i] - rangos_medios[j]) for i in range(3) for j in range(i + 1, 3)], "p Nemenyi": [p_exacto(v) for v in p_nemenyi]}).style.hide(axis="index"))
+                          "Tamaño de efecto": [f"η² parcial = {num(anova['η² parcial'], 3)}", f"W de Kendall = {num(kendall, 3)}"], "Potencia para δ": [round(potencia_global, 3), round(potencia_friedman, 3)], "Mínima detectable": [round(minima_global, 5), round(minima_friedman, 5)]}).style.hide(axis="index").format(FORMATO_POTENCIA, decimal=","))
+    display(pd.DataFrame({"Par": list(resultados_pares), "Diferencia de rangos": [abs(rangos_medios[i] - rangos_medios[j]) for i in range(3) for j in range(i + 1, 3)], "p Nemenyi": [p_exacto(v) for v in p_nemenyi],
+                          "Potencia para δ": round(potencia_nemenyi, 3), "Mínima detectable": round(minima_nemenyi, 5)}).style.hide(axis="index").format(FORMATO_POTENCIA, decimal=","))
     ss_total = sum(anova["ss"].values())
     varianza = pd.DataFrame({"Suma de cuadrados": anova["ss"], "Porcentaje": {k: 100 * v / ss_total for k, v in anova["ss"].items()}})
     display(varianza.round(6))
@@ -1884,9 +2108,9 @@ if hay_resultados:
         if all(resultados_pares[par]["p TOST"] * 3 < ALFA for par in equivalentes):
             texto_equivalencia += ", conclusión que se mantiene al multiplicar el valor p por las tres comparaciones"
     p_min_wilcoxon = 2 / 2 ** len(SEMILLAS)
-    interpretar(f'''**Interpretación.** Tras la corrección de Holm (1979), {"ningún par difiere de forma significativa" if not significativos else "difieren de forma significativa " + enumerar(significativos)}. La ANOVA de medidas repetidas da $F$ = {num(anova["F"], 2)} con {valor_p(anova["p GG"])} tras la corrección de Greenhouse-Geisser, y la prueba de Friedman (1937) da χ² = {num(friedman.statistic, 2)} con {valor_p(friedman.pvalue)} y una W de Kendall de {num(kendall, 3)}; la distancia crítica de Nemenyi es de {num(distancia_critica, 2)} rangos (Demšar, 2006). En la descomposición de la varianza, el modelo explica el {num(varianza.loc["Modelo", "Porcentaje"], 1)} %, la semilla el {num(varianza.loc["Semilla", "Porcentaje"], 1)} % y el residuo el {num(varianza.loc["Residuo", "Porcentaje"], 1)} %.
+    interpretar(f'''**Interpretación.** Tras la corrección de Holm (1979), {"ningún par difiere de forma significativa" if not significativos else "difieren de forma significativa " + enumerar(significativos)}. La ANOVA de medidas repetidas da $F$ = {num(anova["F"], 2)} con {valor_p(anova["p GG"])} tras la corrección de Greenhouse-Geisser, y la prueba de Friedman (1937) da χ² = {num(friedman.statistic, 2)} con {valor_p(friedman.pvalue)} y una W de Kendall de {num(kendall, 3)}; la distancia crítica de Nemenyi es de {num(distancia_critica, 2)} rangos (Demšar, 2006). En la descomposición de la varianza, el modelo explica el {num(varianza.loc["Modelo", "Porcentaje"], 1)} %, la semilla el {num(varianza.loc["Semilla", "Porcentaje"], 1)} % y el residuo el {num(varianza.loc["Residuo", "Porcentaje"], 1)} %. En potencia, con el residuo medido y suponiendo que dos modelos difieren en δ y el tercero queda en el punto medio, que es la configuración menos favorable, la ANOVA alcanza {num(potencia_global, 2)} y su diferencia mínima detectable es de {num(minima_global, 4)}; Friedman, {num(potencia_friedman, 2)} y {num(minima_friedman, 4)}, y Nemenyi, {num(potencia_nemenyi, 2)} y {num(minima_nemenyi, 4)}, estas dos últimas por simulación. Entre los pares, Wilcoxon alcanza de {num(min(r["Potencia de Wilcoxon para δ"] for r in resultados_pares.values()), 2)} a {num(max(r["Potencia de Wilcoxon para δ"] for r in resultados_pares.values()), 2)} para δ, con una mínima detectable de {num(min(r["Mínima detectable de Wilcoxon"] for r in resultados_pares.values()), 4)} a {num(max(r["Mínima detectable de Wilcoxon"] for r in resultados_pares.values()), 4)}, y TOST, si la diferencia real fuera nula, de {num(min(r["Potencia de TOST"] for r in resultados_pares.values()), 2)} a {num(max(r["Potencia de TOST"] for r in resultados_pares.values()), 2)}.
 
-Es decir, hay que distinguir dos preguntas. En significancia estadística, {"no hay evidencia de que algún par difiera" if not significativos else "hay evidencia de diferencia en " + enumerar(significativos)}. En relevancia práctica, {"ninguna diferencia media alcanza" if not relevantes else "la diferencia media de " + enumerar(relevantes) + " supera"} δ = {num(DELTA, 2)}{"" if not inciertos else f", pero sin significancia y con una potencia que va de {num(min(resultados_pares[par]['Potencia para δ'] for par in inciertos), 2)} a {num(max(resultados_pares[par]['Potencia para δ'] for par in inciertos), 2)}, de modo que el resultado en esos pares es no concluyente"}. La equivalencia se evalúa aparte con TOST (Schuirmann, 1987): {texto_equivalencia}. Así mismo, con {len(SEMILLAS)} pares el valor p mínimo de Wilcoxon es {num(p_min_wilcoxon, 4)}, de modo que {"esta prueba no podría superar el nivel más exigente de Holm, α/3 = 0,0167" if p_min_wilcoxon > ALFA / 3 else "esta prueba sí puede superar el nivel más exigente de Holm, α/3 = 0,0167"}.
+Es decir, hay que distinguir dos preguntas. En significancia estadística, {"no hay evidencia de que algún par difiera" if not significativos else "hay evidencia de diferencia en " + enumerar(significativos)}. En relevancia práctica, {"ninguna diferencia media alcanza" if not relevantes else "la diferencia media de " + enumerar(relevantes) + " supera"} δ = {num(DELTA, 2)}{"" if not inciertos else f", pero sin significancia y con una potencia que va de {num(min(resultados_pares[par]['Potencia para δ'] for par in inciertos), 2)} a {num(max(resultados_pares[par]['Potencia para δ'] for par in inciertos), 2)}, de modo que el resultado en esos pares es no concluyente"}. La equivalencia se evalúa aparte con TOST (Schuirmann, 1987): {texto_equivalencia}. Así mismo, con {len(SEMILLAS)} pares el valor p mínimo de Wilcoxon es {num(p_min_wilcoxon, 4)}, de modo que {"esta prueba no podría superar el nivel más exigente de Holm, α/3 = 0,0167" if p_min_wilcoxon > ALFA / 3 else "esta prueba sí puede superar el nivel más exigente de Holm, α/3 = 0,0167"}. {"Además, con esas potencias, el no rechazo de las pruebas globales no descarta una diferencia de magnitud δ" if max(potencia_global, potencia_friedman, potencia_nemenyi) < POTENCIA_OBJETIVO else "Además, las pruebas globales tienen potencia suficiente para detectar una diferencia de magnitud δ"}, y donde TOST tiene potencia baja, como en los pares con LSTM, tampoco podría declararse equivalencia aunque existiera.
 
 Por tanto, corresponde apoyar la decisión en la diferencia media con su intervalo y en el tamaño de efecto, y no solo en el valor p. Una ausencia de significancia no se interpreta como equivalencia.''')
 """)
@@ -1903,12 +2127,23 @@ def delong(verdad, puntaje_a, puntaje_b):
     (auc_a, v10_a, v01_a), (auc_b, v10_b, v01_b) = componentes
     cov_10, cov_01 = np.cov(v10_a, v10_b), np.cov(v01_a, v01_b)
     varianza = (cov_10[0, 0] + cov_10[1, 1] - 2 * cov_10[0, 1]) / m + (cov_01[0, 0] + cov_01[1, 1] - 2 * cov_01[0, 1]) / n
-    return auc_a - auc_b, 2 * stats.norm.sf(abs(auc_a - auc_b) / np.sqrt(varianza)) if varianza > 0 else 1.0
+    return auc_a - auc_b, 2 * stats.norm.sf(abs(auc_a - auc_b) / np.sqrt(varianza)) if varianza > 0 else 1.0, np.sqrt(max(varianza, 0))
 
 
 def f1_macro_rapido(verdad, prediccion, k=len(CLASES)):
     confusion = np.bincount(k * verdad + prediccion, minlength=k * k).reshape(k, k)
     return np.mean(2 * np.diag(confusion) / np.maximum(confusion.sum(0) + confusion.sum(1), 1))
+
+
+# AUC con pesos sobre puntajes ya agrupados por empates, para recalcularlo rápido en cada remuestreo
+def auc_ponderado(positivos, grupos, n_grupos, pesos):
+    pos = np.bincount(grupos, weights=pesos * positivos, minlength=n_grupos)
+    neg = np.bincount(grupos, weights=pesos * ~positivos, minlength=n_grupos)
+    return (pos * (np.cumsum(neg) - neg / 2)).sum() / (pos.sum() * neg.sum())
+
+
+def potencia_z(error, diferencia):
+    return stats.norm.sf(Z_ALFA - diferencia / error) + stats.norm.sf(Z_ALFA + diferencia / error)
 
 
 if hay_resultados:
@@ -1927,11 +2162,11 @@ if hay_resultados:
         pruebas_delong = np.array(pruebas_delong)
         ajustados = np.array([multipletests(fila, method="holm")[1] for fila in pruebas_delong[:, :, 1]])
         filas_mcnemar.append({"Par": f"{a} - {b}", "Diferencia media de accuracy": np.mean(diferencias_exactitud), "Discordantes (media)": np.mean(discordantes), "p de McNemar (mediana)": p_exacto(np.median(p_mcnemar)), "p mínimo": p_exacto(np.min(p_mcnemar)), "p máximo": p_exacto(np.max(p_mcnemar)),
-                              "Semillas con p Holm < 0,05": f"{int((multipletests(p_mcnemar, method='holm')[1] < ALFA).sum())} de {len(SEMILLAS)}"})
-        filas_delong.append({"Par": f"{a} - {b}", "Diferencia media de AUC por clase": pruebas_delong[:, :, 0].mean(), "Clase × semilla con p Holm < 0,05": f"{int((ajustados < ALFA).sum())} de {ajustados.size}", "p DeLong (mediana)": p_exacto(np.median(pruebas_delong[:, :, 1]))})
+                              "Semillas con p Holm < 0,05": f"{int((multipletests(p_mcnemar, method='holm')[1] < ALFA).sum())} de {len(SEMILLAS)}",
+                              "Potencia para δ": np.median(potencia_z(np.sqrt(discordantes) / len(y_prueba), DELTA)), "Mínima detectable": (Z_ALFA + Z_POTENCIA) * np.median(np.sqrt(discordantes)) / len(y_prueba)})
+        filas_delong.append({"Par": f"{a} - {b}", "Diferencia media de AUC por clase": pruebas_delong[:, :, 0].mean(), "Clase × semilla con p Holm < 0,05": f"{int((ajustados < ALFA).sum())} de {ajustados.size}", "p DeLong (mediana)": p_exacto(np.median(pruebas_delong[:, :, 1])),
+                             "Potencia para δ": np.median(potencia_z(pruebas_delong[:, :, 2], DELTA)), "Mínima detectable": (Z_ALFA + Z_POTENCIA) * np.median(pruebas_delong[:, :, 2])})
     TABLA_MCNEMAR, TABLA_DELONG = pd.DataFrame(filas_mcnemar), pd.DataFrame(filas_delong)
-    display(TABLA_MCNEMAR.round(5).style.hide(axis="index"))
-    display(TABLA_DELONG.round(5).style.hide(axis="index"))
 
     # Bootstrap estratificado por clase sobre el conjunto de prueba: captura la incertidumbre por la muestra de datos
     rng = np.random.default_rng(42)
@@ -1939,11 +2174,23 @@ if hay_resultados:
     REPETICIONES_PRUEBA = 1000
     predicciones = {n: np.stack([PROBABILIDADES[(n, s)].argmax(1) for s in SEMILLAS]) for n in NOMBRES}
     distribucion = {n: np.empty(REPETICIONES_PRUEBA) for n in NOMBRES}
+    # El mismo remuestreo da los intervalos de accuracy y de AUC macro, que McNemar y DeLong no entregan como promedio entre semillas
+    grupos_auc = {n: [[np.unique(PROBABILIDADES[(n, s)][:, c], return_inverse=True)[1] for c in range(len(CLASES))] for s in SEMILLAS] for n in NOMBRES}
+    positivos_auc = [y_prueba == c for c in range(len(CLASES))]
+    extra_filas = {n: np.empty((REPETICIONES_PRUEBA, 2)) for n in NOMBRES}
+    extra_bloques = {n: np.empty((REPETICIONES_PRUEBA, 2)) for n in NOMBRES}
+
+    def exactitud_y_auc(nombre, muestra):
+        pesos = np.bincount(muestra, minlength=len(y_prueba)).astype(float)
+        exactitud = ((predicciones[nombre] == y_prueba) @ pesos).mean() / pesos.sum()
+        return exactitud, np.mean([auc_ponderado(positivos_auc[c], grupos[c], grupos[c].max() + 1, pesos) for grupos in grupos_auc[nombre] for c in range(len(CLASES))])
+
     for repeticion in range(REPETICIONES_PRUEBA):
         muestra = np.concatenate([rng.choice(p, len(p), replace=True) for p in posiciones])
         for n in NOMBRES:
             distribucion[n][repeticion] = np.mean([f1_macro_rapido(y_prueba[muestra], fila[muestra]) for fila in predicciones[n]])
-    limites = {f"{a} - {b}": np.percentile(distribucion[a] - distribucion[b], [2.5, 97.5]) for a, b in PARES}
+            extra_filas[n][repeticion] = exactitud_y_auc(n, muestra)
+    limites ={f"{a} - {b}": np.percentile(distribucion[a] - distribucion[b], [2.5, 97.5]) for a, b in PARES}
 
     # Remuestreo por bloques: respeta la unidad de independencia, y se estratifica por la clase dominante de cada bloque
     bloques_prueba = (datos["FlowID"].to_numpy()[particion["prueba"]] - 1) // int(preparados["largo_bloque"])
@@ -1955,16 +2202,35 @@ if hay_resultados:
         muestra = np.concatenate([posiciones_bloque[b] for estrato in estratos for b in rng.choice(estrato, len(estrato), replace=True)])
         for n in NOMBRES:
             distribucion_bloques[n][repeticion] = np.mean([f1_macro_rapido(y_prueba[muestra], fila[muestra]) for fila in predicciones[n]])
+            extra_bloques[n][repeticion] = exactitud_y_auc(n, muestra)
     limites_bloques = {f"{a} - {b}": np.percentile(distribucion_bloques[a] - distribucion_bloques[b], [2.5, 97.5]) for a, b in PARES}
-    TABLA_BOOTSTRAP = pd.DataFrame([{"Par": par, "Diferencia de F1 macro": float(np.mean(distribucion[par.split(" - ")[0]] - distribucion[par.split(" - ")[1]])), "IC 95 % por filas": f"[{num(l[0], 4)}; {num(l[1], 4)}]", "IC 95 % por bloques": f"[{num(limites_bloques[par][0], 4)}; {num(limites_bloques[par][1], 4)}]"} for par, l in limites.items()])
-    display(TABLA_BOOTSTRAP.round(5).style.hide(axis="index"))
+    FACTOR_MINIMA = Z_ALFA + Z_POTENCIA
+
+    # Diferencia entre dos modelos por remuestreo, por filas y por bloques
+    def fila_remuestreo(metrica, a, b, por_filas, por_bloques):
+        filas, bloques = por_filas[a] - por_filas[b], por_bloques[a] - por_bloques[b]
+        lf, lb = np.percentile(filas, [2.5, 97.5]), np.percentile(bloques, [2.5, 97.5])
+        return {"Métrica": metrica, "Par": f"{a} - {b}", "Diferencia media": float(filas.mean()), "IC 95 % por filas": f"[{num(lf[0], 4)}; {num(lf[1], 4)}]", "IC 95 % por bloques": f"[{num(lb[0], 4)}; {num(lb[1], 4)}]",
+                "Mínima detectable por filas": FACTOR_MINIMA * filas.std(ddof=1), "Mínima detectable por bloques": FACTOR_MINIMA * bloques.std(ddof=1), "Excluye cero": not lb[0] <= 0 <= lb[1]}
+
+    def columna_extra(extra, columna):
+        return {n: extra[n][:, columna] for n in NOMBRES}
+
+    TABLA_BOOTSTRAP = pd.DataFrame([fila_remuestreo("F1 macro", a, b, distribucion, distribucion_bloques) for a, b in PARES]
+                                   + [fila_remuestreo("Accuracy", a, b, columna_extra(extra_filas, 0), columna_extra(extra_bloques, 0)) for a, b in PARES]
+                                   + [fila_remuestreo("AUC macro", a, b, columna_extra(extra_filas, 1), columna_extra(extra_bloques, 1)) for a, b in PARES])
+    F1_REMUESTREO = TABLA_BOOTSTRAP[TABLA_BOOTSTRAP["Métrica"] == "F1 macro"]
+    excluye_extra = int(TABLA_BOOTSTRAP.loc[TABLA_BOOTSTRAP["Métrica"] != "F1 macro", "Excluye cero"].sum())
+    display(TABLA_MCNEMAR.round(5).style.hide(axis="index").format(FORMATO_POTENCIA, decimal=","))
+    display(TABLA_DELONG.round(5).style.hide(axis="index").format(FORMATO_POTENCIA, decimal=","))
+    display(TABLA_BOOTSTRAP.drop(columns="Excluye cero").round(5).style.hide(axis="index").format({**FORMATO_POTENCIA, "Diferencia media": "{:.4f}"}, decimal=","))
     ic_baseline = np.percentile(distribucion[BASELINE], [2.5, 97.5])
     ic_baseline_bloques = np.percentile(distribucion_bloques[BASELINE], [2.5, 97.5])
     sin_cero = [par for par, l in limites.items() if not l[0] <= 0 <= l[1]]
     sin_cero_bloques = [par for par, l in limites_bloques.items() if not l[0] <= 0 <= l[1]]
-    interpretar(f'''**Interpretación.** Estas pruebas trabajan con cada observación de prueba, no con cada semilla. McNemar (1947) compara las tasas de error mediante los casos discordantes, $\\chi^2 = (|n_{{01}} - n_{{10}}| - 1)^2 / (n_{{01}} + n_{{10}})$, con su versión exacta si hay menos de 25, y DeLong et al. (1988) compara las curvas ROC correlacionadas. Como el problema es multiclase, DeLong se aplica uno contra el resto, por clase, con corrección de Holm dentro de cada semilla. Como cada semilla entrega una prueba, se reporta la mediana y el rango de los valores p. El *bootstrap* estratificado por clase (Efron y Tibshirani, 1993), con {REPETICIONES_PRUEBA} remuestreos de las filas de prueba, da para el baseline un IC 95 % de [{num(ic_baseline[0], 4)}; {num(ic_baseline[1], 4)}]{", y el intervalo de la diferencia excluye el cero en " + enumerar(sin_cero) if sin_cero else ", y ningún intervalo de diferencia excluye el cero"}. Como las filas de un bloque no son independientes, el remuestreo se repite con los {len(dominante)} bloques de prueba, dentro de su clase dominante, y el IC 95 % del baseline pasa a [{num(ic_baseline_bloques[0], 4)}; {num(ic_baseline_bloques[1], 4)}]{", con un intervalo de la diferencia que excluye el cero en " + enumerar(sin_cero_bloques) if sin_cero_bloques else ", y ningún intervalo de diferencia excluye el cero"}.
+    interpretar(f'''**Interpretación.** Estas pruebas trabajan con cada observación de prueba, no con cada semilla. McNemar (1947) compara las tasas de error mediante los casos discordantes, $\\chi^2 = (|n_{{01}} - n_{{10}}| - 1)^2 / (n_{{01}} + n_{{10}})$, con su versión exacta si hay menos de 25, y DeLong et al. (1988) compara las curvas ROC correlacionadas. Como el problema es multiclase, DeLong se aplica uno contra el resto, por clase, con corrección de Holm dentro de cada semilla. Como cada semilla entrega una prueba, se reporta la mediana y el rango de los valores p. El *bootstrap* estratificado por clase (Efron y Tibshirani, 1993), con {REPETICIONES_PRUEBA} remuestreos de las filas de prueba, da para el baseline un IC 95 % de [{num(ic_baseline[0], 4)}; {num(ic_baseline[1], 4)}]{", y el intervalo de la diferencia excluye el cero en " + enumerar(sin_cero) if sin_cero else ", y ningún intervalo de diferencia excluye el cero"}. Como las filas de un bloque no son independientes, el remuestreo se repite con los {len(dominante)} bloques de prueba, dentro de su clase dominante, y el IC 95 % del baseline pasa a [{num(ic_baseline_bloques[0], 4)}; {num(ic_baseline_bloques[1], 4)}]{", con un intervalo de la diferencia que excluye el cero en " + enumerar(sin_cero_bloques) if sin_cero_bloques else ", y ningún intervalo de diferencia excluye el cero"}. La última tabla agrega, con los mismos remuestreos, el intervalo de la diferencia media de accuracy y de AUC macro, {"y con los bloques ninguno de esos intervalos excluye el cero" if excluye_extra == 0 else f"y con los bloques {excluye_extra} de esos 6 intervalos excluyen el cero"}.
 
-Hay que tener en cuenta que, con unas {num(len(y_prueba), 0)} observaciones, McNemar y DeLong detectan diferencias muy pequeñas, de modo que un valor p bajo aquí no implica relevancia práctica. Además, ambas pruebas y el *bootstrap* por filas suponen observaciones independientes, algo que la sección 2.1.3 descarta, de modo que sus valores p y sus intervalos resultan optimistas. Por eso, el remuestreo por bloques es el que mejor mide lo que las semillas no miden, cuánto cambiaría la diferencia con otra muestra de bloques, aunque con tan pocos bloques su intervalo es solo aproximado.
+Hay que tener en cuenta que, con unas {num(len(y_prueba), 0)} observaciones, McNemar y DeLong detectan diferencias muy pequeñas: con potencia de 0,80, la mínima detectable va de {num(TABLA_MCNEMAR["Mínima detectable"].min(), 4)} a {num(TABLA_MCNEMAR["Mínima detectable"].max(), 4)} en accuracy, y de {num(TABLA_DELONG["Mínima detectable"].min(), 4)} a {num(TABLA_DELONG["Mínima detectable"].max(), 4)} en el AUC de una clase, de modo que un valor p bajo aquí no implica relevancia práctica. Como δ se declaró sobre el F1 macro, en estas dos métricas la potencia para δ, {"prácticamente de 1" if min(TABLA_MCNEMAR["Potencia para δ"].min(), TABLA_DELONG["Potencia para δ"].min()) > 0.99 else "de al menos " + num(min(TABLA_MCNEMAR["Potencia para δ"].min(), TABLA_DELONG["Potencia para δ"].min()), 2)}, solo sirve como referencia de escala. Además, ambas pruebas y el *bootstrap* por filas suponen observaciones independientes, algo que la sección 2.1.3 descarta, de modo que sus valores p y sus intervalos resultan optimistas: al respetar los bloques, la mínima detectable en F1 macro sube de un rango de {num(F1_REMUESTREO["Mínima detectable por filas"].min(), 4)} a {num(F1_REMUESTREO["Mínima detectable por filas"].max(), 4)} por filas a uno de {num(F1_REMUESTREO["Mínima detectable por bloques"].min(), 4)} a {num(F1_REMUESTREO["Mínima detectable por bloques"].max(), 4)} por bloques. Por eso, el remuestreo por bloques es el que mejor mide lo que las semillas no miden, cuánto cambiaría la diferencia con otra muestra de bloques, aunque con tan pocos bloques su intervalo es solo aproximado.
 
 Así las cosas, se decide reportar McNemar y DeLong como pide el enunciado, pero solo como apoyo, sin basar en ellas ninguna afirmación de superioridad, y juzgar la relevancia siempre contra δ = {num(DELTA, 2)}.''')
 """)
@@ -2016,19 +2282,103 @@ if hay_resultados:
             error_cv = np.sqrt((1 / kr + n2_cv / n1_cv) * d_cv.var(ddof=1))
             t_cv = d_cv.mean() / error_cv if error_cv > 0 else 0.0
             margen_cv = stats.t.ppf(0.975, kr - 1) * error_cv
-            filas_cv.append({"Par": f"{NOMBRES[i]} - {NOMBRES[j]}", "Diferencia media": d_cv.mean(), "IC 95 % corregido": f"[{num(d_cv.mean() - margen_cv, 4)}; {num(d_cv.mean() + margen_cv, 4)}]", "t corregida": t_cv, "p sin ajustar": 2 * stats.t.sf(abs(t_cv), kr - 1), "P. de superioridad": (d_cv > 0).mean() + 0.5 * (d_cv == 0).mean()})
+            filas_cv.append({"Par": f"{NOMBRES[i]} - {NOMBRES[j]}", "Diferencia media": d_cv.mean(), "IC 95 % corregido": f"[{num(d_cv.mean() - margen_cv, 4)}; {num(d_cv.mean() + margen_cv, 4)}]", "t corregida": t_cv, "p sin ajustar": 2 * stats.t.sf(abs(t_cv), kr - 1), "P. de superioridad": (d_cv > 0).mean() + 0.5 * (d_cv == 0).mean(), "Potencia para δ": potencia_t_error(error_cv, kr - 1, DELTA), "Mínima detectable": minima_t_error(error_cv, kr - 1)})
     tabla_cv = pd.DataFrame(filas_cv)
     tabla_cv["p Holm"] = multipletests(tabla_cv["p sin ajustar"], method="holm")[1]
     resumen_cv = matriz_cv.agg(["mean", "std"]).T
     display(resumen_cv.rename(columns={"mean": "F1 macro medio", "std": "Desviación"}).round(4))
-    display(tabla_cv.style.hide(axis="index").format({"Diferencia media": "{:.4f}", "t corregida": "{:.3f}", "p sin ajustar": p_exacto, "p Holm": p_exacto, "P. de superioridad": "{:.2f}"}))
+    display(tabla_cv.style.hide(axis="index").format({"Diferencia media": "{:.4f}", "t corregida": "{:.3f}", "p sin ajustar": p_exacto, "p Holm": p_exacto, "P. de superioridad": "{:.2f}", "Potencia para δ": "{:.3f}", "Mínima detectable": "{:.4f}"}, decimal=","))
     tabla_cv.to_csv(RESULTADOS / "comparaciones_validacion_repetida.csv", index=False)
     significativos_cv = tabla_cv.loc[tabla_cv["p Holm"] < ALFA, "Par"].tolist()
-    interpretar(f'''**Interpretación.** Con {kr} pliegues, el F1 macro medio va de {num(resumen_cv["mean"].min(), 4)} a {num(resumen_cv["mean"].max(), 4)}, y la desviación entre pliegues llega a {num(resumen_cv["std"].max(), 4)}, mayor que la que producen las semillas sobre una partición fija, porque aquí también cambian los datos. Con la corrección de Nadeau y Bengio (2003), {"ningún par difiere de forma significativa" if not significativos_cv else "difieren de forma significativa: " + ", ".join(significativos_cv)} tras el ajuste de Holm.
+    interpretar(f'''**Interpretación.** Con {kr} pliegues, el F1 macro medio va de {num(resumen_cv["mean"].min(), 4)} a {num(resumen_cv["mean"].max(), 4)}, y la desviación entre pliegues llega a {num(resumen_cv["std"].max(), 4)}, mayor que la que producen las semillas sobre una partición fija, porque aquí también cambian los datos. Con la corrección de Nadeau y Bengio (2003), {"ningún par difiere de forma significativa" if not significativos_cv else "difieren de forma significativa: " + ", ".join(significativos_cv)} tras el ajuste de Holm. La potencia para detectar δ va de {num(tabla_cv["Potencia para δ"].min(), 2)} a {num(tabla_cv["Potencia para δ"].max(), 2)}, y la diferencia mínima detectable, de {num(tabla_cv["Mínima detectable"].min(), 4)} a {num(tabla_cv["Mínima detectable"].max(), 4)}.
 
-Esto significa que la incertidumbre por la selección de los bloques pesa más que la de la inicialización. En ese sentido, una diferencia que parece clara entre semillas puede no sostenerse cuando cambia el conjunto de datos, y por eso esta prueba es la más exigente del estudio. Hay que tener en cuenta que el estadístico corregido es conservador cuando los pliegues se solapan mucho.
+Esto significa que la incertidumbre por la selección de los bloques pesa más que la de la inicialización. En ese sentido, una diferencia que parece clara entre semillas puede no sostenerse cuando cambia el conjunto de datos, y por eso esta prueba es la más exigente del estudio. {"Con esa mínima detectable, el no rechazo no descarta diferencias mayores que δ. " if tabla_cv["Mínima detectable"].min() > DELTA else ""}Hay que tener en cuenta que el estadístico corregido es conservador cuando los pliegues se solapan mucho.
 
 Por tal motivo, se toma esta prueba como la referencia para afirmar que un modelo base supera a otro.''')
+""")
+
+md("s5-sensibilidad", r"""
+#### Análisis de sensibilidad del *dropout*
+
+La sección 4.2 declara que el *dropout* de los tres modelos difiere del código de los autores (Zeng, 2025). Para saber si esa desviación cambia las conclusiones, se entrenan de nuevo los tres modelos con el *dropout* original, con las mismas semillas, la misma partición y los mismos hiperparámetros, y se comparan por pares con las corridas definitivas. Este análisis se decidió después de conocer los resultados, de modo que no reemplaza al baseline preregistrado y solo mide cuánto depende de esa diferencia. Además, los hiperparámetros se eligieron sin este *dropout*, por lo que no están ajustados para estas variantes.
+""")
+
+code("s5-sensibilidad-calc", r"""
+class DNNOriginal(nn.Module):
+    def __init__(self, p=0.2):
+        super().__init__()
+        self.red = nn.Sequential(nn.Linear(N_ATRIBUTOS, 128), nn.ReLU(), nn.Dropout(p), nn.Linear(128, 64), nn.ReLU(), nn.Dropout(p), nn.Linear(64, 32), nn.ReLU(), nn.Linear(32, N_CLASES))
+
+    def forward(self, x):
+        return self.red(x)
+
+
+class CNN1DOriginal(nn.Module):
+    def __init__(self, p=0.2):
+        super().__init__()
+        self.convoluciones = nn.Sequential(nn.Conv1d(1, 32, 3, padding=1), nn.ReLU(), nn.Conv1d(32, 64, 3, padding=1), nn.ReLU(), nn.MaxPool1d(2))
+        self.densas = nn.Sequential(nn.Flatten(), nn.Dropout(p), nn.Linear(64 * (N_ATRIBUTOS // 2), 64), nn.ReLU(), nn.Linear(64, N_CLASES))
+
+    def forward(self, x):
+        return self.densas(self.convoluciones(x.unsqueeze(1)))
+
+
+class LSTMOriginal(nn.Module):
+    def __init__(self, p=0.2):
+        super().__init__()
+        self.lstm = nn.LSTM(1, 64, batch_first=True)
+        self.salida = nn.Sequential(nn.Dropout(p), nn.Linear(64, N_CLASES))
+
+    def forward(self, x):
+        return self.salida(self.lstm(x.unsqueeze(-1))[1][0][-1])
+
+
+VARIANTES = {"DNN": "DNN original", "CNN 1D": "CNN 1D original", "LSTM": "LSTM original"}
+MODELOS.update({"DNN original": DNNOriginal, "CNN 1D original": CNN1DOriginal, "LSTM original": LSTMOriginal})
+RUTA_SENSIBILIDAD = RESULTADOS / "sensibilidad"
+RUTA_SENSIBILIDAD.mkdir(exist_ok=True)
+if hay_resultados:
+    filas_sens = []
+    for nombre in NOMBRES:
+        assert sum(p.numel() for p in MODELOS[nombre]().parameters()) == sum(p.numel() for p in MODELOS[VARIANTES[nombre]]().parameters())
+        for semilla in SEMILLAS:
+            ruta = RUTA_SENSIBILIDAD / f"{nombre.replace(' ', '_')}_{int(semilla)}.json"
+            if not ruta.exists():
+                inicio = time.time()
+                modelo, curvas = entrenar(VARIANTES[nombre], preregistro["hiperparametros"][nombre], int(semilla), id_ent, id_val)
+                registro = {"modelo": VARIANTES[nombre], "semilla": int(semilla), "hp": preregistro["hiperparametros"][nombre], "epocas": len(curvas), "segundos": round(time.time() - inicio, 1),
+                            "f1_val": f1_score(Y[id_val].numpy(), predecir(modelo, id_val).argmax(1).numpy(), average="macro", zero_division=0),
+                            "f1_prueba": f1_score(y_prueba, predecir(modelo, id_pru).argmax(1).numpy(), average="macro", zero_division=0),
+                            "dispositivo": f"CPU, {torch.get_num_threads()} hilos, {platform.processor()}"}
+                ruta.write_text(json.dumps(registro, ensure_ascii=False), encoding="utf-8")
+                print(f"{VARIANTES[nombre]} | semilla {int(semilla)} | F1 de prueba {registro['f1_prueba']:.4f} | {registro['segundos'] / 60:.1f} min", flush=True)
+            filas_sens.append({"Modelo": nombre, "Semilla": int(semilla), **{k: v for k, v in json.loads(ruta.read_text(encoding="utf-8")).items() if k in ("f1_prueba", "f1_val", "epocas", "segundos")}})
+    SENS = pd.DataFrame(filas_sens)
+    MATRIZ_SENS = SENS.pivot(index="Semilla", columns="Modelo", values="f1_prueba")[NOMBRES]
+    resultados_sens = {n: comparar_par(MATRIZ_SENS[n], MATRIZ_F1[n]) for n in NOMBRES}
+    holm_sens = multipletests([r["p t pareada"] for r in resultados_sens.values()], method="holm")[1]
+    tabla_sens = pd.DataFrame([{"Modelo": n, "F1 macro definitivo": MATRIZ_F1[n].mean(), "F1 macro con dropout original": MATRIZ_SENS[n].mean(), "Desviación": MATRIZ_SENS[n].std(ddof=1), "Diferencia media": r["Diferencia media"],
+                                "IC 95 % t": f"[{num(r['IC 95 % t'][0], 4)}; {num(r['IC 95 % t'][1], 4)}]", "p sin ajustar": p_exacto(r["p t pareada"]), "p Holm": p_exacto(h), "d de Cohen pareada": r["d de Cohen pareada"],
+                                "Potencia para δ": r["Potencia para δ"], "Mínima detectable": r["Mínima detectable"], "p TOST": p_exacto(r["p TOST"])} for (n, r), h in zip(resultados_sens.items(), holm_sens)])
+    display(tabla_sens.style.hide(axis="index").format({"F1 macro definitivo": "{:.4f}", "F1 macro con dropout original": "{:.4f}", "Desviación": "{:.4f}", "Diferencia media": "{:.4f}", "d de Cohen pareada": "{:.2f}", "Potencia para δ": "{:.3f}", "Mínima detectable": "{:.4f}"}, decimal=","))
+    tabla_sens.to_csv(RESULTADOS / "sensibilidad_dropout.csv", index=False)
+    pares_sens = {f"{a} - {b}": comparar_par(MATRIZ_SENS[a], MATRIZ_SENS[b]) for a, b in PARES}
+    holm_pares_sens = multipletests([r["p t pareada"] for r in pares_sens.values()], method="holm")[1]
+    tabla_pares_sens = pd.DataFrame([{"Par con dropout original": par, "Diferencia media": r["Diferencia media"], "IC 95 % t": f"[{num(r['IC 95 % t'][0], 4)}; {num(r['IC 95 % t'][1], 4)}]", "p sin ajustar": p_exacto(r["p t pareada"]), "p Holm": p_exacto(h),
+                                      "d de Cohen pareada": r["d de Cohen pareada"], "Potencia para δ": r["Potencia para δ"], "p TOST": p_exacto(r["p TOST"])} for (par, r), h in zip(pares_sens.items(), holm_pares_sens)])
+    display(tabla_pares_sens.style.hide(axis="index").format({"Diferencia media": "{:.4f}", "d de Cohen pareada": "{:.2f}", "Potencia para δ": "{:.3f}"}, decimal=","))
+    orden_def = list(MATRIZ_F1.mean().sort_values(ascending=False).index)
+    orden_sens = list(MATRIZ_SENS.mean().sort_values(ascending=False).index)
+    mayor_cambio = tabla_sens.loc[tabla_sens["Diferencia media"].abs().idxmax()]
+    relevantes_sens = [n for n, r in resultados_sens.items() if abs(r["Diferencia media"]) >= DELTA]
+    significativos_sens = [n for n, h in zip(resultados_sens, holm_sens) if h < ALFA]
+    equivalentes_sens = [n for n, r in resultados_sens.items() if r["p TOST"] < ALFA]
+    pares_signif = [par for par, h in zip(pares_sens, holm_pares_sens) if h < ALFA]
+    interpretar(f'''**Interpretación.** Con el *dropout* del código de los autores, el F1 macro de prueba es de {num(MATRIZ_SENS[orden_sens[0]].mean(), 4)} en {orden_sens[0]}, {num(MATRIZ_SENS[orden_sens[1]].mean(), 4)} en {orden_sens[1]} y {num(MATRIZ_SENS[orden_sens[2]].mean(), 4)} en {orden_sens[2]}. El mayor cambio frente a las corridas definitivas es el de {mayor_cambio["Modelo"]}, con una diferencia media de {num(mayor_cambio["Diferencia media"], 4)}. Tras la corrección de Holm, {"ningún modelo cambia de forma significativa" if not significativos_sens else "cambia de forma significativa " + enumerar(significativos_sens)}, y {"ninguna diferencia alcanza" if not relevantes_sens else "la diferencia de " + enumerar(relevantes_sens) + " alcanza"} δ = {num(DELTA, 2)}. Entre las variantes, {"ningún par difiere de forma significativa" if not pares_signif else "difieren de forma significativa " + enumerar(pares_signif)}.
+
+Esto significa que el orden de los modelos {"se mantiene" if orden_sens == orden_def else "cambia, de " + ", ".join(orden_def) + " a " + ", ".join(orden_sens)}. Hay que tener en cuenta que no rechazar no demuestra equivalencia: {"TOST la respalda en " + enumerar(equivalentes_sens) if equivalentes_sens else "TOST no la respalda en ningún modelo"}, y la mínima detectable llega a {num(tabla_sens["Mínima detectable"].max(), 4)}. Además, este análisis usa la misma partición y hiperparámetros elegidos sin ese *dropout*.
+
+Por tal motivo, {"se conserva el baseline preregistrado y se declara la desviación como una amenaza a la validez interna" if orden_sens[0] == orden_def[0] and not relevantes_sens else "se conserva el baseline preregistrado solo como referencia del protocolo declarado, y se recomienda repetir el diseño con la arquitectura original antes de heredarlo al Entregable 2"}.''')
 """)
 
 md("s5-discusion", r"""
@@ -2036,7 +2386,7 @@ md("s5-discusion", r"""
 
 Esta subsección responde las preguntas del enunciado con la evidencia de las secciones 4.4 y 5.1 a 5.4. El resultado central es que el estudio fija un baseline y un umbral, pero no permite ordenar con certeza a los tres modelos, porque dos de ellos son equivalentes en esta partición y el tercero queda en un resultado no concluyente.
 
-**Qué modelo funciona mejor y por qué.** Por F1 macro, CNN 1D (0,8549) y DNN (0,8548) quedan empatadas, y LSTM queda por detrás (0,8423). CNN 1D es la primera y por eso es el baseline, como indica el enunciado, pero su ventaja de 0,0002 no tiene peso alguno: gana en 3 de las 7 semillas, y TOST declara equivalentes a los dos modelos dentro de ±0,01 (p = 0,0079). En sesgo inductivo, la convolución y la LSTM suponen que la posición en el vector tiene significado, mientras que aquí el orden es solo el de las columnas del archivo (sección 2.2.2). Que CNN 1D iguale a DNN con 3,1 veces sus parámetros sugiere que la localidad no aporta sobre las conexiones densas, y que LSTM quede atrás es coherente con que deba resumir en un estado de 64 unidades una secuencia de 16 pasos sin sentido temporal. En capacidad y regularización, LSTM es además el modelo más sensible a los hiperparámetros, con un rango de 0,073 en la búsqueda; su configuración elegida no tiene *dropout* ni *weight decay*, y muestra la mayor brecha entre entrenamiento y validación, 0,037 frente a 0,005 en CNN 1D y 0,001 en DNN. Hay que tener en cuenta que estas explicaciones son plausibles, pero no están demostradas, porque el diseño compara tres arquitecturas completas y no aísla cada factor.
+**Qué modelo funciona mejor y por qué.** Por F1 macro, CNN 1D (0,8549) y DNN (0,8548) quedan empatadas, y LSTM queda por detrás (0,8423). CNN 1D es la primera y por eso es el baseline, como indica el enunciado, pero su ventaja de 0,0002 no tiene peso alguno: gana en 3 de las 7 semillas, y TOST declara equivalentes a los dos modelos dentro de ±0,01 (p = 0,0079). En sesgo inductivo, la convolución y la LSTM suponen que la posición en el vector tiene significado, mientras que aquí el orden es solo el de las columnas del archivo (sección 2.2.2). Que CNN 1D iguale a DNN con 3,1 veces sus parámetros sugiere que la localidad no aporta sobre las conexiones densas, y que LSTM quede atrás es coherente con que deba resumir en un estado de 64 unidades una secuencia de 16 pasos sin sentido temporal. En capacidad y regularización, LSTM es además el modelo más sensible a los hiperparámetros, con un rango de 0,073 en la búsqueda; su configuración elegida no tiene *weight decay* ni, por la desviación declarada en la sección 4.2, *dropout*, y muestra la mayor brecha entre entrenamiento y validación, 0,037 frente a 0,005 en CNN 1D y 0,001 en DNN. El análisis de sensibilidad de la sección 5.4 tampoco respalda que la falta de *dropout* explique el rezago de LSTM: con él, su F1 macro baja a 0,8357 y su desviación sube a 0,0263, y la distancia con CNN 1D crece a 0,0253. Hay que tener en cuenta que estas explicaciones son plausibles, pero no están demostradas, porque el diseño compara tres arquitecturas completas y no aísla cada factor.
 
 El orden, además, depende de la métrica. LSTM, la última por F1 macro, obtiene el mayor AUC-ROC macro (0,9728, frente a 0,9637 en CNN 1D y 0,9602 en DNN), el mayor AUC-PR macro (0,8791, frente a 0,8511 y 0,8336) y el menor ECE (0,0402, frente a 0,0482 y 0,0520). Esto sugiere que ordena mejor las probabilidades, aunque decide peor al tomar la clase más probable, de modo que parte de su desventaja podría estar en la decisión y no en la discriminación.
 
@@ -2046,24 +2396,23 @@ Lo que sí queda claro es que el F1 absoluto depende mucho de qué bloques se ev
 
 **Si las diferencias son significativas y relevantes.** No hay evidencia estadística sólida de diferencias. La prueba $t$ pareada da valores p ajustados por Holm de 0,954, 0,323 y 0,339; la ANOVA de medidas repetidas da p = 0,143; Friedman, p = 0,368, y la validación repetida con la corrección de Nadeau y Bengio (2003) tampoco rechaza. El *bootstrap* pareado por semillas apenas excluye el cero en CNN 1D - LSTM, con [0,0005; 0,0247], pero sin ajuste por comparaciones múltiples y con solo 7 pares. McNemar, DeLong y el *bootstrap* por filas sí rechazan, y ninguno sostiene una afirmación de superioridad, porque suponen filas independientes: con el remuestreo por bloques, ningún intervalo excluye el cero.
 
-En relevancia práctica, la situación cambia según el par. Entre CNN 1D y DNN, la diferencia de 0,0002 queda muy por debajo de δ = 0,01, con un intervalo por bloques de [-0,0082; 0,0076], contenido en ±δ. Sin embargo, esa equivalencia vale para esta partición, porque en la validación repetida, donde cambian los datos de entrenamiento, el intervalo de la diferencia es de [-0,0082; 0,0236] y no cabe en ±δ. En los dos pares con LSTM, la diferencia media, de 0,0127 y 0,0125, supera δ, pero sus intervalos $t$, [-0,0037; 0,0291] y [-0,0071; 0,0321], incluyen el cero, la potencia para δ es de solo 0,24 y 0,18, y tampoco son equivalentes según TOST (p = 0,648 y 0,617). Es decir, en esos pares el resultado es no concluyente: LSTM puede ser peor en una magnitud relevante, pero este diseño no lo demuestra.
+En relevancia práctica, la situación cambia según el par. Entre CNN 1D y DNN, la diferencia de 0,0002 queda muy por debajo de δ = 0,01, con un intervalo por bloques de [-0,0082; 0,0076], contenido en ±δ. Sin embargo, esa equivalencia vale para esta partición, porque en la validación repetida, donde cambian los datos de entrenamiento, el intervalo de la diferencia es de [-0,0082; 0,0236] y no cabe en ±δ. En los dos pares con LSTM, la diferencia media, de 0,0127 y 0,0125, supera δ, pero sus intervalos $t$, [-0,0037; 0,0291] y [-0,0071; 0,0321], incluyen el cero, la potencia para δ es de solo 0,24 y 0,18, y TOST tampoco permite declararlos equivalentes (p = 0,648 y 0,617), con una potencia de solo 0,06 y 0,02 aunque la diferencia real fuera nula. Es decir, en esos pares el resultado es no concluyente: LSTM puede ser peor en una magnitud relevante, pero este diseño no lo demuestra.
 
 **Si existe un *trade-off* entre desempeño y costo.** Sí, y favorece al modelo más simple. DNN iguala a CNN 1D con un tercio de sus parámetros (12 677 frente a 39 493), menos de la mitad del tiempo de entrenamiento (0,65 frente a 1,47 minutos por corrida) y una inferencia unas 41 veces más rápida (0,0007 frente a 0,0287 ms por muestra). LSTM es la más costosa de entrenar, con 2,30 minutos, sin que ese costo se refleje en el F1 macro. Por tal motivo, aunque CNN 1D sea el baseline por la regla del enunciado, DNN queda como la alternativa recomendada cuando importe el costo, por ejemplo, en un despliegue a bordo, teniendo en cuenta que estos tiempos se midieron en un solo equipo con CPU. Así mismo, el boosting, sin ajuste de hiperparámetros, supera al baseline en 0,0199 en este mismo conjunto de prueba, lo que indica que estas arquitecturas de Deep Learning no tienen aquí una ventaja ganada frente a un método clásico para datos tabulares.
 
 **Baseline y umbral de mejora.** El baseline es CNN 1D, con F1 macro de 0,8549 ± 0,0091 e IC 95 % de [0,8466; 0,8633] entre semillas. Para ser una mejora distinguible y relevante, un modelo avanzado debe alcanzar un F1 macro medio de al menos 0,8775, es decir, 0,0226 por encima del baseline, evaluado con esta misma partición y con semillas pareadas. Ese umbral lo fija la mínima detectable, que con 7 semillas y $\hat{\sigma}_d$ = 0,0177 supera a δ = 0,01; con unas 27 semillas, el umbral podría bajar hasta cerca de 0,8649, y entonces lo fijaría la relevancia práctica. El margen teórico hasta un F1 perfecto es de 0,1451.
 
-**Margen que sugiere la literatura y su credibilidad.** Los valores publicados sobre UAVIDS-2025 van de 0,9066 a 0,9428, entre 0,052 y 0,088 por encima del baseline. Esa brecha no es creíble como margen de mejora real, porque no compara lo mismo: esos estudios parten de forma aleatoria, lo que en la sección 2.1.3 sube el F1 macro de referencia en 0,0689, y Zarkadis y Douligeris (2026) codifican las direcciones IP, que aquí se excluyen por funcionar como atajo. Al descontar solo el efecto de la partición, la distancia frente a la CNN de Zeng et al. (2025), de 0,0751, queda en 0,0062, por debajo de δ, aunque ese descuento es aproximado, porque se midió con el boosting en validación. La evidencia más creíble es interna: el boosting sin ajuste queda 0,0199 por encima del baseline, a 0,0027 del umbral. Esto significa que el margen con respaldo hoy es del orden de 0,02, similar al umbral e inferior a la desviación de cerca de 0,04 entre pliegues, de modo que un modelo mejor puede no distinguirse si no se aumentan las semillas.
+**Margen que sugiere la literatura y su credibilidad.** Los valores de referencia publicados sobre UAVIDS-2025 que se comparan aquí van de 0,9066 a 0,9428, entre 0,052 y 0,088 por encima del baseline, y otros estudios reportan más, como 0,962 (Mohamed et al., 2026) o 0,986 (Wang et al., 2026). Esa brecha no es creíble como margen de mejora real, porque no compara lo mismo: esos estudios parten de forma aleatoria, lo que en la sección 2.1.3 sube el F1 macro de referencia en 0,0689, y Zarkadis y Douligeris (2026) codifican las direcciones IP, que aquí se excluyen por funcionar como atajo. Además, esos estudios no siempre declaran si su F1 es macro o ponderado, aunque en este conjunto de datos esa diferencia pesa poco: el F1 ponderado del baseline es de 0,8619 y el macro de 0,8549, una distancia de 0,007, muy inferior a la que produce la partición, porque las clases están casi balanceadas. Al descontar solo el efecto de la partición, la distancia frente a la CNN de Zeng et al. (2025), de 0,0751, queda en 0,0062, por debajo de δ, aunque ese descuento es aproximado, porque se midió con el boosting en validación. La evidencia más creíble es interna: el boosting sin ajuste queda 0,0199 por encima del baseline, a 0,0027 del umbral. Esto significa que el margen con respaldo hoy es del orden de 0,02, similar al umbral e inferior a la desviación de cerca de 0,04 entre pliegues, de modo que un modelo mejor puede no distinguirse si no se aumentan las semillas.
 
 **Amenazas a la validez.**
 
-- **Validez interna.** El archivo no identifica la simulación de origen, y la partición por bloques reduce esa fuga, pero no la elimina: `FlowID`, que no se usa como entrada, conserva un F1 macro de 0,859 con partición agrupada, porque los tramos de una sola clase son más largos que el bloque (sección 2.1.4), y el 1,8 % de las filas de prueba tiene un casi duplicado en entrenamiento. Si los atributos de tráfico delatan el tramo del archivo, el baseline sigue siendo optimista. La optimización desigual se evita con el mismo presupuesto de ajuste para los tres modelos (sección 4.2.3), aunque la búsqueda usa una sola semilla. La prueba no se usó para elegir hiperparámetros, y ni los modelos ni la partición cambiaron después de verla.
+- **Validez interna.** El archivo no identifica la simulación de origen, y la partición por bloques reduce esa fuga, pero no la elimina: `FlowID`, que no se usa como entrada, conserva un F1 macro de 0,859 con partición agrupada, porque los tramos de una sola clase son más largos que el bloque (sección 2.1.4), y el 1,8 % de las filas de prueba tiene un casi duplicado en entrenamiento. Si los atributos de tráfico delatan el tramo del archivo, el baseline sigue siendo optimista. La optimización desigual se evita con el mismo presupuesto de ajuste para los tres modelos (sección 4.2.3), aunque la búsqueda usa una sola semilla. Además, el *dropout* de los tres modelos difiere del código de los autores (sección 4.2), una desviación que se detectó con los resultados ya calculados. Con el *dropout* original, el orden se mantiene y ninguna diferencia media alcanza δ: es de 0,0061 en CNN 1D, 0,0035 en DNN y -0,0066 en LSTM, sin significancia. Sin embargo, sus intervalos todavía admiten diferencias mayores que δ, de modo que la desviación no se puede descartar como irrelevante. La prueba no se usó para elegir hiperparámetros, y ni los modelos ni la partición cambiaron después de verla.
 - **Validez externa.** Los flujos provienen de un solo simulador y de una sola configuración de radio y enrutamiento, sin drones reales. Por tanto, los resultados no se extienden a otros enjambres ni a capturas en campo, y los atributos de tráfico pueden reflejar parámetros de cada escenario y no solo el ataque (sección 2.1.4).
 - **Validez de construcción.** El F1 macro pondera por igual las cinco clases, aunque la proporción de clases la definió quien construyó el archivo. La etiqueta corresponde al escenario y no a cada flujo, de modo que parte del error puede ser ruido de etiquetas (sección 2.1.2). Además, el orden de los modelos cambia entre el F1 macro y el AUC, de modo que la conclusión depende de la métrica; por esa razón, la métrica primaria se declaró a priori y se complementa con los resultados por clase, por tamaño de flujo y con las demás métricas declaradas.
 
-**Limitaciones del estudio.** Se evalúa una sola partición de un solo conjunto de datos simulado, y las semillas solo miden la inicialización y el orden de los lotes. El piloto estimó la variabilidad en validación, con $\hat{\sigma}_d$ de 0,0068 a 0,0089, y en prueba resultó mayor, de 0,0078 a 0,0212, por lo que las 7 ejecuciones preregistradas solo dieron potencia suficiente para el par CNN 1D - DNN. Además, la revisión de literatura no incluye aún IEEE Xplore, Web of Science ni Scopus, y 137 de los 172 reportes elegibles no se recuperaron a texto completo (sección 3.1).
+**Limitaciones del estudio.** Se evalúa una sola partición de un solo conjunto de datos simulado, y las semillas solo miden la inicialización y el orden de los lotes. El piloto estimó la variabilidad en validación, con $\hat{\sigma}_d$ de 0,0068 a 0,0089, y en prueba resultó mayor, de 0,0078 a 0,0212, por lo que las 7 ejecuciones preregistradas solo dieron potencia suficiente para el par CNN 1D - DNN. Además, 174 de los 228 estudios elegibles, entre ellos 40 de los 68 Q1, no se leyeron a texto completo, y la cadena original omitió sinónimos de método y de tarea: la verificación de cobertura halló 23 registros elegibles más, de los cuales se leyeron los 5 Q1 y quedan 18 sin leer (sección 3.1), y de los evaluados se revisaron las tablas y los pasajes de comparación y protocolo, no el texto íntegro.
 
-**Recomendaciones futuras.** Para el Entregable 2 se recomienda conservar `particion.npz`, el umbral de `baseline.json` y el mismo protocolo, y aumentar las semillas hasta unas 27 o, al menos, reportar la mínima detectable que resulte. Así mismo, conviene incluir arquitecturas pensadas para datos tabulares, que no supongan un orden entre atributos, y exigirles el resultado por clase, porque el mayor espacio de mejora está en separar los ataques entre sí: en CNN 1D, Normal ya alcanza un F1 de 0,9688, mientras que los cuatro ataques van de 0,8017 a 0,8517, con Blackhole predicho como Wormhole en el 17,6 % de sus muestras. También conviene revisar la decisión de LSTM con calibración sobre validación y evaluar el efecto de los pesos de clase, porque en Flooding, la clase con mayor peso (1,936), el recall de 0,9059 contrasta con una precision de 0,7209. Por último, para la validez externa hace falta obtener de los autores el identificador de simulación o probar el modelo con otro conjunto de datos de drones.
-por tamaño de flujo y con las demás métricas declaradas.
+**Recomendaciones futuras.** Para el Entregable 2 se recomienda conservar `particion.npz`, el umbral de `baseline.json` y el mismo protocolo, usar el *dropout* del código de los autores, comparando entonces contra las corridas de `resultados/sensibilidad/`, y volver a ajustar sus hiperparámetros, y aumentar las semillas hasta unas 27 o, al menos, reportar la mínima detectable que resulte. Así mismo, conviene incluir arquitecturas pensadas para datos tabulares, que no supongan un orden entre atributos, y exigirles el resultado por clase, porque el mayor espacio de mejora está en separar los ataques entre sí: en CNN 1D, Normal ya alcanza un F1 de 0,9688, mientras que los cuatro ataques van de 0,8017 a 0,8517, con Blackhole predicho como Wormhole en el 17,6 % de sus muestras. También conviene revisar la decisión de LSTM con calibración sobre validación y evaluar el efecto de los pesos de clase, porque en Flooding, la clase con mayor peso (1,936), el recall de 0,9059 contrasta con una precision de 0,7209. Por último, para la validez externa hace falta obtener de los autores el identificador de simulación o probar el modelo con otro conjunto de datos de drones.
 """)
 
 md("s6", r"""
@@ -2091,9 +2440,9 @@ En esta sección se declaran los límites de lo que este diseño permite conclui
 
 **Diseño de repetición.** La validación cruzada repetida 5 × 5 con la corrección de varianza de Nadeau y Bengio (2003) da más observaciones pareadas y mide también la selección de los datos, y por ser viable en CPU, con unas 2 horas en este equipo, se aplica en la sección 5.4, además de las semillas repetidas sobre una partición fija. Hay que tener en cuenta que las ejecuciones con semillas comparten el conjunto de prueba, de modo que no son estrictamente independientes, y que su variabilidad corresponde a la inicialización y al orden de los lotes, no a la selección de los datos.
 
-**Qué se hace al respecto.** Las comparaciones se complementan con la prueba $t$ pareada cuando se cumple la normalidad y con el *bootstrap* pareado. Se reporta la diferencia mínima detectable con las ejecuciones disponibles (secciones 4.3.1 y 5.3), los tamaños de efecto con su intervalo y la probabilidad de superioridad (sección 5.4). Para afirmar equivalencia entre dos modelos se usa TOST con el margen δ, y no la ausencia de significancia (sección 5.4).
+**Qué se hace al respecto.** Las comparaciones se complementan con la prueba $t$ pareada cuando se cumple la normalidad y con el *bootstrap* pareado. Se reporta la diferencia mínima detectable con las ejecuciones disponibles (secciones 4.3.1 y 5.3) y, para cada prueba de hipótesis, junto con su potencia para δ, además de los tamaños de efecto con su intervalo y la probabilidad de superioridad (sección 5.4). Para afirmar equivalencia entre dos modelos se usa TOST con el margen δ, y no la ausencia de significancia (sección 5.4).
 
-**Qué ocurrió en este estudio.** El preregistro fijó 7 ejecuciones con la variabilidad que el piloto midió en validación. En prueba, la variabilidad fue mayor, de modo que la potencia para δ es de 0,81 en CNN 1D - DNN, pero de solo 0,24 y 0,18 en los pares con LSTM, con diferencias mínimas detectables de 0,0226 y 0,0269. Friedman (p = 0,368) y Nemenyi no rechazan, y ese resultado no se interpreta como equivalencia: la equivalencia del par CNN 1D - DNN proviene de TOST, y los pares con LSTM quedan como no concluyentes. Detectar δ con la mayor $\hat{\sigma}_d$ de las comparaciones del baseline exigiría 27 semillas.
+**Qué ocurrió en este estudio.** El preregistro fijó 7 ejecuciones con la variabilidad que el piloto midió en validación. En prueba, la variabilidad fue mayor, de modo que la potencia para δ es de 0,81 en CNN 1D - DNN, pero de solo 0,24 y 0,18 en los pares con LSTM, con diferencias mínimas detectables de 0,0226 y 0,0269. Friedman (p = 0,368) y Nemenyi no rechazan, con una potencia para δ de solo 0,19 y 0,14, y ese resultado no se interpreta como equivalencia: la equivalencia del par CNN 1D - DNN proviene de TOST, y los pares con LSTM quedan como no concluyentes, porque en ellos TOST tiene una potencia de solo 0,06 y 0,02. En la validación repetida, la potencia para δ va de 0,09 a 0,24. McNemar y DeLong, en cambio, tienen una potencia cercana a 1, pero a costa de suponer filas independientes: al respetar los bloques, la mínima detectable en F1 macro es de 0,0116 a 0,0279. Detectar δ con la mayor $\hat{\sigma}_d$ de las comparaciones del baseline exigiría 27 semillas.
 """)
 
 md("s8", r"""
@@ -2105,16 +2454,17 @@ Este entregable fija, con evidencia estadística, el punto de partida del proyec
 
 **Los tres modelos base no se pueden ordenar con certeza.** Ninguna prueba que respete la dependencia entre filas detecta diferencias. CNN 1D y DNN son equivalentes dentro de ±δ en esta partición, según TOST (p = 0,0079), y DNN lo logra con un tercio de los parámetros, menos de la mitad del tiempo de entrenamiento y una inferencia unas 41 veces más rápida, de modo que es la alternativa recomendada cuando importe el costo. Los pares con LSTM quedan como no concluyentes, con una potencia de 0,24 y 0,18, y aunque LSTM es la última por F1 macro, obtiene los mejores AUC-ROC, AUC-PR y ECE.
 
-**La forma de partir los datos pesa más que la arquitectura.** La partición aleatoria sube el F1 macro de referencia en 0,0689, casi siete veces δ y más de cinco veces la mayor diferencia entre modelos base, de 0,0127. Esto explica buena parte de la distancia con los valores publicados, de 0,9066 a 0,9428, de modo que esa brecha no es un margen de mejora creíble.
+**La forma de partir los datos pesa más que la arquitectura.** La partición aleatoria sube el F1 macro de referencia en 0,0689, casi siete veces δ y más de cinco veces la mayor diferencia entre modelos base, de 0,0127. Esto explica buena parte de la distancia con los valores de referencia publicados, de 0,9066 a 0,9428, de modo que esa brecha no es un margen de mejora creíble.
 
 **El margen con respaldo es estrecho.** El margen teórico hasta un F1 perfecto es de 0,1451, pero el boosting sin ajuste, con 0,8748, sugiere que la mejora con respaldo hoy es del orden de 0,02, cercana al umbral. Además, el F1 absoluto depende mucho de los bloques evaluados, porque el IC 95 % por bloques del baseline va de 0,7661 a 0,9182. Por eso, lo que se hereda al Entregable 2 son las comparaciones pareadas sobre esta partición, y no el valor absoluto.
 
-**Los resultados tienen límites claros.** Los datos son simulados, de un solo simulador y sin identificador de simulación; la partición por bloques reduce la fuga, pero no la elimina, como muestra `FlowID`, que conserva un F1 macro de 0,859, y la búsqueda bibliográfica aún no incluye IEEE Xplore, Web of Science ni Scopus. En consecuencia, estas cifras describen el comportamiento dentro de UAVIDS-2025 y no se extienden a enjambres reales.
+**Los resultados tienen límites claros.** Los datos son simulados, de un solo simulador y sin identificador de simulación; la partición por bloques reduce la fuga, pero no la elimina, como muestra `FlowID`, que conserva un F1 macro de 0,859, y 174 de los 228 estudios elegibles de la revisión, más 18 de la verificación de cobertura, no se leyeron a texto completo. Además, el *dropout* de los modelos difiere del código de los autores; al corregirlo en un análisis de sensibilidad, el orden se mantiene, el F1 macro de CNN 1D pasa a 0,8610, por debajo del umbral, y ninguna diferencia media alcanza δ. En consecuencia, estas cifras describen el comportamiento dentro de UAVIDS-2025 y no se extienden a enjambres reales.
 
 Para el Entregable 2 se heredan `particion.npz`, `declaracion_a_priori.json`, `preregistro.json` y `baseline.json`, con la recomendación de subir a unas 27 semillas para que el umbral lo fije la relevancia práctica y no la variabilidad.
 """)
 
 REFERENCIAS_FIJAS = r'''
+- SCImago (2026). *SJR: SCImago Journal & Country Rank* [Conjunto de datos]. <https://www.scimagojr.com>
 - Cohen, J. (1988). *Statistical power analysis for the behavioral sciences* (2.ª ed.). Lawrence Erlbaum Associates.
 - DeLong, E. R., DeLong, D. M. y Clarke-Pearson, D. L. (1988). Comparing the areas under two or more correlated receiver operating characteristic curves: A nonparametric approach. *Biometrics, 44*(3), 837–845.
 - Demšar, J. (2006). Statistical comparisons of classifiers over multiple data sets. *Journal of Machine Learning Research, 7*, 1–30.

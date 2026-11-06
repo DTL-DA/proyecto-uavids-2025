@@ -1,0 +1,1 @@
+{"modelo": "CNN 1D original", "semilla": 2006, "hp": {"lr": 0.001, "weight_decay": 0.0001, "batch": 128}, "epocas": 8, "segundos": 30.7, "f1_val": 0.9248905752979251, "f1_prueba": 0.8474791195524922, "dispositivo": "CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel"}

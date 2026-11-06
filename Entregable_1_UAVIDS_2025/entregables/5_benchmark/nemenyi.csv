@@ -1,0 +1,4 @@
+﻿Par,Diferencia de rangos,p Nemenyi,Potencia para δ,Mínima detectable
+CNN 1D - DNN,"0,1429","0,96139","0,142","0,0262"
+CNN 1D - LSTM,"0,5714","0,53334","0,142","0,0262"
+DNN - LSTM,"0,7143","0,37498","0,142","0,0262"

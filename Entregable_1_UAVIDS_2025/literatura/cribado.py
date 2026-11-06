@@ -3,7 +3,10 @@
 Elegible: el estudio detecta o clasifica intrusiones o ataques en redes o sistemas de drones (UAV, FANET, Internet of Drones)
 a partir de datos tabulares de tráfico o del sistema, usando Deep Learning. La decisión se tomó leyendo el título de cada
 registro y queda por registro en cribado_titulo_resumen.csv. Cuando entren registros nuevos (exportaciones de IEEE, Scopus
-o WoS), este script los marca como "sin cribar" para que se decidan y no queden incluidos ni excluidos por omisión.
+o WoS), quedan "sin cribar" para que se decidan y no queden incluidos ni excluidos por omisión.
+
+No debe volver a ejecutarse: identifica las decisiones por su posición en el archivo original. Las decisiones de las bases nuevas
+están en cribado_bases_nuevas.csv y se agregan con integrar_bases_nuevas.py.
 """
 import csv
 import re

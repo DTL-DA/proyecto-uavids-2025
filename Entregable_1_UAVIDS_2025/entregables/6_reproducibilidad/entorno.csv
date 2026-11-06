@@ -1,0 +1,10 @@
+﻿Componente,Versión
+Python,3.13.14
+torch,2.6.0+cpu
+numpy,2.4.6
+pandas,3.0.3
+scipy,1.17.1
+scikit-learn,1.9.0
+statsmodels,0.15.0
+matplotlib,3.10.9
+Dispositivo,"CPU Intel64 Family 6 Model 154 Stepping 4, GenuineIntel, 10 hilos"

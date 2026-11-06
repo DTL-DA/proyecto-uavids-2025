@@ -1,0 +1,76 @@
+{
+ "descripcion": "Estudios Q1 de la verificación de cobertura de sinónimos (verificar_cobertura_sinonimos.py, 5 de noviembre de 2026), leídos a texto completo. Los otros 18 registros elegibles o dudosos de esa verificación no son Q1 y no se leyeron. Los campos salen de la búsqueda dirigida de pasajes y tablas en cada texto; lo no hallado queda como no reportado o no identificado.",
+ "incluidos": [
+  {
+   "doi": "10.1016/j.aej.2025.12.065",
+   "dataset": "UAV-NIDD",
+   "entrada": "flujos de red",
+   "propuesto": "modelo fundacional Transformer de disparo cero",
+   "modelos": [
+    "LSTM",
+    "Transformer"
+   ],
+   "detalle": "LSTM y FlowTransformer supervisados, como cota superior",
+   "valores": "F1 supervisado: LSTM 94,5 ± 0,7 % y FlowTransformer 95,8 ± 0,6 %; propuesto 85,6 ± 0,8 % sin haber visto el ataque",
+   "particion": "un tipo de ataque fuera en cada evaluación",
+   "repeticiones": "no reportadas",
+   "dispersion": "sí",
+   "prueba": "t pareada, p < 0,001",
+   "nota": "Su sección 5.3 cita MLP, CNN y LSTM con cifras que no coinciden con su tabla 3"
+  },
+  {
+   "doi": "10.3390/drones6100297",
+   "dataset": "8000 registros con las clases de NSL-KDD",
+   "entrada": "flujos de red",
+   "propuesto": "autoencoder profundo con selección de atributos por optimización",
+   "modelos": [
+    "DNN/MLP"
+   ],
+   "detalle": "MLP, junto con cinco modelos clásicos, tomados de un trabajo publicado",
+   "valores": "Exactitud: propuesto 99,12 %, MLP 90,03 %",
+   "particion": "70/30",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Conjunto genérico, no de drones; compara con cifras publicadas"
+  },
+  {
+   "doi": "10.1016/j.asej.2024.102943",
+   "dataset": "NSL-KDD",
+   "entrada": "flujos de red",
+   "propuesto": "autoencoder profundo con selección de atributos y ajuste por optimización",
+   "modelos": [
+    "DBN"
+   ],
+   "detalle": "IDBN y DPC-DBN, junto con DRL-BWO, T-SID, un modelo de Deep Learning sin especificar y AK-NN, tomados de trabajos publicados",
+   "valores": "Exactitud: propuesto 99,36 %, IDBN 95,32 %, DPC-DBN 94,39 %",
+   "particion": "80/20 y 70/30",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Conjunto genérico; la descripción del autoencoder menciona señales EEG, ajenas al problema"
+  },
+  {
+   "doi": "10.3390/s26020509",
+   "dataset": "UAV Attack Dataset, de IEEE DataPort",
+   "entrada": "registros de vuelo y tráfico MAVLink",
+   "propuesto": "VAE con clasificador, federado y con firmas poscuánticas",
+   "modelos": [
+    "DNN/MLP"
+   ],
+   "detalle": "Clasificador feedforward solo, como línea base de la ablación",
+   "valores": "Exactitud: clasificador 92,23 ± 0,3 % (F1 0,9198); propuesto centralizado 98,67 ± 0,2 % (F1 0,9856)",
+   "particion": "estratificada 70/15/15",
+   "repeticiones": "5 semillas",
+   "dispersion": "sí",
+   "prueba": "ninguna",
+   "nota": "Una CNN publicada aparece solo en una tabla de posicionamiento con otros conjuntos de datos, y no se cuenta"
+  }
+ ],
+ "excluidos": [
+  {
+   "doi": "10.1016/j.compeleceng.2026.111429",
+   "motivo": "compara el mismo autoencoder con entrenamiento local, federado y centralizado sobre telemetría sintética, sin modelo de referencia por arquitectura"
+  }
+ ]
+}

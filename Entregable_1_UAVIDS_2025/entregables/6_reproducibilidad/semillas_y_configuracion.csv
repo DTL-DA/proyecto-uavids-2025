@@ -1,0 +1,55 @@
+﻿fase,modelo,semilla,lr,weight_decay,batch,epocas,segundos,parametros,f1_entrenamiento,f1_validacion,ms_por_muestra,dispositivo,archivo
+busqueda,CNN 1D,42,0.001,0.0001,128,15,165.3,39493,0.9258104465244976,0.9298061483968594,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_CNN_1D_42_c0.json
+busqueda,CNN 1D,42,0.0001,0.0,256,15,82.3,39493,0.9235009968945486,0.9235890761537865,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_CNN_1D_42_c1.json
+busqueda,CNN 1D,42,0.0001,0.0,128,15,59.2,39493,0.9279873716740388,0.9292881501520526,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_CNN_1D_42_c2.json
+busqueda,CNN 1D,42,0.0005,0.0,128,15,57.2,39493,0.9228079675450853,0.922556459568858,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_CNN_1D_42_c3.json
+busqueda,CNN 1D,42,0.0001,0.0001,256,15,39.1,39493,0.9228644099835808,0.9225112170558111,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_CNN_1D_42_c4.json
+busqueda,CNN 1D,42,0.001,0.0001,256,15,91.4,39493,0.9278670109217814,0.9205685993170668,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_CNN_1D_42_c5.json
+busqueda,DNN,42,0.001,0.0001,128,15,54.4,12677,0.9332487935561966,0.9282501802266321,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_DNN_42_c0.json
+busqueda,DNN,42,0.0001,0.0,256,15,29.5,12677,0.9039614982233012,0.9018488201907509,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_DNN_42_c1.json
+busqueda,DNN,42,0.0001,0.0,128,15,55.9,12677,0.9167932318546518,0.9183844524453424,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_DNN_42_c2.json
+busqueda,DNN,42,0.0005,0.0,128,15,69.1,12677,0.9337609403190312,0.9330244973845367,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_DNN_42_c3.json
+busqueda,DNN,42,0.0001,0.0001,256,15,34.3,12677,0.9034194435154352,0.9012285234696213,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_DNN_42_c4.json
+busqueda,DNN,42,0.001,0.0001,256,15,33.8,12677,0.9342823561388286,0.9297164815931851,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_DNN_42_c5.json
+busqueda,LSTM,42,0.001,0.0001,128,15,123.9,17477,0.896299753771876,0.8729777317505552,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_LSTM_42_c0.json
+busqueda,LSTM,42,0.0001,0.0,256,15,68.8,17477,0.8668374761100839,0.8075528448264798,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_LSTM_42_c1.json
+busqueda,LSTM,42,0.0001,0.0,128,15,160.1,17477,0.8879776382921417,0.8375107640313597,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_LSTM_42_c2.json
+busqueda,LSTM,42,0.0005,0.0,128,15,169.3,17477,0.9058081306124999,0.8759750301262222,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_LSTM_42_c3.json
+busqueda,LSTM,42,0.0001,0.0001,256,15,78.7,17477,0.8643435778738976,0.803294579708143,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_LSTM_42_c4.json
+busqueda,LSTM,42,0.001,0.0001,256,15,76.0,17477,0.9240237497894255,0.8705765773321928,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",busqueda_LSTM_42_c5.json
+definitiva,CNN 1D,2001,0.001,0.0001,128,9,70.7,39493,0.9192056442555483,0.9192907073692842,0.02934,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_CNN_1D_2001.json
+definitiva,CNN 1D,2002,0.001,0.0001,128,10,89.5,39493,0.9204618451523178,0.9298387810601824,0.03723,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_CNN_1D_2002.json
+definitiva,CNN 1D,2003,0.001,0.0001,128,10,79.2,39493,0.9289360785409118,0.9256068255679999,0.02524,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_CNN_1D_2003.json
+definitiva,CNN 1D,2004,0.001,0.0001,128,14,114.8,39493,0.9413673560312308,0.9296606345574585,0.03004,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_CNN_1D_2004.json
+definitiva,CNN 1D,2005,0.001,0.0001,128,12,105.9,39493,0.9358760370869141,0.9166304884934929,0.03067,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_CNN_1D_2005.json
+definitiva,CNN 1D,2006,0.001,0.0001,128,10,77.9,39493,0.928598512696451,0.9248034914704848,0.02486,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_CNN_1D_2006.json
+definitiva,CNN 1D,2007,0.001,0.0001,128,9,78.3,39493,0.9300199146067571,0.9227060905042711,0.02384,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_CNN_1D_2007.json
+definitiva,DNN,2001,0.0005,0.0,128,17,40.3,12677,0.931050465543197,0.926504059897073,0.00117,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_DNN_2001.json
+definitiva,DNN,2002,0.0005,0.0,128,15,33.1,12677,0.9286514081045493,0.92831167557833,0.00053,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_DNN_2002.json
+definitiva,DNN,2003,0.0005,0.0,128,11,26.8,12677,0.918845299869678,0.925886147872401,0.00056,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_DNN_2003.json
+definitiva,DNN,2004,0.0005,0.0,128,25,57.7,12677,0.9353765871182669,0.9282938477605253,0.00049,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_DNN_2004.json
+definitiva,DNN,2005,0.0005,0.0,128,22,45.7,12677,0.9350900214785932,0.9311707452160547,0.00068,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_DNN_2005.json
+definitiva,DNN,2006,0.0005,0.0,128,12,27.3,12677,0.9222112722308891,0.9221139248251535,0.00068,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_DNN_2006.json
+definitiva,DNN,2007,0.0005,0.0,128,18,40.2,12677,0.9298368027701185,0.9283787644197531,0.00075,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_DNN_2007.json
+definitiva,LSTM,2001,0.0005,0.0,128,13,118.7,17477,0.9052312081250209,0.8764673323835037,0.01104,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_LSTM_2001.json
+definitiva,LSTM,2002,0.0005,0.0,128,14,129.0,17477,0.912389843157911,0.8763951250856643,0.00873,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_LSTM_2002.json
+definitiva,LSTM,2003,0.0005,0.0,128,19,174.3,17477,0.9250521695262132,0.8822734835728039,0.0108,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_LSTM_2003.json
+definitiva,LSTM,2004,0.0005,0.0,128,14,128.7,17477,0.9118078912680467,0.8767101538140449,0.00872,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_LSTM_2004.json
+definitiva,LSTM,2005,0.0005,0.0,128,13,120.6,17477,0.9070452795963005,0.8804240915504717,0.01061,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_LSTM_2005.json
+definitiva,LSTM,2006,0.0005,0.0,128,15,138.2,17477,0.915925553100165,0.875134829346934,0.00953,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_LSTM_2006.json
+definitiva,LSTM,2007,0.0005,0.0,128,17,156.1,17477,0.9186039268721743,0.8720410914483809,0.01087,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",definitiva_LSTM_2007.json
+piloto,CNN 1D,1001,0.001,0.0001,128,9,69.5,39493,0.9291230472295927,0.9324462490952939,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_CNN_1D_1001.json
+piloto,CNN 1D,1002,0.001,0.0001,128,12,84.8,39493,0.9367820946602159,0.9305615804168672,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_CNN_1D_1002.json
+piloto,CNN 1D,1003,0.001,0.0001,128,9,69.1,39493,0.9294504236813548,0.9268691597482979,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_CNN_1D_1003.json
+piloto,CNN 1D,1004,0.001,0.0001,128,11,105.2,39493,0.9352055995463431,0.9283427091314798,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_CNN_1D_1004.json
+piloto,CNN 1D,1005,0.001,0.0001,128,11,104.1,39493,0.9370290677237282,0.922257253159113,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_CNN_1D_1005.json
+piloto,DNN,1001,0.0005,0.0,128,16,48.1,12677,0.9276919131096616,0.9256057041069553,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_DNN_1001.json
+piloto,DNN,1002,0.0005,0.0,128,23,54.7,12677,0.9365115255767023,0.9272375021645015,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_DNN_1002.json
+piloto,DNN,1003,0.0005,0.0,128,18,42.7,12677,0.9296554154937798,0.9298806171283467,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_DNN_1003.json
+piloto,DNN,1004,0.0005,0.0,128,18,42.7,12677,0.9240958659584642,0.9273577922914129,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_DNN_1004.json
+piloto,DNN,1005,0.0005,0.0,128,20,40.0,12677,0.9305964602915566,0.9330260060471627,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_DNN_1005.json
+piloto,LSTM,1001,0.0005,0.0,128,13,118.4,17477,0.9120681749117232,0.8884042562603754,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_LSTM_1001.json
+piloto,LSTM,1002,0.0005,0.0,128,17,155.4,17477,0.9164716913496249,0.8888842611805569,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_LSTM_1002.json
+piloto,LSTM,1003,0.0005,0.0,128,11,96.9,17477,0.9027011711052035,0.8751295059196835,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_LSTM_1003.json
+piloto,LSTM,1004,0.0005,0.0,128,11,101.9,17477,0.8999402513966441,0.8710363354378284,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_LSTM_1004.json
+piloto,LSTM,1005,0.0005,0.0,128,19,173.4,17477,0.92483556481425,0.8860167291042187,,"CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",piloto_LSTM_1005.json

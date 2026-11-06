@@ -1,0 +1,12 @@
+format: jb-book
+root: 00_portada
+chapters:
+  - file: 01_problema_y_dataset
+  - file: 02_analisis_exploratorio
+  - file: 03_estado_del_arte
+  - file: 04_modelos_base
+  - file: 05_benchmark
+  - file: 06_guia_de_procedimiento
+  - file: 07_limitaciones
+  - file: 08_conclusiones
+  - file: 09_bibliografia

@@ -1,0 +1,4 @@
+﻿Modelo,Arquitectura tomada de,Parámetros,Capas con pesos,Multiplicaciones por muestra
+DNN,Zeng (2025),12 677,4,12 448
+LSTM,Zeng (2025),17 477,2,266 560
+CNN 1D,Zeng (2025),39 493,4,132 928

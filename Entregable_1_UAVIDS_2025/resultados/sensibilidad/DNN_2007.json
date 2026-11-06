@@ -1,0 +1,1 @@
+{"modelo": "DNN original", "semilla": 2007, "hp": {"lr": 0.0005, "weight_decay": 0.0, "batch": 128}, "epocas": 15, "segundos": 19.0, "f1_val": 0.9259900215850788, "f1_prueba": 0.8550106420290524, "dispositivo": "CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel"}

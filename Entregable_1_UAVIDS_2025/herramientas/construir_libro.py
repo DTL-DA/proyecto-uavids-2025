@@ -1,4 +1,4 @@
-"""Ensambla las fuentes del Jupyter Book del Entregable 1 a partir del cuaderno ya ejecutado en Colab.
+"""Ensambla las fuentes del Jupyter Book del Entregable 1 a partir del cuaderno ya ejecutado.
 
 Cada sección ``## N.`` del cuaderno es un capítulo del libro. Además, el script:
 
@@ -7,7 +7,7 @@ Cada sección ``## N.`` del cuaderno es un capítulo del libro. Además, el scri
 - oculta el código de cada celda detrás de un botón (etiqueta ``hide-input``), con sus salidas visibles;
 - quita las barras de avance y las advertencias (salidas por stderr), que no aportan al informe.
 
-El libro no vuelve a ejecutar el cuaderno (``execute_notebooks: off``): usa las salidas de la corrida en Colab.
+El libro no vuelve a ejecutar el cuaderno (``execute_notebooks: off``): usa las salidas ya guardadas en el cuaderno.
 
 Uso:
     python construir_libro.py --libro <carpeta de destino> [--cuaderno <cuaderno ejecutado>]
@@ -50,7 +50,7 @@ sphinx:
     nb_code_prompt_hide: "Ocultar el código de la celda"
     suppress_warnings: ["myst.header"]
     html_theme_options:
-      repository_url: https://github.com/DTL-DA/proyecto-final-dl-uavids-2025
+      repository_url: https://github.com/DTL-DA/proyecto-uavids-2025
       repository_branch: main
       use_repository_button: true
       show_toc_level: 2

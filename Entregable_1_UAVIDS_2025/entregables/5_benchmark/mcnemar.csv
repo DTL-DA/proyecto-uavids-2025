@@ -1,0 +1,4 @@
+﻿Par,Diferencia media de accuracy,Discordantes (media),p de McNemar (mediana),p mínimo,p máximo,"Semillas con p Holm < 0,05",Potencia para δ,Mínima detectable
+CNN 1D - DNN,"0,0003","1003,5714","6,94e-06","3,09e-18","0,80453",5 de 7,"1,000","0,0038"
+CNN 1D - LSTM,"0,0109","1680,8571","2,71e-12","4,44e-79","0,00038",7 de 7,"1,000","0,0051"
+DNN - LSTM,"0,0106","1695,8571","2,17e-31","1,63e-74","0,32314",6 de 7,"1,000","0,0051"

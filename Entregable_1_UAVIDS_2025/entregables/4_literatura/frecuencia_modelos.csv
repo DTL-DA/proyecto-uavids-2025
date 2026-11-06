@@ -1,0 +1,16 @@
+﻿modelo,estudios,porcentaje,estudios_uavids,porcentaje_uavids
+DNN/MLP,24,57.1,9,81.8
+CNN,22,52.4,6,54.5
+LSTM,14,33.3,4,36.4
+CNN-LSTM,6,14.3,2,18.2
+RNN,5,11.9,2,18.2
+GRU,5,11.9,0,0.0
+Autoencoder,4,9.5,2,18.2
+BiLSTM,3,7.1,2,18.2
+DBN,3,7.1,0,0.0
+Transformer,3,7.1,0,0.0
+GNN,3,7.1,2,18.2
+ResNet,2,4.8,0,0.0
+GAN,1,2.4,0,0.0
+TabNet,1,2.4,0,0.0
+KAN,1,2.4,1,9.1
