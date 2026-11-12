@@ -231,12 +231,13 @@ def particiones_5x2():
     return nombres
 
 
-def plan_cv5x2():
+def plan_cv5x2(modelos_cv=None):
+    """Por defecto, todos los modelos; el orquestador la limita al par de RQ2, que es el único contraste que la usa."""
     pre = adenda()
     hp = mejores_hp()
     nombres = particiones_5x2()
     t = []
-    for m in profundos() + ["LightGBM", "Logística"]:
+    for m in modelos_cv or profundos() + ["LightGBM", "Logística"]:
         for n in nombres:
             t.append(trabajo("cv5x2", m, hp[m], CONFIG["definitiva"]["semilla_inicial"], "_" + n, particion=n, evaluar=True, guardar_prob_eva=False, **arquitectura_final(m, pre)))
     return t
@@ -255,6 +256,30 @@ def plan_permutacion(modelos_p, B=200):
                     **arquitectura_final(m, pre)) for m in modelos_p for b in range(B)]
 
 
+def plan_bootstrap(modelos_b, B=20, semilla=7301):
+    """Optimismo de Efron y Gong: se entrena en una muestra bootstrap de bloques de entrenamiento y se evalúa en el entrenamiento original."""
+    from codigo import datos
+
+    pre = adenda()
+    hp = mejores_hp()
+    h = datos.heredados()
+    ent, val = h["ids"]["entrenamiento"], h["ids"]["validacion"]
+    bloques = datos.crudo()[1]
+    unicos = np.unique(bloques[ent])
+    carpeta = RAIZ_E2 / "resultados" / "particiones"
+    carpeta.mkdir(parents=True, exist_ok=True)
+    rng = np.random.default_rng(semilla)
+    nombres = []
+    for b in range(B):
+        elegidos = rng.choice(unicos, len(unicos), replace=True)
+        filas = np.concatenate([ent[bloques[ent] == x] for x in elegidos])
+        nombre = f"bootstrap_b{b:02d}"
+        np.savez(carpeta / f"{nombre}.npz", ent=filas, val=val, eva=ent)
+        nombres.append(nombre)
+    return [trabajo("bootstrap", m, hp[m], CONFIG["definitiva"]["semilla_inicial"], "_" + n, particion=n, evaluar=True, guardar_prob_eva=False, **arquitectura_final(m, pre))
+            for m in modelos_b for n in nombres]
+
+
 def guardar(nombre, trabajos):
     TRABAJOS.mkdir(parents=True, exist_ok=True)
     ruta = TRABAJOS / f"{nombre}.jsonl"
@@ -271,9 +296,11 @@ if __name__ == "__main__":
     elif fase == "ablacion":
         guardar(fase, plan_ablacion(sys.argv[2]))
     elif fase == "cv5x2":
-        guardar(fase, plan_cv5x2())
+        guardar(fase, plan_cv5x2(sys.argv[2].split(",") if len(sys.argv) > 2 else None))
     elif fase == "curvas":
         guardar(fase, plan_curvas(sys.argv[2].split(",")))
+    elif fase == "bootstrap":
+        guardar(fase, plan_bootstrap(sys.argv[2].split(","), int(sys.argv[3]) if len(sys.argv) > 3 else 20))
     elif fase == "permutacion":
         guardar(fase, plan_permutacion(sys.argv[2].split(","), int(sys.argv[3]) if len(sys.argv) > 3 else 200))
     else:

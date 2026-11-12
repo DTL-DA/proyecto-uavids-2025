@@ -25,8 +25,10 @@ PAR_RUTEO = (0, 4)  # Blackhole y Wormhole
 
 # ------------------------------------------------------------------ métricas por corrida
 def f1_macro_rapido(verdad, prediccion, k=K):
+    """F1 macro sobre las clases presentes en `verdad`: en un bloque o segmento sin alguna clase, esa clase no entra al promedio."""
     confusion = np.bincount(k * verdad + prediccion, minlength=k * k).reshape(k, k)
-    return float(np.mean(2 * np.diag(confusion) / np.maximum(confusion.sum(0) + confusion.sum(1), 1)))
+    presentes = confusion.sum(1) > 0
+    return float(np.mean((2 * np.diag(confusion) / np.maximum(confusion.sum(0) + confusion.sum(1), 1))[presentes]))
 
 
 def confusion(verdad, prediccion, k=K):
@@ -401,11 +403,24 @@ def auc_ponderado(positivo, puntaje, pesos):
 def auc_macro_bootstrap(verdad, prob, bloques, repeticiones=2000, semilla=42):
     """IC del AUC macro uno contra todos remuestreando bloques: cada réplica pondera las filas por las veces que se eligió su bloque."""
     unicos, inversa = np.unique(bloques, return_inverse=True)
+    # El orden de los puntajes no cambia entre réplicas: se ordena una vez por clase y en cada réplica solo cambian los pesos
+    previo = []
+    for c in range(prob.shape[1]):
+        orden = np.argsort(prob[:, c], kind="mergesort")
+        _, inicio, conteo = np.unique(prob[orden, c], return_index=True, return_counts=True)
+        previo.append((orden, np.repeat(np.arange(len(inicio)), conteo), (verdad == c)[orden], inversa[orden]))
     rng = np.random.default_rng(semilla)
     valores = np.empty(repeticiones)
     for i in range(repeticiones):
-        veces = np.bincount(rng.integers(0, len(unicos), len(unicos)), minlength=len(unicos))[inversa].astype(float)
-        valores[i] = np.mean([auc_ponderado(verdad == c, prob[:, c], veces) for c in range(prob.shape[1])])
+        veces = np.bincount(rng.integers(0, len(unicos), len(unicos)), minlength=len(unicos)).astype(float)
+        aucs = []
+        for orden, grupo, positivo, bloque_ord in previo:
+            w = veces[bloque_ord]
+            w_pos = np.bincount(grupo, weights=w * positivo)
+            w_neg = np.bincount(grupo, weights=w * ~positivo)
+            total = w_pos.sum() * w_neg.sum()
+            aucs.append((w_pos * (np.cumsum(w_neg) - w_neg / 2)).sum() / total if total > 0 else np.nan)
+        valores[i] = np.nanmean(aucs)
     return valores
 
 

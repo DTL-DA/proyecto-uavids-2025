@@ -45,11 +45,22 @@ def confusion_bloques(verdad, prediccion, bloques):
     return M
 
 
+def _avance(texto):
+    """Muestra el avance solo cuando el módulo corre como script, para no ensuciar las salidas del cuaderno."""
+    if __name__ == "__main__":
+        print(texto, flush=True)
+
+
 def f1_desde_conteos(C):
-    """F1 macro de una o varias matrices de confusión aplanadas (…, K²)."""
+    """F1 macro de una o varias matrices de confusión aplanadas (…, K²), promediado sobre las clases presentes.
+
+    Los bloques de prueba tienen una o dos clases, y un remuestreo por bloques puede dejar fuera una clase; promediar
+    sobre las K clases contaría como 0 el F1 de una clase ausente, que no es un error del modelo."""
     C = C.reshape(*C.shape[:-1], K, K)
     tp = np.diagonal(C, axis1=-2, axis2=-1)
-    return (2 * tp / np.maximum(C.sum(-2) + C.sum(-1), 1)).mean(-1)
+    f1 = 2 * tp / np.maximum(C.sum(-2) + C.sum(-1), 1)
+    presentes = C.sum(-1) > 0
+    return (f1 * presentes).sum(-1) / np.maximum(presentes.sum(-1), 1)
 
 
 def pesos_bootstrap(n_bloques, repeticiones=2000, semilla=42):
@@ -142,7 +153,7 @@ def perturbaciones(semillas_por_modelo=5):
                 p = predecir_matriz(m, X)
                 filas.append({"modelo": modelo_nombre, "semilla": r["semilla"], "perturbacion": tipo, "nivel": nivel,
                               "f1": estadistica.f1_macro_rapido(y[i_pru], p.argmax(1)), "ece": estadistica.ece(p, y[i_pru])})
-        print(modelo_nombre, flush=True)
+        _avance(modelo_nombre)
     tabla = pd.DataFrame(filas)
     tabla.to_csv(ruta, index=False)
     return tabla
@@ -197,7 +208,7 @@ def atribuciones(nombres, semillas_por_modelo=5, muestra=1500, semilla=0):
         salida[f"{nombre}|importancia"] = np.array(imp)
         salida[f"{nombre}|borrado"] = np.array(borrado)
         salida[f"{nombre}|aleatorio"] = np.array(aleatorio)
-        print(nombre, flush=True)
+        _avance(nombre)
     np.savez(ruta, **salida)
     return salida
 
@@ -223,7 +234,7 @@ def mc_dropout(nombres, pasadas=30, semillas_por_modelo=5):
                 torch.manual_seed(r["semilla"])
                 with torch.no_grad():
                     salida[f"{r['id']}|{conjunto}"] = np.mean([torch.softmax(m(X), 1).numpy() for _ in range(pasadas)], 0).astype(np.float32)
-        print(nombre, flush=True)
+        _avance(nombre)
     np.savez_compressed(ruta, **salida)
     return salida
 
