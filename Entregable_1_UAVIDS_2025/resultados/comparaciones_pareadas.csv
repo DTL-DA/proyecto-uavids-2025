@@ -1,0 +1,22 @@
+,CNN 1D - DNN,CNN 1D - LSTM,DNN - LSTM
+Diferencia media,0.00018,0.01267,0.01249
+IC 95 % t,"[-0,0070; 0,0074]","[-0,0037; 0,0291]","[-0,0071; 0,0321]"
+IC 95 % bootstrap,"[-0,0049; 0,0057]","[0,0005; 0,0247]","[-0,0030; 0,0257]"
+Prueba elegida,t pareada,t pareada,t pareada
+p sin ajustar,"0,95379","0,10764","0,16962"
+p Holm,"0,95379","0,32291","0,33923"
+p t,"0,95379","0,10764","0,16962"
+p t Holm,"0,95379","0,32291","0,33923"
+p Wilcoxon,"0,93750","0,10938","0,15625"
+p Wilcoxon Holm,"0,93750","0,32812","0,32812"
+d de Cohen pareada,0.023,0.714,0.59
+IC 95 % de d,"[-1,25; 0,80]","[0,04; 2,40]","[-0,13; 2,73]"
+r biserial,-0.071,0.714,0.643
+δ de Cliff,-0.02,0.551,0.592
+P. de superioridad,0.429,0.714,0.714
+Potencia para δ,0.806,0.243,0.185
+Mínima detectable,0.00992,0.02256,0.02694
+Potencia de Wilcoxon para δ,0.768,0.22,0.168
+Mínima detectable de Wilcoxon,0.0105,0.02388,0.02851
+p TOST,"0,00787","0,64777","0,61685"
+Potencia de TOST,0.817,0.058,0.021

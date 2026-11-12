@@ -1,0 +1,3 @@
+﻿Prueba,Estadístico,p,Tamaño de efecto,Potencia para δ,Mínima detectable
+ANOVA de medidas repetidas (Greenhouse-Geisser),"2,6900","0,14306","η² parcial = 0,310","0,173","0,0276"
+Friedman,"2,0000","0,36788","W de Kendall = 0,143","0,186","0,0258"

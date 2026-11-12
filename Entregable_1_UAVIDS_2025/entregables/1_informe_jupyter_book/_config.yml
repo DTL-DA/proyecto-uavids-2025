@@ -1,0 +1,31 @@
+title: "Entregable 1 · Detección de intrusiones en redes de drones con UAVIDS-2025"
+author: Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+copyright: "2026"
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: "off"
+
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - amsmath
+    - colon_fence
+    - html_image
+
+sphinx:
+  config:
+    language: es
+    nb_merge_streams: true
+    nb_render_markdown_format: myst
+    nb_code_prompt_show: "Mostrar el código de la celda"
+    nb_code_prompt_hide: "Ocultar el código de la celda"
+    suppress_warnings: ["myst.header"]
+    html_theme_options:
+      repository_url: https://github.com/DTL-DA/proyecto-uavids-2025
+      repository_branch: main
+      use_repository_button: true
+      show_toc_level: 2
+      use_download_button: true
+      use_fullscreen_button: true
+      home_page_in_toc: true

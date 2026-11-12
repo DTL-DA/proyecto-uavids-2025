@@ -1,0 +1,959 @@
+{
+ "10.1109/cns66487.2025.11194990": {
+  "titulo": "UAVIDS-2025: A Benchmark Dataset for Intrusion Detection in UAV Networks Using Machine Learning Techniques",
+  "anio": 2025,
+  "autores": [
+   "Qingli Zeng",
+   "Abdalrahman Bashir",
+   "Farid Naït‐Abdesselam"
+  ],
+  "fuente": "IEEE Conference on Communications and Network Security",
+  "tipo": "conference-paper",
+  "volumen": null,
+  "numero": null,
+  "paginas": "1-9",
+  "url": "https://doi.org/10.1109/cns66487.2025.11194990"
+ },
+ "10.3390/s19245529": {
+  "titulo": "Intrusion Detection of UAVs Based on the Deep Belief Network Optimized by PSO",
+  "anio": 2019,
+  "autores": [
+   "Xiaopeng Tan",
+   "Shaojing Su",
+   "Zhen Zuo",
+   "Xiaojun Guo",
+   "Xiaoyong Sun"
+  ],
+  "fuente": "Sensors",
+  "tipo": "article",
+  "volumen": "19",
+  "numero": "24",
+  "paginas": "5529-5529",
+  "url": "http://dx.doi.org/10.3390/s19245529"
+ },
+ "10.1038/s41598-023-45065-8": {
+  "titulo": "IoT empowered smart cybersecurity framework for intrusion detection in internet of drones",
+  "anio": 2023,
+  "autores": [
+   "Syeda Nazia Ashraf",
+   "Selvakumar Manickam",
+   "Syed Saood Zia",
+   "Abdul Ahad Abro",
+   "Muath A. Obaidat",
+   "Mueen Uddin",
+   "Maha Abdelhaq",
+   "Raed Ali Alsaqour"
+  ],
+  "fuente": "Scientific Reports",
+  "tipo": "article",
+  "volumen": "13",
+  "numero": "1",
+  "paginas": "18422-18422",
+  "url": "https://doi.org/10.1038/s41598-023-45065-8"
+ },
+ "10.1109/access.2024.3359043": {
+  "titulo": "Enhanced Black Widow Optimization With Hybrid Deep Learning Enabled Intrusion Detection in Internet of Things-Based Smart Farming",
+  "anio": 2024,
+  "autores": [
+   "Rua Yahya Aburasain"
+  ],
+  "fuente": "IEEE Access",
+  "tipo": "article",
+  "volumen": "12",
+  "numero": null,
+  "paginas": "16621-16631",
+  "url": "https://doi.org/10.1109/access.2024.3359043"
+ },
+ "10.1109/access.2024.3349469": {
+  "titulo": "A Novel Intrusion Detection System Based on Artificial Neural Network and Genetic Algorithm With a New Dimensionality Reduction Technique for UAV Communication",
+  "anio": 2024,
+  "autores": [
+   "Korhan Cengiz",
+   "Swati Lipsa",
+   "Ranjan Kumar Dash",
+   "Nikola Ivković",
+   "Mario Konecki"
+  ],
+  "fuente": "IEEE Access",
+  "tipo": "article",
+  "volumen": "12",
+  "numero": null,
+  "paginas": "4925-4937",
+  "url": "https://doi.org/10.1109/access.2024.3349469"
+ },
+ "10.3389/fenrg.2024.1491332": {
+  "titulo": "Enhancing unmanned aerial vehicle and smart grid communication security using a ConvLSTM model for intrusion detection",
+  "anio": 2024,
+  "autores": [
+   "Raed S. Alharthi"
+  ],
+  "fuente": "Frontiers in Energy Research",
+  "tipo": "article",
+  "volumen": "12",
+  "numero": null,
+  "paginas": "",
+  "url": "https://doi.org/10.3389/fenrg.2024.1491332"
+ },
+ "10.1109/access.2024.3392618": {
+  "titulo": "Enhancing Security in IoT-Assisted UAV Networks Using Adaptive Mongoose Optimization Algorithm With Deep Learning",
+  "anio": 2024,
+  "autores": [
+   "Saud S. Alotaibi",
+   "Ahmed El Sayed",
+   "Elmouez Samir Abd Elhameed",
+   "Omar Alghushairy",
+   "Mohammed Assiri",
+   "Sara Saadeldeen Ibrahim"
+  ],
+  "fuente": "IEEE Access",
+  "tipo": "article",
+  "volumen": "12",
+  "numero": null,
+  "paginas": "63768-63776",
+  "url": "https://doi.org/10.1109/access.2024.3392618"
+ },
+ "10.1109/access.2024.3386570": {
+  "titulo": "Modified Marine Predators Algorithm With Deep Learning-Driven Security Solution for IoT-Assisted UAV Networks",
+  "anio": 2024,
+  "autores": [
+   "S. Anantha Babu",
+   "Abadhan Ranganath",
+   "Manish M. Goswami",
+   "T Gnanaprakasam",
+   "Mohamad Khairi Ishak"
+  ],
+  "fuente": "IEEE Access",
+  "tipo": "article",
+  "volumen": "12",
+  "numero": null,
+  "paginas": "54991-54998",
+  "url": "https://doi.org/10.1109/access.2024.3386570"
+ },
+ "10.22266/ijies2025.0531.33": {
+  "titulo": "A Deep Learning Paradigm for Intrusion Detection in Unmanned Aerial Vehicle Networks Using Extended LSTM",
+  "anio": 2025,
+  "autores": [],
+  "fuente": "International journal of intelligent engineering and systems",
+  "tipo": "article",
+  "volumen": "18",
+  "numero": "4",
+  "paginas": "507-523",
+  "url": "https://doi.org/10.22266/ijies2025.0531.33"
+ },
+ "10.3389/fcomp.2025.1545282": {
+  "titulo": "Integrating artificial intelligence for improved security of IoT-drones through cyber-physical attack detection",
+  "anio": 2025,
+  "autores": [
+   "Abeer Hakeem",
+   "Maha Sabir",
+   "Reemah M. Alhebshi",
+   "Abeer Almakky",
+   "Imran Ashraf"
+  ],
+  "fuente": "Frontiers in Computer Science",
+  "tipo": "article",
+  "volumen": "7",
+  "numero": null,
+  "paginas": "",
+  "url": "https://doi.org/10.3389/fcomp.2025.1545282"
+ },
+ "10.7546/crabs.2024.08.09": {
+  "titulo": "Radial Basis Function Neural Networks (RBFNN) for Secure Intrusion Detection in the Internet of Drones (IoD)",
+  "anio": 2024,
+  "autores": [
+   "Nek Muhammad Katbar",
+   "Abdul Hakeem",
+   "Israr Ahmed",
+   "Ghulam Abbass"
+  ],
+  "fuente": "Proceedings of the Bulgarian Academy of Sciences",
+  "tipo": "article",
+  "volumen": "77",
+  "numero": "8",
+  "paginas": "",
+  "url": "https://doi.org/10.7546/crabs.2024.08.09"
+ },
+ "10.3934/math.2024348": {
+  "titulo": "Hybrid arithmetic optimization algorithm with deep learning model for secure Unmanned Aerial Vehicle networks",
+  "anio": 2024,
+  "autores": [
+   "Sultanah M. Alshammari",
+   "Nofe Ateq Alganmi",
+   "Mohammed Hassan Ba-Aoum",
+   "Sami Saeed Binyamin",
+   "Abdullah Saad Al-Malaise ALGhamdi",
+   "Mahmoud Ragab"
+  ],
+  "fuente": "AIMS Mathematics",
+  "tipo": "article",
+  "volumen": "9",
+  "numero": "3",
+  "paginas": "7131-7151",
+  "url": "https://doi.org/10.3934/math.2024348"
+ },
+ "10.1109/dasc66011.2025.11257309": {
+  "titulo": "An Efficient Privacy-preserving Intrusion Detection Scheme for UAV Swarm Networks",
+  "anio": 2025,
+  "autores": [
+   "Kanchon Gharami",
+   "Shafika Showkat Moni"
+  ],
+  "fuente": "IEEE/AIAA Digital Avionics Systems Conference (DASC)",
+  "tipo": "conference-paper",
+  "volumen": null,
+  "numero": null,
+  "paginas": "1-10",
+  "url": "https://doi.org/10.1109/dasc66011.2025.11257309"
+ },
+ "10.1109/cits70307.2026.11637173": {
+  "titulo": "XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles",
+  "anio": 2026,
+  "autores": [
+   "Iakovos-Christos Zarkadis",
+   "Christos Douligeris"
+  ],
+  "fuente": "International Conference on Computer, Information and Telecommunication Systems",
+  "tipo": "conference-paper",
+  "volumen": null,
+  "numero": null,
+  "paginas": "1-8",
+  "url": "https://doi.org/10.1109/cits70307.2026.11637173"
+ },
+ "10.1038/s41598-026-55446-4": {
+  "titulo": "BPBiLSTM-IDS: a lightweight intrusion detection framework for cyber-physical UAV networks",
+  "anio": 2026,
+  "autores": [
+   "Hafiz Muhammad Attaullah",
+   "Inam Ullah Khan",
+   "Muhammad Mansoor Alam",
+   "Mazliham Mohd Su’ud",
+   "Keshav Kaushik",
+   "Ahthasham Sajid",
+   "Nurashikin Saaludin",
+   "Talha Ahmed Khan"
+  ],
+  "fuente": "Scientific Reports",
+  "tipo": "article",
+  "volumen": "16",
+  "numero": "1",
+  "paginas": "",
+  "url": "https://doi.org/10.1038/s41598-026-55446-4"
+ },
+ "10.3389/fphy.2025.1660104": {
+  "titulo": "Intrusion detection model of UAV system based on machine learning and neural network",
+  "anio": 2026,
+  "autores": [
+   "Wengang Zhou",
+   "Boyun Li",
+   "Xue Zeng"
+  ],
+  "fuente": "Frontiers in Physics",
+  "tipo": "article",
+  "volumen": "13",
+  "numero": null,
+  "paginas": "",
+  "url": "https://doi.org/10.3389/fphy.2025.1660104"
+ },
+ "10.1038/s41598-026-52524-5": {
+  "titulo": "Residual-aware lightweight deep learning framework for high-fidelity intrusion detection in UAV swarm networks",
+  "anio": 2026,
+  "autores": [
+   "Jianghua Wang",
+   "Tahani Alsubait",
+   "Ahmad Subhi Salem Mufleh",
+   "Md. Alamgir Hossain"
+  ],
+  "fuente": "Scientific Reports",
+  "tipo": "article",
+  "volumen": "16",
+  "numero": "1",
+  "paginas": "",
+  "url": "https://doi.org/10.1038/s41598-026-52524-5"
+ },
+ "10.17762/ijritcc.v11i9.8338": {
+  "titulo": "A Deep CNN Framework for UAV Intrusion Detection in Intelligent Systems",
+  "anio": 2023,
+  "autores": [
+   "V. Arulalan",
+   "G. Balamurugan",
+   "V. Premanand"
+  ],
+  "fuente": "International Journal on Recent and Innovation Trends in Computing and Communication",
+  "tipo": "article",
+  "volumen": "11",
+  "numero": "9",
+  "paginas": "227-236",
+  "url": "https://doi.org/10.17762/ijritcc.v11i9.8338"
+ },
+ "10.47000/tjmcs.1828534": {
+  "titulo": "Federated Learning for Intrusion Detection in UAV Networks",
+  "anio": 2026,
+  "autores": [
+   "Deniz Berke Ozsoy",
+   "Atakan Ozcan",
+   "Mohammed Al-Hubaishi"
+  ],
+  "fuente": "Turkish Journal of Mathematics and Computer Science",
+  "tipo": "article",
+  "volumen": "18",
+  "numero": "2",
+  "paginas": "481-503",
+  "url": "https://doi.org/10.47000/tjmcs.1828534"
+ },
+ "10.1109/pimrc59610.2024.10817244": {
+  "titulo": "Enhanced Intrusion Detection System for Multiclass Classification in UAV Networks",
+  "anio": 2024,
+  "autores": [
+   "Safaa Menssouri",
+   "Mamady Delamou",
+   "Khalil Ibrahimi",
+   "El Mehdi Amhoud"
+  ],
+  "fuente": "IEEE International Symposium on Personal, Indoor and Mobile Radio Communications (PIMRC)",
+  "tipo": "conference-paper",
+  "volumen": null,
+  "numero": null,
+  "paginas": "1-6",
+  "url": "https://doi.org/10.1109/pimrc59610.2024.10817244"
+ },
+ "10.48550/arxiv.2607.17025": {
+  "titulo": "Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation",
+  "anio": 2026,
+  "autores": [
+   "Fawaz J. Alruwaili",
+   "Cihan Tunc"
+  ],
+  "fuente": "arXiv (Cornell University)",
+  "tipo": "preprint",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "url": "https://arxiv.org/abs/2607.17025"
+ },
+ "10.70102/afts.2026.1836.229": {
+  "titulo": "ASSESSING LEARNING-BASED MODELS FOR INTRUSION DETECTION IN UAV NETWORKS",
+  "anio": 2026,
+  "autores": [
+   "Razan Abdulhammed",
+   "Mohand Lokman Ahmad Al-Dabag",
+   "Shaima Miqdad Mohamed Najeeb",
+   "Haider TH. Salim ALRikabi"
+  ],
+  "fuente": "Archives for Technical Sciences",
+  "tipo": "article",
+  "volumen": null,
+  "numero": null,
+  "paginas": "229-229",
+  "url": "https://doi.org/10.70102/afts.2026.1836.229"
+ },
+ "sin-doi:dragon": {
+  "titulo": "Deep Reinforced Adaptive Graph Optimization Network for Intelligent Intrusion Detection in UAV Communication Networks",
+  "anio": 2026,
+  "autores": [
+   "P. SureshBabu M. Geetha"
+  ],
+  "fuente": "Indian Engineering Journal",
+  "tipo": "article",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "url": "https://indianengineeringjournal.com/index.php/journal/article/view/270"
+ },
+ "sin-doi:gatv2": {
+  "titulo": "Edge-Aware GATv2-BiLSTM Framework for Spatiotemporal Intrusion Detection in Autonomous UAV Command-and-Control Networks",
+  "anio": 2026,
+  "autores": [
+   "Jury O. Balgoon"
+  ],
+  "fuente": "International Journal of Intelligent Systems and Applications in Engineering",
+  "tipo": "article",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "url": "https://ijisae.org/index.php/IJISAE/article/view/8549"
+ },
+ "10.3390/s23198077": {
+  "titulo": "Secure and Privacy-Preserving Intrusion Detection and Prevention in the Internet of Unmanned Aerial Vehicles",
+  "anio": 2023,
+  "autores": [
+   "Ernest Ntizikira",
+   "Lei Wang",
+   "Fahad Alblehai",
+   "Kiran Saleem",
+   "Muhammad Ali Lodhi"
+  ],
+  "fuente": "Sensors",
+  "tipo": "article",
+  "volumen": "23",
+  "numero": "19",
+  "paginas": "8077-8077",
+  "url": "https://doi.org/10.3390/s23198077"
+ },
+ "10.3389/fdata.2021.782902": {
+  "titulo": "Top-Down Machine Learning-Based Architecture for Cyberattacks Identification and Classification in IoT Communication Networks",
+  "anio": 2022,
+  "autores": [
+   "Qasem S. Abu Al-Haija"
+  ],
+  "fuente": "Frontiers in Big Data",
+  "tipo": "review",
+  "volumen": "4",
+  "numero": null,
+  "paginas": "782902-782902",
+  "url": "https://doi.org/10.3389/fdata.2021.782902"
+ },
+ "10.1109/tvt.2023.3302814": {
+  "titulo": "Deep Attention Recognition for Attack Identification in 5G UAV Scenarios: Novel Architecture and End-to-End Evaluation",
+  "anio": 2023,
+  "autores": [
+   "Joseanne Viana",
+   "Hamed Farkhari",
+   "Pedro Sebastião",
+   "Luís Miguel Campos",
+   "Katerina Koutlia",
+   "Biljana Bojović",
+   "Sandra Lagén",
+   "Rui Dinis"
+  ],
+  "fuente": "IEEE Transactions on Vehicular Technology",
+  "tipo": "article",
+  "volumen": "73",
+  "numero": "1",
+  "paginas": "131-146",
+  "url": "https://doi.org/10.1109/tvt.2023.3302814"
+ },
+ "10.21203/rs.3.rs-271920/v1": {
+  "titulo": "Securing Against DoS/DDoS Attacks in Internet of Flying Things using Experience-based Deep Learning Algorithm",
+  "anio": 2021,
+  "autores": [
+   "Inam Ullah Khan",
+   "Arsin Abdollahi",
+   "Muhammad Asghar Khan",
+   "Muhammad Irfan Uddin",
+   "Insaf Ullah"
+  ],
+  "fuente": "Research Square",
+  "tipo": "preprint",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "url": "https://doi.org/10.21203/rs.3.rs-271920/v1"
+ },
+ "10.32604/jcs.2023.042486": {
+  "titulo": "Improving Intrusion Detection in UAV Communication Using an LSTM-SMOTE Classification Method",
+  "anio": 2022,
+  "autores": [
+   "Abdulrahman M. Abdulghani",
+   "Mokhles M. Abdulghani",
+   "Wilbur L. Walters",
+   "Khalid H. Abed"
+  ],
+  "fuente": "Journal of Cyber Security",
+  "tipo": "article",
+  "volumen": "4",
+  "numero": "4",
+  "paginas": "287-298",
+  "url": "https://doi.org/10.32604/jcs.2023.042486"
+ },
+ "10.17762/ijritcc.v11i6s.6960": {
+  "titulo": "Decentralized Machine Learning based Energy Efficient Routing and Intrusion Detection in Unmanned Aerial Network (UAV)",
+  "anio": 2023,
+  "autores": [
+   "C. Srinivas",
+   "S. Venkatramulu",
+   "V. Chandra Shekar Rao",
+   "B. Raghuram",
+   "Kotte Vinay Kumar",
+   "Sreenivas Pratapagiri"
+  ],
+  "fuente": "International Journal on Recent and Innovation Trends in Computing and Communication",
+  "tipo": "article",
+  "volumen": "11",
+  "numero": "6s",
+  "paginas": "517-527",
+  "url": "https://doi.org/10.17762/ijritcc.v11i6s.6960"
+ },
+ "10.1109/gcwkshps68340.2025.11590964": {
+  "titulo": "Quantum Machine Learning for UAV Swarm Intrusion Detection",
+  "anio": 2025,
+  "autores": [
+   "Kuan‐Cheng Chen",
+   "Samuel Yen-Chi Chen",
+   "Tai-Yue Li",
+   "Chen-Yu Liu",
+   "Kin Kwong Leung"
+  ],
+  "fuente": "IEEE Globecom Workshops (GC Wkshps)",
+  "tipo": "conference-paper",
+  "volumen": null,
+  "numero": null,
+  "paginas": "921-926",
+  "url": "https://doi.org/10.1109/gcwkshps68340.2025.11590964"
+ },
+ "10.47000/tjmcs.1568820": {
+  "titulo": "Evaluation of Machine Learning Models for Attack Detection in Unmanned Aerial Vehicle Networks",
+  "anio": 2024,
+  "autores": [
+   "Ahmet Faruk Görmüş",
+   "Serkan Gönen",
+   "Abdulsamet Haşıloğlu",
+   "Ercan Nurcan Yılmaz"
+  ],
+  "fuente": "Turkish Journal of Mathematics and Computer Science",
+  "tipo": "article",
+  "volumen": "16",
+  "numero": "2",
+  "paginas": "400-410",
+  "url": "https://doi.org/10.47000/tjmcs.1568820"
+ },
+ "10.55041/ijsrem68442": {
+  "titulo": "Auto Healing Intrusion Detection System with Reinforcement Learning for Proactive Defence in Autonomous IIoT Environment",
+  "anio": 2026,
+  "autores": [
+   "Pushpakalavalli H",
+   "Abirami P",
+   "Anumeena S T"
+  ],
+  "fuente": "INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT",
+  "tipo": "article",
+  "volumen": "10",
+  "numero": "10",
+  "paginas": "",
+  "url": "https://doi.org/10.55041/ijsrem68442"
+ },
+ "sin-doi:ensemble": {
+  "titulo": "Explainable Deep Ensemble Learning for Multi-Class Cyberattack Detection in Heterogeneous Drone–Industrial IoT Networks",
+  "anio": 2026,
+  "autores": [
+   "Dr. Kwame Mensah",
+   "Dr. Ama Owus"
+  ],
+  "fuente": "International Journal of Advanced Artificial Intelligence Research",
+  "tipo": "article",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "url": "https://aimjournals.com/article-analytics/go/pdf.php?u=https%3A%2F%2Faimjournals.com%2Findex.php%2Fijaair%2Farticle%2Fview%2F954%2F858&j=ijaair&a=954&g=858"
+ },
+ "sin-doi:iod": {
+  "titulo": "Lightweight Intrusion Detection for IoD Infrastructure using Deep Learning",
+  "anio": 2024,
+  "autores": [
+   "Hafiz Muhammad Sanaullah Badar",
+   "Nadeem Iqbal Kajla",
+   "Jehangir Arshad",
+   "Najia Saher",
+   "Manal Ahmad",
+   "Muhammad Ahsan Jamil"
+  ],
+  "fuente": "Journal of Computing & Biomedical Informatics",
+  "tipo": "article",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "url": "https://jcbi.org/index.php/Main/article/view/433"
+ },
+ "10.1109/jiot.2024.3360231": {
+  "titulo": "Intrusion Detection for Unmanned Aerial Vehicles Security: A Tiny Machine Learning Model",
+  "anio": 2024,
+  "autores": [
+   "Yixuan Wu",
+   "Lin Yang",
+   "Long Zhang",
+   "Laisen Nie",
+   "Li Zheng"
+  ],
+  "fuente": "IEEE Internet of Things Journal",
+  "tipo": "article",
+  "volumen": "11",
+  "numero": "12",
+  "paginas": "20970-20982",
+  "url": "https://doi.org/10.1109/jiot.2024.3360231"
+ },
+ "10.1109/tce.2026.3667039": {
+  "titulo": "Multi-Agent Federated Edge Learning for UAV-IDS in Smart City IoT Environment",
+  "anio": 2026,
+  "autores": [
+   "Hafiz Muhammad Attaullah",
+   "Shakila Basheer",
+   "Muhammad Ehsan",
+   "Ala Saleh Alluhaidan"
+  ],
+  "fuente": "IEEE Transactions on Consumer Electronics",
+  "tipo": "article",
+  "volumen": "72",
+  "numero": "2",
+  "paginas": "3988-3995",
+  "url": "https://doi.org/10.1109/tce.2026.3667039"
+ },
+ "10.1109/ojcoms.2026.3698792": {
+  "titulo": "A Federated Learning-Based Hybrid Architecture for Multi-Class Attack Detection in UAVs Communications",
+  "anio": 2026,
+  "autores": [
+   "Sohail Abbas",
+   "Muhammad Fayaz",
+   "Asad Ullah",
+   "Pervez Khan",
+   "Muhammad Nawaz Khan",
+   "Rehan Tariq Chohan"
+  ],
+  "fuente": "IEEE Open Journal of the Communications Society",
+  "tipo": "article",
+  "volumen": "7",
+  "numero": null,
+  "paginas": "6121-6135",
+  "url": "https://doi.org/10.1109/ojcoms.2026.3698792"
+ },
+ "10.1109/jiot.2026.3665688": {
+  "titulo": "Enhancing UAV Intrusion Detection Against Adversarial Samples Based on AdvGAN and Decision Boundary Reconstruction",
+  "anio": 2026,
+  "autores": [
+   "Mengyang Li",
+   "Yongze Jin",
+   "Wenjiang Ji",
+   "Junqi Liu",
+   "Jing Xin",
+   "Yichuan Wang",
+   "Xinhong Hei"
+  ],
+  "fuente": "IEEE Internet of Things Journal",
+  "tipo": "article",
+  "volumen": "13",
+  "numero": "10",
+  "paginas": "20705-20717",
+  "url": "https://doi.org/10.1109/jiot.2026.3665688"
+ },
+ "10.1109/tce.2026.3658881": {
+  "titulo": "GenFed-IDS: A Lightweight Federated Generative AI Framework for UAV Anomaly Detection in Rescue Operations",
+  "anio": 2026,
+  "autores": [
+   "Hafiz Muhammad Attaullah",
+   "Muhammad Ehsan",
+   "Shakila Basheer",
+   "Ala Saleh Alluhaidan"
+  ],
+  "fuente": "IEEE Transactions on Consumer Electronics",
+  "tipo": "article",
+  "volumen": "72",
+  "numero": "3",
+  "paginas": "7662-7669",
+  "url": "https://doi.org/10.1109/tce.2026.3658881"
+ },
+ "10.1016/j.rineng.2025.106838": {
+  "titulo": "Integrating convolutional stacked long short-term memory with bio-inspired algorithm for secure unmanned aerial vehicle communication in SDN environment",
+  "anio": 2025,
+  "autores": [
+   "Iyad A. Katib",
+   "Mahmoud Ragab",
+   "Sanaa Abdullah Sharaf",
+   "Emad Albassam",
+   "Wafi Bedewi",
+   "Abdulaziz A. Alsulami",
+   "Abdullah Saad Al-Malaise ALGhamdi"
+  ],
+  "fuente": "Results in Engineering",
+  "tipo": "article",
+  "volumen": "27",
+  "numero": null,
+  "paginas": "106838-106838",
+  "url": "https://doi.org/10.1016/j.rineng.2025.106838"
+ },
+ "10.1109/tcomm.2026.3693173": {
+  "titulo": "Enhance UAV Network Resilience by Malicious Traffic Detection: A Twin Graph Encoder Approach",
+  "anio": 2026,
+  "autores": [
+   "Xuzeng Li",
+   "Tao Zhang",
+   "Jiacheng Wang",
+   "Jiangtian Nie",
+   "Jian Wang",
+   "Xuangou Wu",
+   "Zhen Han",
+   "Jiqiang Liu",
+   "Dusit Tao Niyato",
+   "Dong In Kim"
+  ],
+  "fuente": "IEEE Transactions on Communications",
+  "tipo": "article",
+  "volumen": "74",
+  "numero": null,
+  "paginas": "9138-9153",
+  "url": "https://doi.org/10.1109/tcomm.2026.3693173"
+ },
+ "10.1016/j.eswa.2024.124215": {
+  "titulo": "Real-time fusion multi-tier DNN-based collaborative IDPS with complementary features for secure UAV-enabled 6G networks",
+  "anio": 2024,
+  "autores": [
+   "Hassan Jalil Hadi",
+   "Yue Cao",
+   "Sifan Li",
+   "Lexi Xu",
+   "Yulin Hu",
+   "Mingxin Li"
+  ],
+  "fuente": "Expert Systems with Applications",
+  "tipo": "article",
+  "volumen": "252",
+  "numero": null,
+  "paginas": "124215-124215",
+  "url": "https://doi.org/10.1016/j.eswa.2024.124215"
+ },
+ "10.1016/j.adhoc.2026.104251": {
+  "titulo": "Spatio-temporal graph neural networks for zero-day intrusion detection in low-altitude autonomous UAV swarms",
+  "anio": 2026,
+  "autores": [
+   "Mahmoud Mohamed",
+   "Dina Mohamed",
+   "Khaled Alosman"
+  ],
+  "fuente": "Ad Hoc Networks",
+  "tipo": "article",
+  "volumen": "191",
+  "numero": null,
+  "paginas": "104251-104251",
+  "url": "https://doi.org/10.1016/j.adhoc.2026.104251"
+ },
+ "10.3390/drones10070503": {
+  "titulo": "Dual-Impact Feature Selection for Adversarially Robust, Functionality-Preserving UAV Intrusion Detection",
+  "anio": 2026,
+  "autores": [
+   "Saleem Alsaraireh",
+   "Mustafa A. Al-Fayoumi",
+   "Mohammad Alnabhan"
+  ],
+  "fuente": "Drones",
+  "tipo": "article",
+  "volumen": "10",
+  "numero": "7",
+  "paginas": "503-503",
+  "url": "https://doi.org/10.3390/drones10070503"
+ },
+ "10.1016/j.iot.2026.102095": {
+  "titulo": "An AI-driven framework for intrusion detection and predictive threat modeling in UAV ecosystem",
+  "anio": 2026,
+  "autores": [
+   "Junaid",
+   "Fahad Algarni",
+   "Muhammad Ijaz Khan",
+   "Syed Tariq Shah",
+   "Ala Saleh Alluhaidan",
+   "Insaf Ullah"
+  ],
+  "fuente": "Internet of Things",
+  "tipo": "article",
+  "volumen": "40",
+  "numero": null,
+  "paginas": "102095-102095",
+  "url": "https://doi.org/10.1016/j.iot.2026.102095"
+ },
+ "10.1109/ojcoms.2026.3683883": {
+  "titulo": "A Real-Time Multi-Tier Machine Learning Intrusion Detection Framework for Securing Ground Control Station–UAV Communications",
+  "anio": 2026,
+  "autores": [
+   "Hassan Jalil Hadi",
+   "Muhammad Khurram Khan",
+   "Naveed Ahmad"
+  ],
+  "fuente": "IEEE Open Journal of the Communications Society",
+  "tipo": "article",
+  "volumen": "7",
+  "numero": null,
+  "paginas": "3881-3900",
+  "url": "https://doi.org/10.1109/ojcoms.2026.3683883"
+ },
+ "10.1038/s41598-026-45063-6": {
+  "titulo": "A novel unified lightweight temporal-spatial transformer approach for intrusion detection in drone networks",
+  "anio": 2026,
+  "autores": [
+   "Tarun Kumar Biswas",
+   "Ashrafun Zannat",
+   "Waqas Ishtiaq",
+   "Md. Alamgir Hossain"
+  ],
+  "fuente": "Scientific Reports",
+  "tipo": "article",
+  "volumen": "16",
+  "numero": "1",
+  "paginas": "",
+  "url": "https://doi.org/10.1038/s41598-026-45063-6"
+ },
+ "10.1016/j.sysarc.2026.104038": {
+  "titulo": "H-MicroKAN: An energy-aware hierarchical Kolmogorov–Arnold Network for TinyML UAV intrusion detection with conditional inference",
+  "anio": 2026,
+  "autores": [
+   "Abdelmalek Bakiri",
+   "Samir Fenanir",
+   "Lakhdar Goudjil"
+  ],
+  "fuente": "Journal of Systems Architecture",
+  "tipo": "article",
+  "volumen": "181",
+  "numero": null,
+  "paginas": "104038-104038",
+  "url": "https://doi.org/10.1016/j.sysarc.2026.104038"
+ },
+ "10.1016/j.comnet.2026.112806": {
+  "titulo": "A communication-efficient semi-supervised federated intrusion detection method for dynamic UAV swarm networks",
+  "anio": 2026,
+  "autores": [
+   "Laiwei Jiang",
+   "YANG XiuQing",
+   "Jihai Jiang"
+  ],
+  "fuente": "Computer Networks",
+  "tipo": "article",
+  "volumen": "290",
+  "numero": null,
+  "paginas": "112806-112806",
+  "url": "https://doi.org/10.1016/j.comnet.2026.112806"
+ },
+ "10.1016/j.adhoc.2026.104348": {
+  "titulo": "FED-FAN: Federated learning-based intrusion detection system for Flying Ad-hoc Networks",
+  "anio": 2026,
+  "autores": [
+   "Odinachi Udemezuo Nwankwo",
+   "Simeon Okechukwu Ajakwe",
+   "Gifar Arif Haryadi",
+   "Muhammad Rasyid Redha Ansori",
+   "Dong‐Seong Kim",
+   "Jae Min Lee"
+  ],
+  "fuente": "Ad Hoc Networks",
+  "tipo": "article",
+  "volumen": "193",
+  "numero": null,
+  "paginas": "104348-104348",
+  "url": "https://doi.org/10.1016/j.adhoc.2026.104348"
+ },
+ "10.1109/tcns.2026.3718814": {
+  "titulo": "Deep Reinforcement Learning-Based Sensor and Actuator Cyberattack Detection and Isolation of Nonlinear Cyber-Physical Systems",
+  "anio": 2026,
+  "autores": [
+   "Hamed Kazemi",
+   "K. Khorasani"
+  ],
+  "fuente": "IEEE Transactions on Control of Network Systems",
+  "tipo": "article",
+  "volumen": null,
+  "numero": null,
+  "paginas": "1-12",
+  "url": "https://doi.org/10.1109/tcns.2026.3718814"
+ },
+ "10.1109/jiot.2024.3426511": {
+  "titulo": "Real-Time Collaborative Intrusion Detection System in UAV Networks Using Deep Learning",
+  "anio": 2024,
+  "autores": [
+   "Hassan Jalil Hadi",
+   "Yue Cao",
+   "Sifan Li",
+   "Yulin Hu",
+   "Juan Wang",
+   "Shoufeng Wang"
+  ],
+  "fuente": "IEEE Internet of Things Journal",
+  "tipo": "article",
+  "volumen": "11",
+  "numero": "20",
+  "paginas": "33371-33391",
+  "url": "https://doi.org/10.1109/jiot.2024.3426511"
+ },
+ "10.70675/9327dab4zf089z4dbez8942zf3e3a822a69c": {
+  "titulo": "Intrusion detection in a fleet of drones",
+  "anio": 2022,
+  "autores": [
+   "Ruohao Zhang"
+  ],
+  "fuente": null,
+  "tipo": "dissertation",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "url": "https://doi.org/10.70675/9327dab4zf089z4dbez8942zf3e3a822a69c"
+ },
+ "10.1016/j.aej.2025.12.065": {
+  "titulo": "Zero-shot attack detection in UAV networks using foundation models",
+  "anio": 2026,
+  "autores": [
+   "Adel Alshamrani",
+   "Ahmed Mohammed Alghamdi"
+  ],
+  "fuente": "Alexandria Engineering Journal",
+  "tipo": "article",
+  "volumen": "136",
+  "numero": null,
+  "paginas": "105-124",
+  "url": "https://doi.org/10.1016/j.aej.2025.12.065"
+ },
+ "10.3390/drones6100297": {
+  "titulo": "Crystal Structure Optimization with Deep-Autoencoder-Based Intrusion Detection for Secure Internet of Drones Environment",
+  "anio": 2022,
+  "autores": [
+   "Khalid Adnan Alissa",
+   "Saud S. Alotaibi",
+   "Fatma S. Alrayes",
+   "Mohammed Aljebreen",
+   "Sana Alazwari",
+   "Hussain Alshahrani",
+   "Mohamed Ahmed Elfaki",
+   "Mahmoud Othman",
+   "Abdelwahed Motwakel"
+  ],
+  "fuente": "Drones",
+  "tipo": "article",
+  "volumen": "6",
+  "numero": "10",
+  "paginas": "297-297",
+  "url": "https://doi.org/10.3390/drones6100297"
+ },
+ "10.1016/j.asej.2024.102943": {
+  "titulo": "Tasmanian devil optimization with deep autoencoder for intrusion detection in IoT assisted unmanned aerial vehicle networks",
+  "anio": 2024,
+  "autores": [
+   "Noha Negm",
+   "Hayam Alamro",
+   "Randa Allafi",
+   "Majdi Khalid",
+   "Amal M. Nouri",
+   "Radwa Marzouk",
+   "Aladdin Yahya Othman",
+   "Noura Abdelaziz Ahmed"
+  ],
+  "fuente": "Ain Shams Engineering Journal",
+  "tipo": "article",
+  "volumen": "15",
+  "numero": "11",
+  "paginas": "102943-102943",
+  "url": "https://doi.org/10.1016/j.asej.2024.102943"
+ },
+ "10.3390/s26020509": {
+  "titulo": "Quantum-Resilient Federated Learning for Multi-Layer Cyber Anomaly Detection in UAV Systems",
+  "anio": 2026,
+  "autores": [
+   "Canan Batur Şahin"
+  ],
+  "fuente": "Sensors",
+  "tipo": "article",
+  "volumen": "26",
+  "numero": "2",
+  "paginas": "509-509",
+  "url": "https://doi.org/10.3390/s26020509"
+ },
+ "10.1016/j.compeleceng.2026.111429": {
+  "titulo": "Quantum safe drone security: Authenticated key exchange and privacy preserving intrusion detection for low altitude intelligent transportation systems",
+  "anio": 2026,
+  "autores": [
+   "Shafiq Ahmed",
+   "Mohammad Hossein Anisi",
+   "Ayesha Iqbal",
+   "Abhirami Suresh",
+   "Mohammed Amoon",
+   "Kadambri Agarwal"
+  ],
+  "fuente": "Computers & Electrical Engineering",
+  "tipo": "article",
+  "volumen": "139",
+  "numero": null,
+  "paginas": "111429-111429",
+  "url": "https://doi.org/10.1016/j.compeleceng.2026.111429"
+ }
+}

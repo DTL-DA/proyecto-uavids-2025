@@ -1,0 +1,12 @@
+﻿Definición,Valor
+Capas y unidades,Las de la sección 3.3
+Función de pérdida,Entropía cruzada ponderada
+Optimizador,Adam
+Tasa de aprendizaje,Se ajusta en la sección 4.2.3
+Planificador,Reducción por 10 si la pérdida de validación no mejora en 2 épocas
+Decaimiento de pesos,Se ajusta en la sección 4.2.3
+Tamaño de lote,Se ajusta en la sección 4.2.3
+Dropout,"0,2 en la DNN; las otras dos arquitecturas no lo usan aquí (sección 4.2)"
+Máximo de épocas,50
+Parada temprana,Paciencia de 6 épocas sobre el F1 macro de validación
+Registro de cada corrida,"Curvas, parámetros, semilla, hiperparámetros, tiempo y equipo"

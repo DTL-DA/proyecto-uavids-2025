@@ -1,0 +1,80 @@
+{
+ "fecha": "2026-11-03 23:16",
+ "metrica_primaria": "F1 macro",
+ "delta": 0.01,
+ "alfa": 0.05,
+ "potencia": 0.8,
+ "semillas_piloto": [
+  1001,
+  1002,
+  1003,
+  1004,
+  1005
+ ],
+ "piloto": {
+  "mean": {
+   "CNN 1D": 0.928095,
+   "DNN": 0.928622,
+   "LSTM": 0.881894
+  },
+  "std": {
+   "CNN 1D": 0.003894,
+   "DNN": 0.002898,
+   "LSTM": 0.008245
+  },
+  "cv_%": {
+   "CNN 1D": 0.419596,
+   "DNN": 0.31207,
+   "LSTM": 0.93487
+  }
+ },
+ "dimensionamiento": [
+  {
+   "Par": "CNN 1D - DNN",
+   "Diferencia media": -0.000526,
+   "σ̂_d": 0.006754,
+   "δ/σ̂_d": 1.480615,
+   "Shapiro-Wilk, p": 0.805949,
+   "R necesario": 4
+  },
+  {
+   "Par": "CNN 1D - LSTM",
+   "Diferencia media": 0.046201,
+   "σ̂_d": 0.008342,
+   "δ/σ̂_d": 1.198783,
+   "Shapiro-Wilk, p": 0.874046,
+   "R necesario": 6
+  },
+  {
+   "Par": "DNN - LSTM",
+   "Diferencia media": 0.046727,
+   "σ̂_d": 0.008908,
+   "δ/σ̂_d": 1.122647,
+   "Shapiro-Wilk, p": 0.28783,
+   "R necesario": 7
+  }
+ ],
+ "supuesto": "normalidad de las diferencias pareadas; si no se cumple, Wilcoxon y bootstrap pareado",
+ "ejecuciones_calculadas": 7,
+ "tope_por_presupuesto": 30,
+ "limitado_por_tope": false,
+ "ejecuciones_definitivas": 7,
+ "hiperparametros": {
+  "CNN 1D": {
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "batch": 128
+  },
+  "DNN": {
+   "lr": 0.0005,
+   "weight_decay": 0.0,
+   "batch": 128
+  },
+  "LSTM": {
+   "lr": 0.0005,
+   "weight_decay": 0.0,
+   "batch": 128
+  }
+ },
+ "diferencia_minima_detectable": 0.009432
+}

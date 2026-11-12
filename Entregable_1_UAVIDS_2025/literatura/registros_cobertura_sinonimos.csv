@@ -1,0 +1,423 @@
+﻿n,anio,fuente,titulo,doi,cadenas
+0,2026,IEEE DataPort,"""EMR_Dataset_CSV""",10.21227/fvwx-vv51,C1 ampliada
+1,2026,IEEE DataPort,"""UCS-OODID dataset""",10.21227/4qqd-cb84,C1 ampliada
+2,2022,Studies in computational intelligence,2D Target/Anomaly Detection in Time Series Drone Images Using Deep Few-Shot Learning in Small Training Dataset,10.1007/978-3-030-99079-4_10,C1 ampliada
+3,2022,IEEE Access,75MW AC PV Module Field Anomaly Detection Using Drone-Based IR Orthogonal Images With Res-CNN3 Detector,10.1109/access.2022.3194547,C1 ampliada
+4,2023,Journal of Open Aviation Science,[Poster] ADS-B anomaly detection in the surveillance of low-altitude aircrafts,10.59490/joas.2023.7200,C1 ampliada
+5,2026,Biosensors,A Blockchain-Enabled Federated Neuro-Symbolic Framework for Secure Wearable Biosensor-Based Health Monitoring,10.3390/bios16080442,C1 ampliada
+6,2026,KSII Transactions on Internet and Information Systems,A Comparative Study of LSTM and GRU-Based Early Threat Detection in Drone Ad-hoc Networks,10.3837/tiis.2026.09.010,C1 ampliada
+7,2026,International Conference on Self Sustainable Artificial Intelligence Systems (ICSSAS),A Comprehensive AI Pipeline for Decisionmaking in Smart Agriculture Systems Using Multimodal Datasets,10.1109/icssas68835.2026.11559468,C1 ampliada
+8,2026,Measurement Science and Technology,A contrastive dual-task variational autoencoder for UAV flight anomaly detection,10.1088/1361-6501/aeaaff,C1 ampliada
+9,2024,"International Conference on Electrical, Computer and Energy Technologies (ICECET)",A Deep Vision and UAV Paradigm for Future Intelligent Mobility,10.1109/icecet61485.2024.10698434,C1 ampliada
+10,2026,Expert Systems with Applications,A depthwise convolutional variational autoencoder for anomaly detection in complex traffic scenarios from UAV views,10.1016/j.eswa.2026.131425,C1 ampliada
+11,2026,IEEE Transactions on Instrumentation and Measurement,A Dynamics-Constrained Probabilistic Method for Adaptive Anomaly Detection in UAVs,10.1109/tim.2026.3718566,C1 ampliada
+12,2025,IEEE Transactions on Aerospace and Electronic Systems,A Hybrid Multimodal Neural-Network-Based Anomaly Detection Model for UAVs,10.1109/taes.2025.3562543,C1 ampliada
+13,2023,PLoS ONE,A hybrid security system for drones based on ICMetric technology,10.1371/journal.pone.0282567,C1 ampliada
+14,2024,Lecture notes in electrical engineering,A Hybrid-Type Power Transmission Line Inspection Drone and an Anomaly Detection Method Using a Deep Neural Network,10.1007/978-981-97-6591-1_15,C1 ampliada
+15,2026,DOAJ (DOAJ: Directory of Open Access Journals),A Lightweight Intrusion Detection Method for UAV Networks Based on Hybrid Knowledge Distillation,,C1 ampliada
+16,2026,"Computers, materials & continua/Computers, materials & continua (Print)",A Lightweight Transformer-Based Network Intrusion Detection Method with Potential Application to UAV Networks,10.32604/cmc.2026.091625,C1 ampliada
+17,2024,Mediterranean Smart Cities Conference (MSCC),A Method for Anomaly Detection of Unmanned Aerial Vehicles (UAVs),10.1109/mscc62288.2024.10697079,C1 ampliada
+18,2026,Scientific Reports,A new adaptive federated learning approach for privacy preserving UAV anomaly detection under non-IID distributions,10.1038/s41598-026-38732-z,C1 ampliada
+19,2026,AIMS Mathematics,A new Caputo–generalized conformable fractional derivative with applications to finite-time stability and secure neural systems,10.3934/math.20261380,C1 ampliada
+20,2026,Sensors,A Novel Transformer-Based Multivariate Spatio-Temporal Feature Fusion Method for UAV Actuator Anomaly Detection,10.3390/s26175467,C1 ampliada
+21,2026,Reliability Engineering & System Safety,A probabilistic variational inference method for anomaly detection in unmanned aerial vehicle flight data,10.1016/j.ress.2026.112419,C1 ampliada
+22,2025,Emerald Group Publishing Limited eBooks,A Robust Intelligent Framework for Air Traffic Management System Using Machine Learning,10.1108/978-1-80592-062-520251007,C1 ampliada
+23,2024,"International Conference on Software, Systems and Information Technology (SSITCON)",A Secure Aware Routing Protocol for Efficient and Reliable FPANETS,10.1109/ssitcon62437.2024.10796633,C2 ampliada
+24,2026,International Conference on Electronics and Sustainable Communication Systems (ICESC),A Secure IoT and Machine Learning Framework using Variational Autoencoders for Intelligent Cyberattack Detection,10.1109/icesc70182.2026.11687694,C1 ampliada; C2 ampliada
+25,2023,IEEE Access,A Stethoscope for Drones: Transformers-Based Methods for UAVs Acoustic Anomaly Detection,10.1109/access.2023.3262702,C1 ampliada
+26,2026,SSRN Electronic Journal,A Structural Health Monitoring Method for Catenary Support Components Based on Global State-aware Clustering-guided Masked Autoencoder,10.2139/ssrn.6933518,C1 ampliada
+27,2019,International Engineering Journal For Research & Development,A SYSTEM TO DETECT ANOMALY IN LIVE FEED OF AUTONOMOUS DRONE SURVEILLANCE USING COMPUTER VISION APPROACH,10.17605/osf.io/xwgj9,C1 ampliada
+28,2026,Neural Computing and Applications,A vision-based leakage detection framework for roof systems using attention-enhanced deep neural networks,10.1007/s00521-026-12016-z,C1 ampliada
+29,2025,Sensors,A Weighted-Transfer Domain-Adaptation Network Applied to Unmanned Aerial Vehicle Fault Diagnosis,10.3390/s25061924,C1 ampliada
+30,2023,IEEE International Conference on Engineering Technologies and Applied Sciences (ICETAS),Abnormal Image Classification Using Vision Transformer for Smart Agriculture,10.1109/icetas59148.2023.10346441,C1 ampliada
+31,2024,Research Square,Abnormal time series detection under unsupervised and multi-working conditions for power system of unmanned equipment,10.21203/rs.3.rs-4958971/v1,C1 ampliada
+32,2025,IEEE Access,Acoustic Anomaly Detection for Propeller Crack Defects: A Drone-Based Surrogate Dataset for UAM,10.1109/access.2025.3632030,C1 ampliada
+33,2023,Applied Sciences,Acquisition and Processing of UAV Fault Data Based on Time Line Modeling Method,10.3390/app13074301,C1 ampliada
+34,2026,Aerospace,Adaptive Method for Optical Tracking of Maneuvering Aerial Objects Under Limited Computational Resources,10.3390/aerospace13080704,C1 ampliada
+35,2019,International Wireless Communications and Mobile Computing Conference (IWCMC),Adaptive Range-based Anomaly Detection in Drone-assisted Cellular Networks,10.1109/iwcmc.2019.8766446,C1 ampliada
+36,2025,International Conference on Range Technology (ICORT),Adaptive Resilience and Self-Healing in Aerospace System-of-Systems (SoS) Using Graph Neural Networks and Adversarial Machine Learning,10.1109/icort64008.2025.11115648,C1 ampliada
+37,2025,Springer eBooks,Adaptive Resilient Swarming Using Attention and Reinforcement Learning,10.1007/978-981-95-1050-4_21,C1 ampliada
+38,2025,Journal of the Arkansas Academy of Science,Adaptive Vision-based Methods for Building Anomaly Detection Using Unmanned Aerial Vehicles and Machine Learning,,C1 ampliada
+39,2025,Journal of Neonatal Surgery,"Advanced Deep Learning Framework for Soybean Leaf Disease Detection, Classification and Segmentation Using UAV Imagery",10.63682/jns.v14i3.9928,C1 ampliada
+40,2025,International Journal of Science and Research Archive,Advanced fault diagnosis and prognosis model for UAV control systems,10.30574/ijsra.2025.14.2.0502,C1 ampliada
+41,2026,Zenodo (CERN European Organization for Nuclear Research),"Advanced IoT-Integrated Systems for Intelligent Water Quality Monitoring in Aquaculture: Emerging Technologies, AI-Driven Analytics, and Future Perspectives",10.5281/zenodo.21760942,C1 ampliada
+42,2025,SSRN Electronic Journal,Advanced Performance Analysis of an Intelligent Aerial System for Structural Identification and Regional Anomaly Detection Using Reflective Spectroscopy,10.2139/ssrn.5389866,C1 ampliada
+43,2025,Journal of Nuclear Science and Technology,Advanced thermal monitoring in scaled reactors using deep learning-enhanced drone IR imaging,10.1080/00223131.2025.2530050,C1 ampliada
+44,2024,Journal of Materials Science and Chemical Engineering,Advancements in Photovoltaic Panel Fault Detection Techniques,10.4236/msce.2024.126001,C1 ampliada
+45,2022,Journal of Frontiers in Multidisciplinary Research,Advances in Integrated Geographic Information Systems and AI Surveillance for Real-Time Transportation Threat Monitoring,10.54660/.ijfmr.2022.3.1.130-139,C1 ampliada
+46,2026,The International Journal of Engineering Sciences,"Advances in Intelligent Bridge Structural Health Monitoring in Indonesia: Integrating AI-Driven Damage Detection, IoT-Based Sensing, Digital Twins, Predictive Maintenance, Environmental Monitoring, and Seismic Resilience",10.64440/ijes/engineeringx0023,C1 ampliada
+47,2026,CRC Press eBooks,Adversarial-Aware Transformer-Based Threat Mitigation System for Robotic Defense Units in Battlefield Environments,10.1201/9781003663461-24,C1 ampliada
+48,2026,International Conference on Connected Intelligence for Industrial Applications (CI2A),AI & ML Enabled Video Analysis and Interpretation System,10.1109/ci2a69097.2026.11576887,C1 ampliada
+49,2026,BENTHAM SCIENCE PUBLISHERS eBooks,AI for Wind Turbine Performance and Maintenance,10.2174/9798898815042126010010,C1 ampliada
+50,2024,Infrastructures,AI in Structural Health Monitoring for Infrastructure Maintenance and Safety,10.3390/infrastructures9120225,C1 ampliada
+51,2024,Aerospace,AI-Based Anomaly Detection Techniques for Structural Fault Diagnosis Using Low-Sampling-Rate Vibration Data,10.3390/aerospace11070509,C1 ampliada
+52,2025,IARJSET,AI-Driven Aircraft Defence: Developing Deep Learning CNN Architectures for Autonomous Systems,10.17148/iarjset.2025.12119,C1 ampliada
+53,2025,International Conference on Computing Communication Control and automation,AI-Driven Optical Intelligence for Modern Warfare Command and Control,10.1109/iccubea65967.2025.11283928,C1 ampliada
+54,2025,EAGE Annual Conference & Exhibition,AI-Driven Robotics for Efficient Subsea Pipeline Inspections in the North Sea,10.3997/2214-4609.2025101474,C1 ampliada
+55,2024,Digital Commons - University of South Florida (University of South Florida),AI-enabled Methodological Frameworks to Enhance the Robustness of Machine Learning Models in Various Domains and Dynamic Environments,,C1 ampliada
+56,2025,Electro-Optical and Infrared Systems: Technology and Applications,AI-enhanced polarimetric LWIR imaging for autonomous anomaly detection,10.1117/12.3070152,C1 ampliada
+57,2025,Journal of Carcinogenesis,AI-Powered Environmental Surveillance: Enhancing Air and Water Quality Monitoring through Real-Time Predictive Analytics,10.64149/j.carcinog.24.3s.639-647,C1 ampliada
+58,2023,IEEE International Conference on Electronic Measurement & Instruments,Airspeed Anomaly Detection of UAV Based on Flight Mode Adaptive with Noise Margin,10.1109/icemi59194.2023.10270654,C1 ampliada
+59,2025,Russian Aeronautics,Algorithm for Diagnostics of an Aircraft Electromechanical Drive Using a Fully Connected Neural Network of the Autoencoder Type,10.3103/s1068799825030250,C1 ampliada
+60,2025,IEEE Transactions on Instrumentation and Measurement,An Adaptive Denoising Algorithm for RTD Fluxgate Sensor Time-Differential Signals Based on Isolation Forest and VMD–Wavelet Fusion,10.1109/tim.2025.3626111,C1 ampliada
+61,2026,CRC Press eBooks,An Adversarial-Resilient Multi-Agent AI Framework for Autonomous Robotic Warfare Defense,10.1201/9781003663461-26,C1 ampliada
+62,2026,"International Conference on Computational Robotics, Testing and Engineering Evaluation (ICCRTEE)",An AI and Machine Learning Enabled Video Surveillance System for Real-Time Threat Detection and Crowd Analysis,10.1109/iccrtee68719.2026.11566502,C1 ampliada
+63,2024,Aerospace,An Anomaly Detection Method for UAV Based on Wavelet Decomposition and Stacked Denoising Autoencoder,10.3390/aerospace11050393,C1 ampliada
+64,2023,"International Conference on Signal Processing, Computation, Electronics, Power and Telecommunication (IConSCEPT)",An approach to Instance segmentation of Quadcopters for Suspicious Surveillance,10.1109/iconscept57958.2023.10170359,C1 ampliada
+65,2025,Knowledge-Based Systems,An enhanced CLKAN-RF framework for robust anomaly detection in unmanned aerial vehicle sensor data,10.1016/j.knosys.2025.113690,C1 ampliada
+66,2026,Lecture notes in networks and systems,An Enhanced Histogram-Based Technique for Drone Image Quality in Defense Intelligence,10.1007/978-3-032-25952-3_4,C1 ampliada
+67,2026,IEEE SoutheastCon,An Evaluation of Machine Learning Models' Efficacy in Determining UAV Spoofing Attacks,10.1109/southeastcon63549.2026.11476654,C1 ampliada
+68,2025,Engineering Applications of Artificial Intelligence,An improved anomaly detection model for automated inspection of power line insulators,10.1016/j.engappai.2025.111431,C1 ampliada
+69,2024,SSRN Electronic Journal,An Improved Anomaly Detection Model for Automated Inspection of Power Line Insulators,10.2139/ssrn.5041753,C1 ampliada
+70,2023,arXiv (Cornell University),An Improved Anomaly Detection Model for Automated Inspection of Power Line Insulators,10.48550/arxiv.2312.11470,C1 ampliada
+71,2026,IEEE Internet of Things Journal,An Improved Probabilistic Variational Auto-Encoder With Dual Anomaly Score for UAV Flight Data Anomaly Detection,10.1109/jiot.2026.3702651,C1 ampliada
+72,2026,PolyPublie (École Polytechnique de Montréal),An Integrated FL--DRL Framework for Adaptive Eavesdropping Mitigation in Internet of Drones Networks,10.5281/zenodo.21381130,C1 ampliada
+73,2024,Buildings,"An Integrated Method Using a Convolutional Autoencoder, Thresholding Techniques, and a Residual Network for Anomaly Detection on Heritage Roof Surfaces",10.3390/buildings14092828,C1 ampliada
+74,2025,Advances in Civil Engineering,An Integrated UAV and Deep Learning Framework With HSB‐Based Segmentation for Automated Slope Anomaly Detection in Mountainous Soil and Water Conservation Sites,10.1155/adce/5580438,C1 ampliada
+75,2026,IEEE Data Driven Control and Learning Systems Conference (DDCLS),An iTransformer-based Approach for UAV Anomaly Detection via Sensor Correlation Learning,10.1109/ddcls71227.2026.11610334,C1 ampliada
+76,2020,International Wireless Communications and Mobile Computing Conference (IWCMC),An Online Anomaly Detection Approach For Unmanned Aerial Vehicles,10.1109/iwcmc48107.2020.9148073,C1 ampliada
+77,2023,"IEEE International Conference on Electrical Engineering, Big Data and Algorithms (EEBDA)",An Optimized CNN-SVM Algorithm for UAV Anomaly Detection,10.1109/eebda56825.2023.10090683,C1 ampliada
+78,2026,Machines,An Unsupervised Anomaly Detection Method for Drones Based on a 1-D Selective Kernel Convolutional Autoencoder with Bayesian Optimization,10.3390/machines14070812,C1 ampliada
+79,2026,SSRN Electronic Journal,An unsupervised federated anomaly detection framework for UAV swarms with memory network and contrastive learning enhanced spatiotemporal autoencoder,10.2139/ssrn.7005152,C1 ampliada
+80,2020,"IEEE Annual Ubiquitous Computing, Electronics & Mobile Communication Conference (UEMCON)",Anomaly Detection and Identification Using Visual Techniques in Streaming Video,10.1109/uemcon51285.2020.9298178,C1 ampliada
+81,2024,Asia Conference on Power and Electrical Engineering (ACPEE),Anomaly Detection and Trajectory Prediction Methods for Substation UAV,10.1109/acpee60788.2024.10532653,C1 ampliada
+82,2023,Drones,Anomaly Detection for Data from Unmanned Systems via Improved Graph Neural Networks with Attention Mechanism,10.3390/drones7050326,C1 ampliada
+83,2025,ACM SIGSPATIAL International Workshop on Spatial Big Data and AI for Industrial Applications,Anomaly Detection for Locating Abandoned Oil and Gas Wells Using ResNet models,10.1145/3764919.3770882,C1 ampliada
+84,2022,,Anomaly detection for multivariate time series in water distribution IoT systems,10.5281/zenodo.7330273,C1 ampliada
+85,2025,IEEE Access,Anomaly Detection for PV Modules Using Multi-Modal Data Fusion in Aerial Inspections,10.1109/access.2025.3570815,C1 ampliada
+86,2026,Lecture notes in networks and systems,Anomaly Detection for UAV Flight Data via LSTM–Attention–TCN Fusion Network,10.1007/978-3-032-31236-5_41,C1 ampliada
+87,2022,SAE International Journal of Aerospace,Anomaly Detection for Unmanned Aerial Vehicle Sensor Data Using a Stacked Recurrent Autoencoder Method with Dynamic Thresholding,10.4271/01-15-02-0017,C1 ampliada
+88,2021,IEEE International Geoscience and Remote Sensing Symposium (IGARSS),Anomaly Detection in Aerial Videos Via Future Frame Prediction Networks,10.1109/igarss47720.2021.9554396,C1 ampliada
+89,2022,IEEE Transactions on Geoscience and Remote Sensing,Anomaly Detection in Aerial Videos With Transformers,10.1109/tgrs.2022.3198130,C1 ampliada
+90,2026,International Journal of Integrated Engineering,Anomaly Detection in Autonomous Fixed-Wing UAV Agricultural Mapping Missions Using Deep Learning,10.30880/ijie.2026.18.04.004,C1 ampliada
+91,2025,Scientific Reports,Anomaly detection in cropland monitoring using multiple view vision transformer,10.1038/s41598-025-98405-1,C1 ampliada
+92,2021,Lecture notes in electrical engineering,Anomaly Detection in Drone-Captured Images Using Machine Learning Techniques and Deep Learning Architectures,10.1007/978-981-16-4625-6_78,C1 ampliada
+93,2025,Applied Radiation and Isotopes,Anomaly detection in gamma-ray spectra using autoencoders with small form factor CZT detectors,10.1016/j.apradiso.2025.112409,C1 ampliada
+94,2025,IGI Global eBooks,Anomaly Detection in MAVLink Telemetry Using Autoencoders,10.4018/979-8-3373-3546-9.ch002,C1 ampliada
+95,2025,International Journal of Ambient Energy,Anomaly detection in solar farms with a hybrid CNN-ViT model to enhance accuracy and efficiency,10.1080/01430750.2025.2541270,C1 ampliada
+96,2025,International Conference on Robotics and Automation Sciences (ICRAS),Anomaly Detection in Solar PV Plants Using Drone Technology and AI for Proactive Maintenance,10.1109/icras65818.2025.11108888,C1 ampliada
+97,2020,International Conference on Machine Learning and Applications,Anomaly Detection in Unsupervised Surveillance Setting Using Ensemble of Multimodal Data with Adversarial Defense,10.1109/icmla51294.2020.00039,C1 ampliada
+98,2023,Communications in computer and information science,Anomaly Detection of Fixed-Wing Unmanned Aerial Vehicle (UAV) Based on Cross-Feature-Attention LSTM Network,10.1007/978-981-99-8148-9_40,C1 ampliada
+99,2026,International Conference on Information Management and Technology (ICIMTech),Anomaly Detection of IoT-Based Aquaculture Using Drone Imagery and Machine Learning,10.1109/icimtech202671078.2026.11698916,C1 ampliada
+100,2024,Energies,Anomaly Detection on Small Wind Turbine Blades Using Deep Learning Algorithms,10.3390/en17050982,C1 ampliada
+101,2021,Transportation research procedia,Anomaly detection using Autoencoders and Deep Convolution Generative Adversarial Networks,10.1016/j.trpro.2021.07.113,C1 ampliada
+102,2025,International Journal of Latest Technology in Engineering Management & Applied Science,Anomaly Detection Using Convolutional Neural Networks for Crime Prevention: A Deep Learning Approach,10.51583/ijltemas.2025.140600044,C1 ampliada
+103,2025,Gümüşhane Üniversitesi Fen Bilimleri Enstitüsü Dergisi,AnoSense: Edge computing for real-time flight anomaly detection by using embedded deep neural networks,10.17714/gumusfenbil.1676270,C1 ampliada
+104,2025,,Applications of Pattern Recognition and Computer Vision in Smart Grid Data Management Using Machine Learning,10.1109/ipria68579.2025.11263522,C1 ampliada
+105,2026,Wiley eBooks,Applied Case Studies and Deployment Frameworks,10.1002/9781394399642.ch15,C1 ampliada
+106,2025,IEEE International Conference on Emerging Technologies and Factory Automation (ETFA),Applying Vision Transformers and Large Language Models to Anomaly Detection for Safer UAV Landings,10.1109/etfa65518.2025.11205775,C1 ampliada
+107,2026,Iconic Research and Engineering Journals,Artificial Intelligence Applications for Enhancing Security and Threat Detection in Northeast Nigeria,10.64388/irev10i4-1723634,C1 ampliada
+108,2026,Lecture notes in networks and systems,Artificial Intelligence Driven Intelligent Intrusion Detection System for Cybersecure Unmanned Aerial Vehicle Networks,10.1007/978-3-032-14197-2_9,C1 ampliada
+109,2026,"Studies in systems, decision and control","Artificial Intelligence for Structural Health Monitoring: Techniques, Applications, and Future Directions",10.1007/978-3-032-07738-7_12,C1 ampliada
+110,2024,Wiley eBooks,Artificial Intelligence in Indoor or Outdoor Surveillance Systems,10.1002/9781394200733.ch13,C1 ampliada
+111,2025,Journal of Future Building,Artificial Intelligence in Security and Warfare: Ethical Dilemmas and Technological Frontiers,,C1 ampliada
+112,2025,International Conference on Equipment Intelligent Operation and Maintenance (ICEIOM),Attention-Based Encoder-Decoder Hybrid Network with Adaptive Thresholds for Critical Parameter Anomaly Detection of UAV Flight Data,10.1109/iceiom65271.2025.11239842,C1 ampliada
+113,2021,IEEE Transactions on Geoscience and Remote Sensing,Auto-AD: Autonomous Hyperspectral Anomaly Detection Network Based on Fully Convolutional Autoencoder,10.1109/tgrs.2021.3057721,C1 ampliada
+114,2026,Journal of Institute of Control Robotics and Systems,Autoencoder-based Real-time Thrust Anomaly Detection and HILS Verification for Multicopter UAVs,10.5302/j.icros.2026.25.0264,C1 ampliada
+115,2026,Transportation Research Record Journal of the Transportation Research Board,Automated Bridge Deck Health Evaluation Aligned with National Bridge Inventory Ratings via Unmanned Aerial Vehicle Imaging and Label-Free Sparse Autoencoder-Based Anomaly Mapping,10.1177/03611981261457110,C1 ampliada
+116,2025,Engineering Applications of Artificial Intelligence,Automated processing of eXplainable Artificial Intelligence outputs in deep learning models for fault diagnostics of large infrastructures,10.1016/j.engappai.2025.110518,C1 ampliada
+117,2025,ASCE International Conference on Computing in Civil Engineering (i3CE),Automated Thermal Anomaly Detection through Deep Learning-Based Semantic Segmentation of Building Envelope Images,10.1061/9780784486115.004,C1 ampliada
+118,2023,Journal of Automation Mobile Robotics & Intelligent Systems,Autonomous Anomaly Detection System for Crime Monitoring and Alert Generation,10.14313/jamris/1-2022/7,C1 ampliada
+119,2026,Computer-Aided Civil and Infrastructure Engineering,Autonomous inspection method for insulator strings using an unmanned aerial vehicle,10.1016/j.cacaie.2026.100034,C1 ampliada
+120,2025,Annual Conference of the PHM Society,Autonomous Inspection Strategy for Insulator Strings Using a Drone,10.36001/phmconf.2025.v17i1.4310,C1 ampliada
+121,2026,Artificial Intelligence Research and Applications,Autonomous UAV Inspection Powered by Generative AI for Photovoltaic Power Loss Analysis,10.20508/ckkk9598,C1 ampliada
+122,2025,Journal of Applied Science and Technology Trends,Big Data-Based Remote-Sensed Intelligent Visual Analytics for Environmental and Earth Monitoring Systems,10.38094/jastt605589,C1 ampliada
+123,2026,International Conference on Communications,Big-Data-Driven ISAR RF Digital Twin for UAV Channel Modeling in 6G Non-Terrestrial Networks,10.1109/icc59461.2026.11587114,C1 ampliada
+124,2024,Advances in environmental engineering and green technologies book series,Biosensor-Based Drones Anomaly Detection Integration for Sustainable Agriculture Development,10.4018/979-8-3693-4240-4.ch012,C1 ampliada
+125,2020,,Black-box Behavioral Model Inference for Autopilot Software Systems,10.11575/prism/38304,C1 ampliada
+126,2022,International Journal of Aeronautical and Space Sciences,Causality-Seq2Seq Model for Battery Anomaly Detection,10.1007/s42405-022-00508-w,C1 ampliada
+127,2026,SSRN Electronic Journal,Centralized Anomaly Detection on Uunmanned Aerial Vehicle-Generated Ortho Mosaics for Solar Photo Voltaic Inspection Using YOLOv11-OBB,10.2139/ssrn.6433717,C1 ampliada
+128,2024,Journal of Applied Remote Sensing,Cercospora leaf spot detection in sugar beets using high spatio-temporal unmanned aerial vehicle imagery and unsupervised anomaly detection methods,10.1117/1.jrs.18.024506,C1 ampliada
+129,2026,Zenodo (CERN European Organization for Nuclear Research),City-scale threat trajectory aggregation across heterogeneous camera networks: a conceptual deep learning framework,10.5281/zenodo.20589006,C1 ampliada
+130,2023,IEEE Transactions on Intelligent Transportation Systems,Classification of Manifold Learning Based Flight Fingerprints of UAVs in Air Traffic,10.1109/tits.2023.3237159,C1 ampliada
+131,2026,Wiley eBooks,Computational Intelligence and Internet of Vehicle Things,10.1002/9781394275113.ch1,C1 ampliada
+132,2024,Sensors,Consecutive Image Acquisition without Anomalies,10.3390/s24206608,C1 ampliada
+133,2026,arXiv (Cornell University),Context-Aware Operational Security for Autonomous Drones,10.48550/arxiv.2609.19021,C1 ampliada
+134,2021,Proceedings - IEEE International Conference on Robotics and Automation/Proceedings,Context-Dependent Anomaly Detection for Low Altitude Traffic Surveillance,10.1109/icra48506.2021.9562043,C1 ampliada
+135,2025,Advances in Space Research,Convolutional neural network design and evaluation for real-time multivariate time series fault detection in spacecraft attitude sensors,10.1016/j.asr.2025.06.068,C1 ampliada
+136,2019,International Journal of Advanced Robotic Systems,Convolutional neural network target detection in hyperspectral imaging for maritime surveillance,10.1177/1729881419842991,C1 ampliada
+137,2025,Transactions on Emerging Telecommunications Technologies,Correlation Analysis of ADS ‐B Data Jump and UAV Positioning Error Combined With Data Mining Algorithm,10.1002/ett.70297,C1 ampliada
+138,2025,Information Processing & Management,Cross-transformer learning network for abnormal crowd human behavior detection from UAV captured images,10.1016/j.ipm.2025.104374,C1 ampliada
+139,2026,Egyptian Informatics Journal,CrowdVoxel-Net: Voxelized geometry and transformer-based multimodal fusion for activity recognition and anomaly detection in UAV-based crowded scenes,10.1016/j.eij.2026.101020,C1 ampliada
+140,2022,Drones,Crystal Structure Optimization with Deep-Autoencoder-Based Intrusion Detection for Secure Internet of Drones Environment,10.3390/drones6100297,C1 ampliada
+141,2026,Frontiers in Future Transportation,Cyber-resilient flight architecture for software-defined UAVs using digital twin-based validation,10.3389/ffutr.2026.1827528,C1 ampliada
+142,2019,Prognostics and System Health Management Conference,Data-Driven Anomaly Detection for UAV Sensor Data Based on Deep Learning Prediction Model,10.1109/phm-paris.2019.00055,C1 ampliada
+143,2024,Journal of Computational Design and Engineering,Data-driven multivariate regression-based anomaly detection and recovery of unmanned aerial vehicle flight data,10.1093/jcde/qwae023,C1 ampliada
+144,2023,Science China Technological Sciences,Data-driven unsupervised anomaly detection and recovery of unmanned aerial vehicle flight data based on spatiotemporal correlation,10.1007/s11431-022-2312-8,C1 ampliada
+145,2026,Zenodo (CERN European Organization for Nuclear Research),Dataset and Code for Spatio-Temporal Graph Transformer-Based Intrusion Detection in UAV Swarms,10.5281/zenodo.18196361,C1 ampliada
+146,2020,Multimedia Tools and Applications,Deep learning and handcrafted features for one-class anomaly detection in UAV video,10.1007/s11042-020-09774-w,C1 ampliada
+147,2021,,Deep Learning Anomaly Detection for Drone-based Surveillance,10.70675/3fa63c77z4e70z4395zb38fz9d8bfa4499e3,C1 ampliada
+148,2024,SSRN Electronic Journal,Deep Learning Approaches To Image Classification: Exploring The Future Of Visual Data Analysis,10.2139/ssrn.4977119,C1 ampliada
+149,2020,International Conference on Unmanned Aircraft Systems (ICUAS),Deep Learning based Anomaly Detection for a Vehicle in Swarm Drone System,10.1109/icuas48674.2020.9213880,C1 ampliada
+150,2023,Mobile Networks and Applications,Deep Learning for Outage Probability Minimization in Secure NOMA Energy Harvesting UAV IoT Networks,10.1007/s11036-024-02348-2,C1 ampliada
+151,2025,Natural Hazards,Deep learning for rapid crop damage assessment after cyclones,10.1007/s11069-025-07152-z,C1 ampliada
+152,2024,"International Conference on Networking, Embedded and Wireless Systems (ICNEWS)",Deep Learning in Semiconductor Devices for Drone Based Wind Turbine Inspections,10.1109/icnews60873.2024.10730926,C1 ampliada
+153,2025,Preprints.org,Deep Learning Techniques for Acoustic Health Monitoring in AI-Enabled Quadrocopters.pdf,10.20944/preprints202503.0481.v1,C1 ampliada
+154,2023,Expert Systems with Applications,Deep learning-based anomaly detection for individual drone vehicles performing swarm missions,10.1016/j.eswa.2023.122869,C1 ampliada
+155,2025,IEEE Journal of Photovoltaics,Deep Learning-Based Health Monitoring for Photovoltaic Systems,10.1109/jphotov.2025.3563887,C1 ampliada
+156,2026,IEEE Wireless Communications and Networking Conference,Deep Learning-Powered Behavioral Authentication and Anomaly Detection for UAV Systems,10.1109/wcnc65185.2026.11555096,C1 ampliada
+157,2026,Mechanisms and machine science,Deep Long-Term Ship Motion Prediction with Anomaly Detection for Autonomous Maritime UAV Landing,10.1007/978-3-032-29469-2_27,C1 ampliada
+158,2022,IEEE Transactions on Geoscience and Remote Sensing,Deep Low-Rank Prior for Hyperspectral Anomaly Detection,10.1109/tgrs.2022.3165833,C1 ampliada
+159,2021,IEEE Transactions on Software Engineering,Deep State Inference: Toward Behavioral Model Inference of Black-Box Software Systems,10.1109/tse.2021.3128820,C1 ampliada
+160,2026,Engineered Science,Deep Temporal Learning Models for Robust Quantum Key Integrity in Low-Latency Aviation Wireless Systems,10.30919/es2473,C1 ampliada
+161,2021,Journal of the Semiconductor & Display Technology,Deep-Learning-based Plant Anomaly Detection using a Drone,,C1 ampliada
+162,2024,IEEE Sensors Journal,Deeply Integrated Autoencoder-Based Anomaly Detection and Critical Parameter Identification for Unmanned Aerial Vehicle Actuators,10.1109/jsen.2024.3406760,C1 ampliada
+163,2026,JOIV International Journal on Informatics Visualization,DeepNest-SCAN: An Unsupervised Surface Crack Anomaly Detection using Nested Autoencoders,10.62527/joiv.10.3.4561,C1 ampliada
+164,2025,IEEE Transactions on Instrumentation and Measurement,Denoising for Magnetic Anomaly Data Using a Progressive U-Net Framework,10.1109/tim.2025.3635813,C1 ampliada
+165,2026,International Conference on Information Networking,Depth-Based Attitude Anomaly Detection for Small UAVs Using a Convolutional Autoencoder for Health Inspection,10.1109/icoin68469.2026.11480539,C1 ampliada
+166,2026,Zenodo (CERN European Organization for Nuclear Research),Design and Development of AI-Assisted UAV for Smart Campus Crowd Analytics and Anomaly Detection,10.5281/zenodo.21604473,C1 ampliada
+167,2026,International Journal of IoT Embedded Systems and Industrial Automation,Design and Experimental Validation of an Autonomous Ground Robot with Adaptive Camouflage and AI-Based Drone Detection for Border Surveillance,10.66261/gz34qd07,C1 ampliada
+168,2023,IEEE Intelligent Systems,Detecting Anomalies in Small Unmanned Aerial Systems via Graphical Normalizing Flows,10.1109/mis.2023.3252810,C1 ampliada
+169,2025,System technologies,DETECTING FLAT ROOF DEFECTS WITH MACHINE LEARNING AND DEEP LEARNING TECHNIQUES,10.34185/1562-9945-5-160-2025-05,C1 ampliada
+170,2025,Computer Networks,Detection of Aerial Spoofing Attacks to LEO Satellite Systems via Deep Learning,10.1016/j.comnet.2025.111408,C1 ampliada
+171,2026,arXiv (Cornell University),Drishti AI-Event Guardian: An Intelligent Real-Time Crowd Monitoring and Emergency Response System for Mass Gathering Events,10.48550/arxiv.2606.05185,C1 ampliada
+172,2025,IEEE Access,Drone Video Anomaly Detection by Future Segmentation Prediction and Spatio- Temporal Relational Modeling,10.1109/access.2025.3536623,C1 ampliada
+173,2025,INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT,Drone-Based Anomaly and Person Detection System,10.55041/ijsrem52919,C1 ampliada
+174,2025,Neurocomputing,Drone-guard: A self-supervised deep learning framework for real-time spatiotemporal anomaly detection in UAV surveillance systems,10.1016/j.neucom.2025.131168,C1 ampliada
+175,2024,IEEE Transactions on Consumer Electronics,DroneSSL: Self-Supervised Multimodal Anomaly Detection in Internet of Drone Things,10.1109/tce.2024.3376440,C1 ampliada
+176,2024,ACM/IEEE International Conference on Software Engineering: Companion Proceedings (ICSE-Companion),DronLomaly: Runtime Log-based Anomaly Detector for DJI Drones,10.1145/3639478.3640042,C1 ampliada
+177,2026,IEEE Data Driven Control and Learning Systems Conference (DDCLS),DS-STAE: Dual-Stream Spatio-Temporal Transformer for Context-Aware Anomaly Reconstruction in UAVs,10.1109/ddcls71227.2026.11610517,C1 ampliada
+178,2025,INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT,Dual-Purpose Aerial Imaging using Drone for Precision Agriculture and Rapid Disaster Response,10.55041/ijsrem49053,C1 ampliada
+179,2025,Global Reliability and Prognostics and Health Management Conference (PHM),Dynamic Anomaly Detection of UAV Actuators Based on State Identification and Spatio-Temporal Feature Extraction,10.1109/phm-xian66756.2025.11427447,C1 ampliada
+180,2022,arXiv (Cornell University),E^2TAD: An Energy-Efficient Tracking-based Action Detector,10.48550/arxiv.2204.04416,C1 ampliada
+181,2026,IEEE Transactions on Transportation Electrification,EBIST: An Energy-Efficient Bio-Inspired Spiking Transformer Framework for Catenary Support Component Anomaly Detection in Electrified Railways,10.1109/tte.2026.3737124,C1 ampliada
+182,2025,Sensors,Edge-Based Real-Time Fault Detection in UAV Systems via B-Spline Telemetry Reconstruction and Lightweight Hybrid AI,10.3390/s25164944,C1 ampliada
+183,2026,Recent Patents on Engineering,Edge-Enabled Digital Twin of an IoT Drone: Real-Time Monitoring and Predictive Intelligence,10.2174/0118722121450063260320160614,C1 ampliada
+184,2026,"International Conference on Power, Electronics, Communications, Computing, and Intelligent Infrastructure (PECCII)",Edge-Enabled UAV Anomaly Detection Using Multimodal Sensor Fusion and Lightweight Embedded Machine Learning,10.1109/peccii70991.2026.11661823,C1 ampliada
+185,2025,International Conference on Mobile Networks and Wireless Communications (ICMNWC),Edge-Optimized Multi-Modal Deep Learning for Real-Time Object Recognition and Threat Prioritization in Drone Systems,10.1109/icmnwc66779.2025.11354410,C1 ampliada
+186,2024,arXiv (Cornell University),Effective Intrusion Detection for UAV Communications using Autoencoder-based Feature Extraction and Machine Learning Approach,10.48550/arxiv.2410.02827,C1 ampliada
+187,2025,International Conference on Intelligent Technologies for Sustainable Electric and Communications Systems (iTech SECOM),Effective Marine Animal Detection and Rare Species Classification Using Autonomous Drones,10.1109/itechsecom64750.2025.11307511,C1 ampliada
+188,2025,Sensors,Efficient Drone Detection Using Temporal Anomalies and Small Spatio-Temporal Networks,10.3390/s26010170,C1 ampliada
+189,2023,Journal of Infrastructure Preservation and Resilience,Enclosing contour tracking of highway construction equipment based on orientation-aware bounding box using UAV,10.1186/s43065-023-00071-y,C1 ampliada
+190,2023,OPUS - Open Publications of UTS Scholars (University of Technology Sydney),End-to-End Spectral-Spatial Cooperative Autoencoding Density Estimation Model,,C1 ampliada
+191,2026,International Research Journal of Modernization in Engineering Technology and Science,Enhanced Anomaly Detection Algorithm For Hyperspectral Line Scanning Using CNN and ERX,10.56726/irjmets89958,C1 ampliada
+192,2026,National Academy Science Letters,Enhancing Anomaly Detection and Moment Retrieval with a Query-Driven Transformer Framework,10.1007/s40009-026-02323-3,C1 ampliada
+193,2026,NRCT Data Center,Enhancing drone-based solar panel inspection with thermal image super resolution,10.14457/tu.the.2025.918,C1 ampliada
+194,2025,Jurasik (Jurnal Riset Sistem Informasi dan Teknik Informatika),Enhancing UAV Communication Security: Multi-Label Anomaly Detection Using Machine Learning in Imbalanced Data Environments,10.30645/jurasik.v10i1.883,C1 ampliada
+195,2026,Procedia Computer Science,Explaining UAV Anomalies: A TCN-A and SHAP-Based Approach,10.1016/j.procs.2026.06.607,C1 ampliada
+196,2023,European Safety and Reliability Conference (ESREL),Exploiting Explanations to Detect Misclassifications of Deep Learning Models in Power Grid Visual Inspection,10.3850/978-981-18-8071-1_p662-cd,C1 ampliada
+197,2024,IEEE/ACS International Conference on Computer Systems and Applications (AICCSA),Exploring Drone-Based Inspection for Detecting Anomalies in PV using Darknet and Image Colorization,10.1109/aiccsa63423.2024.10912521,C1 ampliada
+198,2025,Zenodo (CERN European Organization for Nuclear Research),Exploring Failure Patterns in UAVs with Transformer-Based Anomaly Detection,10.5281/zenodo.17629833,C1 ampliada
+199,2022,"Computers, materials & continua/Computers, materials & continua (Print)",Feature Selection with Stacked Autoencoder Based Intrusion Detection in Drones Environment,10.32604/cmc.2022.031887,C1 ampliada
+200,2026,Sensors,Federated Flight Anomaly Detection with Self-Supervised Forecasting: A Flight-Disjoint Evaluation,10.3390/s26206376,C1 ampliada
+201,2026,,Few-shot anomaly detection for transmission corridor hazards: a framework based on diffusion models for data augmentation and explainable visual analysis,10.1117/12.3130807,C1 ampliada
+202,2023,IEEE Transactions on Aerospace and Electronic Systems,Fixed-Wing Unmanned Aerial Vehicle Rotary Engine Anomaly Detection via Online Digital Twin Methods,10.1109/taes.2023.3329797,C1 ampliada
+203,2026,Reliability Engineering & System Safety,Flight data anomaly detection via fractional Fourier transform conditioned latent diffusion,10.1016/j.ress.2026.113336,C1 ampliada
+204,2025,IEEE Military Communications Conference (MILCOM),Fly Aware: Lightweight Real-Time Anomaly Detection and Classification in UAV Telemetry,10.1109/milcom64451.2025.11310309,C1 ampliada
+205,2026,International Conference on Smart Systems and Inventive Technology (ICSSIT),Forest-Fire Response System using Deep-Learning-based Approaches with CCTV Images and Weather Data,10.1109/icssit69151.2026.11656422,C1 ampliada
+206,2026,Actuators,From Manned to Unmanned Helicopters: A Transformer-Driven Cross-Scale Transfer Learning Framework for Vibration-Based Anomaly Detection,10.3390/act15010038,C1 ampliada
+207,2025,Buildings,"Fundamentals of Controlled Demolition in Structures: Real-Life Applications, Discrete Element Methods, Monitoring, and Artificial Intelligence-Based Research Directions",10.3390/buildings15193501,C1 ampliada
+208,2025,IEEE Access,GenAI-Based Jamming and Spoofing Attacks on UAVs,10.1109/access.2025.3574284,C1 ampliada
+209,2024,International Conference on Computer Science and Engineering (UBMK),Generative Adversarial Networks for Synthetic Jamming Attacks on UAVs,10.1109/ubmk63289.2024.10773419,C1 ampliada
+210,2025,Wiley eBooks,Generative AI at the MAC Layer,10.1002/9781394293933.ch05,C1 ampliada
+211,2026,Knowledge-Based Systems,Generative AI based blockchain framework for secure and private communication in internet of drones systems,10.1016/j.knosys.2026.115813,C1 ampliada
+212,2020,International Symposium on Automation and Robotics in Construction (ISARC),Generative Damage Learning for Concrete Aging Detection using Auto-flight Images,10.22260/isarc2020/0166,C1 ampliada
+213,2026,Frontiers in Earth Science,Geoinformatics-oriented concept-guided segmentation of Earth observation imagery using text-driven foundation models,10.3389/feart.2026.1922826,C1 ampliada
+214,2026,Lecture notes in electrical engineering,GPS Spoofing Attack Detection for UAVs Based on Flight State Recognition and Trajectory Prediction,10.1007/978-981-95-7668-5_24,C1 ampliada
+215,2026,International Journal of Energy Technology and Policy,Graph neural network-driven anomaly detection framework for UAV inspection data,10.1504/ijetp.2027.10080320,C1 ampliada
+216,2023,Scientific Reports,Heat-vision based drone surveillance augmented by deep learning for critical industrial monitoring,10.1038/s41598-023-49589-x,C1 ampliada
+217,2026,IEEE Sensors Journal,High-Voltage Power-Line Conductor Anomaly Detection Using Magnetic Field,10.1109/jsen.2026.3694481,C1 ampliada
+218,2026,IEEE Open Journal of the Communications Society,HQC 2 NN: Hybrid Quantum-Classical Drone Detection for Low-SNR Conditions in Low-Altitude Economy Networks,10.1109/ojcoms.2026.3653312,C1 ampliada
+219,2025,Applied Intelligence,HSTforU: anomaly detection in aerial and ground-based videos with hierarchical spatio-temporal transformer for U-net,10.1007/s10489-024-06042-4,C1 ampliada
+220,2021,IEEE International Conference on Mobile Ad-Hoc and Sensor Systems (MASS),Hybrid Analog-Digital Sensing Approach for Low-power Real-time Anomaly Detection in Drones,10.1109/mass52906.2021.00062,C1 ampliada
+221,2026,Zenodo (CERN European Organization for Nuclear Research),Hybrid Bio-Inspired Drone Defense: A Rule-Based Skeleton with Evolutionary Parameter Learning,10.5281/zenodo.20615392,C1 ampliada
+222,2024,International Journal of Intelligent Systems and Applications in Engineering,Hybrid Deep Learning for Anomaly Detection in FANETs: A Defense Against DDoS Attacks,,C1 ampliada; C2 ampliada
+223,2020,IEEE/ACM International Conference on Automated Software Engineering (ASE),Hybrid deep neural networks to infer state models of black-box systems,10.1145/3324884.3416559,C1 ampliada
+224,2026,SSRN Electronic Journal,Hybrid Spiking-Visual-Language Framework for UAV-Based Inspection and Anomaly Detection of Catenary Support Components in Electrified Railways,10.2139/ssrn.7147496,C1 ampliada
+225,2026,SSRN Electronic Journal,Hybrid Spiking-Visual-Language Framework for UAV-Based Inspection and Anomaly Detection of Catenary Support Components in Electrified Railways,10.2139/ssrn.7147494,C1 ampliada
+226,2026,Engineering Applications of Artificial Intelligence,Hybrid spiking-visual-language framework for unmanned aerial vehicle-based inspection and anomaly detection of catenary support components in electrified railways,10.1016/j.engappai.2026.116170,C1 ampliada
+227,2021,Artificial Intelligence and Machine Learning in Defense Applications,Hyperspectral anomaly detection of hidden camouflage objects based on convolutional autoencoder,10.1117/12.2598011,C1 ampliada
+228,2026,University of Salford Institutional Repository (University of Salford),Implementation and Optimization of a Compact Deep Learning Architecture for Portable Acoustic Drone Detection,10.17866/rd.salford.34892934,C1 ampliada
+229,2025,Scientific Reports,"Improved Weighted Quantum Whale Optimization with vision transformer for intrusion detection, atmospheric monitoring and recommendation in smart agriculture",10.1038/s41598-025-24425-6,C1 ampliada
+230,2026,Geomatics,Improving the Reliability of UAV-Based Crack Inspection of Port Quay Walls Using Anomaly Detection,10.3390/geomatics6030046,C1 ampliada
+231,2022,International Conference on Information and Communication Technology Convergence (ICTC),Industrial Intelligence of Things (IIoT 2.0) based Automated Smart Factory Management System using Blockchain,10.1109/ictc55196.2022.9952653,C1 ampliada
+232,2022,IEEE Military Communications Conference (MILCOM),Insights on Using Deep Learning to Spoof Inertial Measurement Units for Stealthy Attacks on UAVs,10.1109/milcom55135.2022.10017482,C1 ampliada
+233,2026,IEEE International Symposium on Circuits and Systems proceedings,Integrated Current and Vibration Sensing System for Condition Monitoring of a Drone Docking Station,10.1109/iscas66217.2026.11562660,C1 ampliada
+234,2026,Electronics,Integrated IoT–UAV Architecture for Three-Dimensional Electromagnetic Radiation Monitoring and Intelligent Source Classification,10.3390/electronics15091941,C1 ampliada
+235,2026,SSRN Electronic Journal,Integrating AI and UAS for Automated Roof Inspection: A CNN-Based Approach for Multi-Class Anomaly Detection,10.2139/ssrn.6110886,C1 ampliada
+236,2025,IEEE Transactions on Aerospace and Electronic Systems,Integrating Risk Assessment and Deep-Learning-Based Anomaly Detection for Efficient Risk-Informed Decision Making for Swarm Flight Robot Systems,10.1109/taes.2025.3579483,C1 ampliada
+237,2026,International Journal of Novel Research and Development,INTEGRATION OF SMART SENSOR NETWORKS AND VISION-BASED ANALYSIS FOR REALTIME CONSTRUCTION QUALITY MANAGEMENT,10.56975/ijnrd.v11i4.323727,C1 ampliada
+238,2026,International Conference on Information and Computer Technologies (ICICT),Intelligent Detection and Response System for Attacks on Unmanned Aerial Vehicles Based on Hybrid AI Models,10.1145/3803291.3803361,C1 ampliada
+239,2026,Scholarly Commons (Embry–Riddle Aeronautical University),"Intelligent Detection and Response System for Attacks on Unmanned Aerial Vehicles Based on Hybrid AI Models, MLP and Autoencoder",,C1 ampliada
+240,2025,Sensors,Intelligent Dynamic-Enhanced Compensation for UAV Magnetic Interference,10.3390/s25165059,C1 ampliada
+241,2026,IEEE Transactions on Consumer Electronics,Intelligent Feedback for Sports Training Using AAV Swarms Based on Transformer and Reinforcement Learning,10.1109/tce.2026.3663631,C1 ampliada
+242,2026,International Conference on Mechatronics and Electronic Technology (MeETech),Intelligent monitoring of flight control system for complex operating conditions: the LSTM-attention method,10.1117/12.3124158,C1 ampliada
+243,2021,International Conference on Computing and Communications Technologies (ICCCT),Intelligent Outlier Detection with Optimal Deep Reinforcement Learning Model for Intrusion Detection,10.1109/iccct53315.2021.9711837,C1 ampliada
+244,2026,Advances in computational intelligence and robotics book series,Intelligent Traffic Systems and Real-Time Monitoring Using Aerial-Ground Edge Computing,10.4018/979-8-2600-0685-6.ch012,C1 ampliada
+245,2023,Zenodo (CERN European Organization for Nuclear Research),International Research in Engineering Sciences,10.5281/zenodo.7744435,C1 ampliada
+246,2024,Hawaii International Conference on System Sciences (HICSS),Introduction to the Minitrack on Decision Systems for Smart Farming,10.24251/hicss.2024.145,C1 ampliada
+247,2026,CRC Press eBooks,IoT and ML for Predictive Disaster Response and Environmental Monitoring,10.1201/9781042018222-16,C1 ampliada
+248,2025,OpenMETU (Middle East Technical University),İHA görünümlerinden Karmaşık Trafik Senaryolarında Anomali Tespiti için Yeni Bir Derinlik Yönlü Evrişimsel Varyasyonel Otokodlayıcı,,C1 ampliada
+249,2020,IEEE ... International Conference on Cloud Computing,JANUS: Benchmarking Commercial and Open-Source Cloud and Edge Platforms for Object and Anomaly Detection Workloads,10.1109/cloud49709.2020.00088,C1 ampliada
+250,2026,IEEE Data Driven Control and Learning Systems Conference (DDCLS),Jointly Optimizing Reconstruction and Prediction for Unsupervised UAV Anomaly Detection,10.1109/ddcls71227.2026.11610376,C1 ampliada
+251,2025,International Conference on Innovations and Emerging Technologies in AI & Communication Systems (IETACS),Karana: A Post-Quantum Secure AI Surveillance System for Autonomous Multimodal Threat Detection,10.1109/ietacs68750.2025.11385607,C1 ampliada
+252,2026,IEEE International Instrumentation and Measurement Technology Conference,KE-DDPM: Kinematics-Enhanced Denoising Diffusion Probabilistic Model for Inertial Measurement Unit Anomaly Detection,10.1109/i2mtc66907.2026.11694786,C1 ampliada
+253,2024,IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW),Label-free Anomaly Detection in Aerial Agricultural Images with Masked Image Modeling,10.1109/cvprw63382.2024.00553,C1 ampliada
+254,2026,Advanced Engineering Informatics,Large language model-guided dual-addressing memory and nonlinear subspace projection constraints for electric power equipment inspection,10.1016/j.aei.2026.105374,C1 ampliada
+255,2024,Lecture notes in computer science,Large Models in Dialogue for Active Perception and Anomaly Detection,10.1007/978-3-031-78447-7_25,C1 ampliada
+256,2025,arXiv (Cornell University),Large Models in Dialogue for Active Perception and Anomaly Detection,10.48550/arxiv.2501.16300,C1 ampliada
+257,2024,Remote Sensing,Large-Kernel Central Block Masked Convolution and Channel Attention-Based Reconstruction Network for Anomaly Detection of High-Resolution Hyperspectral Imagery,10.3390/rs16224125,C1 ampliada
+258,2025,Journal of Institute of Control Robotics and Systems,Last-mile Delivery by an Autonomous Drone Through a Balcony in Urban Environments,10.5302/j.icros.2025.25.0097,C1 ampliada
+259,2021,Electronics,LC-IDS: Loci-Constellation-Based Intrusion Detection for Reconfigurable Wireless Networks,10.3390/electronics10243053,C1 ampliada
+260,2019,Applied Sciences,Learning-Based Anomaly Detection and Monitoring for Swarm Drone Flights,10.3390/app9245477,C1 ampliada
+261,2025,arXiv (Cornell University),Learning-based Detection of GPS Spoofing Attack for Quadrotors,10.48550/arxiv.2501.07597,C1 ampliada
+262,2022,ACM/IEEE International Conference on Cyber-Physical Systems (ICCPS),Learning-Based Vulnerability Analysis of Cyber-Physical Systems,10.1109/iccps54341.2022.00030,C1 ampliada
+263,2025,Faculty of Natural and Applied Sciences Journal of Computing and Applications,"Leveraging a Hybridized CNN-HARS Surveillance Model for Security Threat Detection in Imo State, Nigeria",10.63561/jca.v2i3.836,C1 ampliada
+264,2026,International Journal of Machine Learning and Cybernetics,LightViT-AD: lightweight vision transformer distillation for unsupervised UAV anomaly detection with real-time edge inference,10.1007/s13042-026-03306-y,C1 ampliada
+265,2025,"Latin American Robotics Symposium, Brazilian Symposium on Robotics and Workshop on Robotics in Education (LARS/SBR/WRE)",Lightweight CNN-Based Acoustic Monitoring for Real-Time UAV Propeller Anomaly Detection,10.1109/lars69345.2025.11272963,C1 ampliada
+266,2026,Scientific Reports,Lightweight convolutional neural network for UAV onboard visual anomaly detection and localization,10.1038/s41598-026-68007-6,C1 ampliada
+267,2026,IEEE Access,Lightweight Deep Learning Model for Real-Time Anomaly Detection in Underwater Drone Surveillance Systems,10.1109/access.2026.3733785,C1 ampliada
+268,2026,IEEE International Conference on Signal and Image Processing Applications (ICSIPA),Lightweight One-Class Autoencoder for UAV Intrusion Detection,10.1109/icsipa69622.2026.11720074,C1 ampliada
+269,2026,International Conference on Big Data and Information Analytics (BigDIA),Lightweight State-Reference Residual Learning for UAV Anomaly Detection and Interpretation,10.1109/bigdia71496.2026.11684654,C1 ampliada
+270,2025,Applied Soft Computing,Lightweight unmanned aerial vehicles anomaly detection model based on synaptic evolution mechanism and layer-adaptive neural network,10.1016/j.asoc.2025.113536,C1 ampliada
+271,2024,Frontiers in Marine Science,Localization and tracking of beluga whales in aerial video using deep learning,10.3389/fmars.2024.1445698,C1 ampliada
+272,2025,Lecture notes in networks and systems,Log-Processing Ensemble-Based Approach for Drone Anomaly Detection (LEBADAD),10.1007/978-3-031-98565-2_84,C1 ampliada
+273,2026,Applied Sciences,LSTM-Based Early Jamming Threat Detection Scheme for Drone Ad-Hoc Networks,10.3390/app16063046,C1 ampliada
+274,2025,Journal of Computer System and Informatics (JoSYC),Machine Learning-Based GPS Spoofing Detection in UAV Networks: A Comparative Analysis of Anomaly Detection Models,10.47065/josyc.v6i2.7033,C1 ampliada
+275,2020,,"Machine Vision, Not Human Vision, Guided Compression Towards Low-Latency and Robust Deep Learning Systems",10.25148/etd.fidc008960,C1 ampliada
+276,2025,Expert Systems with Applications,MADViT: A vision transformer-based multilayer distillation framework for explainable anomaly detection in aerial imagery,10.1016/j.eswa.2025.129166,C1 ampliada
+277,2025,IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),Masked Autoencoders are Robust Task Offloaders for Timely and Accurate Inference,10.1109/iros60139.2025.11246268,C1 ampliada
+278,2023,"Design, Automation, and Test in Europe",MAVFI: An End-to-End Fault Analysis Framework with Anomaly Detection and Recovery for Micro Aerial Vehicles,10.23919/date56975.2023.10137246,C1 ampliada
+279,2024,Computers & Security,MeNU: Memorizing normality for UAV anomaly detection with a few sensor values,10.1016/j.cose.2024.104248,C1 ampliada
+280,2026,Radio Electronics Computer Science Control,METHOD OF DYNAMIC TRUST ASSESSMENT IN DISTRIBUTED SYSTEMS,10.15588/1607-3274-2026-3-19,C1 ampliada
+281,2023,Journal of Physics Conference Series,MMF: a fault detection model for UAVs based on Multimodal Model Fusion,10.1088/1742-6596/2593/1/012004,C1 ampliada
+282,2025,EU PVSEC,Model Optimization for Multi-Class Real Time UAV Thermal Anomaly Detection in Solar PV Systems,10.4229/eupvsec2025/4do.17.2,C1 ampliada
+283,2022,IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),Model-Free Unsupervised Anomaly Detection of a General Robotic System Using a Stacked LSTM and Its Application to a Fixed-Wing Unmanned Aerial Vehicle,10.1109/iros47612.2022.9981950,C1 ampliada
+284,2026,Lecture notes in computer science,MoE Nonstationary Transformer: A Self-Supervised Learning Framework for UAV Time-Series Anomaly Detection with Multiple Periodicities,10.1007/978-981-92-3410-3_48,C1 ampliada
+285,2026,Applied Sciences,MoE-Based Anomaly Detection of High-Altitude UAV Flight Data,10.3390/app162010073,C1 ampliada
+286,2026,Zenodo (CERN European Organization for Nuclear Research),MOSAD: Multimodal Open-Set Anomaly Detection Dataset for Omnidirectional UAVs,10.5281/zenodo.21539951,C1 ampliada
+287,2024,"International Conference on Reliability, Maintainability and Safety",Multi-dimensional Time-series GAN based Data Augmentation for UAV Agent Behavior Prediction,10.1109/icrms63553.2024.00175,C1 ampliada
+288,2026,IET conference proceedings.,Multi-modal feature modeling and anomaly detection algorithm of hidden dangers in substation based on collaborative perception of heaven and earth,10.1049/icp.2026.3405,C1 ampliada
+289,2026,Zenodo (CERN European Organization for Nuclear Research),Multi-Scale Image Dataset for Semantic Segmentation of Geotechnical Anomalies in Mining Infrastructure,10.5281/zenodo.21465345,C1 ampliada
+290,2025,Scientific Reports,Multi-source data fusion-based knowledge transfer for unmanned aerial vehicle flight data anomaly detection and recovery,10.1038/s41598-025-05322-4,C1 ampliada
+291,2025,Advanced Engineering Informatics,Multi-source ensemble transfer learning-based unmanned aerial vehicle flight data anomaly detection with limited data: From simulation to reality,10.1016/j.aei.2025.103255,C1 ampliada
+292,2025,IEEE Transactions on Sustainable Computing,Multi-Task Deep Learning Framework for Anomaly Detection and Carbon Emission Prediction in Precision Agriculture,10.1109/tsusc.2025.3619577,C1 ampliada
+293,2019,Report,Multiple view anomaly detection in images from UAS structure inspection using CNNs,10.2749/newyork.2019.1984,C1 ampliada
+294,2019,Remote Sensing,Multiple-Object-Tracking Algorithm Based on Dense Trajectory Voting in Aerial Videos,10.3390/rs11192278,C1 ampliada
+295,2025,IEEE Transactions on Instrumentation and Measurement,Multiscale Transformers With Contrastive Learning for UAV Anomaly Detection,10.1109/tim.2025.3571126,C1 ampliada
+296,2026,"The international archives of the photogrammetry, remote sensing and spatial information sciences/International archives of the photogrammetry, remote sensing and spatial information sciences",Multispectral Anomaly Detection: Comparison of sensor bands in conventional and machine learning approaches,10.5194/isprs-archives-xlix-b3-2026-431-2026,C1 ampliada
+297,2021,Journal of Institute of Control Robotics and Systems,Neural Network-Based Battery Anomaly Detection Method for Electric-Powered UAS,10.5302/j.icros.2021.20.0192,C1 ampliada
+298,2025,Journal of AI Range,Neural Networks and Cognitive Computing: Bridging AI with Human-Like Intelligence,,C1 ampliada
+299,2026,CRC Press eBooks,Next-Generation Swarm Threat Neutralization: An Intelligent Sensor Fusion and Behavior Prediction System,10.1201/9781003663461-25,C1 ampliada
+300,2023,DSpace - FIRAT (Fırat University),Novelty based intrusion detection in unmanned aerial vehicles,,C1 ampliada
+301,2026,Black Sea Journal of Engineering and Science,Novelty-Based Intrusion Detection in Unmanned Aerial Vehicles,10.34248/bsengineering.1964066,C1 ampliada
+302,2026,Engineering Applications of Artificial Intelligence,On-device generative anomaly detection for unmanned aerial vehicle telemetry using memristor analog compute-in-memory,10.1016/j.engappai.2026.114897,C1 ampliada
+303,2022,International Conference on Electric Vehicular Technology (ICEVT),Open Source OPC UA Data Traffic Characteristic and Anomaly Detection using Image-Encoding based Convolutional Neural Network,10.1109/icevt55516.2022.9925002,C1 ampliada
+304,2025,Bulletin of the National Technical University KhPI Series Energy Reliability and Energy Efficiency,Optimization of energy storage systems (ESS) operating modes based on the analysis of electricity market prices in Ukraine,10.20998/eree.2025.2(11).345310,C1 ampliada
+305,2026,Computers & Electrical Engineering,Optimized feature selection and federated spatial self-transformer for increasing cybersecurity in distributed network of underwater drones,10.1016/j.compeleceng.2026.111495,C1 ampliada
+306,2026,IEEE Journal of Radio Frequency Identification,OSAM-Fusion: A Dual-Branch Feature Fusion Network With Transformer for Open-Set Drone RF Signal Recognition,10.1109/jrfid.2026.3736073,C1 ampliada
+307,2025,IEEE International Conference on Acoustics Speech and Signal Processing,Padnet: a Patch-Based Anomaly Detection Framework for Industrial Pipeline Damage Detection,10.1109/icassp49660.2025.10889385,C1 ampliada
+308,2022,Frontiers in artificial intelligence and applications,PAIS 2022,10.3233/faia351,C1 ampliada
+309,2026,Sensors,Panel-Aware Local Background Filtering for Photovoltaic Thermal Anomaly Detection and Automatic Bounding-Box Pre-Annotation,10.3390/s26196163,C1 ampliada
+310,2026,Zenodo (CERN European Organization for Nuclear Research),Passive RF Threat Detection and Electronic Intelligence for Low-Altitude Counter-UAS Operations Using SDR-Assisted Sensing and Transformer-Based RF Intelligence,10.5281/zenodo.20476207,C1 ampliada
+311,2023,Journal of Building Engineering,Performance evaluation of deep learning algorithms for heat loss damage classification in buildings from UAV-borne infrared images,10.1016/j.jobe.2023.106948,C1 ampliada
+312,2020,IOP Conference Series Materials Science and Engineering,Photovoltaic panel anomaly detection system based on Unmanned Aerial Vehicle platform,10.1088/1757-899x/768/7/072061,C1 ampliada
+313,2026,"International Conference on Electrical, Computer and Energy Technologies (ICECET)",Physics-Informed Anomaly Detection: A Zero-Trust Framework for GNSS Spoofing Resilience,10.1109/icecet65726.2026.11632512,C1 ampliada
+314,2021,International Journal of Grid and Utility Computing,Power transmission line anomaly detection scheme based on CNN-transformer model,10.1504/ijguc.2021.10043195,C1 ampliada
+315,2026,,PowerLiteNet: A Lightweight Anomaly Detection Model for Powerline Transmission Infrastructure,10.22541/au.177497138.82292644/v1,C1 ampliada
+316,2026,Journal of the Franklin Institute,Precise docking and safety prediction for unmanned aerial vehicle autonomous aerial refueling: An adaptive control and deep learning approach,10.1016/j.jfranklin.2026.108693,C1 ampliada
+317,2025,Chinese Journal of Aeronautics,Prediction-based trajectory anomaly detection in UAV system with GPS spoofing attack,10.1016/j.cja.2025.103478,C1 ampliada
+318,2025,IEEE International Conference on Recent Trends in Computing and Smart Mobility (RCSM),Predictive Analytics and Machine Learning-Driven Optimization in Real-Time Drone Flight Trajectory Management and Anomaly Detection Utilizing Open Flight Data,10.1109/rcsm67767.2025.11506709,C1 ampliada
+319,2026,,PREDICTIVE INTELLIGENT SYSTEMS FOR EARLY DETECTION OF EMERGENCY SITUATIONS IN CIVIL PROTECTION SYSTEMS,10.70286/isu-04.03.2026.013,C1 ampliada
+320,2025,,Privacy-Preserving Federated Learning with Lightweight Transformers for UAV Intrusion Detection in IoT Networks,10.36227/techrxiv.175699583.34551569/v1,C1 ampliada
+321,2025,Journal of energy resources technology.,Pruned and Low-Rank Optimized Tiny Residual Architecture for Solar Photovoltaic Fault Classification on Edge TPU,10.1115/1.4069350,C1 ampliada
+322,2026,Computers & Electrical Engineering,Quantum safe drone security: Authenticated key exchange and privacy preserving intrusion detection for low altitude intelligent transportation systems,10.1016/j.compeleceng.2026.111429,C1 ampliada
+323,2026,Sensors,Quantum-Resilient Federated Learning for Multi-Layer Cyber Anomaly Detection in UAV Systems,10.3390/s26020509,C1 ampliada
+324,2024,Multimedia Tools and Applications,R-GCN: a residual-gated recurrent unit convolution network model for anomaly detection in blockchain transactions,10.1007/s11042-023-17942-x,C1 ampliada
+325,2023,"Asilomar Conference on Signals, Systems and Computers (ACSSC)",Radiation Anomaly Detection Using an Adversarial Autoencoder,10.1109/ieeeconf59524.2023.10476882,C1 ampliada
+326,2026,Aerospace Science and Technology,Real-time anomaly detection in aviation composites: An edge computing framework for acoustic tap test,10.1016/j.ast.2026.111908,C1 ampliada
+327,2026,International Journal of Construction Management,Real-time delay detection and risk analysis management in civil construction projects using AI-driven framework,10.1080/15623599.2026.2636733,C1 ampliada
+328,2025,Machine Learning with Applications,Real-time detection of acoustic anomalies in drone servo motors using edge-based machine learning,10.1016/j.mlwa.2025.100755,C1 ampliada
+329,2021,Security and Communication Networks,Real-Time Surveillance Using Deep Learning,10.1155/2021/6184756,C1 ampliada
+330,2025,International Conference on Electronics and Sustainable Communication Systems (ICESC),Real-Time UAV Surveillance and Anomaly Detection in Smart Cities using a Fuzzy Logic–CNN Hybrid Model,10.1109/icesc65114.2025.11212547,C1 ampliada
+331,2022,Sensors,Region-Based CNN for Anomaly Detection in PV Power Plants Using Aerial Imagery,10.3390/s22031244,C1 ampliada
+332,2026,Zenodo (CERN European Organization for Nuclear Research),Replication Package for: A Lightweight Deep Learning Framework for Low-Latency Intrusion Detection in Drone Networks (RT-DIDNet),10.5281/zenodo.23910697,C1 ampliada
+333,2022,IEEE International Requirements Engineering Conference (RE),RESAM: Requirements Elicitation and Specification for Deep-Learning Anomaly Models with Applications to UAV Flight Controllers,10.1109/re54965.2022.00020,C1 ampliada
+334,2025,"IEEE International Conference on Power, Electronics and Computer Applications (ICPECA)",Research on UAV Data Anomaly Detection and Early Trajectory Warning Technology,10.1109/icpeca63937.2025.10928900,C1 ampliada
+335,2026,SAE technical papers on CD-ROM/SAE technical paper series,Research on Unmanned Aerial Vehicle Fault Detection Method Based on 1DCNN-BiLSTM,10.4271/2026-99-1866,C1 ampliada
+336,2025,Measurement,Reverse digital twin mapping of building envelope anomalies based on UAV infrared point clouds,10.1016/j.measurement.2025.119256,C1 ampliada
+337,2026,International Conference on Machine Vision,RGB-thermal drone imaging for semantic segmentation and anomaly detection in photovoltaic panels,10.1117/12.3096576,C1 ampliada
+338,2024,IEEE Transactions on Instrumentation and Measurement,Robust Spatial-Temporal Autoencoder for Unsupervised Anomaly Detection of Unmanned Aerial Vehicle With Flight Data,10.1109/tim.2024.3428649,C1 ampliada
+339,2026,International Journal of Intelligent Transportation Systems Research,Robustness of Traffic Anomaly Detection in UAV Videos: Cross–Weather Generalization,10.1007/s13177-026-00661-6,C1 ampliada
+340,2026,Zenodo (CERN European Organization for Nuclear Research),RoofAnomaly-10: A Multi-Class UAS Dataset for Automated Roof Inspection,10.5281/zenodo.21701320,C1 ampliada
+341,2025,Lecture notes in computer science,Runtime Anomaly Detection for Drones: An Integrated Rule-Mining and Unsupervised-Learning Approach,10.1007/978-3-032-00828-2_1,C1 ampliada
+342,2026,Drones,Satellite-Aided Multi-UAV Secure Collaborative Localization via Spatio-Temporal Anomaly Detection and Diagnosis,10.3390/drones10010053,C1 ampliada
+343,2021,International Journal of Intelligent Systems and Applications in Engineering,Scalable Geospatial Data Platforms for Utility Asset Monitoring and Risk Mitigation,10.17762/ijisae.v9i2.8467,C1 ampliada
+344,2022,OSTI OAI (U.S. Department of Energy Office of Scientific and Technical Information),Scaling Building Energy Audits through Machine Learning Methods on Novel Drone Image Data,,C1 ampliada
+345,2025,"International Conference on Smart Technologies, Communication and Robotics (STCR)",Self-Supervised Learning with Variational Autoencoders for Anomaly Detection in Autonomous Drone Fleets,10.1109/stcr62650.2025.11019136,C1 ampliada
+346,2021,Lecture notes in computer science,Semi-supervised Cloud Edge Collaborative Power Transmission Line Insulator Anomaly Detection Framework,10.1007/978-3-030-87355-4_18,C1 ampliada
+347,2026,SSRN Electronic Journal,Semi-Supervised Fault Detection in Drones Across Multiple Rotations Using a Meta-Fuzzy Detector and Feature Engineering,10.2139/ssrn.7127921,C1 ampliada
+348,2021,IEEE Military Communications Conference (MILCOM),Sensor Data-Driven UAV Anomaly Detection using Deep Learning Approach,10.1109/milcom52596.2021.9653036,C1 ampliada
+349,2024,IEEE Access,Severity-Oriented Multiclass Drone Flight Logs Anomaly Detection,10.1109/access.2024.3396926,C1 ampliada
+350,2026,Drones,Signal Intelligence: Vibration-Driven Deep Learning for Anomaly Detection of Rotary-Wing UAVs,10.3390/drones10050321,C1 ampliada
+351,2025,IEEE Sensors Journal,Similarity Augmented Incremental Learning-Based Flight Data Anomaly Detection Method for UAV Dynamic Conditions,10.1109/jsen.2025.3562935,C1 ampliada
+352,2026,Transactions on Emerging Telecommunications Technologies,SkyVehiGuard‐Net: A Mamba‐MoE Framework for IoV Security Over Space–Air–Ground‐Integrated Networks,10.1002/ett.70463,C1 ampliada
+353,2020,International Petroleum Technology Conference,Smart Autopilot Drone System for Surface Surveillance and Anomaly Detection via Customizable Deep Neural Network,10.2523/iptc-20111-ms,C1 ampliada
+354,2025,Annual Methodological Archive Research Review,Smart Construction Project Management through UAV-Based Monitoring and Machine Learning-Driven Performance Optimization,10.63075/g7q5bf78,C1 ampliada
+355,2026,Electronics,Source-Rate Representations and Attention Autoencoders for Leakage-Safe Zero-Day Sybil Detection in UAV Networks,10.3390/electronics15173966,C1 ampliada
+356,2024,Advanced Engineering Informatics,Spatio-temporal correlation-based multiple regression for anomaly detection and recovery of unmanned aerial vehicle flight data,10.1016/j.aei.2024.102440,C1 ampliada
+357,2025,Results in Engineering,STE-RS: A novel framework for robust anomaly detection in UAV flight data,10.1016/j.rineng.2025.106801,C1 ampliada
+358,2025,elib (German Aerospace Center),Supporting flood disaster response using multi-sensor Earth Observation data,,C1 ampliada
+359,2026,Center of Computer Science,Synergies of Computer Vision and Sustainable Energy: A Paradigm Shift for Environmental Management and Renewable Optimization,10.65591/cocs-43-2026,C1 ampliada
+360,2026,Mendeley Data,Synthetic RF Spectrograms and IQ Signals for UAV Detection (2.4 GHz band),10.17632/y3nv3ycdcv,C1 ampliada
+361,2024,AIAA AVIATION Forum,System Identification of a Multicopter Powertrain With Degradation for Simulation-Based Training of a Fault Detection Neural Network,10.2514/6.2024-4568,C1 ampliada
+362,2023,International Conference on Intelligent Communications and Computing (ICICC),System Log Anomaly Detection Based on Spiking Neural Network Trained with Backpropagation,10.1109/icc59986.2023.10421435,C1 ampliada
+363,2024,Ain Shams Engineering Journal,Tasmanian devil optimization with deep autoencoder for intrusion detection in IoT assisted unmanned aerial vehicle networks,10.1016/j.asej.2024.102943,C1 ampliada
+364,2025,Computers and Electronics in Agriculture,Tassel counting of individual ridge from UAV RGB imagery based on YOLOv8m with deep SORT and double-step Otsu thresholding algorithm by filtering abnormal IDs for maize breeding,10.1016/j.compag.2025.111041,C1 ampliada
+365,2025,"International Conference on Emerging Research in Electronics, Computer Science and Technology (ICERECT)",Temporal Relational GNN for Coordinated Multi-Drone Surveillance,10.1109/icerect65215.2025.11377713,C1 ampliada
+366,2026,arXiv (Cornell University),TGTV: An Interpretable Framework for UAV Fault Detection and Traceability via Spatiotemporal Graph Learning and Large Language Models,10.48550/arxiv.2610.38106,C1 ampliada
+367,2026,FinTech,The CMA Agentic Platform: Autonomous Asset Verification and Algorithmic Auditor Governance,10.3390/fintech5020055,C1 ampliada
+368,2026,Communications in computer and information science,Thermal Anomaly Detection in Municipal Solid Waste Landfills Using CNNs,10.1007/978-3-032-29254-4_42,C1 ampliada
+369,2023,IEEE International Instrumentation and Measurement Technology Conference,Time series fragmental variation trend anomaly detection method based on a temporal sequential modeling approach,10.1109/i2mtc53148.2023.10176054,C1 ampliada
+370,2025,,Towards a Scalable Deep Learning Framework for Forest Monitoring under Challenging Conditions with Multimodal Data,10.5194/egusphere-egu25-19171,C1 ampliada
+371,2026,Repository KITopen (Karlsruhe Institute of Technology),Towards Automatic Thermography-Based Leak Detection in District Heating Systems,10.5445/ir/1000191747,C1 ampliada
+372,2026,Zenodo (CERN European Organization for Nuclear Research),TPLDetect: Thermography-based Pipeline Leak Detection,10.5281/zenodo.19266090,C1 ampliada
+373,2023,International Symposium on Digital Forensics and Security (ISDFS),Transformer-based Sentiment Analysis for Anomaly Detection on Drone Forensic Timeline,10.1109/isdfs58141.2023.10131749,C1 ampliada
+374,2024,IEEE Transactions on Circuits and Systems for Video Technology,Transformer-Based Spatio-Temporal Unsupervised Traffic Anomaly Detection in Aerial Videos,10.1109/tcsvt.2024.3376399,C1 ampliada
+375,2024,,Transforming Post-Disaster Risk Management: A Comprehensive Framework for Digital Twinning with AI and Machine Learning,10.5194/egusphere-egu24-4202,C1 ampliada
+376,2026,SN Computer Science,Trust-Gated Ensemble Fusion for Unsupervised UAV Intrusion Detection with Temporal Smoothing,10.1007/s42979-026-05394-7,C1 ampliada
+377,2025,Aerospace Science and Technology,TSAE-UAV: A time-sense autoencoder for unsupervised anomaly detection of UAV based on flight data,10.1016/j.ast.2025.111431,C1 ampliada
+378,2024,Drones,UAV Anomaly Detection Method Based on Convolutional Autoencoder and Support Vector Data Description with 0/1 Soft-Margin Loss,10.3390/drones8100534,C1 ampliada
+379,2024,"International Conference on Information Science, Parallel and Distributed Systems (ISPDS)",UAV Anomaly Detection Model Based on Integrated Multi-Modal Neural Network and Neural Architecture Search,10.1109/ispds62779.2024.10667484,C1 ampliada
+380,2023,IEEE/AIAA Digital Avionics Systems Conference (DASC),UAV Fault and Anomaly Detection Using Autoencoders,10.1109/dasc58513.2023.10311126,C1 ampliada
+381,2023,Global Reliability and Prognostics and Health Management Conference (PHM),UAV Flight Data Anomaly Detection Based on Parameter Selection and Multiple Regression,10.1109/phm-hangzhou58797.2023.10482575,C1 ampliada
+382,2023,Concurrency and Computation Practice and Experience,UAV instantaneous power consumption prediction using LR‐TCN with simple moving average,10.1002/cpe.7913,C1 ampliada
+383,2025,SSRN Electronic Journal,UAV Sensor Anomaly Detection Based on Multi-Graph Attention Learning and Automated Thresholding,10.2139/ssrn.5946032,C1 ampliada
+384,2020,IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),UAV-AdNet: Unsupervised Anomaly Detection using Deep Neural Networks for Aerial Surveillance,10.1109/iros45743.2020.9341790,C1 ampliada
+385,2023,Computer-Aided Design and Applications,UAV-based Anomaly Detection via a novel Spatial-Temporal Transformer for Precision Agriculture,10.14733/cadaps.2024.s13.298-310,C1 ampliada
+386,2025,EU PVSEC,UAV-Based Autonomus Monitoring and Real-Time Thermal Anomaly Detection of Photovoltaic Modules,10.4229/eupvsec2025/4cv.1.26,C1 ampliada
+387,2025,"TPM Testing, psychometrics, methodology in applied psychology",UAV-BASED SOYBEAN DISEASE CLASSIFICATION & ANOMALY DETECTION,10.5281/zenodo.18384954,C1 ampliada
+388,2020,IEEE Symposium on Computers and Communications (ISCC),UAV-based Surveillance System: an Anomaly Detection Approach,10.1109/iscc50000.2020.9219585,C1 ampliada
+389,2026,Systems and Soft Computing,UAV-EGAT: An enhanced graph attention network for UAV elevon fault detection,10.1016/j.sasc.2026.200481,C1 ampliada
+390,2026,한국통신학회논문지,UDT-BlocEdge: UAV-Integrated Digital Twin Framework Using Blockchain and Edge Devices for Military IoT Surveillance,10.7840/kics.2026.51.10.1999,C1 ampliada
+391,2024,Communications Engineering,Uncovering drone intentions using control physics informed machine learning,10.1038/s44172-024-00179-3,C1 ampliada
+392,2022,Internet of things,Understanding New Age of Intelligent Video Surveillance and Deeper Analysis on Deep Learning Techniques for Object Tracking,10.1007/978-3-030-89554-9_2,C1 ampliada
+393,2025,Water,Underwater Digital Twin Sensor Network-Based Maritime Communication and Monitoring Using Exponential Hyperbolic Crisp Adaptive Network-Based Fuzzy Inference System,10.3390/w17091324,C1 ampliada
+394,2025,Drones,Unmanned Aerial Vehicle Anomaly Detection Based on Causality-Enhanced Graph Neural Networks,10.3390/drones9060408,C1 ampliada
+395,2021,IEEE Transactions on Reliability,Unmanned Aerial Vehicle Flight Data Anomaly Detection and Recovery Prediction Based on Spatio-Temporal Correlation,10.1109/tr.2021.3134369,C1 ampliada
+396,2024,IEEE Transactions on Instrumentation and Measurement,Unmanned Aerial Vehicle Flight Data Anomaly Detection Based on Multirate-Aware LSTM,10.1109/tim.2024.3440379,C1 ampliada
+397,2020,"IEEE Uttar Pradesh Section International Conference on Electrical, Electronics and Computer Engineering (UPCON)",Unmanned Aerial Vehicle for Precision Agriculture in a Modular Approach,10.1109/upcon50219.2020.9376521,C1 ampliada
+398,2025,IEEE International Conference on Mechatronics and Automation (ICMA),Unmanned Aerial Vehicles and Edge AI for Power Line Inspection,10.1109/icma65362.2025.11120738,C1 ampliada
+399,2024,Engineering Applications of Artificial Intelligence,Unmanned Aerial Vehicles anomaly detection model based on sensor information fusion and hybrid multimodal neural network,10.1016/j.engappai.2024.107961,C1 ampliada
+400,2020,arXiv (Cornell University),Unsupervised Abnormality Detection Using Heterogeneous Autonomous Systems,10.48550/arxiv.2006.03733,C1 ampliada
+401,2020,IEEE Region 10 Conference (TENCON),Unsupervised Abnormality Detection Using Heterogenous Autonomous System,10.1109/tencon50793.2020.9293742,C1 ampliada
+402,2023,Intelligent Autonomous Systems,Unsupervised Anomaly Detection of Unmanned Aerial Vehicles based on Spatial-Temporal Model with Flight Data,10.1109/icoias61634.2023.00019,C1 ampliada
+403,2026,Structural durability & health monitoring,Unsupervised Anomaly Detection System for High-Speed Railway Noise Barrier Using UAV Imagery,10.32604/sdhm.2026.081306,C1 ampliada
+404,2019,IPSJ Transactions on Computer Vision and Applications,Unsupervised anomaly detection with compact deep features for wind turbine blade images taken by a drone,10.1186/s41074-019-0056-0,C1 ampliada
+405,2021,arXiv (Cornell University),Unsupervised Anomaly Segmentation using Image-Semantic Cycle Translation,10.48550/arxiv.2103.09094,C1 ampliada
+406,2020,Lecture notes in computer science,Unsupervised Intrusion Detection System for Unmanned Aerial Vehicle with Less Labeling Effort,10.1007/978-3-030-65299-9_4,C1 ampliada
+407,2023,Frontiers in Sustainable Cities,Unsupervised video anomaly detection in UAVs: a new approach based on learning and inference,10.3389/frsc.2023.1197434,C1 ampliada
+408,2020,Journal of recent trends in computer science and engineering.,Unveiling the Hidden Patterns: AI-Driven Innovations in Image Processing and Acoustic Signal Detection,10.70589/jrtcse.2020.1.3,C1 ampliada
+409,2026,Brazilian Conference on Robotics (CROS),UPI-Dataset: A Balanced UAV-Based Image Dataset for Defect and Anomaly Detection in Power Distribution Systems,10.1109/cros69211.2026.11565640,C1 ampliada
+410,2026,Wiley eBooks,Urban Intelligence—Vision AI's Role in Smart City Security and Innovation,10.1002/9781394389582.ch23,C1 ampliada
+411,2024,Engineering Science and Technology an International Journal,Vibration data-driven anomaly detection in UAVs: A deep learning approach,10.1016/j.jestch.2024.101702,C1 ampliada
+412,2025,International Journal for Research in Applied Science and Engineering Technology,Vision Guard: Smart Surveillance for Tomorrow,10.22214/ijraset.2025.68474,C1 ampliada
+413,2022,IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS),Vision-based Relative Detection and Tracking for Teams of Micro Aerial Vehicles,10.1109/iros47612.2022.9981115,C1 ampliada
+414,2025,International Journal of Applied Earth Observation and Geoinformation,Wavelet-based diffusion with spatial-frequency attention for hyperspectral anomaly detection,10.1016/j.jag.2025.104662,C1 ampliada
+415,2021,IEEE International Conference on Network Protocols (ICNP),Welcome Message from the ICNP 2021 TPC Chairs,10.1109/icnp52444.2021.9651933,C1 ampliada
+416,2025,Empirical Software Engineering,When uncertainty leads to unsafety: Empirical insights into the role of uncertainty in unmanned aerial vehicle safety,10.1007/s10664-025-10697-z,C1 ampliada
+417,2025,arXiv (Cornell University),When Uncertainty Leads to Unsafety: Empirical Insights into the Role of Uncertainty in Unmanned Aerial Vehicle Safety,10.48550/arxiv.2501.08908,C1 ampliada
+418,2025,International Conference on Machine Vision,X-ray anomaly detection in industrial pipelines,10.1117/12.3055016,C1 ampliada
+419,2025,Drones,XAI-Based Framework for Protocol Anomaly Classification and Identification to 6G NTNs with Drones,10.3390/drones9050324,C1 ampliada
+420,2025,Lecture notes in computer science,XAI-Guided Insulator Anomaly Detection for Imbalanced Datasets,10.1007/978-3-031-92805-5_5,C1 ampliada
+421,2026,Alexandria Engineering Journal,Zero-shot attack detection in UAV networks using foundation models,10.1016/j.aej.2025.12.065,C1 ampliada

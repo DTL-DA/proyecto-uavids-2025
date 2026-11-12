@@ -1,0 +1,17 @@
+{
+ "CNN 1D": {
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "batch": 128
+ },
+ "DNN": {
+  "lr": 0.0005,
+  "weight_decay": 0.0,
+  "batch": 128
+ },
+ "LSTM": {
+  "lr": 0.0005,
+  "weight_decay": 0.0,
+  "batch": 128
+ }
+}

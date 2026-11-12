@@ -1,0 +1,130 @@
+{
+ "cadenas": {
+  "C1": "(drone OR UAV OR \"unmanned aerial\" OR FANET) AND (\"intrusion detection\" OR \"attack detection\") AND (\"deep learning\" OR \"neural network\" OR CNN OR LSTM OR MLP)",
+  "C2": "(drone OR UAV OR \"unmanned aerial\" OR FANET) AND (swarm OR \"ad hoc\" OR \"network traffic\") AND (blackhole OR wormhole OR sybil OR flooding OR cyberattack) AND (\"deep learning\" OR \"neural network\" OR CNN OR LSTM OR MLP)",
+  "C3": "UAVIDS OR \"UAVIDS-2025\"",
+  "C4": "(drone OR UAV OR \"unmanned aerial\" OR FANET OR \"Internet of Drones\") AND (\"intrusion detection\" OR \"attack detection\" OR \"anomaly detection\") AND (GRU OR \"gated recurrent\" OR BiLSTM OR \"bidirectional LSTM\" OR transformer OR TabNet OR \"Kolmogorov-Arnold\" OR autoencoder OR \"deep belief\" OR ResNet OR residual OR \"CNN-LSTM\" OR \"graph neural\" OR \"temporal convolutional\" OR mamba OR \"state space\")",
+  "T1": "(\"supervised contrastive\" OR \"contrastive learning\") AND (image OR \"computer vision\" OR visual) AND (transfer OR adaptation)",
+  "T2": "(\"mixture of experts\" OR \"gated experts\") AND (\"natural language\" OR \"language model\" OR vision) AND (transfer OR adaptation)",
+  "T3": "(\"domain generalization\" OR \"invariant risk minimization\" OR \"distributionally robust\") AND (image OR vision OR speech) AND (transfer OR adaptation)",
+  "T4": "(\"Kolmogorov-Arnold\" OR \"feature tokenizer\" OR \"tabular transformer\") AND (\"time series\" OR vision OR image OR language) AND (transfer OR adaptation)"
+ },
+ "maximos": {
+  "C1": 1000,
+  "C2": 1000,
+  "C3": 1000,
+  "C4": 1000,
+  "T1": 100,
+  "T2": 100,
+  "T3": 100,
+  "T4": 100
+ },
+ "desde": {
+  "C1": "2019-01-01",
+  "C2": "2019-01-01",
+  "C3": "2019-01-01",
+  "C4": "2019-01-01",
+  "T1": "2018-01-01",
+  "T2": "2018-01-01",
+  "T3": "2018-01-01",
+  "T4": "2018-01-01"
+ },
+ "resultados": [
+  {
+   "fuente": "OpenAlex",
+   "cadena": "C1",
+   "total": 323,
+   "exportados": 323
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "C2",
+   "total": 40,
+   "exportados": 40
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "C3",
+   "total": 224,
+   "exportados": 224
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "C4",
+   "total": 414,
+   "exportados": 414
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "T1",
+   "total": 1895,
+   "exportados": 100
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "T2",
+   "total": 286,
+   "exportados": 100
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "T3",
+   "total": 1133,
+   "exportados": 100
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "T4",
+   "total": 116,
+   "exportados": 100
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "C1",
+   "total": 11,
+   "exportados": 11
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "C2",
+   "total": 3,
+   "exportados": 3
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "C3",
+   "total": 30,
+   "exportados": 29
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "C4",
+   "total": 25,
+   "exportados": 24
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "T1",
+   "total": 993,
+   "exportados": 100
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "T2",
+   "total": 606,
+   "exportados": 100
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "T3",
+   "total": 541,
+   "exportados": 100
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "T4",
+   "total": 76,
+   "exportados": 76
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+﻿referencia,modelo,familia,arquitectura,regularizacion,entrenamiento,fuente_del_dato,nota
+Zeng (2025),DNN,DNN/MLP,"3 capas ocultas: 128, 64 y 32","Dropout de 0,2 tras las capas de 128 y 64","Adam, tasa de 0,001, lote de 256, máximo 50 épocas, parada temprana con paciencia de 5",Código de los autores,
+Zeng (2025),CNN 1D,CNN,"2 convoluciones de 32 y 64 filtros de tamaño 3, max-pooling y densa de 64","Dropout de 0,2 antes de la capa densa","Adam, tasa de 0,001, lote de 256, máximo 50 épocas, parada temprana con paciencia de 5",Código de los autores,
+Zeng (2025),LSTM,LSTM,1 capa de 64 unidades,"Dropout de 0,2 antes de la salida","Adam, tasa de 0,001, lote de 256, máximo 50 épocas, parada temprana con paciencia de 5",Código de los autores,
+Abdulhammed et al. (2026),FFN,DNN/MLP,2 capas ocultas: 128 y 64,"Dropout de 0,3","Adam, 50 épocas, lote de 32",Tabla 7,Tabla de UAV-GCS
+Abdulhammed et al. (2026),LSTM,LSTM,2 capas de 64 y 32 unidades,"Dropout de 0,2","Adam, 50 épocas, lote de 32, parada temprana con paciencia de 10",Tabla 8,Tabla de UAV-GCS
+Abdulhammed et al. (2026),1DCNN,CNN,"Convoluciones de 64 y 128 filtros de tamaño 3, max-pooling de 2 y densa de 128","Dropout de 0,2 y 0,5","Adam, lote de 64",Tabla 9,Tabla de UAV-GCS
+Ashraf et al. (2023),RNN,RNN,64 unidades; capas no reportadas,"Dropout de 0,2","Adam, 20 épocas; lote reportado dos veces, 24 y 864",Tabla 2,El lote aparece con dos valores en la misma tabla
+Ashraf et al. (2023),LSTM,LSTM,64 unidades; capas no reportadas,"Dropout de 0,2","Adam, 20 épocas; lote reportado dos veces, 24 y 1152",Tabla 2,El lote aparece con dos valores en la misma tabla
+Ashraf et al. (2023),Bi-LSTM,BiLSTM,64 unidades; capas no reportadas,"Dropout de 0,2","Adam, 20 épocas; lote reportado dos veces, 24 y 1152",Tabla 2,El lote aparece con dos valores en la misma tabla
+Zhou et al. (2026),BPNN,DNN/MLP,"3 capas ocultas: 512, 256 y 128","Dropout de 0,2",No reportado,Texto,
+Zhou et al. (2026),Transformer,Transformer,"2 capas, 4 cabezas y dimensión de 128",No reportado,"Adam, tasa de 0,001, lote de 64",Texto,
+Hakeem et al. (2025),MLP,DNN/MLP,Capa oculta de 64 y entrada de 32,"Dropout de 0,2",No reportado,Texto,Clasificación binaria
+Hakeem et al. (2025),CNN,CNN,"Convolución y max-pooling, sin número de filtros","Dropout de 0,2 y 0,5",No reportado,Texto,Clasificación binaria
+Ozsoy et al. (2026),MLP federado,DNN/MLP,2 capas ocultas: 64 y 32,"Dropout, normalización por lotes y decaimiento de pesos L2",Adam con tasa coseno,Texto,
+Balgoon (2026),BiLSTM,BiLSTM,2 capas de 128 unidades,"Dropout de 0,3",No reportado,Texto,Componente del modelo propuesto
+Balgoon (2026),GNN,GNN,"3 capas GATv2 de ancho 64, con 8, 4 y 1 cabezas",No reportado,No reportado,Texto,Componente del modelo propuesto
+Balgoon (2026),Autoencoder,Autoencoder,No extraída,No reportado,"Adam, tasa de 0,001, 150 épocas, lote de 256",Texto,Componente del modelo propuesto
+Biswas et al. (2026),CNN 1D,CNN,"2 bloques Conv1D de tamaño 3, con normalización por lotes y max-pooling de 2","Dropout de 0,3",No extraído,Texto,Conjunto ISOT
+Biswas et al. (2026),GRU,GRU,2 capas de 128 y 64 unidades,"Dropout de 0,3 y normalización por lotes",No extraído,Texto,Conjunto ISOT
+Biswas et al. (2026),RNN,RNN,"2 capas SimpleRNN, la primera de 128 unidades",No extraído,No extraído,Texto,Conjunto ISOT
+Alsaraireh et al. (2026),CNN 1D,CNN,Capas no extraídas,"Dropout de 0,3","Tasa de 0,001, lote de 2048, 20 épocas, parada temprana con paciencia de 5",Tabla 8,
+Li et al. (2026a),CNN 1D,CNN,"Convoluciones 1D con ReLU y pooling, sin número de capas",No reportado,No reportado,Texto,
+Bakiri et al. (2026),KAN plana,KAN,"6039 parámetros, en 23,59 KB",No reportado,Igual a la del modelo propuesto,Tabla 7,Conjunto UAVIDS-2025
+"Batur Şahin (2026)",Clasificador sin VAE,DNN/MLP,"3 capas ocultas: 256, 128 y 64","Dropout, sin tasa reportada","Tasa de 0,001 con recocido coseno, lote de 128, 100 épocas",Ecuaciones 6 a 9 y sección 4,Línea base de la ablación

@@ -1,0 +1,74 @@
+{
+ "10.1109/cvpr.2015.7298878": {
+  "titulo": "Long-term recurrent convolutional networks for visual recognition and description",
+  "anio": 2015,
+  "citas": 5237,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.1207/s15516709cog1402_1": {
+  "titulo": "Finding Structure in Time",
+  "anio": 1990,
+  "citas": 12511,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.3115/v1/d14-1179": {
+  "titulo": "Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation",
+  "anio": 2014,
+  "citas": 27080,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.1126/science.1127647": {
+  "titulo": "Reducing the Dimensionality of Data with Neural Networks",
+  "anio": 2006,
+  "citas": 21568,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.1016/j.neunet.2005.06.042": {
+  "titulo": "Framewise phoneme classification with bidirectional LSTM and other neural network architectures",
+  "anio": 2005,
+  "citas": 6179,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.1162/neco.2006.18.7.1527": {
+  "titulo": "A Fast Learning Algorithm for Deep Belief Nets",
+  "anio": 2006,
+  "citas": 16728,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.48550/arxiv.1706.03762": {
+  "titulo": "Attention Is All You Need",
+  "anio": 2017,
+  "citas": 136211,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.1109/tnn.2008.2005605": {
+  "titulo": "The Graph Neural Network Model",
+  "anio": 2008,
+  "citas": 10246,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.1109/cvpr.2016.90": {
+  "titulo": "Deep Residual Learning for Image Recognition",
+  "anio": 2016,
+  "citas": 243394,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.1145/3422622": {
+  "titulo": "Generative adversarial networks",
+  "anio": 2020,
+  "citas": 19393,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.1609/aaai.v35i8.16826": {
+  "titulo": "TabNet: Attentive Interpretable Tabular Learning",
+  "anio": 2021,
+  "citas": 455,
+  "fecha_consulta": "2026-11-12"
+ },
+ "10.48550/arxiv.2404.19756": {
+  "titulo": "KAN: Kolmogorov-Arnold Networks",
+  "anio": 2024,
+  "citas": 2963,
+  "fecha_consulta": "2026-11-12"
+ }
+}

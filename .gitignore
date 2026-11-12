@@ -1,0 +1,31 @@
+# Solo se versiona el entregable
+/*
+!/.gitignore
+!/README.md
+!/requirements.txt
+!/Entregable 2 - UAVIDS-2025.ipynb
+!/Entregable_1_UAVIDS_2025/
+!/Entregable_2_UAVIDS_2025/
+
+# Del Entregable 1 se hereda la partición y su declaración; el CSV se descarga
+/Entregable_1_UAVIDS_2025/datos/
+/Entregable_1_UAVIDS_2025/resultados/datos_preparados.npz
+/Entregable_1_UAVIDS_2025/resultados/resultados_listos.txt
+/Entregable_1_UAVIDS_2025/entregables/1_informe_jupyter_book/Informe_Entregable_1.pdf
+
+# Texto de terceros: los scripts de búsqueda vuelven a consultar las fuentes
+/Entregable_1_UAVIDS_2025/literatura/exportaciones/*
+!/Entregable_1_UAVIDS_2025/literatura/exportaciones/2026-11-03_resumen.json
+/Entregable_2_UAVIDS_2025/literatura/exportaciones/*
+!/Entregable_2_UAVIDS_2025/literatura/exportaciones/*_resumen_e2.json
+
+# Pesos y probabilidades por corrida: se empaquetan aparte
+/Entregable_2_UAVIDS_2025/resultados/corridas/**/*.pt
+/Entregable_2_UAVIDS_2025/resultados/corridas/**/*.npy
+/Entregable_2_UAVIDS_2025/resultados/corridas/**/*.tmp
+
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+_build/
+*.log

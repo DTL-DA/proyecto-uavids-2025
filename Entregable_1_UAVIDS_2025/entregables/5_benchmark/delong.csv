@@ -1,0 +1,4 @@
+﻿Par,Diferencia media de AUC por clase,"Clase × semilla con p Holm < 0,05",p DeLong (mediana),Potencia para δ,Mínima detectable
+CNN 1D - DNN,"0,0035",30 de 35,"8,11e-20","1,000","0,0010"
+CNN 1D - LSTM,"-0,0092",32 de 35,"4,05e-28","1,000","0,0019"
+DNN - LSTM,"-0,0127",31 de 35,"5,55e-34","1,000","0,0021"

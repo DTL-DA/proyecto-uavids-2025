@@ -1,0 +1,271 @@
+{
+ "descripcion": "Estudios Q1 leídos el 4 de noviembre de 2026 con el acceso de la biblioteca de la Universidad del Norte. Los campos salen de la búsqueda dirigida de pasajes y tablas en cada texto; lo no hallado queda como no reportado o no identificado.",
+ "incluidos": [
+  {
+   "doi": "10.1109/jiot.2024.3360231",
+   "dataset": "CSE-CIC-IDS2018 y CIC-DDoS2019",
+   "entrada": "flujos de red",
+   "propuesto": "conjuntos difusos, red superficial y bosque aleatorio",
+   "modelos": [
+    "CNN",
+    "LSTM",
+    "Autoencoder",
+    "GAN"
+   ],
+   "detalle": "VCDL, CNN3D, LSTM, SNDA, SCA+SVM y CGAN",
+   "valores": "El propuesto alcanza 99 % de exactitud en CIC-DDoS2019; las tablas de comparación no se pudieron extraer",
+   "particion": "entrenamiento con parte de los ataques; prueba más de diez veces mayor",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Conjuntos genéricos, no de drones"
+  },
+  {
+   "doi": "10.1109/tce.2026.3667039",
+   "dataset": "T-ITS",
+   "entrada": "datos del sistema",
+   "propuesto": "AE-LSTM federado multiagente",
+   "modelos": [
+    "CNN",
+    "DNN/MLP"
+   ],
+   "detalle": "FFCNN y MC-DNN, tomados de trabajos publicados",
+   "valores": "Exactitud del propuesto: 99,44 %",
+   "particion": "5 pliegues estratificados, con 70/15/15 en cada uno",
+   "repeticiones": "5 pliegues",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Compara con cifras publicadas"
+  },
+  {
+   "doi": "10.1109/ojcoms.2026.3698792",
+   "dataset": "UAVIDS-2025",
+   "entrada": "flujos de red simulados",
+   "propuesto": "GCN federada",
+   "modelos": [
+    "CNN",
+    "RNN",
+    "DNN/MLP"
+   ],
+   "detalle": "FL-CNN, FL-RNN y FL-MLP",
+   "valores": "Precisión en Wormhole: FL-CNN 0,70, FL-RNN 0,78, FL-MLP 0,78 y FL-GCN 0,81; en Blackhole: 0,90, 0,92, 0,94 y 0,92",
+   "particion": "no identificada",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Clientes federados con datos no IID"
+  },
+  {
+   "doi": "10.1109/jiot.2026.3665688",
+   "dataset": "UAV-IDS-2020",
+   "entrada": "flujos de red",
+   "propuesto": "defensa adversarial con AdvGAN",
+   "modelos": [
+    "CNN"
+   ],
+   "detalle": "CNN 1D como modelo base del detector",
+   "valores": "Tasa de éxito del ataque sobre la CNN: 93,61 %",
+   "particion": "aleatoria 90/10",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": ""
+  },
+  {
+   "doi": "10.1109/tce.2026.3658881",
+   "dataset": "conjunto multimodal de UAV",
+   "entrada": "flujos de red",
+   "propuesto": "autoencoder CNN-GRU federado",
+   "modelos": [
+    "CNN",
+    "DNN/MLP",
+    "GRU"
+   ],
+   "detalle": "GAN-MCNN-DFS, ANN, CNN, XAI-DNN y SEMI-GRU, tomados de trabajos publicados",
+   "valores": "Exactitud del propuesto: 99,49 %",
+   "particion": "5 pliegues estratificados",
+   "repeticiones": "5 pliegues",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Compara con cifras publicadas"
+  },
+  {
+   "doi": "10.1016/j.rineng.2025.106838",
+   "dataset": "InSDN",
+   "entrada": "flujos de red",
+   "propuesto": "CNN con LSTM apilada y optimización",
+   "modelos": [
+    "CNN",
+    "ResNet"
+   ],
+   "detalle": "AlexNet, ResNet y ShuffleNet, tomados de trabajos publicados",
+   "valores": "Exactitud del propuesto: 99,88 %",
+   "particion": "80/20 y 70/30",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Los autores advierten que no aplican pruebas estadísticas"
+  },
+  {
+   "doi": "10.1109/tcomm.2026.3693173",
+   "dataset": "UAV-NIDD y CICIoT2022",
+   "entrada": "flujos de red",
+   "propuesto": "codificador de grafos gemelos",
+   "modelos": [
+    "RNN",
+    "Transformer",
+    "GNN",
+    "DNN/MLP"
+   ],
+   "detalle": "FS-Net, ET-BERT, YaTC, GraphDAPP, TFE-GNN y FNN",
+   "valores": "F1 en UAV-NIDD: TGE-ETD 99,97 ± 0,04 %, YaTC 99,96 ± 0,77 %, FNN 95,20 %, TFE-GNN 93,01 ± 2,14 %, MAML 71,09 %",
+   "particion": "90/10",
+   "repeticiones": "10",
+   "dispersion": "sí",
+   "prueba": "ninguna",
+   "nota": ""
+  },
+  {
+   "doi": "10.1016/j.eswa.2024.124215",
+   "dataset": "UAVIDS-2020, NF-UQ-NIDS-v2 y 5G-NIDD",
+   "entrada": "flujos de red",
+   "propuesto": "DNN multinivel con fusión",
+   "modelos": [
+    "DNN/MLP"
+   ],
+   "detalle": "DNN simple y DNN multinivel simple",
+   "valores": "Exactitud en UAVIDS-2020: fusión 99,95 %, multinivel 98,91 %, DNN simple 94,78 %",
+   "particion": "80/20",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": ""
+  },
+  {
+   "doi": "10.1016/j.adhoc.2026.104251",
+   "dataset": "UAVIDS-2025, UNSW-NB15 y ET-BERT",
+   "entrada": "flujos de red simulados",
+   "propuesto": "AD-GNN",
+   "modelos": [
+    "Autoencoder",
+    "CNN-LSTM",
+    "GNN"
+   ],
+   "detalle": "DAE, CNN-GRU, GCN, GNN-Adv, TodyNet y GTCN-G",
+   "valores": "F1 en UAVIDS-2025: AD-GNN 0,962 ± 0,003, TodyNet 0,941",
+   "particion": "70/15/15; además, un ataque fuera",
+   "repeticiones": "no reportadas",
+   "dispersion": "sí",
+   "prueba": "p < 0,01, sin nombrar la prueba en los pasajes revisados",
+   "nota": ""
+  },
+  {
+   "doi": "10.3390/drones10070503",
+   "dataset": "tres conjuntos UAV-IDS",
+   "entrada": "flujos de red",
+   "propuesto": "selección de atributos robusta a ataques adversariales",
+   "modelos": [
+    "CNN"
+   ],
+   "detalle": "CNN 1D como modelo base del detector",
+   "valores": "Exactitud sin perturbar: 95,27 % en un conjunto y 78,93 % en UAV3-IDS",
+   "particion": "estratificada 70/15/15",
+   "repeticiones": "varias ejecuciones",
+   "dispersion": "sí",
+   "prueba": "ninguna",
+   "nota": ""
+  },
+  {
+   "doi": "10.1016/j.iot.2026.102095",
+   "dataset": "UAVIDS-2025",
+   "entrada": "flujos de red simulados",
+   "propuesto": "Transformer con aprendizaje por refuerzo",
+   "modelos": [
+    "DNN/MLP"
+   ],
+   "detalle": "MLP, junto con cuatro modelos clásicos",
+   "valores": "Binario: MLP exactitud 99,1 % y F1 99,5 %; propuesto 97,7 % y 98,5 %; XGBoost 99,6 % y 99,7 %",
+   "particion": "estratificada 70/15/15, con SMOTE solo en entrenamiento",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Usa los mismos 16 atributos"
+  },
+  {
+   "doi": "10.1109/ojcoms.2026.3683883",
+   "dataset": "GCS-NIDD",
+   "entrada": "flujos de red",
+   "propuesto": "fusión multinivel",
+   "modelos": [
+    "TabNet"
+   ],
+   "detalle": "TabNet, junto con LightGBM y BLS",
+   "valores": "Exactitud por modelo: TabNet 93,10 %, LightGBM 90,20 %, BLS 89,70 %; fusión 99,30 %",
+   "particion": "no identificada",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": ""
+  },
+  {
+   "doi": "10.1038/s41598-026-45063-6",
+   "dataset": "ISOT Drone Anomaly Detection",
+   "entrada": "flujos de red",
+   "propuesto": "transformador temporal-espacial ligero",
+   "modelos": [
+    "CNN",
+    "DNN/MLP",
+    "GRU",
+    "LSTM",
+    "RNN"
+   ],
+   "detalle": "CNN 1D, MLP, GRU, LSTM y RNN",
+   "valores": "Exactitud del propuesto: 99,99 %",
+   "particion": "estratificada por sesión de captura y dron",
+   "repeticiones": "5 semillas",
+   "dispersion": "sí",
+   "prueba": "ninguna",
+   "nota": "Agrupa por sesión y dron"
+  },
+  {
+   "doi": "10.1016/j.sysarc.2026.104038",
+   "dataset": "UAVIDS-2025 y UAV-NIDD",
+   "entrada": "flujos de red simulados",
+   "propuesto": "KAN jerárquica",
+   "modelos": [
+    "KAN",
+    "DNN/MLP",
+    "CNN"
+   ],
+   "detalle": "KAN plana; DNN-KDQ y UAV-IDS-ConvNet, de trabajos publicados",
+   "valores": "Exactitud en cinco clases en UAVIDS-2025: 92,50 %; KAN plana 93,35 %",
+   "particion": "por nodo de origen en UAVIDS-2025; estratificada 72/8/20 en UAV-NIDD",
+   "repeticiones": "no reportadas",
+   "dispersion": "no",
+   "prueba": "ninguna",
+   "nota": "Audita el archivo: 8219 filas repetidas y FlowID sin identificador de simulación"
+  }
+ ],
+ "excluidos": [
+  {
+   "doi": "10.1016/j.comnet.2026.112806",
+   "motivo": "compara algoritmos federados, sin modelo de referencia por arquitectura identificable"
+  },
+  {
+   "doi": "10.1016/j.adhoc.2026.104348",
+   "motivo": "sin modelo de referencia de Deep Learning"
+  },
+  {
+   "doi": "10.1109/tcns.2026.3718814",
+   "motivo": "detector de control sobre un modelo simulado, con referencias estadísticas y de refuerzo"
+  },
+  {
+   "doi": "10.1109/jiot.2024.3426511",
+   "motivo": "sin modelo de referencia identificable en los pasajes revisados"
+  },
+  {
+   "doi": "10.70675/9327dab4zf089z4dbez8942zf3e3a822a69c",
+   "motivo": "tesis doctoral, sin modelo de referencia con cifras en los pasajes revisados"
+  }
+ ]
+}

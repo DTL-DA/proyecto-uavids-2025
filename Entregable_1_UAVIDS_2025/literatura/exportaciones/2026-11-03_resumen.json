@@ -1,0 +1,45 @@
+{
+ "cadenas": {
+  "C1": "(drone OR UAV OR \"unmanned aerial\" OR FANET) AND (\"intrusion detection\" OR \"attack detection\") AND (\"deep learning\" OR \"neural network\" OR CNN OR LSTM OR MLP)",
+  "C2": "(drone OR UAV OR \"unmanned aerial\" OR FANET) AND (swarm OR \"ad hoc\" OR \"network traffic\") AND (blackhole OR wormhole OR sybil OR flooding OR cyberattack) AND (\"deep learning\" OR \"neural network\" OR CNN OR LSTM OR MLP)",
+  "C3": "UAVIDS OR \"UAVIDS-2025\""
+ },
+ "resultados": [
+  {
+   "fuente": "OpenAlex",
+   "cadena": "C1",
+   "total": 323,
+   "exportados": 323
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "C2",
+   "total": 40,
+   "exportados": 40
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "C3",
+   "total": 220,
+   "exportados": 220
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "C1",
+   "total": 11,
+   "exportados": 11
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "C2",
+   "total": 3,
+   "exportados": 3
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "C3",
+   "total": 29,
+   "exportados": 28
+  }
+ ]
+}

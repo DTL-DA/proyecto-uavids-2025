@@ -1,0 +1,1 @@
+{"modelo": "LSTM original", "semilla": 2005, "hp": {"lr": 0.0005, "weight_decay": 0.0, "batch": 128}, "epocas": 17, "segundos": 119.7, "f1_val": 0.8867163095371252, "f1_prueba": 0.8540489013980433, "dispositivo": "CPU, 10 hilos, Intel64 Family 6 Model 154 Stepping 4, GenuineIntel"}
