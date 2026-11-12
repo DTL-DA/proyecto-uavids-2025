@@ -1,0 +1,12 @@
+{
+ "desviaciones": [
+  {
+   "numero": 1,
+   "fecha": "2026-11-12 13:59",
+   "fase": "estudio de ruido y fase 1 de la búsqueda de arquitectura",
+   "cambio": "entrenamiento con el 25 % de los bloques de entrenamiento, estratificado por clase (fase1_25_bloques.npz)",
+   "motivo": "costo medido: unas 40 h para el protocolo completo",
+   "sha256_subconjunto": "b6f3b75cfa1d9911efa211da67f2928e5a32f1c47f260e7a22dff0fa74b53787"
+  }
+ ]
+}

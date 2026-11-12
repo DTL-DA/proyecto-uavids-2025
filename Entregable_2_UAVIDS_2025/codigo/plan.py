@@ -98,6 +98,25 @@ def muestra_arquitecturas():
     return random.Random(r["semilla_muestreo"]).sample(modelos.espacio_arquitecturas(), r["arquitecturas_por_modelo"])
 
 
+SUBCONJUNTO_FASE1 = "fase1_25_bloques"
+
+
+def subconjunto_fase1(fraccion_bloques=0.25):
+    """Desviación del 12/11/2026: el 25 % de los bloques de entrenamiento, estratificado por clase, para la fase 1 y el estudio de ruido."""
+    from sklearn.model_selection import StratifiedGroupKFold
+    from codigo import datos
+
+    ruta = RAIZ_E2 / "resultados" / "particiones" / f"{SUBCONJUNTO_FASE1}.npz"
+    if not ruta.exists():
+        h = datos.heredados()
+        ent = h["ids"]["entrenamiento"]
+        bloques = datos.crudo()[1]
+        _, elegido = next(StratifiedGroupKFold(int(round(1 / fraccion_bloques)), shuffle=True, random_state=CONFIG["busqueda_arquitectura"]["semilla_fase1"]).split(ent, h["y"][ent], bloques[ent]))
+        ruta.parent.mkdir(parents=True, exist_ok=True)
+        np.savez(ruta, ent=np.sort(ent[elegido]))
+    return SUBCONJUNTO_FASE1
+
+
 def plan_ruido():
     hp = mejores_hp()
     r, b = CONFIG["ruido_semilla_busqueda"], CONFIG["busqueda_arquitectura"]
@@ -105,14 +124,15 @@ def plan_ruido():
     for m in CONFIG["modelos"]["con_busqueda"]:
         for a in muestra_arquitecturas():
             for s in r["semillas"]:
-                t.append(trabajo("ruido", m, hp[m], s, "_" + modelos.identificador(a), arquitectura=list(a), max_epocas=b["epocas_fase1"]))
+                t.append(trabajo("ruido", m, hp[m], s, "_" + modelos.identificador(a), arquitectura=list(a), max_epocas=b["epocas_fase1"], subconjunto_ent=subconjunto_fase1()))
     return t
 
 
 def plan_fase1():
     hp = mejores_hp()
     b = CONFIG["busqueda_arquitectura"]
-    return [trabajo("fase1", m, hp[m], b["semilla_fase1"], "_" + modelos.identificador(a), arquitectura=list(a), max_epocas=b["epocas_fase1"],
+    sub = subconjunto_fase1()
+    return [trabajo("fase1", m, hp[m], b["semilla_fase1"], "_" + modelos.identificador(a), arquitectura=list(a), max_epocas=b["epocas_fase1"], subconjunto_ent=sub,
                     costo_relativo=modelos.contar_mac(modelos.construir(m, a)))
             for m in CONFIG["modelos"]["con_busqueda"] for a in modelos.espacio_arquitecturas()]
 
@@ -163,9 +183,76 @@ def plan_definitiva(R, arquitecturas):
         extra = {"arquitectura": list(arquitecturas[m])} if m in arquitecturas else {}
         t += [trabajo("definitiva", m, hp[m], s, evaluar=True, guardar_prob_val=True, guardar_pesos=True, **extra) for s in semillas]
     for m in ("LightGBM", "Logística"):
-        t += [trabajo("definitiva", m, hp[m], s, evaluar=True, guardar_prob_val=True) for s in semillas]
+        t += [trabajo("definitiva", m, hp[m], s, evaluar=True, guardar_prob_val=True, guardar_pesos=True) for s in semillas]
     t.append(trabajo("definitiva", "Trivial", {}, semillas[0], evaluar=True, guardar_prob_val=True))
     return t
+
+
+def arquitectura_final(m, pre):
+    return {"arquitectura": list(pre["arquitecturas_ganadoras"][m])} if m in pre.get("arquitecturas_ganadoras", {}) else {}
+
+
+def adenda():
+    return json.loads((RAIZ_E2 / "resultados" / "preregistro_e2_adenda.json").read_text(encoding="utf-8"))
+
+
+VARIANTES = {"sin ponderación de clases": {"ponderar": False}, "sin log(1 + x)": {"transformacion": "estandar"}, "sin dropout": {"dropout": False}}
+
+
+def plan_ablacion(modelo, variantes=VARIANTES):
+    pre = adenda()
+    hp = mejores_hp()
+    semillas = [CONFIG["definitiva"]["semilla_inicial"] + i for i in range(pre["R"])]
+    return [trabajo("ablacion", modelo, hp[modelo], s, "_" + nombre_archivo(n).replace("(", "").replace(")", "").replace(" ", "_").replace("+", ""), variante=v, variante_nombre=n,
+                    evaluar=True, guardar_prob_eva=False, **arquitectura_final(modelo, pre)) for n, v in variantes.items() for s in semillas]
+
+
+def particiones_5x2():
+    """Validación cruzada 5 × 2 agrupada por bloques sobre entrenamiento + validación; la prueba no se toca.
+    En cada pliegue, un 20 % de los bloques de la mitad de entrenamiento se reserva para la parada temprana."""
+    from sklearn.model_selection import StratifiedGroupKFold
+    from codigo import datos
+
+    h = datos.heredados()
+    bloques = datos.crudo()[1]
+    y = h["y"]
+    pool = np.concatenate([h["ids"]["entrenamiento"], h["ids"]["validacion"]])
+    carpeta = RAIZ_E2 / "resultados" / "particiones"
+    carpeta.mkdir(parents=True, exist_ok=True)
+    nombres = []
+    semilla = CONFIG["validacion_cruzada_5x2"]["semilla"]
+    for rep in range(5):
+        for j, (a, b) in enumerate(StratifiedGroupKFold(2, shuffle=True, random_state=semilla + rep).split(pool, y[pool], bloques[pool])):
+            entrenar, evaluar = pool[a], pool[b]
+            e, v = next(StratifiedGroupKFold(5, shuffle=True, random_state=semilla + 100 + rep).split(entrenar, y[entrenar], bloques[entrenar]))
+            nombre = f"cv5x2_r{rep}_f{j}"
+            np.savez(carpeta / f"{nombre}.npz", ent=entrenar[e], val=entrenar[v], eva=evaluar)
+            nombres.append(nombre)
+    return nombres
+
+
+def plan_cv5x2():
+    pre = adenda()
+    hp = mejores_hp()
+    nombres = particiones_5x2()
+    t = []
+    for m in profundos() + ["LightGBM", "Logística"]:
+        for n in nombres:
+            t.append(trabajo("cv5x2", m, hp[m], CONFIG["definitiva"]["semilla_inicial"], "_" + n, particion=n, evaluar=True, guardar_prob_eva=False, **arquitectura_final(m, pre)))
+    return t
+
+
+def plan_curvas(modelos_cc, fracciones=(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0), semillas=(7101, 7102, 7103, 7104, 7105)):
+    pre = adenda()
+    hp = mejores_hp()
+    return [trabajo("curvas", m, hp[m], s, f"_p{int(100 * f):03d}", fraccion_ent=f, **arquitectura_final(m, pre)) for m in modelos_cc for f in fracciones for s in semillas]
+
+
+def plan_permutacion(modelos_p, B=200):
+    pre = adenda()
+    hp = mejores_hp()
+    return [trabajo("permutacion", m, hp[m], CONFIG["definitiva"]["semilla_inicial"], f"_b{b:03d}", permutar_etiquetas=9000 + b, evaluar=True, guardar_prob_eva=False,
+                    **arquitectura_final(m, pre)) for m in modelos_p for b in range(B)]
 
 
 def guardar(nombre, trabajos):
@@ -181,5 +268,13 @@ if __name__ == "__main__":
     if fase == "definitiva":
         pre = json.loads((RAIZ_E2 / "resultados" / "preregistro_e2_adenda.json").read_text(encoding="utf-8"))
         guardar(fase, plan_definitiva(pre["R"], {m: tuple(a) for m, a in pre["arquitecturas_ganadoras"].items()}))
+    elif fase == "ablacion":
+        guardar(fase, plan_ablacion(sys.argv[2]))
+    elif fase == "cv5x2":
+        guardar(fase, plan_cv5x2())
+    elif fase == "curvas":
+        guardar(fase, plan_curvas(sys.argv[2].split(",")))
+    elif fase == "permutacion":
+        guardar(fase, plan_permutacion(sys.argv[2].split(","), int(sys.argv[3]) if len(sys.argv) > 3 else 200))
     else:
         guardar(fase, {"ajuste": plan_ajuste, "piloto": plan_piloto, "ruido": plan_ruido, "fase1": plan_fase1, "fase2": plan_fase2}[fase]())

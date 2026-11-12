@@ -23,6 +23,7 @@
 /Entregable_2_UAVIDS_2025/resultados/corridas/**/*.pt
 /Entregable_2_UAVIDS_2025/resultados/corridas/**/*.npy
 /Entregable_2_UAVIDS_2025/resultados/corridas/**/*.tmp
+/Entregable_2_UAVIDS_2025/resultados/corridas/**/*.pkl
 
 __pycache__/
 *.py[cod]

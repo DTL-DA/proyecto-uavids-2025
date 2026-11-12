@@ -35,18 +35,21 @@ def fijar_semilla(semilla):
     torch.manual_seed(semilla)
 
 
-def datos_particion(nombre):
-    """Matriz estandarizada, pesos e índices de una partición, en memoria del proceso."""
-    if nombre not in _CACHE:
+def datos_particion(nombre, transformacion="log"):
+    """Matriz estandarizada, pesos e índices de una partición, en memoria del proceso.
+    Con transformacion="estandar" se omite log(1 + x), para la ablación."""
+    clave = (nombre, transformacion)
+    if clave not in _CACHE:
         ids = datos.cargar_particion(nombre)
-        if nombre == "principal":
+        if nombre == "principal" and transformacion == "log":
             h = datos.heredados()
             X, pesos = h["X"], h["pesos"]
         else:
-            X, pesos = datos.preparar_pliegue(ids["ent"])
-        _CACHE[nombre] = {"X": torch.from_numpy(X), "Y": torch.from_numpy(datos.heredados()["y"]), "pesos": torch.from_numpy(pesos),
-                          "ids": {k: torch.from_numpy(v.astype(np.int64)) for k, v in ids.items()}}
-    return _CACHE[nombre]
+            crudo = datos.crudo()[2] if transformacion == "log" else np.minimum(datos.crudo()[0][datos.ATRIBUTOS].to_numpy(dtype=np.float64), datos.TOPE)
+            X, pesos = datos.preparar_pliegue(ids["ent"], crudo)
+        _CACHE[clave] = {"X": torch.from_numpy(X), "Y": torch.from_numpy(datos.etiquetas()), "pesos": torch.from_numpy(pesos),
+                         "ids": {k: torch.from_numpy(v.astype(np.int64)) for k, v in ids.items()}}
+    return _CACHE[clave]
 
 
 def predecir(modelo, X, indices, lote=4096):
@@ -55,11 +58,21 @@ def predecir(modelo, X, indices, lote=4096):
         return torch.cat([modelo(X[b]) for b in indices.split(lote)])
 
 
-def entrenar(nombre, arquitectura, hp, semilla, D, ids_ent, ids_val, max_epocas=MAX_EPOCAS, paciencia=PACIENCIA, etiquetas=None):
+def entrenar(nombre, arquitectura, hp, semilla, D, ids_ent, ids_val, max_epocas=MAX_EPOCAS, paciencia=PACIENCIA, etiquetas=None, variante=None):
+    variante = variante or {}
     fijar_semilla(semilla)
     X, pesos = D["X"], D["pesos"]
+    if not variante.get("ponderar", True):
+        pesos = torch.ones_like(pesos)
     Y = D["Y"] if etiquetas is None else etiquetas
     modelo = modelos.construir(nombre, arquitectura)
+    if not variante.get("dropout", True):
+        for m in modelo.modules():
+            if isinstance(m, nn.Dropout):
+                m.p = 0.0
+        for m in modelo.modules():
+            if isinstance(m, nn.LSTM) and m.num_layers > 1:
+                m.dropout = 0.0
     generador = torch.Generator().manual_seed(semilla)
     inicio_pre = time.time()
     if hasattr(modelo, "preentrenar"):
@@ -138,7 +151,8 @@ def ejecutar(trabajo, carpeta):
     ruta = carpeta / f"{trabajo['id']}.json"
     if ruta.exists():
         return json.loads(ruta.read_text(encoding="utf-8"))
-    D = datos_particion(trabajo.get("particion", "principal"))
+    variante = trabajo.get("variante") or {}
+    D = datos_particion(trabajo.get("particion", "principal"), variante.get("transformacion", "log"))
     ids = D["ids"]
     etiquetas = None
     if trabajo.get("permutar_etiquetas") is not None:
@@ -148,12 +162,15 @@ def ejecutar(trabajo, carpeta):
         y_perm[ent] = D["Y"][ent[g.permutation(len(ent))]]
         etiquetas = y_perm
     ids_ent = ids["ent"]
+    if trabajo.get("subconjunto_ent"):
+        # Desviación declarada: la fase 1 y el estudio de ruido entrenan con un subconjunto fijo de bloques de entrenamiento
+        ids_ent = torch.from_numpy(np.load(datos.RESULTADOS / "particiones" / f"{trabajo['subconjunto_ent']}.npz")["ent"].astype(np.int64))
     if trabajo.get("fraccion_ent") is not None:
         g = torch.Generator().manual_seed(trabajo["semilla"])
         ids_ent = ids_ent[torch.randperm(len(ids_ent), generator=g)[: int(round(trabajo["fraccion_ent"] * len(ids_ent)))]]
     inicio = time.time()
     modelo, curvas, divergente, segundos_pre = entrenar(trabajo["modelo"], trabajo.get("arquitectura"), trabajo["hp"], trabajo["semilla"], D, ids_ent, ids["val"],
-                                                        trabajo.get("max_epocas", MAX_EPOCAS), trabajo.get("paciencia", PACIENCIA), etiquetas)
+                                                        trabajo.get("max_epocas", MAX_EPOCAS), trabajo.get("paciencia", PACIENCIA), etiquetas, variante)
     segundos = time.time() - inicio
     Y = D["Y"] if etiquetas is None else etiquetas
     registro = {k: trabajo[k] for k in trabajo}

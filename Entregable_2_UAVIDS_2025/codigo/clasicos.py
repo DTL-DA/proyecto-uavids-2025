@@ -27,7 +27,7 @@ def _ajustar(trabajo, X, y, ids):
         return prob, {"clase_mayoritaria": mayoritaria}
     if trabajo["modelo"] == "Logística":
         m = LogisticRegression(C=hp["C"], class_weight="balanced", max_iter=5000, random_state=semilla).fit(X[ent], y[ent])
-        return (lambda indices: m.predict_proba(X[indices]).astype(np.float32)), {"parametros": int(m.coef_.size + m.intercept_.size), "iteraciones": int(np.max(m.n_iter_))}
+        return (lambda indices: m.predict_proba(X[indices]).astype(np.float32)), {"parametros": int(m.coef_.size + m.intercept_.size), "iteraciones": int(np.max(m.n_iter_)), "modelo": m}
     import lightgbm as lgb
 
     m = lgb.LGBMClassifier(objective="multiclass", n_estimators=3000, learning_rate=hp["learning_rate"], num_leaves=hp["num_leaves"],
@@ -36,7 +36,7 @@ def _ajustar(trabajo, X, y, ids):
     m.fit(X[ent], y[ent], eval_set=[(X[val], y[val])], callbacks=[lgb.early_stopping(100, verbose=False)])
     arboles = int(m.best_iteration_ or m.n_estimators)
     hojas = int(sum(t["num_leaves"] for t in m.booster_.dump_model()["tree_info"][: arboles * 5]))
-    return (lambda indices: m.predict_proba(X[indices], num_iteration=arboles).astype(np.float32)), {"arboles": arboles, "hojas": hojas, "parametros": 2 * hojas}
+    return (lambda indices: m.predict_proba(X[indices], num_iteration=arboles).astype(np.float32)), {"arboles": arboles, "hojas": hojas, "parametros": 2 * hojas, "modelo": m}
 
 
 def ejecutar_clasico(trabajo, carpeta):
@@ -49,6 +49,7 @@ def ejecutar_clasico(trabajo, carpeta):
     ids = {k: v.numpy() for k, v in D["ids"].items()}
     inicio = time.time()
     prob, extra = _ajustar(trabajo, X, y, ids)
+    modelo_ajustado = extra.pop("modelo", None)
     registro = {k: trabajo[k] for k in trabajo}
     registro.update(extra)
     registro.update({"segundos": round(time.time() - inicio, 2), "epocas": None, "divergente": False, "mac": None,
@@ -61,6 +62,10 @@ def ejecutar_clasico(trabajo, carpeta):
     registro["f1_ent"] = f1_score(y[muestra], prob(muestra).argmax(1), average="macro", zero_division=0)
     if trabajo.get("guardar_prob_val"):
         np.save(ruta.with_name(ruta.stem + "_val.npy"), p_val)
+    if trabajo.get("guardar_pesos") and modelo_ajustado is not None:
+        import pickle
+
+        ruta.with_suffix(".pkl").write_bytes(pickle.dumps(modelo_ajustado))
     if trabajo.get("evaluar") and "eva" in ids:
         inicio_eva = time.time()
         p_eva = prob(ids["eva"])
