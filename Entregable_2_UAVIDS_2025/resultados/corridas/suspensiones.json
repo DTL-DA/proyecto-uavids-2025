@@ -1,0 +1,19 @@
+{
+ "suspensiones": [
+  {
+   "inicio": "2026-11-13 02:03:46",
+   "fin": "2026-11-13 09:16:53",
+   "segundos": 25987.0,
+   "evidencia": "registro del sistema de Windows: Kernel-Power 42 (entrada en suspensión) y 506/507 (reanudación)",
+   "efecto": "las corridas en curso continuaron al reanudar y conservan su resultado; su tiempo de reloj incluye la suspensión, que se descuenta al leerlas",
+   "corridas": [
+    "fase2_DBN_5101_w128-16-256_d001",
+    "fase2_DBN_5102_w128-16-256_d001",
+    "fase2_DBN_5102_w128-256-64_d000",
+    "fase2_DBN_5103_w128-256-64_d000",
+    "fase2_DBN_5104_w128-256-64_d000",
+    "fase2_DBN_5105_w128-256-64_d000"
+   ]
+  }
+ ]
+}

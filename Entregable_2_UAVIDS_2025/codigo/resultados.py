@@ -13,11 +13,37 @@ CORRIDAS = RAIZ_E2 / "resultados" / "corridas"
 
 
 @lru_cache(maxsize=None)
+def suspensiones():
+    """Corridas en curso durante una suspensión del equipo, con los segundos que hay que descontarles.
+
+    El resultado de esas corridas no cambia (el proceso continúa al reanudar), pero su tiempo de reloj incluye la
+    suspensión. El registro está en resultados/corridas/suspensiones.json, con la evidencia del sistema.
+    """
+    ruta = CORRIDAS / "suspensiones.json"
+    descuento = {}
+    if ruta.exists():
+        for s in json.loads(ruta.read_text(encoding="utf-8"))["suspensiones"]:
+            for ident in s["corridas"]:
+                descuento[ident] = descuento.get(ident, 0.0) + s["segundos"]
+    return descuento
+
+
+def _corregir_tiempo(r):
+    d = suspensiones().get(r.get("id"))
+    if d:
+        r["segundos_reloj"] = r["segundos"]
+        r["segundos"] = r["segundos"] - d
+        if (r.get("segundos_preentreno") or 0) > d:
+            r["segundos_preentreno"] -= d
+    return r
+
+
+@lru_cache(maxsize=None)
 def registros(fase):
     carpeta = CORRIDAS / fase
     if not carpeta.exists():
         return ()
-    return tuple(json.loads(p.read_text(encoding="utf-8")) for p in sorted(carpeta.glob("*.json")))
+    return tuple(_corregir_tiempo(json.loads(p.read_text(encoding="utf-8"))) for p in sorted(carpeta.glob("*.json")))
 
 
 def tabla_fase(fase):
