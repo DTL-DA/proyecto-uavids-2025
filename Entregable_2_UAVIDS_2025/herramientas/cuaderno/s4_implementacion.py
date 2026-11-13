@@ -16,7 +16,7 @@ En esta sección se implementan los 13 modelos profundos y las tres líneas base
 | Selección de hiperparámetros | Búsqueda aleatoria con las mismas 12 configuraciones para los 13 modelos profundos, 15 épocas y una semilla, elegida solo con el F1 macro de validación; LightGBM y la regresión logística reciben 12 configuraciones de su propio espacio |
 | Arquitectura no predefinida | Búsqueda de la sección 14 para ResNet, Autoencoder, DBN y CNN-LSTM: 1000 arquitecturas en la fase 1 y k finalistas con 5 semillas en la fase 2 |
 | Repeticiones | R semillas por modelo, con R fijado por el piloto (sección 4.3) y las mismas semillas para todos |
-| Validación interna | Partición fija de validación para seleccionar, más una validación cruzada 5 × 2 agrupada por bloques sobre entrenamiento + validación para las pruebas de Nadeau y Bengio y de Alpaydin |
+| Validación interna | Partición fija de validación para seleccionar, más una validación cruzada 5 × 2 agrupada por bloques sobre entrenamiento + validación para las pruebas de Nadeau y Bengio y de Alpaydin en el contraste de RQ2 |
 | Evaluación | Mismas métricas sobre la misma prueba (sección 4.5) |
 
 La validación anidada completa, que repetiría el ajuste dentro de cada pliegue externo, multiplicaría por 12 el costo de todo el benchmark, de modo que se reemplaza por la comparación entre el puntaje de validación usado para seleccionar y el de prueba (tabla B, sección 7), que mide el mismo optimismo por selección.
@@ -25,7 +25,7 @@ La validación anidada completa, que repetiría el ajuste dentro de cada pliegue
 md("s4-2", r"""
 ### 4.2 Implementación de los modelos
 
-Todos los modelos profundos se implementan en PyTorch, con la versión de la configuración del entorno; TabNet usa la red de la implementación de referencia pytorch-tabnet y los demás, capas estándar de PyTorch. Ningún modelo usa pesos preentrenados, de modo que no aplica la comparación con y sin preentrenamiento ni la fuga por modelos preentrenados. Las líneas base usan scikit-learn y LightGBM.
+Todos los modelos profundos se implementan en PyTorch y se entrenan con Adam (Kingma y Ba, 2015), con la versión de la configuración del entorno; TabNet usa la red de la implementación de referencia pytorch-tabnet y los demás, capas estándar de PyTorch. Ningún modelo usa pesos preentrenados, de modo que no aplica la comparación con y sin preentrenamiento ni la fuga por modelos preentrenados. Las líneas base usan scikit-learn y LightGBM.
 
 Hay una corrección respecto del Entregable 1: los tres modelos base usan ahora el *dropout* exacto del código de los autores (Zeng, 2025), que el Entregable 1 declaró como desviación y evaluó con un análisis de sensibilidad.
 """)
@@ -41,7 +41,7 @@ ADAPTACION = {"DNN": "Ninguna", "CNN 1D": "Ninguna", "LSTM": "Ninguna", "RNN": "
 fuera_rango = float((np.abs(H["X"][ID_ENT]) > 5).mean())
 tabla(complejidad_modelos.assign(Fuente=complejidad_modelos["Modelo"].map(FUENTE), Adaptación=complejidad_modelos["Modelo"].map(ADAPTACION))[["Modelo", "Familia", "Fuente", "Adaptación", "Parámetros", "FLOPs por muestra"]],
       {"Parámetros": "{:,.0f}", "FLOPs por muestra": "{:,.0f}"})
-print(f"Valores estandarizados de entrenamiento fuera de [-5, 5], que la KAN recorta: {100 * fuera_rango:.2f} %")
+print(f"Valores estandarizados de entrenamiento fuera de [-5, 5], que la KAN recorta: {num(100 * fuera_rango, 2)} %")
 """)
 
 md("s4-ajuste", r"""
@@ -57,14 +57,25 @@ from codigo import plan as PLAN
 ajuste = RES.tabla_fase("ajuste")
 PROFUNDOS = CONFIG["modelos"]["base_e1"] + CONFIG["modelos"]["top10"]
 configs = PLAN.configuraciones_ajuste()["profundos"]
-etiqueta_cfg = [f"{i}: lr {c['lr']:g}, wd {c['weight_decay']:g}, lote {c['batch']}" for i, c in enumerate(configs)]
+def cientifico(x):
+    # 0,0003 se escribe 3 × 10⁻⁴, para no mezclar el punto decimal con la coma de las tablas
+    if x == 0:
+        return "0"
+    if 0.01 <= abs(x) < 1e4:
+        return f"{x:.4g}".replace(".", ",")
+    e = int(np.floor(np.log10(abs(x))))
+    m = round(x / 10 ** e, 3)
+    sup = str(e).translate(str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹"))
+    return f"10{sup}" if m == 1 else f"{num(m, 0) if m == int(m) else num(m, 1)} × 10{sup}"
+etiqueta_cfg = [f"{i}: lr {cientifico(c['lr'])}, wd {cientifico(c['weight_decay'])}, lote {c['batch']}" for i, c in enumerate(configs)]
 pivote = ajuste[ajuste["modelo"].isin(PROFUNDOS)].pivot(index="intento", columns="modelo", values="f1_val")[PROFUNDOS]
 pivote.index = etiqueta_cfg
 tabla(pivote.reset_index(names="Configuración"), {m: "{:.4f}" for m in PROFUNDOS})
 MEJORES_HP = PLAN.mejores_hp()
+NOMBRE_HP = {"weight_decay": "wd", "batch": "lote"}
 resumen_ajuste = pd.DataFrame([{"Modelo": m, "Mejor F1 de validación": ajuste.loc[ajuste["modelo"] == m, "f1_val"].max(), "Peor": ajuste.loc[ajuste["modelo"] == m, "f1_val"].min(),
                                 "Rango": ajuste.loc[ajuste["modelo"] == m, "f1_val"].max() - ajuste.loc[ajuste["modelo"] == m, "f1_val"].min(),
-                                "Configuración elegida": ", ".join(f"{k} {v:g}" if isinstance(v, float) else f"{k} {v}" for k, v in MEJORES_HP[m].items()),
+                                "Configuración elegida": ", ".join(f"{NOMBRE_HP.get(k, k)} {cientifico(v)}" if isinstance(v, float) else f"{NOMBRE_HP.get(k, k)} {v}" for k, v in MEJORES_HP[m].items()),
                                 "Minutos del ajuste": ajuste.loc[ajuste["modelo"] == m, "segundos"].sum() / 60, "Divergentes": int(ajuste.loc[ajuste["modelo"] == m, "divergente"].sum())}
                                for m in PROFUNDOS + ["LightGBM", "Logística"]])
 tabla(resumen_ajuste, {"Mejor F1 de validación": "{:.4f}", "Peor": "{:.4f}", "Rango": "{:.4f}", "Minutos del ajuste": "{:.1f}"})
@@ -82,7 +93,7 @@ mas_sensible = resumen_ajuste.loc[resumen_ajuste["Rango"].idxmax()]
 menos_sensible = resumen_ajuste.loc[resumen_ajuste.loc[resumen_ajuste["Modelo"].isin(PROFUNDOS), "Rango"].idxmin()]
 lote_elegido = pd.Series({m: MEJORES_HP[m]["batch"] for m in PROFUNDOS}).value_counts()
 tasa_elegida = pd.Series({m: MEJORES_HP[m]["lr"] for m in PROFUNDOS}).value_counts()
-interpretar(f'''**Interpretación.** El modelo más sensible a los hiperparámetros es {mas_sensible["Modelo"]}, con un rango de {num(mas_sensible["Rango"], 4)} en F1 macro de validación entre sus 12 configuraciones, y el menos sensible es {menos_sensible["Modelo"]}, con {num(menos_sensible["Rango"], 4)}. Entre los profundos, la tasa de aprendizaje más elegida es {num(tasa_elegida.index[0], 4)} ({tasa_elegida.iloc[0]} de 13 modelos) y el lote más elegido, {lote_elegido.index[0]} ({lote_elegido.iloc[0]} de 13). {"Ninguna configuración divergió." if resumen_ajuste["Divergentes"].sum() == 0 else f"Divergieron {int(resumen_ajuste['Divergentes'].sum())} configuraciones, que se reportan y no se usan."}
+interpretar(f'''**Interpretación.** El modelo más sensible a los hiperparámetros es {mas_sensible["Modelo"]}, con un rango de {num(mas_sensible["Rango"], 4)} en F1 macro de validación entre sus 12 configuraciones, y el menos sensible es {menos_sensible["Modelo"]}, con {num(menos_sensible["Rango"], 4)}. Entre los profundos, la tasa de aprendizaje más elegida es {cientifico(tasa_elegida.index[0])} ({tasa_elegida.iloc[0]} de 13 modelos) y el lote más elegido, {lote_elegido.index[0]} ({lote_elegido.iloc[0]} de 13). {"Ninguna configuración divergió." if resumen_ajuste["Divergentes"].sum() == 0 else f"Divergieron {int(resumen_ajuste['Divergentes'].sum())} configuraciones, que se reportan y no se usan."}
 
 Esto significa que el mismo presupuesto no produce el mismo beneficio en todos los modelos: los que tienen un rango amplio dependen más de acertar la configuración, de modo que con un presupuesto menor habrían quedado subestimados, y por eso se iguala el número de intentos y no el tiempo. Hay que tener en cuenta que el ajuste usa una sola semilla, de modo que diferencias entre configuraciones del orden del ruido por semilla, que mide el piloto, no son significativas.
 
@@ -97,11 +108,11 @@ code("s4-hp-tabla", r"""
 DROPOUT = {"DNN": "0,2 tras las capas de 128 y 64", "CNN 1D": "0,2 antes de la densa", "LSTM": "0,2 antes de la salida", "RNN": "0,3", "GRU": "0,3 en tres posiciones", "BiLSTM": "0,3",
            "Transformer": "0,3 antes de la salida", "TabNet": "No usa; regularización de dispersión λ = 10⁻³", "KAN": "0,25 y 0,20", "ResNet": "Por búsqueda", "Autoencoder": "Por búsqueda",
            "DBN": "Por búsqueda", "CNN-LSTM": "Por búsqueda"}
-hp_tabla = pd.DataFrame([{"Modelo": m, "Optimizador": "Adam", "Tasa de aprendizaje": MEJORES_HP[m]["lr"], "Planificador": "ReduceLROnPlateau (0,1; 2)", "Weight decay": MEJORES_HP[m]["weight_decay"],
+hp_tabla = pd.DataFrame([{"Modelo": m, "Optimizador": "Adam", "Tasa de aprendizaje": cientifico(MEJORES_HP[m]["lr"]), "Planificador": "ReduceLROnPlateau (0,1; 2)", "Weight decay": cientifico(MEJORES_HP[m]["weight_decay"]),
                           "Lote": MEJORES_HP[m]["batch"], "Dropout": DROPOUT[m], "Pérdida": "CE ponderada" + (" + dispersión" if m == "TabNet" else " + reconstrucción" if m == "Autoencoder" else ""),
                           "Épocas máximas": CONFIG["entrenamiento"]["max_epocas"], "Parada temprana": f"Paciencia {CONFIG['entrenamiento']['paciencia']} sobre F1 de validación",
                           "Recorte de gradiente": f"Norma {CONFIG['entrenamiento']['norma_gradiente']:g}"} for m in PROFUNDOS])
-tabla(hp_tabla, {"Tasa de aprendizaje": "{:g}", "Weight decay": "{:g}"})
+tabla(hp_tabla, {})
 """)
 
 md("s4-3", r"""
@@ -112,6 +123,8 @@ md("s4-3", r"""
 **Seguimiento de experimentos.** El ejecutor guarda cada corrida en un JSON con su configuración, semilla, curvas por época, tiempo, memoria, equipo y métricas, y la configuración del experimento está versionada en `configuracion/experimento.json`. Ese registro por corrida cumple la función de una herramienta de seguimiento como MLflow sin agregar una dependencia, y se consolida en `entregables/registro_experimentos.csv`.
 
 **Cómputo.** Todo corre en CPU, de modo que no hay ventaja de GPU para ningún modelo; los trabajos se reparten entre procesos de 2 hilos y cada modelo recibe el mismo número de intentos, no el mismo tiempo.
+
+**Preregistro, desviaciones y aclaraciones.** El preregistro (`preregistro_e2.md`) quedó fechado y versionado el 12 de noviembre de 2026 a las 13:12, con la etiqueta `preregistro-e2`, antes del primer entrenamiento. La adenda (`preregistro_e2_adenda.md` y `resultados/preregistro_e2_adenda.json`) registra con fecha las cifras que dependían del piloto y de la búsqueda, y tres cambios declarados antes de usarlos: la **desviación 1**, que entrena la fase 1 de la búsqueda y el estudio de ruido con un subconjunto fijo del 25 % de los bloques de entrenamiento (20 bloques, 19 351 flujos), porque el protocolo completo medía unas 40 horas de cómputo; la **aclaración 1**, que limita la validación cruzada 5 × 2 al contraste de RQ2, el único que la usa, y la **aclaración 2**, que promedia el F1 macro de cada bloque de prueba sobre las clases presentes en él. Ninguna se decidió después de ver resultados de prueba.
 
 #### 4.3.1 Estudio piloto y número de ejecuciones
 
@@ -130,13 +143,13 @@ interpretar(f'''**Interpretación.** En el piloto, la mayor desviación de las d
 
 Esto significa que, {"como en el Entregable 1, el diseño no alcanza a detectar con potencia de 0,80 una diferencia de magnitud δ tras la corrección de Bonferroni, y que solo diferencias de unas " + num(pil["diferencia_minima_detectable"] / DELTA, 1) + " veces δ quedarían detectadas" if pil["limitado_por_tope"] else "el diseño detecta δ con la potencia deseada"}. Hay que tener en cuenta que la cifra es conservadora, porque Holm es menos exigente que Bonferroni salvo en el primer contraste.
 
-Por lo anterior, conviene declarar la diferencia mínima detectable como limitación y leer los resultados no significativos con TOST y con la prueba bayesiana, y no como ausencia de diferencias. Las semillas definitivas son {SEMILLAS[0]} a {SEMILLAS[-1]}, las mismas para los 16 modelos, y quedaron fijadas en la adenda del preregistro el {pil["fecha"]}.''')
+Por lo anterior, conviene declarar la diferencia mínima detectable como limitación y leer los resultados no significativos con TOST y con la prueba bayesiana, y no como ausencia de diferencias. Las semillas definitivas son {SEMILLAS[0]} a {SEMILLAS[-1]}, las mismas para los 15 modelos entrenables (el trivial es determinista y usa solo la primera), y quedaron fijadas en la adenda del preregistro el {pil["fecha"]}.''')
 """)
 
 md("s4-busqueda", r"""
 #### 4.3.2 Búsqueda de arquitectura para los modelos sin diseño definido
 
-ResNet, Autoencoder, DBN y CNN-LSTM recorren el espacio de la sección 14: 3 bloques, anchos de {16, 32, 64, 128, 256} en todas las combinaciones y *dropout* de 0,2 tras cada bloque según b ∈ {0, 1}³, es decir, 1000 arquitecturas por modelo, generadas por código e identificadas como `w64-64-64_d010`. Los demás hiperparámetros se fijaron antes con la arquitectura de referencia (sección 4.2.1). El protocolo es el de dos fases del enunciado.
+ResNet, Autoencoder, DBN y CNN-LSTM recorren el espacio de la sección 14: 3 bloques, anchos de {16, 32, 64, 128, 256} en todas las combinaciones y *dropout* de 0,2 tras cada bloque según b ∈ {0, 1}³, es decir, 1000 arquitecturas por modelo, generadas por código e identificadas como `w64-64-64_d010`. Los demás hiperparámetros se fijaron antes con la arquitectura de referencia (sección 4.2.1). El protocolo es el de dos fases del enunciado, con la desviación 1: la fase 1 y el estudio de ruido entrenan con el 25 % de los bloques de entrenamiento, se mantienen las 1000 arquitecturas, las 6 épocas y la validación completa, y la fase 2 vuelve al entrenamiento completo. Como menos datos hacen más ruidoso el F1 de la fase 1 y pueden favorecer arquitecturas pequeñas, se reporta la correlación de rangos entre las dos fases.
 
 **Ruido por semilla y número de finalistas.** Antes de la fase 1 se entrenan 5 arquitecturas por modelo con 3 semillas a presupuesto de fase 1, para comparar la desviación entre semillas de una misma arquitectura con la desviación entre arquitecturas y fijar k con la regla del preregistro.
 """)
@@ -211,6 +224,10 @@ for m in CON_BUSQUEDA:
     dropout_pareado.append({"Modelo": m, "Diferencia media con dropout − sin dropout": d.mean(), "Combinaciones donde ayuda": int((d > 0).sum()), "p Wilcoxon": w.pvalue,
                             "r biserial": float((stats.rankdata(np.abs(d))[d > 0].sum() - stats.rankdata(np.abs(d))[d < 0].sum()) / stats.rankdata(np.abs(d)).sum())})
 efectos = pd.DataFrame(efectos)
+efectos.to_csv(RESULTADOS / "busqueda_efectos.csv", index=False, encoding="utf-8-sig")
+espacio = pd.DataFrame([{"Modelo": m, "Identificador": MOD.identificador(a), "w1": a[0], "w2": a[1], "w3": a[2], "b1": a[3], "b2": a[4], "b3": a[5],
+                         "Parámetros": MOD.parametros(MOD.construir(m, a)), "FLOPs por muestra": 2 * MOD.contar_mac(MOD.construir(m, a))} for m in CON_BUSQUEDA for a in MOD.espacio_arquitecturas()])
+espacio.to_csv(RESULTADOS / "arquitecturas_espacio.csv", index=False, encoding="utf-8-sig")
 tabla(efectos, {"F": "{:.2f}", "p Holm": "{:.2e}", "% de varianza": "{:.1f}"})
 tabla(pd.DataFrame(dropout_pareado), {"Diferencia media con dropout − sin dropout": "{:+.4f}", "p Wilcoxon": "{:.2e}", "r biserial": "{:.3f}"})
 """)
@@ -248,9 +265,44 @@ for m in CON_BUSQUEDA:
     plt.tight_layout()
     plt.show()
 FASE2 = pd.DataFrame(filas_f2)
+FASE2.to_csv(RESULTADOS / "busqueda_fase2.csv", index=False, encoding="utf-8-sig")
 tabla(FASE2, {"F1 de validación (5 semillas)": "{:.4f}", "Parámetros": "{:,.0f}", "ρ de Spearman fase 1–fase 2": "{:.3f}", "p": "{:.3f}", "DE entre arquitecturas (fase 1)": "{:.4f}",
               "DE entre semillas (fase 2)": "{:.4f}", "Brecha entrenamiento − validación": "{:.4f}"})
 costo_busqueda = pd.DataFrame({"Fase": ["Ruido por semilla", "Fase 1", "Fase 2"], "Corridas": [len(ruido), len(f1), len(f2)],
                                "Horas de proceso": [ruido["segundos"].sum() / 3600, f1["segundos"].sum() / 3600, f2["segundos"].sum() / 3600]})
 tabla(costo_busqueda, {"Horas de proceso": "{:.1f}"})
+if RES.suspensiones():
+    print(f"Nota: {len(RES.suspensiones())} corridas estaban en curso cuando el equipo se suspendió; su resultado no cambia, porque el proceso continuó al reanudar, "
+          "y a su tiempo de reloj se le descuenta la suspensión registrada por el sistema (resultados/corridas/suspensiones.json).")
+""")
+
+code("s4-busqueda-int", r"""
+def mayor_factor(m):
+    sub_e = efectos[(efectos["Modelo"] == m) & (~efectos["Factor"].str.startswith("tendencia")) & (efectos["Factor"] != "Residuo")]
+    return sub_e.loc[sub_e["% de varianza"].idxmax()]
+residuos = efectos[efectos["Factor"] == "Residuo"].set_index("Modelo")["% de varianza"]
+textos_factor = [f"{m}, {mayor_factor(m)['Factor']} ({num(mayor_factor(m)['% de varianza'], 1)} %)" for m in CON_BUSQUEDA]
+dp = pd.DataFrame(dropout_pareado).set_index("Modelo")
+ayuda = [m for m in CON_BUSQUEDA if dp.loc[m, "p Wilcoxon"] < ALFA and dp.loc[m, "Diferencia media con dropout − sin dropout"] > 0]
+perjudica = [m for m in CON_BUSQUEDA if dp.loc[m, "p Wilcoxon"] < ALFA and dp.loc[m, "Diferencia media con dropout − sin dropout"] < 0]
+irrelevante = [r_["Modelo"] for _, r_ in FASE2.iterrows() if r_["DE entre arquitecturas (fase 1)"] <= 1.5 * r_["DE entre semillas (fase 2)"]]
+borde = [r_["Modelo"] for _, r_ in FASE2.iterrows() if any(w in (16, 256) for w in ADENDA["arquitecturas_ganadoras"][r_["Modelo"]][:3])]
+estimado_h = 126000 / 3600
+REFERENCIA_ID = "w64-64-64_d010"
+gana_referencia = FASE2.loc[FASE2["Ganadora"] == REFERENCIA_ID, "Modelo"].tolist()
+con_empate = FASE2.loc[FASE2["Empate técnico"] == "sí", "Modelo"].tolist()
+if not ayuda:
+    texto_dropout = f"El *dropout* no mejora el F1 de forma significativa en ningún modelo" + (f" y lo empeora en {enumerar(perjudica)}" if perjudica else "")
+else:
+    texto_dropout = f"El *dropout* mejora el F1 de forma significativa en {enumerar(ayuda)}" + (f" y lo empeora en {enumerar(perjudica)}" if perjudica else "")
+if gana_referencia:
+    texto_referencia = (f" En {enumerar(con_empate)} hay empate técnico entre la mejor media y otras finalistas, y la regla del preregistro elige entre ellas la de menos parámetros; "
+                        f"en {enumerar(gana_referencia)}, esa elegida es la propia referencia (64, 64, 64) con *dropout* (0, 1, 0), de modo que la búsqueda no encontró en {'esos modelos' if len(gana_referencia) > 1 else 'ese modelo'} una arquitectura que la supere en más de δ.")
+else:
+    texto_referencia = f" En {enumerar(con_empate)} hay empate técnico entre la mejor media y otras finalistas, y la regla del preregistro elige entre ellas la de menos parámetros." if con_empate else ""
+interpretar(f'''**Interpretación.** En la fase 1, el factor que más varianza explica en cada modelo es: {enumerar(textos_factor)}; el residuo, que mezcla el ruido por semilla con lo que el modelo lineal no captura, va de {num(residuos.min(), 1)} % a {num(residuos.max(), 1)} %. {texto_dropout}, según la comparación pareada sobre las 125 combinaciones de anchos. En la fase 2, la correlación de rangos con la fase 1 va de {num(FASE2["ρ de Spearman fase 1–fase 2"].min(), 2)} a {num(FASE2["ρ de Spearman fase 1–fase 2"].max(), 2)}, y las ganadoras son {enumerar(FASE2["Modelo"] + ", " + FASE2["Ganadora"])}.{texto_referencia}
+
+Esto significa que la fase 1 {"informó poco el orden de la fase 2 en " + enumerar(FASE2.loc[FASE2["ρ de Spearman fase 1–fase 2"] < 0.3, "Modelo"]) + ", de modo que en esos modelos la ganadora es la mejor entre los finalistas y no necesariamente la mejor de las 1000" if (FASE2["ρ de Spearman fase 1–fase 2"] < 0.3).any() else "ordenó a los finalistas de forma parecida a la fase 2"}. Así mismo, {"en " + enumerar(irrelevante) + " la dispersión entre arquitecturas es comparable a la dispersión entre semillas, de modo que la arquitectura es irrelevante para ese modelo en este problema, como prevé la sección 14.6 del enunciado" if irrelevante else "en todos los modelos la dispersión entre arquitecturas supera con claridad a la de semillas, de modo que la arquitectura sí importa"}. {"La ganadora tiene algún ancho en el borde del espacio (16 o 256) en " + enumerar(borde) + ", lo que se declara como limitación: el espacio podría no contener el óptimo, y no se amplía después de ver la prueba." if borde else "Ninguna ganadora cae en el borde del espacio."} Hay que tener en cuenta la maldición del ganador: la media de validación de la ganadora en la fase 2 está sesgada hacia arriba por la selección, y por eso su desempeño se estima solo con la prueba, en la ejecución definitiva.
+
+Por lo anterior, conviene usar estas arquitecturas en la ejecución definitiva, como fijó la regla del preregistro, y leer su comparación con los demás modelos sabiendo que la búsqueda costó {num(costo_busqueda["Horas de proceso"].sum(), 1)} horas de proceso, frente a unas {num(estimado_h, 0)} que el preregistro estimó solo para la fase 1 con todos los datos, antes de la desviación 1.''')
 """)

@@ -26,7 +26,13 @@ El entregable hereda sin cambios lo que fijó el Entregable 1: la métrica prima
 md("resumen", r"""
 ## Resumen
 
-*El resumen estructurado se completa con las cifras finales de la sección 6.*
+**Problema.** Detectar y clasificar intrusiones en redes de drones con los 16 atributos de flujo de *UAVIDS-2025* (cinco clases), con el F1 macro como métrica primaria y una partición agrupada por series, para evitar la fuga entre flujos casi gemelos.
+
+**Método.** Se comparan 16 modelos con el mismo pipeline, presupuesto de ajuste y 20 semillas: los diez más recurrentes en una revisión sistemática de 43 estudios, los tres base del Entregable 1, LightGBM, una regresión logística y un trivial. Los cuatro sin arquitectura definida pasan por una búsqueda de 1000 arquitecturas. El protocolo se preregistró, y las diferencias se prueban con *t* pareada, Wilcoxon, Holm, TOST y un *Model Confidence Set*.
+
+**Resultados.** Ningún modelo del Top 10 supera al baseline, la CNN 1D (F1 = 0,8584), por más de δ = 0,01, y tres son equivalentes a él. LightGBM obtiene el mayor F1 (0,8748) y supera a la CNN 1D por 0,0164 (p < 0,001), pero en una validación cruzada 5 × 2 la diferencia es de −0,0003. La serie de prueba explica el 93,1 % de la varianza del F1, y la confusión entre Blackhole y Wormhole, de 12,3 % a 18,5 %, es compartida por las diez familias. El resultado clave del paper guía no se reproduce: 0,9285 frente a 0,94.
+
+**Conclusión.** En este problema la serie pesa más que la arquitectura, y el margen de mejora está en separar los dos ataques de enrutamiento, que es el hueco de investigación para el Entregable 3.
 """)
 
 md("entorno-md", r"""

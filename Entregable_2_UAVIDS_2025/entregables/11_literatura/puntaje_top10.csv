@@ -1,0 +1,13 @@
+﻿modelo,estudios,estudios_uavids,recientes,articulo_fundacional,doi_fundacional,anio_fundacional,citas,citas_por_anio,implementacion,representatividad,puntaje,c_frecuencia,c_citacion,c_recencia,c_uavids,c_implementacion,c_representatividad,aplicable,motivo_no_aplicable,posicion,seleccionado
+CNN-LSTM,6,2,4,Donahue et al. (2015),10.1109/cvpr.2015.7298878,2015,5237,436.4167,1.0,1.0,0.8912,1.0,0.6078,0.6667,1.0,1.0,1.0,sí,,1,sí
+Autoencoder,4,2,3,Hinton y Salakhutdinov (2006),10.1126/science.1127647,2006,21568,1027.0476,1.0,1.0,0.8165,0.6667,0.6932,0.75,1.0,1.0,1.0,sí,,2,sí
+GNN,3,2,3,Scarselli et al. (2009),10.1109/tnn.2008.2005605,2008,10246,539.2632,1.0,1.0,0.7943,0.5,0.6289,1.0,1.0,1.0,1.0,no,"Los tres estudios arman el grafo con direcciones IP, nodos o paquetes, información que este conjunto no trae o que funciona como atajo",3,no
+RNN,5,2,4,Elman (1990),10.1207/s15516709cog1402_1,1990,12511,338.1351,1.0,0.5,0.7824,0.8333,0.5824,0.8,1.0,1.0,0.5,sí,,4,sí
+Transformer,3,0,3,Vaswani et al. (2017),10.48550/arxiv.1706.03762,2017,136211,13621.1,1.0,1.0,0.6927,0.5,0.9515,1.0,0.0,1.0,1.0,sí,,5,sí
+BiLSTM,3,2,2,Graves y Schmidhuber (2005),10.1016/j.neunet.2005.06.042,2005,6179,280.8636,1.0,0.5,0.6596,0.5,0.5639,0.6667,1.0,1.0,0.5,sí,,6,sí
+ResNet,2,0,2,He et al. (2016),10.1109/cvpr.2016.90,2016,243394,22126.7273,1.0,1.0,0.65,0.3333,1.0,1.0,0.0,1.0,1.0,sí,,7,sí
+GRU,5,0,3,Cho et al. (2014),10.3115/v1/d14-1179,2014,27080,2083.0769,1.0,0.5,0.6296,0.8333,0.7639,0.6,0.0,1.0,0.5,sí,,8,sí
+KAN,1,1,1,Liu et al. (2024),10.48550/arxiv.2404.19756,2024,2963,987.6667,1.0,1.0,0.6284,0.1667,0.6893,1.0,0.5,1.0,1.0,sí,,9,sí
+TabNet,1,0,1,Arik y Pfister (2021),10.1609/aaai.v35i8.16826,2021,455,75.8333,1.0,1.0,0.5151,0.1667,0.434,1.0,0.0,1.0,1.0,sí,,10,sí
+DBN,3,0,0,Hinton et al. (2006),10.1162/neco.2006.18.7.1527,2006,16728,796.5714,0.5,1.0,0.4502,0.5,0.6679,0.0,0.0,0.5,1.0,sí,,11,sí
+GAN,1,0,0,Goodfellow et al. (2020),10.1145/3422622,2020,19393,2770.4286,1.0,1.0,0.4189,0.1667,0.7923,0.0,0.0,1.0,1.0,no,"Es un modelo generativo: los estudios lo usan para aumentar datos o generar ataques, no como clasificador",12,no

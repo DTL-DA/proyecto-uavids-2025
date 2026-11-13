@@ -1,0 +1,32 @@
+{
+ "fecha": "2026-11-12 13:12",
+ "documento": "Entregable_2_UAVIDS_2025/preregistro_e2.md",
+ "sha256_documento": "9135a291a45de4b13f8b6f70a1e4a815cb0f4e8046e9d29598ebd7b89dfea48d",
+ "configuracion": "Entregable_2_UAVIDS_2025/configuracion/experimento.json",
+ "sha256_configuracion": "9ba78769676ae669e9ae09f5ffc4b4017c7ac30aeae4feab00266a2a2d3f5cf5",
+ "sha256_csv": "d50d339f68be7b23f0bf089dd438b20a1835c13182d8641220538121440164d0",
+ "sha256_prueba": "2a2dab99c08ed1f19f24add07f5c6b0375e5ce0df7951a99090f54f4f2cd32b4",
+ "sha256_particion": "4c6239a9dc529249af8fc1f009c7197fa9aeaf41dab9d3327eadaf7e9051789e",
+ "sha256_puntaje_top10": "9911c64b549985b95239024631529747dc8279c132b71a9cdd92299bac551645",
+ "python": "3.13.14",
+ "sistema": "Windows 11",
+ "procesador": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+ "versiones": {
+  "torch": "2.6.0+cpu",
+  "numpy": "2.4.6",
+  "pandas": "3.0.3",
+  "scipy": "1.17.1",
+  "scikit-learn": "1.9.0",
+  "statsmodels": "0.15.0",
+  "matplotlib": "3.10.9",
+  "lightgbm": "4.7.0",
+  "xgboost": "3.4.1",
+  "pytorch-tabnet": "4.1.0",
+  "rtdl_revisiting_models": "0.0.2",
+  "psutil": "7.2.2",
+  "nbclient": "0.11.0",
+  "nbformat": "5.11.0",
+  "ipykernel": "7.2.0"
+ },
+ "ejecuciones_previas": "medición de velocidad (unos 6 s por modelo, sin evaluar) y prueba de humo de 2 épocas, borrada sin revisar sus métricas de prueba (sección 14 del documento)"
+}

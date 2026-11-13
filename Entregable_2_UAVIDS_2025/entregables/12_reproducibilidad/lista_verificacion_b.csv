@@ -1,0 +1,22 @@
+﻿Estado,Ítem
+☑,Preregistro fechado y versionado antes del primer entrenamiento
+☑,Hash del dataset y del conjunto de prueba registrados
+☑,"Auditoría de fuga ejecutada y anexa, con todos los criterios aprobados"
+☑,Particiones y semillas guardadas y regenerables
+☑,Un único pipeline por modelo; ningún ajuste fuera de entrenamiento
+☑,Mismo presupuesto de ajuste para todos los modelos; todas las configuraciones registradas
+☑,Al menos 5 ejecuciones por modelo (6 con pruebas por rangos) y resultados por ejecución guardados
+☑,Análisis de potencia y justificación del número de ejecuciones
+☑,"Baselines trivial y clásico fuerte, y los tres modelos base del Entregable 1, ajustados con el mismo presupuesto"
+☑,"Versiones exactas de software, hardware y determinismo documentados"
+☑,"Pruebas de las tablas A, B y C reportadas con p exactos, ajustados, IC y tamaños de efecto"
+☑,Familias de comparaciones y corrección múltiple declaradas a priori
+☑,Techo de desempeño estimado y distancia normalizada γ reportada
+☑,Modelos sin arquitectura definida identificados; espacio declarado antes; fase 1 con 1000; k finalistas con al menos 5 ejecuciones
+☑,"Arquitectura ganadora elegida solo con validación, con finalistas indistinguibles, sesgo del ganador y correlación entre fases"
+☑,Robustez con al menos tres niveles de severidad; interpretabilidad con prueba de fidelidad y estabilidad
+☑,Incertidumbre cuantificada en los tres mejores modelos con cobertura empírica
+☑,"Un solo acceso al conjunto de prueba por ejecución, con modelo y umbrales ya fijados"
+☑,Replicación parcial del paper guía con criterio de éxito definido a priori y limitación identificada
+☑,Reproducción independiente de la tabla principal con discrepancia máxima reportada
+☑,Código ejecutable de extremo a extremo con un solo comando y entorno reproducible

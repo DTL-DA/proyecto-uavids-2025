@@ -21,6 +21,15 @@ CLASICOS = ("Trivial", "Logística", "LightGBM")
 def _ajustar(trabajo, X, y, ids):
     hp, semilla = trabajo["hp"], trabajo["semilla"]
     ent, val = ids["ent"], ids["val"]
+    if trabajo.get("subconjunto_ent"):
+        from . import datos
+
+        ent = np.load(datos.RESULTADOS / "particiones" / f"{trabajo['subconjunto_ent']}.npz")["ent"]
+    if trabajo.get("fraccion_ent") is not None:
+        ent = np.random.default_rng(trabajo["semilla"]).permutation(ent)[: int(round(trabajo["fraccion_ent"] * len(ent)))]
+    if trabajo.get("permutar_etiquetas") is not None:
+        y = y.copy()
+        y[ent] = y[ent][np.random.default_rng(trabajo["permutar_etiquetas"]).permutation(len(ent))]
     if trabajo["modelo"] == "Trivial":
         mayoritaria = int(np.bincount(y[ent]).argmax())
         prob = lambda indices: np.eye(5, dtype=np.float32)[np.full(len(indices), mayoritaria)]

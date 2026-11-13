@@ -30,3 +30,6 @@ __pycache__/
 .ipynb_checkpoints/
 _build/
 *.log
+
+# El PDF del informe se regenera con organizar_entregables.py y viaja en el ZIP del correo
+/Entregable_2_UAVIDS_2025/entregables/01_informe_jupyter_book/Informe_Entregable_2.pdf

@@ -1,0 +1,114 @@
+{
+ "python": "3.13.14",
+ "sistema": "Windows 11",
+ "fecha": "2026-11-13 16:22",
+ "horas": 0.07,
+ "max_segundos": 900,
+ "hilos": 2,
+ "excluidos_por_costo": [
+  "BiLSTM",
+  "GRU"
+ ],
+ "corridas": [
+  {
+   "Modelo": "DNN",
+   "Semilla": 6001,
+   "F1 original": 0.831046379254988,
+   "F1 en entorno limpio": 0.831046379254988,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "CNN 1D",
+   "Semilla": 6001,
+   "F1 original": 0.8566189385861298,
+   "F1 en entorno limpio": 0.8566189385861298,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "LSTM",
+   "Semilla": 6001,
+   "F1 original": 0.8126883329755057,
+   "F1 en entorno limpio": 0.8126883329755057,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "CNN-LSTM",
+   "Semilla": 6001,
+   "F1 original": 0.8797496739668423,
+   "F1 en entorno limpio": 0.8797496739668423,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "Autoencoder",
+   "Semilla": 6001,
+   "F1 original": 0.8588382599863493,
+   "F1 en entorno limpio": 0.8588382599863493,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "RNN",
+   "Semilla": 6001,
+   "F1 original": 0.8274712299031272,
+   "F1 en entorno limpio": 0.8274712299031272,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "Transformer",
+   "Semilla": 6001,
+   "F1 original": 0.8610183290095369,
+   "F1 en entorno limpio": 0.8610183290095369,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "ResNet",
+   "Semilla": 6001,
+   "F1 original": 0.8469188546265093,
+   "F1 en entorno limpio": 0.8469188546265093,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "KAN",
+   "Semilla": 6001,
+   "F1 original": 0.8546932241119855,
+   "F1 en entorno limpio": 0.8546932241119855,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "TabNet",
+   "Semilla": 6001,
+   "F1 original": 0.8102580773606721,
+   "F1 en entorno limpio": 0.8102580773606721,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "DBN",
+   "Semilla": 6001,
+   "F1 original": 0.851675184325791,
+   "F1 en entorno limpio": 0.851675184325791,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "LightGBM",
+   "Semilla": 6001,
+   "F1 original": 0.8737716312536383,
+   "F1 en entorno limpio": 0.8737716312536383,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "Logística",
+   "Semilla": 6001,
+   "F1 original": 0.8029856200497371,
+   "F1 en entorno limpio": 0.8029856200497371,
+   "Diferencia absoluta": 0.0
+  },
+  {
+   "Modelo": "Trivial",
+   "Semilla": 6001,
+   "F1 original": 0.06982180217877498,
+   "F1 en entorno limpio": 0.06982180217877498,
+   "Diferencia absoluta": 0.0
+  }
+ ],
+ "discrepancia_maxima": 0.0,
+ "discrepancia_tabla": 2.220446049250313e-16
+}

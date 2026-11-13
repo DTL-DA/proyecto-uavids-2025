@@ -1,0 +1,81 @@
+{
+ "version": 1,
+ "fecha": "2026-11-12",
+ "descripcion": "Configuración del benchmark del Entregable 2: modelos, espacios de búsqueda, semillas y presupuestos. Se fija antes del primer entrenamiento y la referencia el preregistro con su suma SHA-256.",
+ "modelos": {
+  "base_e1": ["DNN", "CNN 1D", "LSTM"],
+  "top10": ["CNN-LSTM", "Autoencoder", "RNN", "Transformer", "BiLSTM", "ResNet", "GRU", "KAN", "TabNet", "DBN"],
+  "con_busqueda": ["ResNet", "Autoencoder", "DBN", "CNN-LSTM"],
+  "clasicos": ["Trivial", "Logística", "LightGBM"],
+  "baseline_e1": "CNN 1D",
+  "baseline_fuerte": "LightGBM"
+ },
+ "entrenamiento": {
+  "max_epocas": 30,
+  "paciencia": 6,
+  "criterio_parada": "F1 macro de validación",
+  "optimizador": "Adam",
+  "planificador": "ReduceLROnPlateau sobre la pérdida de validación, factor 0,1, paciencia 2",
+  "norma_gradiente": 5.0,
+  "perdida": "entropía cruzada ponderada, w_c = n / (K n_c), con los conteos de entrenamiento",
+  "reentrenamiento_final": "no: cada modelo final se entrena solo con entrenamiento y la validación se usa para la parada temprana"
+ },
+ "ajuste": {
+  "intentos_por_modelo": 12,
+  "metodo": "búsqueda aleatoria sobre una rejilla; las mismas 12 configuraciones para todos los modelos profundos",
+  "semilla_muestreo": 2026,
+  "semilla_entrenamiento": 4242,
+  "max_epocas": 15,
+  "espacio_profundos": {"lr": [0.0001, 0.0003, 0.001, 0.003], "weight_decay": [0.0, 1e-05, 0.0001], "batch": [128, 256, 512]},
+  "espacio_lightgbm": {"learning_rate": [0.03, 0.05, 0.1], "num_leaves": [15, 31, 63, 127], "min_child_samples": [10, 20, 50], "reg_lambda": [0.0, 1.0, 10.0],
+                        "colsample_bytree": [0.7, 1.0], "subsample": [0.7, 1.0]},
+  "espacio_logistica": {"C": [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0, 300.0]},
+  "arquitectura_durante_el_ajuste": "la de referencia (64, 64, 64) con dropout (0, 1, 0) para los modelos con búsqueda de arquitectura",
+  "regla_seleccion": "mayor F1 macro de validación; en empate, la configuración que aparece primero"
+ },
+ "piloto": {
+  "modelos": ["CNN 1D", "Transformer", "RNN", "KAN"],
+  "semillas": [4101, 4102, 4103, 4104, 4105],
+  "conjunto": "validación"
+ },
+ "ruido_semilla_busqueda": {
+  "arquitecturas_por_modelo": 5,
+  "semilla_muestreo": 7,
+  "semillas": [5201, 5202, 5203],
+  "regla_k": "k = 20 si la desviación entre semillas de una misma arquitectura es al menos la mitad de la desviación entre arquitecturas; si no, k = 10"
+ },
+ "busqueda_arquitectura": {
+  "anchos": [16, 32, 64, 128, 256],
+  "profundidad": 3,
+  "tasa_dropout": 0.2,
+  "patrones_dropout": "{0, 1}^3",
+  "cardinalidad": 1000,
+  "semilla_fase1": 5000,
+  "epocas_fase1": 6,
+  "fraccion_fase1": 0.2,
+  "semillas_fase2": [5101, 5102, 5103, 5104, 5105],
+  "referencia": [64, 64, 64, 0, 1, 0],
+  "regla_seleccion": "mayor media de F1 macro de validación en la fase 2; si la diferencia con la segunda es menor que δ o sus IC 95 % se solapan, la de menos parámetros; si persiste, el identificador menor",
+  "conjunto_indistinguible": "finalistas equivalentes a la ganadora por TOST con ±δ sobre sus 5 semillas de validación"
+ },
+ "definitiva": {
+  "semilla_inicial": 6001,
+  "R_minimo": 10,
+  "R_tope": 20,
+  "regla_R": "R = techo(((z_{1-α'/2} + z_{0,80}) σ̂_d / δ)²), con α' = 0,05/10 y σ̂_d el mayor entre los del piloto y el de prueba del Entregable 1 (0,0177); R se acota entre R_minimo y R_tope y, si llega al tope, se reporta la diferencia mínima detectable",
+  "evaluacion_prueba": "una vez por corrida, con el modelo ya fijado",
+  "guardar": "probabilidades de validación y de prueba, y pesos"
+ },
+ "validacion_cruzada_5x2": {
+  "semilla": 7002,
+  "unidad": "bloques de 1000 flujos, sobre entrenamiento + validación, sin tocar la prueba",
+  "fraccion_parada": 0.2
+ },
+ "metricas": {
+  "primaria": "F1 macro",
+  "secundarias": ["accuracy", "balanced accuracy", "precision, recall y F1 macro y ponderados", "AUC-ROC macro uno contra todos", "AUC-PR macro", "MCC", "log-loss", "Brier", "ECE con 15 bins", "ECE adaptativo con 15 bins de igual tamaño"],
+  "delta": 0.01,
+  "delta_g": 0.05,
+  "alfa": 0.05
+ }
+}

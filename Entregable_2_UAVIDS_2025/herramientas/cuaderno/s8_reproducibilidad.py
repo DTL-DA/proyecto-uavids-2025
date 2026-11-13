@@ -14,8 +14,8 @@ code("s8-entorno-limpio", r"""
 ruta_rep = RESULTADOS / "reproduccion_entorno_limpio.json"
 if ruta_rep.exists():
     rep = json.loads(ruta_rep.read_text(encoding="utf-8"))
-    tabla(pd.DataFrame(rep["corridas"]), {"F1 original": "{:.6f}", "F1 en entorno limpio": "{:.6f}", "Diferencia absoluta": "{:.2e}"})
-    interpretar(f'''**Interpretación.** En el entorno limpio, con Python {rep["python"]} y las versiones de `requirements.txt`, la discrepancia máxima en F1 macro de prueba entre las corridas originales y las repetidas es de {p_exacto(rep["discrepancia_maxima"])}, y la tabla principal recalculada a partir de las corridas guardadas coincide con un error máximo de {p_exacto(rep["discrepancia_tabla"])}.
+    tabla(pd.DataFrame(rep["corridas"]), {"F1 original": "{:.6f}", "F1 en entorno limpio": "{:.6f}", "Diferencia absoluta": "{:.2e}", "Semilla": "{:d}"})
+    interpretar(f'''**Interpretación.** En el entorno limpio, con Python {rep["python"]} y las versiones de `requirements.txt`, se volvieron a entrenar {len(rep["corridas"])} corridas, las de la primera semilla de los modelos que entrenan en menos de {num(rep["max_segundos"] / 60, 0)} minutos{"; por costo quedaron fuera " + enumerar(rep["excluidos_por_costo"]) if rep["excluidos_por_costo"] else ""}. La discrepancia máxima en F1 macro de prueba entre las corridas originales y las repetidas es de {p_exacto(rep["discrepancia_maxima"])}, y la tabla principal recalculada a partir de las corridas guardadas coincide con un error máximo de {p_exacto(rep["discrepancia_tabla"])}.
 
 Esto significa que el pipeline es reproducible en una instalación nueva del mismo sistema operativo y procesador; con otro procesador o con GPU, las operaciones de punto flotante pueden cambiar en el último dígito y, por la parada temprana, mover la época elegida, de modo que se esperan diferencias del orden de la variabilidad entre semillas.
 
@@ -56,5 +56,7 @@ verificar = {
     "Reproducción independiente de la tabla principal con discrepancia máxima reportada": (RESULTADOS / "reproduccion_entorno_limpio.json").exists(),
     "Código ejecutable de extremo a extremo con un solo comando y entorno reproducible": True,
 }
-tabla(pd.DataFrame({"Estado": ["☑" if v else "☐" for v in verificar.values()], "Ítem": list(verificar)}))
+LISTA_B = pd.DataFrame({"Estado": ["☑" if v else "☐" for v in verificar.values()], "Ítem": list(verificar)})
+LISTA_B.to_csv(RESULTADOS / "lista_verificacion_b.csv", index=False, encoding="utf-8-sig")
+tabla(LISTA_B)
 """)

@@ -36,7 +36,7 @@ resumen_e2 = json.loads((LIT2 / "exportaciones" / "2026-11-12_resumen_e2.json").
 conteo_e2 = pd.DataFrame(resumen_e2["resultados"]).pivot(index="fuente", columns="cadena", values="total")
 conteo_e1 = pd.DataFrame({"C1": [323, 11, 481, 132, 523], "C2": [40, 3, 40, 11, 18], "C3": [220, 29, 81, 16, 26]}, index=["OpenAlex", "arXiv", "IEEE Xplore", "Web of Science", "Scopus"])
 conteos = pd.concat({"Entregable 1 (3 y 4 de noviembre)": conteo_e1, "Entregable 2 (12 de noviembre)": conteo_e2}, axis=1).reindex(["OpenAlex", "arXiv", "IEEE Xplore", "Scopus", "Web of Science"])
-tabla(conteos.reset_index(names="Base").fillna("pendiente"), indice=False)
+tabla(conteos.reset_index(names="Base").map(lambda v: "pendiente" if pd.isna(v) else (f"{int(v):,}".replace(",", " ") if isinstance(v, (int, float)) else v)), indice=False)
 elegibles_e1 = [r for r in REG_E1 if r["cribado"] == "elegible"]
 cob_eleg = [r for r in COB_E1 if r["decision"] in ("elegible", "dudoso")]
 PRISMA = {"exportados_e1": 583 + 42 + 602 + 567 + 159, "depurados_e1": len(REG_E1), "filtro_e1": sum(r["cribado"] == "" for r in REG_E1), "excluidos_e1": sum(r["cribado"] == "excluido" for r in REG_E1),
@@ -46,7 +46,6 @@ PRISMA = {"exportados_e1": 583 + 42 + 602 + 567 + 159, "depurados_e1": len(REG_E
           "incluidos_e2": sum(r["texto_completo"] == "incluido" for r in REG_E2), "incluidos": len(EXT)}
 PRISMA["evaluados_e1"] = PRISMA["elegibles_e1"] - PRISMA["no_recuperados_e1"]
 PRISMA["incluidos_e1_bases"] = 38
-print(PRISMA)
 """)
 
 code("s3-prisma", r"""
@@ -93,25 +92,43 @@ md("s3-extraccion", r"""
 """)
 
 code("s3-extraccion-tabla", r"""
+import unicodedata
+
 METADATOS = json.loads((LIT1 / "estudios_metadatos.json").read_text(encoding="utf-8"))
 METADATOS["10.22266/ijies2025.0531.33"]["autores"] = ["Aws Hamed Hamad", "Noor Khalid Hussein", "Abdulrahman M. Abdulghani"]
 METADATOS["sin-doi:dragon"]["autores"] = ["P. SureshBabu", "M. Geetha"]
 METADATOS["10.1007/s10207-026-01353-8"] = {"autores": ["Rifa Tasfia", "Anitha Chennamaneni", "Abhijit Kumar Nag"], "anio": 2026, "titulo": "Revisiting adversarial robustness in NIDS: a multi-dataset evaluation of test-time evasion attacks",
                                            "fuente": "International Journal of Information Security", "volumen": "25", "numero": None, "paginas": "184", "tipo": "article"}
 COMPUESTOS = {"Canan Batur Şahin": ("Batur Şahin", "Canan")}
+PARTICULAS = {"van", "von", "de", "der", "den", "del", "da", "du", "le", "la"}
 def partes_nombre(nombre):
+    # Apellido y nombres; las partículas (van, de, von...) van con el apellido: Bart van Merriënboer → van Merriënboer, Bart
     if nombre in COMPUESTOS:
         return COMPUESTOS[nombre]
     f = nombre.replace("‐", "-").split()
-    return f[-1], " ".join(f[:-1])
+    i = len(f) - 2
+    while i >= 1 and f[i].lower() in PARTICULAS:
+        i -= 1
+    return " ".join(f[i + 1:]), " ".join(f[:i + 1])
 def cita_base(doi):
     m = METADATOS[doi]
     a = [partes_nombre(x)[0] for x in m["autores"]]
     autor = a[0] if len(a) == 1 else f"{a[0]} y {a[1]}" if len(a) == 2 else f"{a[0]} et al."
     return f"{autor} ({m['anio']})"
+def clave_orden(t):
+    # Clave de orden alfabético sin tildes ni signos diacríticos (la ı turca se ordena como i)
+    return "".join(c for c in unicodedata.normalize("NFKD", t.lower().replace("ı", "i")) if not unicodedata.combining(c))
+def iniciales(nombres):
+    return " ".join("-".join(p[0] + "." for p in n.split("-") if p) for n in nombres.split())
+def autor_apa(apellido, nombres):
+    return f"{apellido}, {iniciales(nombres)}" if nombres.strip() else apellido
+def orden_autores(doi):
+    # Mismo orden que la lista de referencias: autores completos y luego título
+    m = METADATOS[doi]
+    return clave_orden(", ".join(autor_apa(a, n) for a, n in map(partes_nombre, m["autores"])) + " " + m["titulo"])
 SUFIJO = {}
 for base in {cita_base(e["doi"]) for e in EXT}:
-    iguales = sorted(e["doi"] for e in EXT if cita_base(e["doi"]) == base)
+    iguales = sorted((e["doi"] for e in EXT if cita_base(e["doi"]) == base), key=orden_autores)
     if len(iguales) > 1:
         SUFIJO.update({d: "abcdef"[i] for i, d in enumerate(iguales)})
 citar = lambda doi: cita_base(doi)[:-1] + SUFIJO.get(doi, "") + ")"

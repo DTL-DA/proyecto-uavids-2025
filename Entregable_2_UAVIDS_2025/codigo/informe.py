@@ -39,7 +39,10 @@ def num(valor, decimales=3):
     """Número para el texto: coma decimal y espacio de miles."""
     if valor is None or (isinstance(valor, float) and not np.isfinite(valor)):
         return "no disponible"
-    return f"{valor:,.{decimales}f}".replace(",", " ").replace(".", ",")
+    texto = f"{valor:,.{decimales}f}"
+    if texto.startswith("-") and float(texto.replace(",", "")) == 0:
+        texto = texto[1:]  # sin «-0,000» cuando el valor redondea a cero
+    return texto.replace(",", " ").replace(".", ",")
 
 
 def pct(valor, decimales=1):
@@ -70,6 +73,20 @@ def interpretar(texto):
     display(Markdown(texto))
 
 
+def _sin_cero_negativo(formato):
+    """Formateador que escribe «0,000» y no «-0,000» cuando el valor redondea a cero."""
+    def f(x):
+        try:
+            texto = formato.format(x)
+        except (ValueError, TypeError):
+            return str(x)
+        if texto[:1] in "-+" and not any(c in "123456789" for c in texto):
+            texto = texto[1:]
+        return texto
+    return f
+
+
 def tabla(df, formatos=None, indice=False):
     estilo = df.style if indice else df.style.hide(axis="index")
-    display(estilo.format(formatos or {}, precision=4))
+    formatos = {c: _sin_cero_negativo(f) if isinstance(f, str) else f for c, f in (formatos or {}).items()}
+    display(estilo.format(formatos, precision=4))

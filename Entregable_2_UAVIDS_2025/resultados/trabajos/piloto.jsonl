@@ -1,0 +1,20 @@
+{"id": "piloto_CNN_1D_4101", "fase": "piloto", "modelo": "CNN 1D", "hp": {"lr": 0.001, "weight_decay": 0.0, "batch": 512}, "semilla": 4101, "costo": 60.91892972671767, "guardar_prob_val": true}
+{"id": "piloto_CNN_1D_4102", "fase": "piloto", "modelo": "CNN 1D", "hp": {"lr": 0.001, "weight_decay": 0.0, "batch": 512}, "semilla": 4102, "costo": 60.91892972671767, "guardar_prob_val": true}
+{"id": "piloto_CNN_1D_4103", "fase": "piloto", "modelo": "CNN 1D", "hp": {"lr": 0.001, "weight_decay": 0.0, "batch": 512}, "semilla": 4103, "costo": 60.91892972671767, "guardar_prob_val": true}
+{"id": "piloto_CNN_1D_4104", "fase": "piloto", "modelo": "CNN 1D", "hp": {"lr": 0.001, "weight_decay": 0.0, "batch": 512}, "semilla": 4104, "costo": 60.91892972671767, "guardar_prob_val": true}
+{"id": "piloto_CNN_1D_4105", "fase": "piloto", "modelo": "CNN 1D", "hp": {"lr": 0.001, "weight_decay": 0.0, "batch": 512}, "semilla": 4105, "costo": 60.91892972671767, "guardar_prob_val": true}
+{"id": "piloto_Transformer_4101", "fase": "piloto", "modelo": "Transformer", "hp": {"lr": 0.003, "weight_decay": 1e-05, "batch": 512}, "semilla": 4101, "costo": 68.2292012939238, "guardar_prob_val": true}
+{"id": "piloto_Transformer_4102", "fase": "piloto", "modelo": "Transformer", "hp": {"lr": 0.003, "weight_decay": 1e-05, "batch": 512}, "semilla": 4102, "costo": 68.2292012939238, "guardar_prob_val": true}
+{"id": "piloto_Transformer_4103", "fase": "piloto", "modelo": "Transformer", "hp": {"lr": 0.003, "weight_decay": 1e-05, "batch": 512}, "semilla": 4103, "costo": 68.2292012939238, "guardar_prob_val": true}
+{"id": "piloto_Transformer_4104", "fase": "piloto", "modelo": "Transformer", "hp": {"lr": 0.003, "weight_decay": 1e-05, "batch": 512}, "semilla": 4104, "costo": 68.2292012939238, "guardar_prob_val": true}
+{"id": "piloto_Transformer_4105", "fase": "piloto", "modelo": "Transformer", "hp": {"lr": 0.003, "weight_decay": 1e-05, "batch": 512}, "semilla": 4105, "costo": 68.2292012939238, "guardar_prob_val": true}
+{"id": "piloto_RNN_4101", "fase": "piloto", "modelo": "RNN", "hp": {"lr": 0.003, "weight_decay": 0.0001, "batch": 512}, "semilla": 4101, "costo": 194.94057512549654, "guardar_prob_val": true}
+{"id": "piloto_RNN_4102", "fase": "piloto", "modelo": "RNN", "hp": {"lr": 0.003, "weight_decay": 0.0001, "batch": 512}, "semilla": 4102, "costo": 194.94057512549654, "guardar_prob_val": true}
+{"id": "piloto_RNN_4103", "fase": "piloto", "modelo": "RNN", "hp": {"lr": 0.003, "weight_decay": 0.0001, "batch": 512}, "semilla": 4103, "costo": 194.94057512549654, "guardar_prob_val": true}
+{"id": "piloto_RNN_4104", "fase": "piloto", "modelo": "RNN", "hp": {"lr": 0.003, "weight_decay": 0.0001, "batch": 512}, "semilla": 4104, "costo": 194.94057512549654, "guardar_prob_val": true}
+{"id": "piloto_RNN_4105", "fase": "piloto", "modelo": "RNN", "hp": {"lr": 0.003, "weight_decay": 0.0001, "batch": 512}, "semilla": 4105, "costo": 194.94057512549654, "guardar_prob_val": true}
+{"id": "piloto_KAN_4101", "fase": "piloto", "modelo": "KAN", "hp": {"lr": 0.003, "weight_decay": 0.0, "batch": 128}, "semilla": 4101, "costo": 84.94896452079922, "guardar_prob_val": true}
+{"id": "piloto_KAN_4102", "fase": "piloto", "modelo": "KAN", "hp": {"lr": 0.003, "weight_decay": 0.0, "batch": 128}, "semilla": 4102, "costo": 84.94896452079922, "guardar_prob_val": true}
+{"id": "piloto_KAN_4103", "fase": "piloto", "modelo": "KAN", "hp": {"lr": 0.003, "weight_decay": 0.0, "batch": 128}, "semilla": 4103, "costo": 84.94896452079922, "guardar_prob_val": true}
+{"id": "piloto_KAN_4104", "fase": "piloto", "modelo": "KAN", "hp": {"lr": 0.003, "weight_decay": 0.0, "batch": 128}, "semilla": 4104, "costo": 84.94896452079922, "guardar_prob_val": true}
+{"id": "piloto_KAN_4105", "fase": "piloto", "modelo": "KAN", "hp": {"lr": 0.003, "weight_decay": 0.0, "batch": 128}, "semilla": 4105, "costo": 84.94896452079922, "guardar_prob_val": true}

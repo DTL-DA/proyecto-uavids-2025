@@ -63,8 +63,11 @@ repetidas_atributos = datos[ATRIBUTOS].duplicated(keep=False)
 conflictos_exactos = datos.loc[repetidas_atributos].groupby(ATRIBUTOS, dropna=False)["label"].nunique()
 grupos_conflicto = int((conflictos_exactos > 1).sum())
 filas_conflicto = int(datos.loc[repetidas_atributos].groupby(ATRIBUTOS)["label"].transform("nunique").gt(1).sum())
-clave_casi = pd.DataFrame(np.round(x_log[indices_unicos], 2)).astype(str).agg("|".join, axis=1)
-casi = pd.DataFrame({"clave": clave_casi.to_numpy(), "y": y[indices_unicos]})
+def clave_filas(M, decimales=2):
+    # Clave binaria de cada fila redondeada: dos flujos son casi duplicados si comparten la clave
+    M = np.ascontiguousarray(np.round(M, decimales) + 0.0)
+    return pd.factorize(M.view(np.dtype((np.void, M.dtype.itemsize * M.shape[1]))).ravel())[0]
+casi = pd.DataFrame({"clave": clave_filas(x_log[indices_unicos]), "y": y[indices_unicos]})
 tam_grupo = casi.groupby("clave")["y"].transform("size")
 clases_grupo = casi.groupby("clave")["y"].transform("nunique")
 frac_casi = float((tam_grupo > 1).mean())
@@ -87,20 +90,20 @@ y_ent = y[ID_ENT]
 umbral = np.array([oof[y_ent == c, c].mean() for c in range(K)])
 confiables = oof >= umbral
 candidata = np.where(confiables.any(1), np.argmax(np.where(confiables, oof, -1), 1), -1)
-C = np.zeros((K, K), int)
+C_CL = np.zeros((K, K), int)
 for c in range(K):
     for j in range(K):
-        C[c, j] = int(((y_ent == c) & (candidata == j)).sum())
-ruido_cl = float(C[~np.eye(K, dtype=bool)].sum() / C.sum())
-matriz_cl = pd.DataFrame(C, index=[f"Etiqueta {c}" for c in CLASES], columns=[f"Probable {c}" for c in CLASES])
+        C_CL[c, j] = int(((y_ent == c) & (candidata == j)).sum())
+ruido_cl = float(C_CL[~np.eye(K, dtype=bool)].sum() / C_CL.sum())
+matriz_cl = pd.DataFrame(C_CL, index=[f"Etiqueta {c}" for c in CLASES], columns=[f"Probable {c}" for c in CLASES])
 tabla(matriz_cl.reset_index(names="Conteo conjunto"))
 calidad = pd.DataFrame({"Indicador": ["Filas repetidas en atributos y etiqueta", "Grupos de atributos idénticos con etiquetas distintas", "Filas en esos grupos",
                                       "Flujos sin repetir con un casi duplicado", "Flujos en grupos casi duplicados con clases distintas", "Ruido estimado por aprendizaje confiado (entrenamiento)"],
                         "Valor": [f"{int(repetidas.sum()):,}".replace(",", " "), f"{grupos_conflicto:,}".replace(",", " "), f"{filas_conflicto:,}".replace(",", " "), pct(frac_casi), pct(frac_casi_conflicto), pct(ruido_cl)]})
 tabla(calidad)
-par_bw = (C[0, 4] + C[4, 0]) / max(C[~np.eye(K, dtype=bool)].sum(), 1)
+par_bw = (C_CL[0, 4] + C_CL[4, 0]) / max(C_CL[~np.eye(K, dtype=bool)].sum(), 1)
 texto_conflicto = "ningún grupo de flujos con atributos idénticos tiene etiquetas distintas" if grupos_conflicto == 0 else f"{grupos_conflicto} grupos de atributos idénticos tienen etiquetas distintas y reúnen {filas_conflicto} filas"
-par_sf = (C[3, 1] + C[1, 3]) / max(C[~np.eye(K, dtype=bool)].sum(), 1)
+par_sf = (C_CL[3, 1] + C_CL[1, 3]) / max(C_CL[~np.eye(K, dtype=bool)].sum(), 1)
 interpretar(f'''**Interpretación.** El archivo tiene {num(int(repetidas.sum()), 0)} filas repetidas, que se retiran antes de partir, y {texto_conflicto}. Tras retirar las repetidas, el {pct(frac_casi)} de los flujos tiene un casi duplicado y el {pct(frac_casi_conflicto)} cae en un grupo casi duplicado con más de una clase. El aprendizaje confiado estima que el {pct(ruido_cl)} de las etiquetas de entrenamiento serían de otra clase, el par Blackhole–Wormhole reúne el {pct(par_bw)} de esos casos y el par Sybil–Flooding, el {pct(par_sf)}.
 
 Hay que tener en cuenta que el aprendizaje confiado no distingue el ruido de etiqueta de la superposición real entre clases: un flujo de Blackhole que se comporta como uno de Wormhole aparece como sospechoso aunque su etiqueta sea correcta. Es decir, la cifra es una cota superior de la parte del error que ningún modelo podría eliminar, y se concentra en el mismo par de ataques que el Entregable 1 señaló como el más confundido.
@@ -162,10 +165,10 @@ def huella(indices, con_etiqueta=False):
     filas = [hashlib.sha1(f.tobytes() + (bytes([e]) if con_etiqueta else b"")).hexdigest() for f, e in zip(m, y[indices])]
     return set(filas)
 H_ENT, H_VAL, H_PRU = huella(ID_ENT), huella(ID_VAL), huella(ID_PRU)
-claves = pd.Series(np.round(x_log, 2).astype(str).tolist()).str.join("|")
-c_ent, c_val, c_pru = set(claves[ID_ENT]), claves[ID_VAL], claves[ID_PRU]
-casi_val, casi_pru = float(c_val.isin(c_ent).mean()), float(c_pru.isin(c_ent).mean())
-np.save(ANALISIS / "prueba_con_casi_duplicado.npy", c_pru.isin(c_ent).to_numpy())
+claves = clave_filas(x_log)
+c_ent = np.unique(claves[ID_ENT])
+casi_val, casi_pru = float(np.isin(claves[ID_VAL], c_ent).mean()), float(np.isin(claves[ID_PRU], c_ent).mean())
+np.save(ANALISIS / "prueba_con_casi_duplicado.npy", np.isin(claves[ID_PRU], c_ent))
 
 # Fuga por transformaciones: con datos sintéticos, cambiar validación y prueba no debe mover los estadísticos de la estandarización
 sintetico = np.random.default_rng(0).lognormal(size=(len(datos), len(ATRIBUTOS)))
@@ -188,6 +191,7 @@ AUDITORIA = pd.DataFrame({
     "Criterio de aprobación": ["Intersección vacía", "Cero colisiones", "Menos de 5 %, tolerancia declarada a priori, y desempeño con y sin esos casos en la sección 6", "Orden estricto", "Distancia mayor que el *buffer*",
                                "Estadísticos idénticos", "Ningún atributo sospechoso sin justificación", "AUC no distinguible de 0,5 o diferencia explicada", "Riesgo declarado", "Score cercano al azar"]})
 tabla(AUDITORIA)
+AUDITORIA.to_csv(RESULTADOS / "auditoria_fuga.csv", index=False, encoding="utf-8-sig")
 assert not (B_ENT & B_PRU) and not (B_ENT & B_VAL) and not (B_VAL & B_PRU) and transformacion_ok
 interpretar(f'''**Interpretación.** Las particiones no comparten ningún bloque, y entre entrenamiento y prueba hay {len(H_ENT & H_PRU)} filas idénticas en sus atributos; la prueba con datos sintéticos confirma que la estandarización solo usa entrenamiento. El {pct(casi_pru)} de los flujos de prueba tiene un casi duplicado en entrenamiento, por debajo de la tolerancia de 5 %, y en validación la cifra es de {pct(casi_val)}.
 
@@ -320,13 +324,13 @@ atipico_multi = dist > corte
 por_clase = pd.Series(atipico_multi).groupby(y[ID_ENT]).mean().rename(lambda c: CLASES[c])
 tabla(pd.DataFrame({"Clase": por_clase.index, "% atípicos multivariados": 100 * por_clase.to_numpy()}), {"% atípicos multivariados": "{:.1f}"})
 mas_asimetrico = distribuciones.loc[distribuciones["Asimetría original"].abs().idxmax()]
-interpretar(f'''**Interpretación.** Los {len(ATRIBUTOS)} atributos son numéricos, {int((distribuciones["Tipo"] == "discreto").sum())} de ellos discretos (conteos y tamaños), y en escala original son muy asimétricos: el caso extremo es `{mas_asimetrico["Atributo"]}`, con asimetría de {num(mas_asimetrico["Asimetría original"], 1)} y curtosis de {num(mas_asimetrico["Curtosis original"], 0)}. Con $\log(1 + x)$, la mediana del valor absoluto de la asimetría baja de {num(distribuciones["Asimetría original"].abs().median(), 2)} a {num(distribuciones["Asimetría con log"].abs().median(), 2)}. Sin embargo, el {pct(atipico_multi.mean())} de los flujos de entrenamiento supera el umbral de Mahalanobis robusto, y la proporción va de {pct(por_clase.min())} en {por_clase.idxmin()} a {pct(por_clase.max())} en {por_clase.idxmax()}.
+interpretar(f'''**Interpretación.** Los {len(ATRIBUTOS)} atributos son numéricos, {int((distribuciones["Tipo"] == "discreto").sum())} de ellos discretos (conteos y tamaños), y en escala original son muy asimétricos: el caso extremo es `{mas_asimetrico["Atributo"]}`, con asimetría de {num(mas_asimetrico["Asimetría original"], 1)} y curtosis de {num(mas_asimetrico["Curtosis original"], 0)}. Con $\\log(1 + x)$, la mediana del valor absoluto de la asimetría baja de {num(distribuciones["Asimetría original"].abs().median(), 2)} a {num(distribuciones["Asimetría con log"].abs().median(), 2)}. Sin embargo, el {pct(atipico_multi.mean())} de los flujos de entrenamiento supera el umbral de Mahalanobis robusto, y la proporción va de {pct(por_clase.min())} en {por_clase.idxmin()} a {pct(por_clase.max())} en {por_clase.idxmax()}.
 
 Lo anterior indica que los atípicos multivariados no son errores de medición, sino comportamiento propio de algunas clases: un ataque altera la combinación de atributos, y eliminarlos quitaría justamente la señal que se quiere detectar.
 
 Por tal motivo, se mantiene la transformación logarítmica con estandarización del Entregable 1, sin eliminar atípicos ni usar un escalado robusto, y la robustez ante valores extremos se evalúa con perturbaciones controladas en la sección 6.
 
-**Decisión de preprocesamiento.** $\log(1 + x)$, recorte de `PacketDropRate` en 1 y estandarización con entrenamiento.
+**Decisión de preprocesamiento.** $\\log(1 + x)$, recorte de `PacketDropRate` en 1 y estandarización con entrenamiento.
 
 **Impacto en la arquitectura y la validación.** Las arquitecturas con funciones de base acotadas, como la KAN, recortan la entrada en [−5, 5]; la proporción de valores fuera de ese rango se reporta en la sección 4.2.
 

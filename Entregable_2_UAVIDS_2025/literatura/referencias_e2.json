@@ -1,0 +1,590 @@
+{
+ "10.1109/cvpr.2015.7298878": {
+  "titulo": "Long-term recurrent convolutional networks for visual recognition and description",
+  "anio": 2015,
+  "autores": [
+   "Jeff Donahue",
+   "Lisa Anne Hendricks",
+   "Sergio Guadarrama",
+   "Marcus Rohrbach",
+   "Subhashini Venugopalan",
+   "Trevor Darrell",
+   "Kate Saenko"
+  ],
+  "fuente": "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+  "volumen": null,
+  "numero": null,
+  "paginas": "2625-2634",
+  "tipo": "conference-paper"
+ },
+ "10.1207/s15516709cog1402_1": {
+  "titulo": "Finding Structure in Time",
+  "anio": 1990,
+  "autores": [
+   "Jeffrey L. Elman"
+  ],
+  "fuente": "Cognitive Science",
+  "volumen": "14",
+  "numero": "2",
+  "paginas": "179-211",
+  "tipo": "article"
+ },
+ "10.3115/v1/d14-1179": {
+  "titulo": "Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation",
+  "anio": 2014,
+  "autores": [
+   "Kyunghyun Cho",
+   "Bart van Merriënboer",
+   "Çağlar Gülçehre",
+   "Dzmitry Bahdanau",
+   "Fethi Bougares",
+   "Holger Schwenk",
+   "Yoshua Bengio"
+  ],
+  "fuente": "Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+  "volumen": null,
+  "numero": null,
+  "paginas": "1724-1734",
+  "tipo": "conference-paper"
+ },
+ "10.1126/science.1127647": {
+  "titulo": "Reducing the Dimensionality of Data with Neural Networks",
+  "anio": 2006,
+  "autores": [
+   "Geoffrey E. Hinton",
+   "Ruslan Salakhutdinov"
+  ],
+  "fuente": "Science",
+  "volumen": "313",
+  "numero": "5786",
+  "paginas": "504-507",
+  "tipo": "article"
+ },
+ "10.1016/j.neunet.2005.06.042": {
+  "titulo": "Framewise phoneme classification with bidirectional LSTM and other neural network architectures",
+  "anio": 2005,
+  "autores": [
+   "Alex Graves",
+   "Jürgen Schmidhuber"
+  ],
+  "fuente": "Neural Networks",
+  "volumen": "18",
+  "numero": "5-6",
+  "paginas": "602-610",
+  "tipo": "article"
+ },
+ "10.1162/neco.2006.18.7.1527": {
+  "titulo": "A Fast Learning Algorithm for Deep Belief Nets",
+  "anio": 2006,
+  "autores": [
+   "Geoffrey E. Hinton",
+   "Simon Osindero",
+   "Yee‐Whye Teh"
+  ],
+  "fuente": "Neural Computation",
+  "volumen": "18",
+  "numero": "7",
+  "paginas": "1527-1554",
+  "tipo": "article"
+ },
+ "10.48550/arxiv.1706.03762": {
+  "titulo": "Attention Is All You Need",
+  "anio": 2017,
+  "autores": [
+   "Ashish Vaswani",
+   "Noam Shazeer",
+   "Niki Parmar",
+   "Jakob Uszkoreit",
+   "Llion Jones",
+   "Aidan N. Gomez",
+   "Łukasz Kaiser",
+   "Illia Polosukhin"
+  ],
+  "fuente": "arXiv",
+  "volumen": "30",
+  "numero": null,
+  "paginas": "5998-6008",
+  "tipo": "preprint"
+ },
+ "10.1109/tnn.2008.2005605": {
+  "titulo": "The Graph Neural Network Model",
+  "anio": 2008,
+  "autores": [
+   "Franco Scarselli",
+   "Marco Gori",
+   "Ah Chung Tsoi",
+   "Markus Hagenbuchner",
+   "Gabriele Monfardini"
+  ],
+  "fuente": "IEEE Transactions on Neural Networks",
+  "volumen": "20",
+  "numero": "1",
+  "paginas": "61-80",
+  "tipo": "article"
+ },
+ "10.1109/cvpr.2016.90": {
+  "titulo": "Deep Residual Learning for Image Recognition",
+  "anio": 2016,
+  "autores": [
+   "Kaiming He",
+   "Xiangyu Zhang",
+   "Shaoqing Ren",
+   "Jian Sun"
+  ],
+  "fuente": "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+  "volumen": null,
+  "numero": null,
+  "paginas": "770-778",
+  "tipo": "conference-paper"
+ },
+ "10.1145/3422622": {
+  "titulo": "Generative adversarial networks",
+  "anio": 2020,
+  "autores": [
+   "Ian Goodfellow",
+   "Jean Pouget-Abadie",
+   "Mehdi Mirza",
+   "Bing Xu",
+   "David Warde-Farley",
+   "Sherjil Ozair",
+   "Aaron C. Courville",
+   "Yoshua Bengio"
+  ],
+  "fuente": "Communications of the ACM",
+  "volumen": "63",
+  "numero": "11",
+  "paginas": "139-144",
+  "tipo": "article"
+ },
+ "10.1609/aaai.v35i8.16826": {
+  "titulo": "TabNet: Attentive Interpretable Tabular Learning",
+  "anio": 2021,
+  "autores": [
+   "Sercan Ö. Arık",
+   "Tomas Pfister"
+  ],
+  "fuente": "Proceedings of the AAAI Conference on Artificial Intelligence",
+  "volumen": "35",
+  "numero": "8",
+  "paginas": "6679-6687",
+  "tipo": "conference-paper"
+ },
+ "10.48550/arxiv.2404.19756": {
+  "titulo": "KAN: Kolmogorov-Arnold Networks",
+  "anio": 2024,
+  "autores": [
+   "Ziming Liu",
+   "Yixuan Wang",
+   "Sachin Vaidya",
+   "Fabian Ruehle",
+   "James Halverson",
+   "Marin Soljacic A",
+   "Thomas Y. Hou",
+   "Max Tegmark"
+  ],
+  "fuente": "arXiv",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "tipo": "preprint"
+ },
+ "10.48550/arxiv.2106.11959": {
+  "titulo": "Revisiting Deep Learning Models for Tabular Data",
+  "anio": 2021,
+  "autores": [
+   "Yury Gorishniy",
+   "Ivan Rubachev",
+   "Valentin Khrulkov",
+   "Artem Babenko"
+  ],
+  "fuente": "arXiv",
+  "volumen": "34",
+  "numero": null,
+  "paginas": "",
+  "tipo": "preprint"
+ },
+ "10.1109/72.279181": {
+  "titulo": "Learning long-term dependencies with gradient descent is difficult",
+  "anio": 1994,
+  "autores": [
+   "Yoshua Bengio",
+   "P. Simard",
+   "Paolo Frasconi"
+  ],
+  "fuente": "IEEE Transactions on Neural Networks",
+  "volumen": "5",
+  "numero": "2",
+  "paginas": "157-166",
+  "tipo": "article"
+ },
+ "10.1613/jair.1.12125": {
+  "titulo": "Confident Learning: Estimating Uncertainty in Dataset Labels",
+  "anio": 2021,
+  "autores": [
+   "Curtis G. Northcutt",
+   "Lu Jiang",
+   "Isaac L. Chuang"
+  ],
+  "fuente": "Journal of Artificial Intelligence Research",
+  "volumen": "70",
+  "numero": null,
+  "paginas": "1373-1411",
+  "tipo": "article"
+ },
+ "10.1080/00401706.1999.10485670": {
+  "titulo": "A Fast Algorithm for the Minimum Covariance Determinant Estimator",
+  "anio": 1999,
+  "autores": [
+   "Peter J. Rousseeuw",
+   "Katrien Van Driessen"
+  ],
+  "fuente": "Technometrics",
+  "volumen": "41",
+  "numero": "3",
+  "paginas": "212-223",
+  "tipo": "article"
+ },
+ "10.48550/arxiv.1703.01365": {
+  "titulo": "Axiomatic Attribution for Deep Networks",
+  "anio": 2017,
+  "autores": [
+   "Mukund Sundararajan",
+   "Ankur Taly",
+   "Qiqi Yan"
+  ],
+  "fuente": "arXiv",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "tipo": "preprint"
+ },
+ "10.48550/arxiv.1612.01474": {
+  "titulo": "Simple and Scalable Predictive Uncertainty Estimation using Deep Ensembles",
+  "anio": 2016,
+  "autores": [
+   "Balaji Lakshminarayanan",
+   "Alexander Pritzel",
+   "Charles Blundell"
+  ],
+  "fuente": "arXiv",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "tipo": "preprint"
+ },
+ "10.48550/arxiv.1506.02142": {
+  "titulo": "Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning",
+  "anio": 2015,
+  "autores": [
+   "Yarin Gal",
+   "Zoubin Ghahramani"
+  ],
+  "fuente": "arXiv",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "tipo": "preprint"
+ },
+ "10.1561/2200000101": {
+  "titulo": "Conformal Prediction: A Gentle Introduction",
+  "anio": 2023,
+  "autores": [
+   "Anastasios N. Angelopoulos",
+   "Stephen Bates"
+  ],
+  "fuente": "Foundations and Trends® in Machine Learning",
+  "volumen": "16",
+  "numero": "4",
+  "paginas": "494-591",
+  "tipo": "article"
+ },
+ "10.1109/tit.1967.1053964": {
+  "titulo": "Nearest neighbor pattern classification",
+  "anio": 1967,
+  "autores": [
+   "Thomas M. Cover",
+   "Peter E. Hart"
+  ],
+  "fuente": "IEEE Transactions on Information Theory",
+  "volumen": "13",
+  "numero": "1",
+  "paginas": "21-27",
+  "tipo": "article"
+ },
+ "10.3982/ecta5771": {
+  "titulo": "The Model Confidence Set",
+  "anio": 2011,
+  "autores": [
+   "Peter Reinhard Hansen",
+   "Asger Lunde",
+   "James M. Nason"
+  ],
+  "fuente": "Econometrica",
+  "volumen": "79",
+  "numero": "2",
+  "paginas": "453-497",
+  "tipo": "article"
+ },
+ "10.1162/089976699300016007": {
+  "titulo": "Combined 5 × 2 cv F Test for Comparing Supervised Classification Learning Algorithms",
+  "anio": 1999,
+  "autores": [
+   "Ethem Alpaydın"
+  ],
+  "fuente": "Neural Computation",
+  "volumen": "11",
+  "numero": "8",
+  "paginas": "1885-1892",
+  "tipo": "article"
+ },
+ "10.1080/03610928008827904": {
+  "titulo": "Approximations of the critical region of the Friedman statistic",
+  "anio": 1980,
+  "autores": [
+   "Ronald L. Iman",
+   "James M. Davenport"
+  ],
+  "fuente": "Communications in Statistics - Theory and Methods",
+  "volumen": "9",
+  "numero": "6",
+  "paginas": "571-595",
+  "tipo": "article"
+ },
+ "10.1214/aoms/1177731915": {
+  "titulo": "Significance Test for Sphericity of a Normal $n$-Variate Distribution",
+  "anio": 1940,
+  "autores": [
+   "John W. Mauchly"
+  ],
+  "fuente": "The Annals of Mathematical Statistics",
+  "volumen": "11",
+  "numero": "2",
+  "paginas": "204-209",
+  "tipo": "article"
+ },
+ "10.1007/bf02289823": {
+  "titulo": "On Methods in the Analysis of Profile Data",
+  "anio": 1959,
+  "autores": [
+   "Samuel W. Greenhouse",
+   "Seymour Geisser"
+  ],
+  "fuente": "Psychometrika",
+  "volumen": "24",
+  "numero": "2",
+  "paginas": "95-112",
+  "tipo": "article"
+ },
+ "10.1080/01621459.1974.10482955": {
+  "titulo": "Robust Tests for the Equality of Variances",
+  "anio": 1974,
+  "autores": [
+   "Morton B. Brown",
+   "Alan B. Forsythe"
+  ],
+  "fuente": "Journal of the American Statistical Association",
+  "volumen": "69",
+  "numero": "346",
+  "paginas": "364-367",
+  "tipo": "article"
+ },
+ "10.1002/sim.4780050506": {
+  "titulo": "Probabilistic prediction in patient management and clinical trials",
+  "anio": 1986,
+  "autores": [
+   "David J. Spiegelhalter"
+  ],
+  "fuente": "Statistics in Medicine",
+  "volumen": "5",
+  "numero": "5",
+  "paginas": "421-433",
+  "tipo": "article"
+ },
+ "10.48550/arxiv.1706.04599": {
+  "titulo": "On Calibration of Modern Neural Networks",
+  "anio": 2017,
+  "autores": [
+   "Chuan Guo",
+   "Geoff Pleiss",
+   "Yu Sun",
+   "Kilian Q. Weinberger"
+  ],
+  "fuente": "arXiv",
+  "volumen": null,
+  "numero": null,
+  "paginas": "1321-1330",
+  "tipo": "preprint"
+ },
+ "10.48550/arxiv.2004.11362": {
+  "titulo": "Supervised Contrastive Learning",
+  "anio": 2020,
+  "autores": [
+   "Prannay Khosla",
+   "Piotr Teterwak",
+   "Chen Wang",
+   "Aaron Sarna",
+   "Yonglong Tian",
+   "Phillip Isola",
+   "Aaron Maschinot",
+   "Ce Liu",
+   "Dilip Krishnan"
+  ],
+  "fuente": "arXiv",
+  "volumen": "33",
+  "numero": null,
+  "paginas": "18661-18673",
+  "tipo": "preprint"
+ },
+ "10.48550/arxiv.2010.01028": {
+  "titulo": "Hard Negative Mixing for Contrastive Learning",
+  "anio": 2020,
+  "autores": [
+   "Yannis Kalantidis",
+   "Mert Bülent Sarıyıldız",
+   "Noé Pion",
+   "Philippe Weinzaepfel",
+   "Diane Larlus"
+  ],
+  "fuente": "arXiv",
+  "volumen": "33",
+  "numero": null,
+  "paginas": "21798-21809",
+  "tipo": "preprint"
+ },
+ "10.1109/cvpr42600.2020.00975": {
+  "titulo": "Momentum Contrast for Unsupervised Visual Representation Learning",
+  "anio": 2020,
+  "autores": [
+   "Kaiming He",
+   "Haoqi Fan",
+   "Yuxin Wu",
+   "Saining Xie",
+   "Ross Girshick"
+  ],
+  "fuente": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+  "volumen": null,
+  "numero": null,
+  "paginas": "9726-9735",
+  "tipo": "conference-paper"
+ },
+ "10.48550/arxiv.2202.08906": {
+  "titulo": "ST-MoE: Designing Stable and Transferable Sparse Expert Models",
+  "anio": 2022,
+  "autores": [
+   "Barret Zoph",
+   "Irwan Bello",
+   "Sameer Kumar",
+   "Nan Du",
+   "Yanping Huang",
+   "Jeff Dean",
+   "Noam Shazeer",
+   "William Fedus"
+  ],
+  "fuente": "arXiv",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "tipo": "preprint"
+ },
+ "10.1007/s11263-023-01913-8": {
+  "titulo": "MixStyle Neural Networks for Domain Generalization and Adaptation",
+  "anio": 2023,
+  "autores": [
+   "Kaiyang Zhou",
+   "Yongxin Yang",
+   "Yu Qiao",
+   "Tao Xiang"
+  ],
+  "fuente": "International Journal of Computer Vision",
+  "volumen": "132",
+  "numero": "3",
+  "paginas": "822-836",
+  "tipo": "article"
+ },
+ "10.48550/arxiv.2006.10726": {
+  "titulo": "Tent: Fully Test-time Adaptation by Entropy Minimization",
+  "anio": 2020,
+  "autores": [
+   "Dequan Wang",
+   "Evan Shelhamer",
+   "Shaoteng Liu",
+   "Bruno A. Olshausen",
+   "Trevor Darrell"
+  ],
+  "fuente": "arXiv",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "tipo": "preprint"
+ },
+ "10.1016/j.media.2020.101907": {
+  "titulo": "Test-time adaptable neural networks for robust medical image segmentation",
+  "anio": 2020,
+  "autores": [
+   "Neerav Karani",
+   "Ertunç Erdil",
+   "Krishna Chaitanya",
+   "Ender Konukoğlu"
+  ],
+  "fuente": "Medical Image Analysis",
+  "volumen": "68",
+  "numero": null,
+  "paginas": "101907-101907",
+  "tipo": "article"
+ },
+ "10.1016/j.neucom.2025.129414": {
+  "titulo": "fKAN: Fractional Kolmogorov–Arnold Networks with trainable Jacobi basis functions",
+  "anio": 2025,
+  "autores": [
+   "Alireza Afzal Aghaei"
+  ],
+  "fuente": "Neurocomputing",
+  "volumen": "623",
+  "numero": null,
+  "paginas": "129414-129414",
+  "tipo": "article"
+ },
+ "10.1016/j.patcog.2025.112325": {
+  "titulo": "KANBalance: Kolmogorov–Arnold network mitigates class imbalance",
+  "anio": 2025,
+  "autores": [
+   "Jaber Qezelbash-Chamak",
+   "Karen Hicklin",
+   "Minhee Kim"
+  ],
+  "fuente": "Pattern Recognition",
+  "volumen": "171",
+  "numero": null,
+  "paginas": "112325-112325",
+  "tipo": "article"
+ },
+ "10.1002/cpe.71022": {
+  "titulo": "Characterizing Robustness of Tabular Intrusion Detection System Models Under Sensor Degradation: A Systematic Empirical Evaluation for Unmanned Aerial Vehicle Ad Hoc Networks",
+  "anio": 2026,
+  "autores": [
+   "Qianli Di",
+   "Keju Du",
+   "Gang Chen",
+   "Hai Deng"
+  ],
+  "fuente": "Concurrency and Computation Practice and Experience",
+  "volumen": "38",
+  "numero": "22",
+  "paginas": "",
+  "tipo": "article"
+ },
+ "10.1002/9781118548387": {
+  "titulo": "Applied Logistic Regression",
+  "anio": 2013,
+  "autores": [
+   "David W. Hosmer",
+   "Stanley A. Lemeshow",
+   "Rodney X. Sturdivant"
+  ],
+  "fuente": "Wiley series in probability and statistics",
+  "volumen": null,
+  "numero": null,
+  "paginas": "",
+  "tipo": "book"
+ }
+}

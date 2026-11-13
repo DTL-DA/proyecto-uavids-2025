@@ -1,0 +1,18 @@
+# Versiones con las que se ejecutó el Entregable 2: Python 3.13.14, Windows 11, solo CPU
+torch==2.6.0
+numpy==2.4.6
+pandas==3.0.3
+scipy==1.17.1
+scikit-learn==1.9.0
+statsmodels==0.15.0
+matplotlib==3.10.9
+lightgbm==4.7.0
+xgboost==3.4.1
+pytorch-tabnet==4.1.0
+rtdl_revisiting_models==0.0.2
+psutil==7.2.2
+nbclient==0.11.0
+nbformat==5.11.0
+ipykernel==7.2.0
+# Solo para compilar el informe
+jupyter-book==1.0.4.post1

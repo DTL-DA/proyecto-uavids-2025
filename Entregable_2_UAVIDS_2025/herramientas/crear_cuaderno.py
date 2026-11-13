@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cuaderno import base  # noqa: E402
 
-SECCIONES = ["s0_portada", "s1_problema", "s2_eda", "s3_literatura", "s3b_fichas", "s4_implementacion", "s5_paper_guia", "s6_benchmark", "s7_ruta",
+SECCIONES = ["s0_portada", "s1_problema", "s2_eda", "s3_literatura", "s3b_fichas", "s4_implementacion", "s4b_evaluacion", "s5_paper_guia", "s6_benchmark", "s7_ruta",
              "s8_reproducibilidad", "s9_conclusiones"]
 
 if __name__ == "__main__":

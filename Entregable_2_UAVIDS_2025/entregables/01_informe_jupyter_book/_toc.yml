@@ -1,0 +1,13 @@
+format: jb-book
+root: 00_portada
+chapters:
+  - file: 01_problema_y_dataset
+  - file: 02_analisis_exploratorio
+  - file: 03_estado_del_arte
+  - file: 04_implementacion
+  - file: 05_paper_guia
+  - file: 06_benchmark
+  - file: 07_ruta_metodologica
+  - file: 08_reproducibilidad_y_etica
+  - file: 09_conclusiones
+  - file: 10_bibliografia

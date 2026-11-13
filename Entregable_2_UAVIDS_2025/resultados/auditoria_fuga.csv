@@ -1,0 +1,11 @@
+﻿Verificación,Cómo se ejecuta,Resultado,Criterio de aprobación
+Intersección de unidades de independencia (bloques),Intersección de los bloques de cada partición,Entrenamiento ∩ prueba: 0; entrenamiento ∩ validación: 0; validación ∩ prueba: 0,Intersección vacía
+Duplicados exactos entre particiones,Huella SHA-1 de cada fila de atributos y búsqueda de colisiones,Entrenamiento ∩ prueba: 0; entrenamiento ∩ validación: 0; validación ∩ prueba: 0,Cero colisiones
+Casi duplicados de prueba con vecino en entrenamiento,Clave de log(1 + x) redondeado a 2 decimales,"Prueba: 1,8 %; validación: 1,8 %","Menos de 5 %, tolerancia declarada a priori, y desempeño con y sin esos casos en la sección 6"
+Fuga temporal,No aplica: no hay marca de tiempo ni rezagos como entrada,No aplica,Orden estricto
+Fuga espacial,No aplica: no hay coordenadas,No aplica,Distancia mayor que el *buffer*
+Fuga por transformaciones,Prueba con datos sintéticos: se alteran validación y prueba y se comparan los estadísticos,Aprobada,Estadísticos idénticos
+Fuga por atributos,AUC univariado de cada atributo e identificador (sección 2.2.5),Ver sección 2.2.5,Ningún atributo sospechoso sin justificación
+Validación adversarial,Clasificador que separa entrenamiento de prueba (sección 2.1.5),Ver sección 2.1.5,"AUC no distinguible de 0,5 o diferencia explicada"
+Fuga por modelos preentrenados,No aplica: ningún modelo usa pesos preentrenados,No aplica,Riesgo declarado
+Sanidad con etiquetas permutadas,Entrenamiento con etiquetas permutadas (sección 6.3),Ver sección 6.3,Score cercano al azar
