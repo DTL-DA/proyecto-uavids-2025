@@ -18,6 +18,7 @@
 !/Entregable_1_UAVIDS_2025/literatura/exportaciones/2026-11-03_resumen.json
 /Entregable_2_UAVIDS_2025/literatura/exportaciones/*
 !/Entregable_2_UAVIDS_2025/literatura/exportaciones/*_resumen_e2.json
+!/Entregable_2_UAVIDS_2025/literatura/exportaciones/*_conteos_scopus_wos_e2.json
 
 # Pesos y probabilidades por corrida: se empaquetan aparte
 /Entregable_2_UAVIDS_2025/resultados/corridas/**/*.pt

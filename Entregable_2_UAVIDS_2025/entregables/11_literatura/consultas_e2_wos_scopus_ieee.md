@@ -14,16 +14,27 @@ Estas consultas extienden las del Entregable 1 (`Entregable_1_UAVIDS_2025/litera
 - **T3:** `("domain generalization" OR "invariant risk minimization" OR "distributionally robust") AND (image OR vision OR speech) AND (transfer OR adaptation)`
 - **T4:** `("Kolmogorov-Arnold" OR "feature tokenizer" OR "tabular transformer") AND ("time series" OR vision OR image OR language) AND (transfer OR adaptation)`
 
-## IEEE Xplore
+## Qué se corre en las bases con acceso institucional
 
-*Advanced Search* → *Command Search*; año de publicación de 2019 a 2026 (C4) o de 2018 a 2026 (T1 a T4). Exportación en CSV.
+Solo las cadenas transversales T1 a T4, en Scopus y en Web of Science, que cumplen el mínimo de dos bases principales del enunciado:
+
+- **C1 a C3** no se repiten, porque ya se corrieron en IEEE Xplore, Scopus y Web of Science el 4 de noviembre de 2026 (Entregable 1).
+- **C4** se queda en OpenAlex y arXiv: es una cadena complementaria que no exige el enunciado, y aportó 87 de los 94 registros nuevos, pero ninguno de sus estudios elegibles tuvo texto completo accesible, de modo que no modificó los estudios incluidos.
+- **IEEE Xplore** no se usó para T1 a T4: el primer intento devolvió un error del servidor, y el mínimo ya se cumplía con Scopus y Web of Science.
 
 ## Scopus
 
-`TITLE-ABS-KEY(` cadena `) AND PUBYEAR > 2018 AND PUBYEAR < 2027` para C4, y `PUBYEAR > 2017` para T1 a T4. Exportación en CSV con resumen.
+*Advanced document search*, cada cadena por separado: `TITLE-ABS-KEY(` cadena `) AND PUBYEAR > 2017 AND PUBYEAR < 2027`.
 
 ## Web of Science
 
-Colección principal: `TS=(` cadena `) AND PY=(2019-2026)` para C4, y `PY=(2018-2026)` para T1 a T4. Exportación en Excel.
+*Advanced Search*, colección principal, cada cadena por separado: `TS=(` cadena `) AND PY=(2018-2026)`.
 
-Las exportaciones se guardan en `exportaciones/` con el nombre `2026-11-DD_<Base>_<cadena>.<extensión>`.
+## Conteos
+
+Con el acceso de la biblioteca de la Universidad del Norte; se anotó el número de resultados que muestra cada base, sin exportar registros. También están en `exportaciones/2026-11-13_conteos_scopus_wos_e2.json`.
+
+| Base | T1 | T2 | T3 | T4 | Fecha |
+|---|---|---|---|---|---|
+| Scopus | 4 046 | 334 | 1 181 | 95 | 13 de noviembre de 2026 |
+| Web of Science | 1 023 | 99 | 631 | 86 | 13 de noviembre de 2026 |

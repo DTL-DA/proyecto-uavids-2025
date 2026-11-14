@@ -100,7 +100,7 @@ DOI_FUENTE = {"DNN": "10.1109/cns66487.2025.11194990", "CNN 1D": "10.1109/cns664
               "GRU": "10.1038/s41598-026-45063-6", "Transformer": "10.1038/s41598-026-45063-6", "BiLSTM": "ijisae.org/index.php/IJISAE/article/view/8549", "KAN": "10.1016/j.sysarc.2026.104038",
               "TabNet": "10.1609/aaai.v35i8.16826", "ResNet": "10.1109/cvpr.2016.90", "Autoencoder": "10.1126/science.1127647", "DBN": "10.1162/neco.2006.18.7.1527",
               "CNN-LSTM": "10.1109/cvpr.2015.7298878", "LightGBM": "lightgbm 4.7.0", "Logística": "scikit-learn 1.9.0", "Trivial": "Clase mayoritaria"}
-commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip() or "sin repositorio"
+commit = subprocess.run(["git", "-C", str(RAIZ_E2), "log", "-1", "--format=%h", "--", "codigo"], capture_output=True, text=True).stdout.strip() or "sin repositorio"
 fichas = []
 for m in ORDEN:
     sub_m = METRICAS[METRICAS["modelo"] == m]

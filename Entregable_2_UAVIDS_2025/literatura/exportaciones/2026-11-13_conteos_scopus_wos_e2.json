@@ -1,0 +1,15 @@
+{
+ "fecha": "2026-11-13",
+ "acceso": "Biblioteca de la Universidad del Norte",
+ "nota": "Conteos de las cadenas transversales T1 a T4 que muestra cada base; no se exportaron registros. Scopus: TITLE-ABS-KEY(cadena) AND PUBYEAR > 2017 AND PUBYEAR < 2027. Web of Science, colección principal: TS=(cadena) AND PY=(2018-2026). IEEE Xplore devolvió un error del servidor en el primer intento y no se usó.",
+ "resultados": [
+  {"fuente": "Scopus", "cadena": "T1", "total": 4046},
+  {"fuente": "Scopus", "cadena": "T2", "total": 334},
+  {"fuente": "Scopus", "cadena": "T3", "total": 1181},
+  {"fuente": "Scopus", "cadena": "T4", "total": 95},
+  {"fuente": "Web of Science", "cadena": "T1", "total": 1023},
+  {"fuente": "Web of Science", "cadena": "T2", "total": 99},
+  {"fuente": "Web of Science", "cadena": "T3", "total": 631},
+  {"fuente": "Web of Science", "cadena": "T4", "total": 86}
+ ]
+}
