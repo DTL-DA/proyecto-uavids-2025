@@ -18,9 +18,11 @@ Esta carpeta reúne, en el orden del enunciado, los productos del Entregable 2. 
 | `10_paper_guia/` | Paper guía: réplica parcial y limitación identificada |
 | `11_literatura/` | Revisión sistemática: hoja de extracción, puntaje del Top 10, mecanismos transferibles y consultas |
 | `12_reproducibilidad/` | Lista de verificación de reproducibilidad (apéndice B), entorno y prueba de entorno limpio |
+| `13_defensa/` | Presentación oral con defensa técnica de las decisiones metodológicas: guion con el texto por diapositiva, cifras de apoyo y preguntas probables del jurado |
 | (cuaderno en la raíz) | `Entregable 2 - UAVIDS-2025.ipynb`, ejecutado de principio a fin |
 
-La presentación oral con la defensa técnica se prepara aparte.
+El guion de `13_defensa/` se genera con `herramientas/crear_guion_defensa.py` y acompaña las 16 diapositivas de la
+presentación oral, que se proyectan aparte.
 
 ## Cómo reproducir
 

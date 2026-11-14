@@ -56,6 +56,8 @@ CONTENIDO = {
                        LIT / "registros_nuevos_e2.csv", LIT / "consultas_e2_wos_scopus_ieee.md"]),
     "12_reproducibilidad": ("Lista de verificación de reproducibilidad (apéndice B), entorno y prueba de entorno limpio",
                             [RAIZ / "requirements.txt", E2 / "Dockerfile", RES / "reproduccion_entorno_limpio.json", RES / "lista_verificacion_b.csv"]),
+    "13_defensa": ("Presentación oral con defensa técnica de las decisiones metodológicas: guion con el texto por diapositiva, cifras de apoyo y preguntas probables del jurado",
+                   [E2 / "defensa" / "Guion de defensa - Entregable 2 - UAVIDS-2025.docx"]),
 }
 
 README = """# Entregable 2 · Benchmark de Deep Learning sobre UAVIDS-2025
@@ -67,7 +69,8 @@ Esta carpeta reúne, en el orden del enunciado, los productos del Entregable 2. 
 |---|---|
 {filas}| (cuaderno en la raíz) | `Entregable 2 - UAVIDS-2025.ipynb`, ejecutado de principio a fin |
 
-La presentación oral con la defensa técnica se prepara aparte.
+El guion de `13_defensa/` se genera con `herramientas/crear_guion_defensa.py` y acompaña las 16 diapositivas de la
+presentación oral, que se proyectan aparte.
 
 ## Cómo reproducir
 
