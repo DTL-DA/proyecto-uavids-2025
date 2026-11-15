@@ -1,19 +1,25 @@
 Historial del preregistro del Entregable 2, generado con git por herramientas/organizar_entregables.py
 
 Etiquetas (nombre | fecha de la etiqueta | commit | mensaje):
-preregistro-e2 | etiqueta 2026-11-12 13:13:13 -0500 | commit 77e80d1 | Preregistro del Entregable 2, antes del primer entrenamiento
-preregistro-e2-desviacion-1 | etiqueta 2026-11-12 13:59:29 -0500 | commit acda7ce | Desviación 1 del preregistro, antes de la fase 1
-preregistro-e2-adenda-piloto | etiqueta 2026-11-12 16:58:18 -0500 | commit f65e12a | Entregable 2: adenda del preregistro con R, la limitación del paper guía y k
-preregistro-e2-adenda-arquitecturas | etiqueta 2026-11-13 09:44:08 -0500 | commit 97d0c6f | Entregable 2: adenda del preregistro con las arquitecturas ganadoras de la fase 2
+preregistro-e2 | etiqueta 2026-11-12 13:13:13 -0500 | commit b821aa7 | Preregistro del Entregable 2, antes del primer entrenamiento
+preregistro-e2-desviacion-1 | etiqueta 2026-11-12 13:59:29 -0500 | commit ddd532b | Desviación 1 del preregistro, antes de la fase 1
+preregistro-e2-adenda-piloto | etiqueta 2026-11-12 16:58:18 -0500 | commit 8b501cd | Entregable 2: adenda del preregistro con R, la limitación del paper guía y k
+preregistro-e2-adenda-arquitecturas | etiqueta 2026-11-13 09:44:08 -0500 | commit c768a0b | Entregable 2: adenda del preregistro con las arquitecturas ganadoras de la fase 2
 
 Commits del repositorio en orden cronológico (commit | fecha | mensaje):
-77e80d1 | 2026-11-12 13:13:11 -0500 | Entregable 2: preregistro, configuración y código antes del primer entrenamiento
-acda7ce | 2026-11-12 13:59:29 -0500 | Entregable 2: desviación 1 del preregistro (fase 1 con el 25 % de los bloques) y código del análisis
-dc1562d | 2026-11-12 16:15:38 -0500 | Entregable 2: aclaraciones 1 y 2 de la adenda (5x2 cv solo para RQ2; F1 por bloque sobre clases presentes)
-f65e12a | 2026-11-12 16:58:18 -0500 | Entregable 2: adenda del preregistro con R, la limitación del paper guía y k
-3915542 | 2026-11-13 09:36:48 -0500 | Entregable 2: registro de la suspensión del equipo (13/11, 02:03-09:16) y descuento del tiempo de las corridas afectadas
-97d0c6f | 2026-11-13 09:44:08 -0500 | Entregable 2: adenda del preregistro con las arquitecturas ganadoras de la fase 2
-585802a | 2026-11-13 17:21:31 -0500 | Entregable 2: ejecución definitiva, experimentos complementarios, análisis, cuaderno final y entregables
-670f115 | 2026-11-13 17:24:46 -0500 | Entregable 2: cuaderno y entregables reejecutados con el commit del código definitivo en las fichas
-2078938 | 2026-11-13 21:30:18 -0500 | Entregable 2: guion de la defensa oral (13_defensa) y su generador
-a215fcb | 2026-11-13 23:20:38 -0500 | Entregable 2: conteos de T1 a T4 en Scopus y Web of Science (13/11) y C4 solo en OpenAlex y arXiv
+0f393f7 | 2026-11-04 08:43:32 -0500 | Entregable 1: baseline de Deep Learning con UAVIDS-2025
+8c8dd3d | 2026-11-05 19:28:16 -0500 | Entregable 1: revisión de literatura completa, sensibilidad y entregables
+1a9d700 | 2026-11-05 19:55:02 -0500 | Entregable 1: precisiones en el ranking, la discusión y las conclusiones
+b821aa7 | 2026-11-12 13:13:11 -0500 | Entregable 2: preregistro, configuración y código antes del primer entrenamiento
+ddd532b | 2026-11-12 13:59:29 -0500 | Entregable 2: desviación 1 del preregistro (fase 1 con el 25 % de los bloques) y código del análisis
+4eacd85 | 2026-11-12 16:15:38 -0500 | Entregable 2: aclaraciones 1 y 2 de la adenda (5x2 cv solo para RQ2; F1 por bloque sobre clases presentes)
+8b501cd | 2026-11-12 16:58:18 -0500 | Entregable 2: adenda del preregistro con R, la limitación del paper guía y k
+c7abc7d | 2026-11-13 09:36:48 -0500 | Entregable 2: registro de la suspensión del equipo (13/11, 02:03-09:16) y descuento del tiempo de las corridas afectadas
+c768a0b | 2026-11-13 09:44:08 -0500 | Entregable 2: adenda del preregistro con las arquitecturas ganadoras de la fase 2
+1b366d4 | 2026-11-13 17:21:31 -0500 | Entregable 2: ejecución definitiva, experimentos complementarios, análisis, cuaderno final y entregables
+934e7dc | 2026-11-13 17:24:46 -0500 | Entregable 2: cuaderno y entregables reejecutados con el commit del código definitivo en las fichas
+95a5829 | 2026-11-13 21:30:18 -0500 | Entregable 2: guion de la defensa oral (13_defensa) y su generador
+5557bb3 | 2026-11-13 23:20:38 -0500 | Entregable 2: conteos de T1 a T4 en Scopus y Web of Science (13/11) y C4 solo en OpenAlex y arXiv
+cc9ba63 | 2026-11-15 13:47:22 -0500 | Entregable 2: faltantes frente al enunciado (umbral del ECE exploratorio, BibTeX, análisis examinados y comando único)
+8d52417 | 2026-11-15 13:49:17 -0500 | Entregable 2: une la historia del Entregable 1 publicada en GitHub con la del Entregable 2
+837e87f | 2026-11-15 13:51:03 -0500 | Entregable 2: README de la raíz con los Entregables 1 y 2
