@@ -293,6 +293,11 @@ cuadro("estructura de la presentación, tiempo por diapositiva y sección del cu
 titulo(doc, "2. Texto hablado por diapositiva", 1)
 parrafo(doc, "El texto está escrito para decirse, no para leerse en voz alta palabra por palabra; conviene ensayarlo con cronómetro y recortar en las diapositivas 11 a 13 si el tiempo se alarga, porque las cifras de esas tres diapositivas están completas en los cuadros de la sección 3.")
 
+# Sensibilidad del criterio de adecuación al umbral del ECE, que no estaba en el preregistro (sección 7 del cuaderno)
+SENS_ECE = pd.read_csv(RES / "adecuacion_sensibilidad_ece.csv")
+N_SENS = dict(zip(SENS_ECE["Umbral del ECE con temperatura"].round(2), SENS_ECE["Modelos adecuados"]))
+TEXTO_SENS = f"con umbrales de 0,03 a 0,07, los modelos adecuados pasan de {N_SENS[0.03]} a {N_SENS[0.07]}"
+
 HABLADO = {
     1: ["Buenos días. Presento el segundo entregable del proyecto: un benchmark de dieciséis modelos sobre UAVIDS-2025. Más que el número final, voy a defender las decisiones que lo hacen creíble: cómo se partieron los datos, cómo se igualó el esfuerzo entre modelos y cómo se probó cada diferencia."],
     2: ["El problema es clasificar cada flujo de red de un enjambre de drones en una de cinco clases, con los dieciséis atributos de tráfico. Las decisiones de fondo se heredan sin cambios del Entregable 1 y se fijaron antes de ver un solo resultado.",
@@ -322,8 +327,9 @@ HABLADO = {
     11: ["Este es el hallazgo que más condiciona la lectura. Todos los modelos profundos caen unas siete centésimas de validación a prueba, y no es sobreajuste del entrenamiento: la brecha entre entrenamiento y validación no pasa de 0,0154, por debajo de δg. La validación adversarial agrupada da un AUC de 0,515, dentro de la distribución nula, de modo que tampoco es un desplazamiento propio de la partición: es la variación entre series.",
          "La descomposición de la varianza lo resume: el bloque de prueba explica el 93,1 % de la varianza del F1 y el modelo, el 0,3 %. En ese contexto, RQ3 da equivalencia: leer los atributos como una secuencia ni ayuda ni perjudica.",
          "LightGBM cae mucho menos, 0,0123, y mi hipótesis es que los umbrales por atributo son menos sensibles a los cambios de escala entre series que las combinaciones continuas de las redes. Por eso, para el Entregable 3 propongo elegir el modelo con validación cruzada por bloques y no con una sola partición de validación."],
-    12: ["La ruta F1 del enunciado se siguió completa, con las tablas A, B y C en la ficha de ruta. Las pruebas de sanidad pasan: todos los modelos superan al trivial, y la permutación de etiquetas con B = 200 da p = 0,005, el mínimo posible.",
-         "El criterio de adecuación exige cuatro condiciones a la vez, y lo reporto tal como resulta, sin relajarlo después de ver los datos. Cumplen cinco modelos: CNN-LSTM, Autoencoder, Transformer, BiLSTM y la regresión logística. LightGBM falla por su brecha entre entrenamiento y validación, de 0,0858, propia de los árboles, que se ajustan casi por completo al entrenamiento. La CNN 1D falla por calibración, y aquí soy transparente: cinco modelos quedan por encima del ECE de 0,05 por menos de 0,005, así que el umbral decide más que la diferencia real.",
+    12: ["La ruta F1 del enunciado se siguió completa, con las tablas A, B y C en la ficha de ruta. Las pruebas de sanidad pasan: todos los modelos superan al trivial, y la permutación de etiquetas con B = 200, en los seis modelos cuyo costo lo permitió, da p = 0,005, el mínimo posible.",
+         "El criterio de adecuación exige cuatro condiciones a la vez. Cumplen cinco modelos: CNN-LSTM, Autoencoder, Transformer, BiLSTM y la regresión logística. LightGBM falla por su brecha entre entrenamiento y validación, de 0,0858, propia de los árboles, que se ajustan casi por completo al entrenamiento. La CNN 1D falla por calibración, y aquí soy transparente: el preregistro no fijó un umbral para el ECE, y el de 0,05 lo fijé después de la ejecución definitiva, así que declaro el veredicto como exploratorio. "
+         f"Además, {TEXTO_SENS}, y cinco modelos quedan por encima de 0,05 por menos de 0,005, de modo que el umbral decide más que la diferencia real.",
          "La temperatura ajustada en validación quedó entre 0,90 y 1,10 y no mejoró la prueba, por eso no se aplica; recalibrar con datos de la serie de destino queda como requisito de una puesta en producción."],
     13: ["Sobre incertidumbre, la predicción conforme muestra el costo de que validación y prueba no sean intercambiables: calibrada en validación al 90 %, LAC cubre solo del 81,7 al 82,6 % en prueba, y APS alcanza la cobertura con conjuntos de más de tres clases, que informan poco; en el peor bloque, la cobertura baja a 0,12. Por eso los conjuntos conformes se usan como alerta y no como garantía.",
          "El techo, con Cover y Hart y con aprendizaje confiado, deja un margen real: la distancia normalizada de LightGBM es de 0,665 a 0,711, donde cero sería alcanzar el techo.",
@@ -451,7 +457,8 @@ filas = [[r["Modelo"], r["(i) Supera al trivial"], r["(ii) Brecha < δg"], r["(i
 cuadro("criterio de adecuación de la sección 7.2 del enunciado: el modelo es adecuado solo si cumple las cuatro condiciones",
        ["Modelo", "(i) Supera al trivial", "(ii) Brecha < δg", "(iii) ECE con T < 0,05", "Pendiente media", "(iv) Prueba consistente", "Adecuado"],
        filas, [2.6, 2.1, 2.1, 2.3, 2.1, 2.3, 1.9],
-       "Cuaderno, sección 7 (criterio de adecuación); archivo resultados/adecuacion.csv. La pendiente de calibración media menor que 1 indica sobreconfianza y mayor que 1, subconfianza; LightGBM es el único con pendiente mayor que 1.",
+       "Cuaderno, sección 7 (criterio de adecuación); archivos resultados/adecuacion.csv y resultados/adecuacion_sensibilidad_ece.csv. El umbral de 0,05 del ECE no estaba en el preregistro, de modo que la condición (iii) y el veredicto son exploratorios; "
+       f"{TEXTO_SENS}. La pendiente de calibración media menor que 1 indica sobreconfianza y mayor que 1, subconfianza; LightGBM es el único con pendiente mayor que 1.",
        tam=9)
 
 cuadro("techo de desempeño y distancia normalizada γ, medida desde el baseline del Entregable 1 (exactitud de prueba)",
@@ -538,7 +545,11 @@ PREGUNTAS = [
      ["Porque la validación anidada completa repetiría el ajuste dentro de cada pliegue externo y multiplicaría por 12 el costo de todo el benchmark. Se reemplaza por dos mediciones del mismo optimismo: la comparación entre el puntaje de validación usado para seleccionar y el de prueba (tabla B), donde el interno supera al externo en 0,0796 en promedio sobre los 13 modelos profundos (p < 0,001), y la validación cruzada 5 × 2 agrupada del contraste de RQ2, que mide la variabilidad por partición."]),
     ("¿Por qué no se recalibraron las probabilidades con temperature scaling?",
      ["Porque no mejora en series nuevas. La temperatura ajustada en validación queda entre 0,90 y 1,10, muy cerca de 1, de modo que en validación los modelos ya están casi calibrados, y con ella el ECE medio de prueba de los profundos pasa de 0,0523 a 0,0534; la versión adaptativa confirma la lectura. Lo que vuelve las probabilidades demasiado extremas es el paso a series distintas: 14 de los 15 modelos tienen pendiente de calibración menor que 1 en prueba.",
-      "La condición (iii) del criterio de adecuación se evalúa con el ECE tras la temperatura, como quedó fijado, y recalibrar con datos de la serie de destino queda como requisito de una puesta en producción."]),
+      "La condición (iii) del criterio de adecuación se evalúa con el ECE tras la temperatura, con un umbral de 0,05 que no estaba en el preregistro, de modo que ese veredicto es exploratorio, y recalibrar con datos de la serie de destino queda como requisito de una puesta en producción."]),
+    ("¿El umbral de 0,05 del ECE en el criterio de adecuación estaba en el preregistro?",
+     ["No. El preregistro fijó δ, δg y el ECE como métrica secundaria, pero no un umbral para la condición de calibración; el de 0,05 se fijó al redactar la sección 7, después de la ejecución definitiva. "
+      f"Por eso el veredicto de adecuación se declara exploratorio, no se usa para elegir el modelo final y se reporta su sensibilidad: {TEXTO_SENS}.",
+      "Las conclusiones confirmatorias no dependen de ese umbral, porque se apoyan en los contrastes preregistrados de RQ1 a RQ3, con Holm dentro de cada familia. Para el Entregable 3, el umbral de calibración se fija en el preregistro antes de entrenar."]),
     ("¿Por qué la CNN 1D da 0,8584 aquí y 0,8549 en el Entregable 1?",
      ["Porque se reentrenó con el protocolo de este entregable: las mismas 12 configuraciones de ajuste que los demás modelos, las semillas 6001 a 6020 y, como corrección declarada en la sección 4.2, el dropout exacto del código de los autores, que el Entregable 1 había tratado como desviación con un análisis de sensibilidad. El umbral de mejora de 0,8775 se conserva tal como lo fijó el Entregable 1, y ningún modelo profundo lo alcanza."]),
 ]

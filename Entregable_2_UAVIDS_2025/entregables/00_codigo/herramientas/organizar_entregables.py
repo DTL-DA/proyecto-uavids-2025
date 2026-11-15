@@ -44,16 +44,19 @@ CONTENIDO = {
     "03_preregistro": ("Preregistro fechado y versionado, con su adenda",
                        [E2 / "preregistro_e2.md", E2 / "preregistro_e2_adenda.md", RES / "preregistro_e2.json", RES / "preregistro_e2_adenda.json", E2 / "configuracion" / "experimento.json"]),
     "04_auditoria_de_fuga": ("Reporte de auditoría de fuga", [RES / "auditoria_fuga.csv"]),
-    "05_ficha_de_ruta": ("Ficha de ruta metodológica: tablas A, B y C y criterio de adecuación", [RES / "tabla_a.csv", RES / "tabla_b.csv", RES / "tabla_c.csv", RES / "adecuacion.csv"]),
-    "06_tabla_comparativa": ("Tabla comparativa con métricas, costos e inferencia estadística", [RES / "tabla_benchmark.csv", RES / "contrastes_rq1.csv", RES / "contrastes_rq2.csv"]),
-    "07_registro_y_fichas": ("Registro de experimentos y fichas de modelo", [RES / "registro_experimentos.csv", RES / "fichas_de_modelo.csv"]),
-    "08_techo_e_incertidumbre": ("Reporte de techo de desempeño e incertidumbre", [RES / "techo.csv", RES / "conforme.csv"]),
+    "05_ficha_de_ruta": ("Ficha de ruta metodológica: tablas A, B y C, criterio de adecuación y su sensibilidad al umbral del ECE",
+                         [RES / "tabla_a.csv", RES / "tabla_b.csv", RES / "tabla_c.csv", RES / "adecuacion.csv", RES / "adecuacion_sensibilidad_ece.csv"]),
+    "06_tabla_comparativa": ("Tabla comparativa con métricas, costos e inferencia estadística, y KS y beneficio neto de la decisión de alarma",
+                             [RES / "tabla_benchmark.csv", RES / "contrastes_rq1.csv", RES / "contrastes_rq2.csv", RES / "ks_y_beneficio_neto.csv"]),
+    "07_registro_y_fichas": ("Registro de experimentos, fichas de modelo e importancia de los hiperparámetros",
+                             [RES / "registro_experimentos.csv", RES / "fichas_de_modelo.csv", RES / "importancia_hiperparametros.csv"]),
+    "08_techo_e_incertidumbre": ("Reporte de techo de desempeño, incertidumbre y calibración por clase", [RES / "techo.csv", RES / "conforme.csv", RES / "calibracion_por_clase.csv"]),
     "09_busqueda_de_arquitectura": ("Reporte de la búsqueda de arquitectura: las 1000 arquitecturas, las dos fases, los finalistas y el análisis de efectos",
                                     [RES / "busqueda_fase1.csv", RES / "busqueda_fase2.csv", RES / "busqueda_efectos.csv", RES / "arquitecturas_espacio.csv"]),
     "10_paper_guia": ("Paper guía: réplica parcial y limitación identificada", [RES / "replica.csv", RES / "limitacion_paper_guia.csv"]),
-    "11_literatura": ("Revisión sistemática: hoja de extracción, puntaje del Top 10, mecanismos transferibles y consultas",
+    "11_literatura": ("Revisión sistemática: hoja de extracción, puntaje del Top 10, mecanismos transferibles, consultas y bibliografía en BibTeX",
                       [LIT / "hoja_extraccion_e2.csv", LIT / "puntaje_top10.csv", LIT / "mecanismos_transferibles.csv", LIT / "reproducibilidad_estudios.csv",
-                       LIT / "registros_nuevos_e2.csv", LIT / "consultas_e2_wos_scopus_ieee.md"]),
+                       LIT / "registros_nuevos_e2.csv", LIT / "consultas_e2_wos_scopus_ieee.md", LIT / "referencias.bib"]),
     "12_reproducibilidad": ("Lista de verificación de reproducibilidad (apéndice B), entorno y prueba de entorno limpio",
                             [RAIZ / "requirements.txt", E2 / "Dockerfile", RES / "reproduccion_entorno_limpio.json", RES / "lista_verificacion_b.csv"]),
     "13_defensa": ("Presentación oral con defensa técnica de las decisiones metodológicas: guion con el texto por diapositiva, cifras de apoyo y preguntas probables del jurado",
@@ -88,6 +91,20 @@ La prueba de entorno limpio (`herramientas/entorno_limpio.py`) instala un entorn
 primera semilla de cada modelo que tarda menos de 15 minutos y compara el F1; su resultado está en
 `12_reproducibilidad/reproduccion_entorno_limpio.json` y en la sección 8 del informe.
 """
+
+
+def historial_preregistro(destino):
+    """Etiquetas del preregistro y commits del repositorio, con fecha, para verificar el orden sin acceso al repositorio."""
+    git = lambda *a: subprocess.run(["git", "-C", str(RAIZ), *a], capture_output=True, text=True, encoding="utf-8").stdout.strip()
+    etiquetas = git("for-each-ref", "refs/tags/preregistro-e2*", "--sort=taggerdate",
+                    "--format=%(refname:short) | etiqueta %(taggerdate:iso) | commit %(*objectname:short) | %(contents:subject)")
+    commits = git("log", "--reverse", "--date=iso", "--format=%h | %ad | %s")
+    if not etiquetas:
+        print("  Sin repositorio git: no se generó el historial del preregistro")
+        return
+    destino.write_text("Historial del preregistro del Entregable 2, generado con git por herramientas/organizar_entregables.py\n\n"
+                       "Etiquetas (nombre | fecha de la etiqueta | commit | mensaje):\n" + etiquetas + "\n\n"
+                       "Commits del repositorio en orden cronológico (commit | fecha | mensaje):\n" + commits + "\n", encoding="utf-8")
 
 
 def compilar_libro(libro, constructor):
@@ -146,6 +163,7 @@ def main():
                 shutil.copy2(f, DESTINO / carpeta / f.name)
             else:
                 faltan.append(str(f.relative_to(RAIZ)))
+    historial_preregistro(DESTINO / "03_preregistro" / "historial_git_preregistro.txt")
     filas = "".join(f"| `{c}/` | {d} |\n" for c, (d, _) in CONTENIDO.items())
     (DESTINO / "README.md").write_text(README.format(filas=filas), encoding="utf-8")
 

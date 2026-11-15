@@ -50,13 +50,19 @@ md("s9-2", r"""
 """)
 
 code("s9-amenazas", r"""
+# Número de caminos examinados (sección 9.3 del enunciado), contados sobre los registros de las secciones anteriores
+n_cfg_ajuste, n_arq_f1, n_finalistas, n_corridas = len(ajuste), len(f1), int(FASE2["Finalistas"].sum()), len(registro_exp)
+n_confirmatorios = len(RQ1) + len(RQ2) + 1
+n_p_ab = len(NA) * (3 * K + 1) + int(NA["p permutación"].notna().sum()) + 2 * len(TABLA_B)
 interpretar(f'''**Validez interna.** El mejor modelo profundo y los hiperparámetros se eligen con {NB_VAL} bloques de validación, y la fase 1 de la búsqueda se entrenó con el 25 % de los bloques (desviación 1), lo que hizo que su orden informara poco el de la fase 2 (ρ de {num(FASE2["ρ de Spearman fase 1–fase 2"].min(), 2)} a {num(FASE2["ρ de Spearman fase 1–fase 2"].max(), 2)}); por eso, la conclusión sobre los cuatro modelos con búsqueda se limita a su mejor finalista. La suspensión del equipo durante la fase 2 solo afectó el tiempo de seis corridas, que se corrigió. La réplica del paper guía valida el pipeline con cuatro de sus cinco modelos, pero no reproduce el resultado clave de la LSTM.
 
 **Validez externa.** Todo el benchmark usa una sola versión de un solo conjunto de datos, con {NB_PRU} series de prueba aproximadas por bloques de 1000 flujos, y la serie explica el {num(pct_bloque, 1)} % de la varianza del F1; con otra elección de series, el orden de los modelos puede cambiar, como sugiere la validación cruzada 5 × 2 de RQ2. Además, el atajo del puerto 654 (sección 4.5) indica que parte del desempeño depende de la configuración de los escenarios simulados.
 
 **Validez de constructo.** El F1 macro pesa por igual a las cinco clases, aunque en la práctica no todos los errores cuestan lo mismo: confundir dos ataques de enrutamiento es menos grave que dejar pasar un ataque como tráfico normal. Así mismo, la latencia y la energía se midieron en un solo equipo, en CPU y con 2 hilos por corrida, y el F1 por bloque se promedia sobre las clases presentes en cada bloque (aclaración 2 de la adenda).
 
-**Validez estadística.** Con R = {R} semillas, el tope de cómputo, la diferencia mínima detectable en RQ1 es de {num(ADENDA["piloto"]["diferencia_minima_detectable"], 4)}, mayor que δ, de modo que una mejora real de magnitud δ podría pasar inadvertida; por eso los resultados no significativos se leen con TOST y con la prueba bayesiana. Las pruebas por filas, como McNemar y DeLong, son optimistas porque tratan los flujos como independientes, y las preguntas exploratorias RQ4 y RQ5 no tienen control del error por familia.''')
+**Validez estadística.** Con R = {R} semillas, el tope de cómputo, la diferencia mínima detectable en RQ1 es de {num(ADENDA["piloto"]["diferencia_minima_detectable"], 4)}, mayor que δ, de modo que una mejora real de magnitud δ podría pasar inadvertida; por eso los resultados no significativos se leen con TOST y con la prueba bayesiana. Las pruebas por filas, como McNemar y DeLong, son optimistas porque tratan los flujos como independientes, y las preguntas exploratorias RQ4 y RQ5 no tienen control del error por familia.
+
+**Análisis examinados y tasa de falsos descubrimientos.** Para dimensionar los caminos que se bifurcan (sección 9.3 del enunciado), el benchmark examinó {len(ORDEN)} modelos, {n_cfg_ajuste} configuraciones de hiperparámetros en el ajuste, {num(n_arq_f1, 0)} arquitecturas en la fase 1 y {n_finalistas} finalistas en la fase 2, con {num(n_corridas, 0)} corridas registradas en total y {len(NOMBRES_M)} métricas por corrida. Las afirmaciones confirmatorias se apoyan solo en los {n_confirmatorios} contrastes preregistrados de RQ1 a RQ3, con Holm dentro de cada familia, de modo que las demás pruebas no aumentan su tasa de error. En cambio, solo las tablas A y B suman al menos {n_p_ab} valores p sin corrección por multiplicidad, y si todas sus hipótesis nulas fueran ciertas cabría esperar unos {num(0.05 * n_p_ab, 0)} rechazos por azar; por eso se leen como evidencia de dirección y no como hallazgos. Así mismo, elegir el máximo entre tantas configuraciones infla el puntaje de validación: el F1 interno del ajuste supera al de prueba en {num(np.mean(interno - externo), 4)} en promedio (sección 7), que es el sesgo del ganador acumulado junto con el cambio entre series. Por último, el umbral de ECE de la condición (iii) del criterio de adecuación se fijó después de ver los resultados (sección 7), de modo que ese veredicto es exploratorio y no sustenta ninguna conclusión confirmatoria.''')
 """)
 
 md("s9-3", r"""
@@ -78,10 +84,11 @@ interpretar(f'''**Conclusiones.**
 md("s10", r"""
 ## 10. Bibliografía
 
-Se incluyen solo las referencias citadas en el informe, con su DOI cuando lo tienen; los metadatos de las referencias nuevas de este entregable se consultaron en OpenAlex (`literatura/referencias_e2.json`).
+Se incluyen solo las referencias citadas en el informe, con su DOI cuando lo tienen; los metadatos de las referencias nuevas de este entregable se consultaron en OpenAlex (`literatura/referencias_e2.json`). La misma lista se exporta en formato BibTeX, con los mismos DOI, en `entregables/11_literatura/referencias.bib`.
 """)
 
 code("s10-bibliografia", r"""
+import re
 import unicodedata
 
 REFS_E2 = json.loads((LIT2 / "referencias_e2.json").read_text(encoding="utf-8"))
@@ -148,4 +155,73 @@ def referencia_estudio(doi):
     return f"- {lista} ({m['anio']}{SUFIJO.get(doi, '')}). {titulo}. {detalle} <{enlace_}>"
 BIBLIOGRAFIA = sorted([referencia_estudio(e["doi"]) for e in EXT] + [formato_ref(d, m) for d, m in REFS_E2.items()] + SIN_DOI, key=clave_orden)
 interpretar("\n".join(BIBLIOGRAFIA))
+
+# Misma bibliografía en BibTeX (sección 8 del enunciado), generada de los mismos metadatos
+def bib_texto(t):
+    return str(t).replace("\\", "").replace("&", r"\&").replace("%", r"\%").replace("_", r"\_").replace("#", r"\#").replace("$n$", "n")
+def bib_entrada(tipo, apellido, anio, titulo, campos, usadas):
+    base = "".join(c for c in unicodedata.normalize("NFKD", apellido.lower()) if c.isalnum() and not unicodedata.combining(c))
+    palabra = next((p for p in re.findall(r"[a-z0-9]+", clave_orden(titulo)) if len(p) > 3), "ref")
+    clave = f"{base}{anio}{palabra}"
+    while clave in usadas:
+        clave += "x"
+    usadas.add(clave)
+    lineas = [f"  title = {{{{{bib_texto(titulo)}}}}}", f"  year = {{{anio}}}"] + [f"  {k} = {{{bib_texto(v) if k not in ('doi', 'url') else v}}}" for k, v in campos.items() if v]
+    return f"@{tipo}{{{clave},\n" + ",\n".join(lineas) + "\n}"
+def bib_autores(nombres):
+    return " and ".join(f"{a}, {n}" if n.strip() else a for a, n in map(partes_nombre, nombres))
+usadas_bib, ENTRADAS_BIB = set(), []
+for e in EXT:
+    doi = e["doi"]
+    m = METADATOS[doi]
+    fuente = m["fuente"].title() if (m.get("fuente") or "").isupper() else m.get("fuente")
+    fuente = FUENTES.get(fuente, fuente)
+    titulo = m["titulo"].capitalize() if m["titulo"].isupper() else m["titulo"]
+    enlace_ = {"url": m.get("url")} if doi.startswith("sin-doi") else {"doi": doi}
+    if m.get("tipo") == "conference-paper":
+        campos = {"author": bib_autores(m["autores"]), "booktitle": fuente, "pages": paginas_fmt(m.get("paginas") or "").replace("–", "--"), **enlace_}
+        ENTRADAS_BIB.append(bib_entrada("inproceedings", partes_nombre(m["autores"][0])[0], m["anio"], titulo, campos, usadas_bib))
+    else:
+        campos = {"author": bib_autores(m["autores"]), "journal": fuente, "volume": m.get("volumen"), "number": m.get("numero"), "pages": paginas_fmt(m.get("paginas") or "").replace("–", "--"), **enlace_}
+        ENTRADAS_BIB.append(bib_entrada("article", partes_nombre(m["autores"][0])[0], m["anio"], titulo, campos, usadas_bib))
+for doi, m in REFS_E2.items():
+    anio, fuente = CONGRESO.get(doi, (m["anio"], m["fuente"]))
+    comunes = {"author": bib_autores(m["autores"]), "doi": doi}
+    apellido = partes_nombre(m["autores"][0])[0]
+    if doi in CONGRESO or m.get("tipo") in ("proceedings-article", "conference-paper") or "Conference" in (fuente or "") or "Proceedings" in (fuente or ""):
+        ENTRADAS_BIB.append(bib_entrada("inproceedings", apellido, anio, m["titulo"], {**comunes, "booktitle": fuente, "pages": paginas_fmt(m.get("paginas") or "").replace("–", "--")}, usadas_bib))
+    elif m.get("tipo") == "book":
+        ENTRADAS_BIB.append(bib_entrada("book", apellido, anio, m["titulo"], {**comunes, "publisher": "Wiley", "edition": "3" if doi == "10.1002/9781118548387" else None}, usadas_bib))
+    elif m.get("tipo") == "preprint":
+        ENTRADAS_BIB.append(bib_entrada("misc", apellido, anio, m["titulo"], {**comunes, "howpublished": fuente}, usadas_bib))
+    else:
+        ENTRADAS_BIB.append(bib_entrada("article", apellido, anio, m["titulo"], {**comunes, "journal": fuente, "volume": m.get("volumen"), "number": m.get("numero"),
+                                                                              "pages": paginas_fmt(m.get("paginas") or "").replace("–", "--")}, usadas_bib))
+# Referencias sin DOI de la lista anterior, transcritas con los mismos datos (solo iniciales donde la lista tiene iniciales)
+SIN_DOI_BIB = [
+    ("article", "Benavoli", 2017, "Time for a change: A tutorial for comparing multiple classifiers through Bayesian analysis", {"author": "Benavoli, A. and Corani, G. and Demšar, J. and Zaffalon, M.", "journal": "Journal of Machine Learning Research", "volume": 18, "number": 77, "pages": "1--36"}),
+    ("book", "Cohen", 1988, "Statistical power analysis for the behavioral sciences", {"author": "Cohen, J.", "edition": "2", "publisher": "Lawrence Erlbaum Associates"}),
+    ("article", "DeLong", 1988, "Comparing the areas under two or more correlated receiver operating characteristic curves: A nonparametric approach", {"author": "DeLong, E. R. and DeLong, D. M. and Clarke-Pearson, D. L.", "journal": "Biometrics", "volume": 44, "number": 3, "pages": "837--845"}),
+    ("article", "Demšar", 2006, "Statistical comparisons of classifiers over multiple data sets", {"author": "Demšar, J.", "journal": "Journal of Machine Learning Research", "volume": 7, "pages": "1--30"}),
+    ("book", "Efron", 1993, "An introduction to the bootstrap", {"author": "Efron, B. and Tibshirani, R. J.", "publisher": "Chapman & Hall"}),
+    ("article", "Friedman", 1937, "The use of ranks to avoid the assumption of normality implicit in the analysis of variance", {"author": "Friedman, M.", "journal": "Journal of the American Statistical Association", "volume": 32, "number": 200, "pages": "675--701"}),
+    ("article", "Geirhos", 2020, "Shortcut learning in deep neural networks", {"author": "Geirhos, R. and Jacobsen, J.-H. and Michaelis, C. and Zemel, R. and Brendel, W. and Bethge, M. and Wichmann, F. A.", "journal": "Nature Machine Intelligence", "volume": 2, "number": 11, "pages": "665--673"}),
+    ("article", "Gretton", 2012, "A kernel two-sample test", {"author": "Gretton, A. and Borgwardt, K. M. and Rasch, M. J. and Schölkopf, B. and Smola, A.", "journal": "Journal of Machine Learning Research", "volume": 13, "pages": "723--773"}),
+    ("article", "Holm", 1979, "A simple sequentially rejective multiple test procedure", {"author": "Holm, S.", "journal": "Scandinavian Journal of Statistics", "volume": 6, "number": 2, "pages": "65--70"}),
+    ("inproceedings", "Kingma", 2015, "Adam: A method for stochastic optimization", {"author": "Kingma, D. P. and Ba, J.", "booktitle": "International Conference on Learning Representations", "url": "https://arxiv.org/abs/1412.6980"}),
+    ("inproceedings", "Lopez-Paz", 2017, "Revisiting classifier two-sample tests", {"author": "Lopez-Paz, D. and Oquab, M.", "booktitle": "International Conference on Learning Representations"}),
+    ("article", "McNemar", 1947, "Note on the sampling error of the difference between correlated proportions or percentages", {"author": "McNemar, Q.", "journal": "Psychometrika", "volume": 12, "number": 2, "pages": "153--157"}),
+    ("article", "Nadeau", 2003, "Inference for the generalization error", {"author": "Nadeau, C. and Bengio, Y.", "journal": "Machine Learning", "volume": 52, "number": 3, "pages": "239--281"}),
+    ("article", "Page", 2021, "The PRISMA 2020 statement: An updated guideline for reporting systematic reviews", {"author": "Page, M. J. and McKenzie, J. E. and Bossuyt, P. M. and others", "journal": "BMJ", "volume": 372, "pages": "n71", "doi": "10.1136/bmj.n71"}),
+    ("article", "Schuirmann", 1987, "A comparison of the two one-sided tests procedure and the power approach for assessing the equivalence of average bioavailability", {"author": "Schuirmann, D. J.", "journal": "Journal of Pharmacokinetics and Biopharmaceutics", "volume": 15, "number": 6, "pages": "657--680"}),
+    ("misc", "SCImago", 2026, "SJR: SCImago Journal & Country Rank", {"author": "{SCImago}", "howpublished": "Conjunto de datos", "url": "https://www.scimagojr.com"}),
+    ("article", "Shapiro", 1965, "An analysis of variance test for normality (complete samples)", {"author": "Shapiro, S. S. and Wilk, M. B.", "journal": "Biometrika", "volume": 52, "number": "3/4", "pages": "591--611"}),
+    ("article", "Wilcoxon", 1945, "Individual comparisons by ranking methods", {"author": "Wilcoxon, F.", "journal": "Biometrics Bulletin", "volume": 1, "number": 6, "pages": "80--83"}),
+    ("misc", "Zeng", 2025, "UAV--IDS2025", {"author": "Zeng, Q.", "howpublished": "Código fuente, GitHub", "url": "https://github.com/QingliZeng/UAV--IDS2025"}),
+    ("misc", "Zeng", 2025, "UAVIDS-2025", {"author": "Zeng, Q. and Bashir, A. and Nait-Abdesselam, F.", "howpublished": "Conjunto de datos, Zenodo", "doi": "10.5281/zenodo.15336998"}),
+]
+ENTRADAS_BIB += [bib_entrada(t, a, y_, ti, c, usadas_bib) for t, a, y_, ti, c in SIN_DOI_BIB]
+assert len(ENTRADAS_BIB) == len(BIBLIOGRAFIA), f"BibTeX con {len(ENTRADAS_BIB)} entradas y bibliografía con {len(BIBLIOGRAFIA)}"
+(LIT2 / "referencias.bib").write_text("% Bibliografía del Entregable 2 (UAVIDS-2025), generada por la sección 10 del cuaderno. Codificación UTF-8.\n\n"
+                                      + "\n\n".join(sorted(ENTRADAS_BIB, key=lambda t: clave_orden(t.split("{", 1)[1]))) + "\n", encoding="utf-8")
 """)

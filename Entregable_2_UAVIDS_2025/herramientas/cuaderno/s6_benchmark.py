@@ -17,11 +17,13 @@ tabla_a2 = pd.DataFrame({"Grupo": [("Trivial" if m == "Trivial" else "Clásico" 
                          "F1 macro (media ± DE)": [f"{num(F1P[m].mean(), 4)} ± {num(F1P[m].std(), 4)}" for m in ORDEN],
                          "IC 95 % (bootstrap por bloques)": [intervalo(E.ic_percentil(F1_BOOT[m])) for m in ORDEN], "ECE": [ece_m[m] for m in ORDEN],
                          "Robustez (índice)": [ROBUSTEZ.loc[m, "Índice medio"] if m in ROBUSTEZ.index else np.nan for m in ORDEN],
-                         "Parámetros": [costo.loc[m, "Parámetros"] for m in ORDEN], "FLOPs": [costo.loc[m, "FLOPs"] for m in ORDEN], "Latencia (ms)": [costo.loc[m, "ms_por_muestra"] for m in ORDEN],
+                         "Parámetros": [costo.loc[m, "Parámetros"] for m in ORDEN], "FLOPs": [costo.loc[m, "FLOPs"] for m in ORDEN],
+                         "Entrenamiento (min por corrida)": [costo.loc[m, "Minutos"] for m in ORDEN], "Latencia (ms)": [costo.loc[m, "ms_por_muestra"] for m in ORDEN],
                          "Rango promedio": [rangos[m] for m in ORDEN]}, index=ORDEN)
 TABLA_A2 = tabla_a2.sort_values("Rango promedio")
-TABLA_A2.to_csv(RESULTADOS / "tabla_benchmark.csv", encoding="utf-8-sig")
-tabla(TABLA_A2.reset_index(names="Modelo"), {"ECE": "{:.4f}", "Robustez (índice)": "{:.3f}", "Parámetros": "{:,.0f}", "FLOPs": "{:,.0f}", "Latencia (ms)": "{:.3f}", "Rango promedio": "{:.2f}"})
+TABLA_A2.to_csv(RESULTADOS / "tabla_benchmark.csv", encoding="utf-8-sig", index_label="Modelo")
+tabla(TABLA_A2.reset_index(names="Modelo"), {"ECE": "{:.4f}", "Robustez (índice)": "{:.3f}", "Parámetros": "{:,.0f}", "FLOPs": "{:,.0f}", "Entrenamiento (min por corrida)": "{:.2f}",
+                                            "Latencia (ms)": "{:.3f}", "Rango promedio": "{:.2f}"})
 primero = TABLA_A2.index[0]
 IC_TABLA = {m: E.ic_percentil(F1_BOOT[m]) for m in ORDEN}
 ancho_ic = np.median([IC_TABLA[m][1] - IC_TABLA[m][0] for m in ORDEN if m != "Trivial"])

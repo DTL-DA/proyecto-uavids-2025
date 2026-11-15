@@ -87,7 +87,7 @@ print(f"Hardware: {platform.processor()}, {torch.get_num_threads()} hilos dispon
 """)
 
 md("s4-5-fichas-md", r"""
-**Fichas de modelo y registro de experimentos.** La tabla sigue la plantilla 11.3 del enunciado para los 16 modelos, y el registro consolidado de todas las corridas, de todas las fases, con su configuración, semilla y resultados, queda en `resultados/registro_experimentos.csv`.
+**Fichas de modelo y registro de experimentos.** La tabla sigue la plantilla 11.3 del enunciado para los 16 modelos, y el registro consolidado de todas las corridas, de todas las fases, con su configuración, semilla y resultados, queda en `resultados/registro_experimentos.csv`. Ningún modelo congela capas ni usa pesos preentrenados, de modo que los parámetros totales y los entrenables coinciden; en los cuatro modelos con búsqueda de arquitectura, la ficha indica además cuántos finalistas son equivalentes a la ganadora por TOST, que es el tamaño del conjunto de indistinguibles de la sección 4.3.2.
 """)
 
 code("s4-5-fichas", r"""
@@ -101,20 +101,31 @@ DOI_FUENTE = {"DNN": "10.1109/cns66487.2025.11194990", "CNN 1D": "10.1109/cns664
               "TabNet": "10.1609/aaai.v35i8.16826", "ResNet": "10.1109/cvpr.2016.90", "Autoencoder": "10.1126/science.1127647", "DBN": "10.1162/neco.2006.18.7.1527",
               "CNN-LSTM": "10.1109/cvpr.2015.7298878", "LightGBM": "lightgbm 4.7.0", "Logística": "scikit-learn 1.9.0", "Trivial": "Clase mayoritaria"}
 commit = subprocess.run(["git", "-C", str(RAIZ_E2), "log", "-1", "--format=%h", "--", "codigo"], capture_output=True, text=True).stdout.strip() or "sin repositorio"
+def intervalo_explorado(espacio):
+    # Rango de cada hiperparámetro de la rejilla del preregistro, del menor al mayor valor
+    return "; ".join(f"{NOMBRE_HP.get(k, k)} {cientifico(min(v)) if isinstance(min(v), float) else min(v)}–{cientifico(max(v)) if isinstance(max(v), float) else max(v)}" for k, v in espacio.items())
+ESPACIO_AJUSTE = {"LightGBM": CONFIG["ajuste"]["espacio_lightgbm"], "Logística": CONFIG["ajuste"]["espacio_logistica"]}
+EQUIV_TOST = FASE2.set_index("Modelo")["Equivalentes por TOST"].to_dict()
+HARDWARE = f"CPU {platform.processor().split(',')[-1].strip()}, 2 hilos por corrida"
 fichas = []
 for m in ORDEN:
     sub_m = METRICAS[METRICAS["modelo"] == m]
     arq = ADENDA.get("arquitecturas_ganadoras", {}).get(m)
     fichas.append({"Modelo": m, "Familia": MOD.CATALOGO[m]["familia"] if m in MOD.CATALOGO else "No profundo", "Referencia o versión": DOI_FUENTE[m], "Implementación": f"codigo/, commit {commit}",
-                   "Preentrenamiento": "Ninguno", "Parámetros": costo.loc[m, "Parámetros"], "FLOPs por muestra": costo.loc[m, "FLOPs"],
+                   "Preentrenamiento": "Ninguno", "Parámetros (totales = entrenables)": costo.loc[m, "Parámetros"], "FLOPs por muestra": costo.loc[m, "FLOPs"],
                    "Hiperparámetros finales": ", ".join(f"{k} {cientifico(v)}" if isinstance(v, float) else f"{k} {v}" for k, v in MEJORES_HP.get(m, {}).items()) or "No aplica",
-                   "Intentos de ajuste": int((ajuste["modelo"] == m).sum()), "Arquitectura seleccionada": MOD.identificador(arq) if arq else "Definida en la literatura" if m in MOD.CATALOGO else "No aplica",
+                   "Intervalo explorado": intervalo_explorado(ESPACIO_AJUSTE.get(m, CONFIG["ajuste"]["espacio_profundos"])) if m != "Trivial" else "No aplica",
+                   "Intentos de ajuste": int((ajuste["modelo"] == m).sum()), "Minutos de ajuste": ajuste.loc[ajuste["modelo"] == m, "segundos"].sum() / 60,
+                   "Arquitectura seleccionada": MOD.identificador(arq) if arq else "Definida en la literatura" if m in MOD.CATALOGO else "No aplica",
+                   "Finalistas equivalentes (TOST)": EQUIV_TOST.get(m, "No aplica"),
                    "Entrenamiento": "Adam, ReduceLROnPlateau, parada por F1 de validación, float32" if m in MOD.CATALOGO else "Parada por log-loss de validación" if m == "LightGBM" else "lbfgs" if m == "Logística" else "No aplica",
                    "Épocas efectivas (media)": costo.loc[m, "Épocas"], "Minutos por corrida": costo.loc[m, "Minutos"], "Latencia (ms)": costo.loc[m, "ms_por_muestra"],
+                   "Memoria pico (MB)": costo.loc[m, "Memoria_MB"], "Hardware": HARDWARE,
                    "Corridas definitivas": len(sub_m), "Incidencias": f"{int(registro_exp.loc[registro_exp['modelo'] == m, 'divergente'].fillna(False).astype(bool).sum())} corridas divergentes"})
 FICHAS = pd.DataFrame(fichas)
 FICHAS.to_csv(RESULTADOS / "fichas_de_modelo.csv", index=False, encoding="utf-8-sig")
-tabla(FICHAS, {"Parámetros": "{:,.0f}", "FLOPs por muestra": "{:,.0f}", "Épocas efectivas (media)": "{:.1f}", "Minutos por corrida": "{:.2f}", "Latencia (ms)": "{:.3f}"})
+tabla(FICHAS, {"Parámetros (totales = entrenables)": "{:,.0f}", "FLOPs por muestra": "{:,.0f}", "Minutos de ajuste": "{:.1f}", "Épocas efectivas (media)": "{:.1f}", "Minutos por corrida": "{:.2f}",
+               "Latencia (ms)": "{:.3f}", "Memoria pico (MB)": "{:.0f}"})
 print(f"Registro de experimentos: {len(registro_exp):,} corridas en {registro_exp['fase'].nunique()} fases".replace(",", " "))
 """)
 
@@ -201,6 +212,88 @@ ejes[0].set_ylabel("Exactitud del bin")
 fig.suptitle("Diagramas de confiabilidad en prueba de los tres mejores modelos por validación (primera semilla, 15 bins de igual tamaño)", fontsize=9.5)
 plt.tight_layout()
 plt.show()
+""")
+
+md("s4-5-calibracion-clase-md", r"""
+**Calibración por clase.** La sección 12.2 del enunciado pide evaluar el ECE y la pendiente de calibración en cada subgrupo relevante, que aquí son las cinco clases. Para los tres mejores modelos por validación y LightGBM, con sus R semillas, se calcula el ECE de cada clase en esquema uno contra todos, $\mathrm{ECE}_k = \sum_b \frac{|B_b|}{n} \left| \bar{y}_{k}(B_b) - \bar{p}_{k}(B_b) \right|$, con 15 bins fijos sobre $p_k$, y la pendiente de la regresión logística de $\mathbb{1}[y = k]$ sobre el logit de $p_k$, donde una pendiente menor que 1 indica sobreconfianza en esa clase.
+""")
+
+code("s4-5-calibracion-clase", r"""
+def ece_clase(p_k, y_k, bins=15):
+    cortes = np.linspace(0, 1, bins + 1)
+    indice = np.clip(np.digitize(p_k, cortes[1:-1]), 0, bins - 1)
+    return float(sum((indice == b).mean() * abs(y_k[indice == b].mean() - p_k[indice == b].mean()) for b in range(bins) if (indice == b).any()))
+MODELOS_CAL = list(dict.fromkeys(TOP3 + ["LightGBM"]))
+filas_cc = []
+for m in MODELOS_CAL:
+    for i in METRICAS.loc[METRICAS["modelo"] == m, "id"]:
+        p_eva = AN.prob(next(x for x in DEF if x["id"] == i), "eva")
+        for k, clase in enumerate(CLASES):
+            y_k = (y[ID_PRU] == k).astype(int)
+            filas_cc.append({"modelo": m, "Clase": clase, "ECE": ece_clase(p_eva[:, k], y_k), "Pendiente": E.pendiente_intercepto(p_eva[:, k], y_k)["pendiente"]})
+CAL_CLASE = pd.DataFrame(filas_cc).groupby(["Clase", "modelo"])[["ECE", "Pendiente"]].mean().unstack("modelo")
+tabla_cc = pd.DataFrame({"Clase": CLASES})
+for m in MODELOS_CAL:
+    tabla_cc[f"ECE · {m}"] = [CAL_CLASE.loc[c, ("ECE", m)] for c in CLASES]
+for m in MODELOS_CAL:
+    tabla_cc[f"Pendiente · {m}"] = [CAL_CLASE.loc[c, ("Pendiente", m)] for c in CLASES]
+tabla_cc.to_csv(RESULTADOS / "calibracion_por_clase.csv", index=False, encoding="utf-8-sig")
+tabla(tabla_cc, {c: "{:.4f}" if c.startswith("ECE") else "{:.3f}" for c in tabla_cc.columns if c != "Clase"})
+ece_por_clase = CAL_CLASE["ECE"].mean(axis=1)
+pend_por_clase = CAL_CLASE["Pendiente"].mean(axis=1)
+peor_clase, mejor_clase = ece_por_clase.idxmax(), ece_por_clase.idxmin()
+sobreconf = [c for c in CLASES if (CAL_CLASE.loc[c, "Pendiente"] < 1).all()]
+interpretar(f'''**Interpretación.** El ECE por clase, promediado entre los {len(MODELOS_CAL)} modelos, va de {num(ece_por_clase.min(), 4)} en {mejor_clase} a {num(ece_por_clase.max(), 4)} en {peor_clase}, y la pendiente media va de {num(pend_por_clase.min(), 3)} ({pend_por_clase.idxmin()}) a {num(pend_por_clase.max(), 3)} ({pend_por_clase.idxmax()}). {f"Los {len(MODELOS_CAL)} modelos tienen pendiente menor que 1 en {enumerar(sobreconf)}" if sobreconf else "Ninguna clase tiene pendiente menor que 1 en todos los modelos"}.
+
+Esto significa que el error de calibración de la sección anterior no se reparte por igual: se concentra en {peor_clase}{", una de las dos clases de la frontera que más confunden los modelos (sección 4.5)" if peor_clase in ("Blackhole", "Wormhole") else ""}{f", y en {enumerar(sobreconf)} los modelos son sobreconfiados" if sobreconf else ""}, de modo que un ECE global aceptable puede ocultar probabilidades poco confiables en clases concretas, que son las que un analista usaría para priorizar alertas.
+
+Por tal motivo, se opta por reportar la calibración por clase junto con la global, y por exigir al modelo original del Entregable 3 que la calibración de {peor_clase} entre en su criterio de adecuación.''')
+""")
+
+md("s4-5-decision-md", r"""
+**Estadístico KS y curva de decisión.** La sección 4.5 del enunciado agrega, para datos tabulares, el estadístico KS y la curva de decisión (*net benefit*), que se definen sobre una decisión binaria. En un detector de intrusiones esa decisión es levantar o no una alarma, de modo que se evalúa la probabilidad de ataque, $1 - p_{Normal}$, frente a la etiqueta «ataque o Normal». El KS es la distancia máxima entre las distribuciones de ese puntaje en ataques y en tráfico normal, y el beneficio neto en el umbral $t$ es $\mathrm{NB}(t) = \frac{VP}{n} - \frac{FP}{n} \cdot \frac{t}{1 - t}$, que se compara con alarmar siempre y con no alarmar nunca (Vickers y Elkin, 2006). Como estas métricas no estaban en el preregistro, el análisis es exploratorio.
+""")
+
+code("s4-5-decision", r"""
+i_normal = CLASES.index("Normal")
+y_ataque = (y[ID_PRU] != i_normal).astype(int)
+prev_ataque = y_ataque.mean()
+UMBRALES_NB = np.round(np.arange(0.05, 0.96, 0.05), 2)
+nb_todos = prev_ataque - (1 - prev_ataque) * UMBRALES_NB / (1 - UMBRALES_NB)
+filas_ks, curvas_nb = [], {}
+for m in MODELOS_CAL:
+    ks_m, nb_m = [], []
+    for i in METRICAS.loc[METRICAS["modelo"] == m, "id"]:
+        s = 1 - AN.prob(next(x for x in DEF if x["id"] == i), "eva")[:, i_normal]
+        ks_m.append(stats.ks_2samp(s[y_ataque == 1], s[y_ataque == 0]).statistic)
+        nb_m.append([((s >= t) & (y_ataque == 1)).mean() - ((s >= t) & (y_ataque == 0)).mean() * t / (1 - t) for t in UMBRALES_NB])
+    curvas_nb[m] = np.mean(nb_m, 0)
+    supera = curvas_nb[m] > np.maximum(nb_todos, 0)
+    filas_ks.append({"Modelo": m, "KS (media ± DE)": f"{num(np.mean(ks_m), 4)} ± {num(np.std(ks_m, ddof=1), 4)}", "Beneficio neto en t = 0,5": curvas_nb[m][UMBRALES_NB == 0.5][0],
+                     "Alarmar siempre en t = 0,5": nb_todos[UMBRALES_NB == 0.5][0], "Umbrales donde supera a ambas referencias": f"{int(supera.sum())} de {len(UMBRALES_NB)}"})
+DECISION_BIN = pd.DataFrame(filas_ks)
+DECISION_BIN.to_csv(RESULTADOS / "ks_y_beneficio_neto.csv", index=False, encoding="utf-8-sig")
+tabla(DECISION_BIN, {"Beneficio neto en t = 0,5": "{:.4f}", "Alarmar siempre en t = 0,5": "{:.4f}"})
+fig, eje = plt.subplots(figsize=(7.5, 3.6))
+for j, m in enumerate(MODELOS_CAL):
+    eje.plot(UMBRALES_NB, curvas_nb[m], color=[NEGRO, GRIS_OSCURO, GRIS_MEDIO, NEGRO][j % 4], ls=LINEAS[j % len(LINEAS)], marker=MARCADORES[j % len(MARCADORES)], ms=3.5, mfc="white", lw=1, label=m)
+eje.plot(UMBRALES_NB, nb_todos, color=GRIS_CLARO, lw=1.6, label="Alarmar siempre")
+eje.axhline(0, color=GRIS_CLARO, lw=1, ls=":", label="No alarmar nunca")
+eje.set(xlabel="Umbral de probabilidad de ataque t", ylabel="Beneficio neto", ylim=(min(-0.1, float(np.min(nb_todos[UMBRALES_NB <= 0.9]))), prev_ataque + 0.05))
+eje.legend(fontsize=7, ncol=2)
+eje.set_title("Curva de decisión en prueba: ataque frente a Normal (media de las R semillas)", fontsize=9.5)
+plt.tight_layout()
+plt.show()
+mejor_nb = DECISION_BIN.loc[DECISION_BIN["Beneficio neto en t = 0,5"].idxmax(), "Modelo"]
+n_supera = [int(f.split(" de ")[0]) for f in DECISION_BIN["Umbrales donde supera a ambas referencias"]]
+ventaja_nb = np.mean([curvas_nb[m] - nb_todos for m in MODELOS_CAL], 0)
+lectura_supera = (f"los {len(MODELOS_CAL)} modelos superan a las dos referencias en los {len(UMBRALES_NB)} umbrales" if min(n_supera) == len(UMBRALES_NB)
+                  else f"los modelos superan a las dos referencias en {min(n_supera)} a {max(n_supera)} de los {len(UMBRALES_NB)} umbrales")
+interpretar(f'''**Interpretación.** En la decisión de alarma, el KS medio es de {enumerar([f"{r['KS (media ± DE)'].split(' ± ')[0]} ({r['Modelo']})" for _, r in DECISION_BIN.iterrows()])}, y en el umbral de 0,5 el mayor beneficio neto es el de {mejor_nb}, con {num(DECISION_BIN["Beneficio neto en t = 0,5"].max(), 4)}, frente a {num(nb_todos[UMBRALES_NB == 0.5][0], 4)} de alarmar siempre. La prevalencia de ataques en prueba es de {num(100 * prev_ataque, 1)} %.
+
+Es decir, {lectura_supera}, y la ventaja media sobre alarmar siempre pasa de {num(ventaja_nb[0], 4)} en t = {num(UMBRALES_NB[0], 2)} a {num(ventaja_nb[UMBRALES_NB == 0.5][0], 4)} en t = 0,5: con una prevalencia de ataques de {num(100 * prev_ataque, 1)} %, alarmar siempre es casi tan bueno como un modelo cuando una falsa alarma cuesta poco, y pierde valor a medida que la falsa alarma pesa más.
+
+Por lo anterior, conviene que el Entregable 3 fije el umbral de alarma en validación según el costo relativo de una falsa alarma y de un ataque no detectado, y reporte la curva de decisión junto con el F1 macro, que no distingue entre esos dos errores.''')
 """)
 
 code("s4-5-errores", r"""

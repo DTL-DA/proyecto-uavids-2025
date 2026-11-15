@@ -3,9 +3,9 @@ from .base import code, md
 md("s8", r"""
 ## 8. Reproducibilidad, ética y comunicación científica
 
-**Entorno fijado.** `requirements.txt` fija las versiones exactas de las dependencias, con Python 3.13.14 y Windows 11, solo CPU; el repositorio incluye un `Dockerfile` de referencia con la misma versión de Python, recomendado por el enunciado para el Entregable 3. Las semillas, la configuración del experimento, la partición y la suma SHA-256 de la prueba están versionadas, y el preregistro tiene su etiqueta en el repositorio.
+**Entorno fijado.** `requirements.txt` fija las versiones exactas de las dependencias, con Python 3.13.14 y Windows 11, solo CPU; el repositorio incluye un `Dockerfile` de referencia con la misma versión de Python, recomendado por el enunciado para el Entregable 3. Las semillas, la configuración del experimento, la partición y la suma SHA-256 de la prueba están versionadas, y el preregistro, la desviación 1 y las dos adendas tienen su etiqueta en el repositorio; las fechas y los commits de esas etiquetas se anexan en `entregables/03_preregistro/historial_git_preregistro.txt`.
 
-**Un solo comando.** Con las corridas guardadas, el cuaderno se regenera de principio a fin con `python Entregable_2_UAVIDS_2025/herramientas/ejecutar_cuaderno.py "Entregable 2 - UAVIDS-2025.ipynb"`, que recalcula todas las tablas y figuras sin reentrenar; para reentrenar todo, se ejecutan en orden las fases de `codigo/plan.py` con `codigo/ejecutor.py`.
+**Un solo comando.** Hay un comando para cada nivel de verificación. Con las corridas guardadas, el cuaderno se regenera de principio a fin con `python Entregable_2_UAVIDS_2025/herramientas/ejecutar_cuaderno.py "Entregable 2 - UAVIDS-2025.ipynb"`, que recalcula todas las tablas y figuras sin reentrenar. Para reentrenar todo, `python Entregable_2_UAVIDS_2025/herramientas/orquestar.py` encadena las fases en el orden del preregistro: ajuste, piloto y estudio de ruido, fases 1 y 2 de la búsqueda, ejecución definitiva, experimentos complementarios y análisis. Cada fase genera sus trabajos con `codigo/plan.py` y los ejecuta con `codigo/ejecutor.py`, que salta las corridas ya hechas, y el orquestador versiona cada adenda antes de la fase siguiente.
 
 **Prueba de entorno limpio.** En un entorno `venv` nuevo, instalado solo con `requirements.txt`, se volvieron a entrenar corridas de la ejecución definitiva con sus mismas semillas y configuraciones, y se recalculó la tabla principal a partir de las corridas guardadas. La tabla reporta la discrepancia máxima observada.
 """)
@@ -27,7 +27,7 @@ else:
 md("s8-etica", r"""
 **Ética y uso responsable.** Los datos son simulados, sin información personal, de modo que no hay riesgos de privacidad; la licencia CC BY 4.0 del conjunto permite su uso con atribución, y las librerías usadas tienen licencias abiertas (BSD, MIT o Apache 2.0). El riesgo principal está en las consecuencias del error: un falso negativo deja pasar un ataque que puede interrumpir la misión o desviar el tráfico del enjambre, y un falso positivo puede llevar a aislar un dron legítimo. Por eso se reporta el desempeño desagregado por clase y por tamaño de flujo (sección 4.5): si un modelo detecta bien Flooding pero confunde Blackhole con Wormhole, su promedio oculta un daño concreto, que es dirigir la respuesta equivocada ante un ataque de enrutamiento. Además, los resultados describen un solo simulador, de modo que desplegar un modelo de este benchmark en un enjambre real sin validarlo con capturas de campo sería un uso irresponsable.
 
-**Comunicación científica.** Las figuras están en escala de grises, con las series distinguidas por tono, tipo de línea y marcador; las barras de error se reemplazan por intervalos y diagramas de caja, y la bibliografía solo incluye referencias verificadas con su DOI.
+**Comunicación científica.** Las figuras están en escala de grises, con las series distinguidas por tono, tipo de línea y marcador; las barras de error se reemplazan por intervalos y diagramas de caja, y la bibliografía solo incluye referencias verificadas con su DOI. Así mismo, la sección 10 escribe la bibliografía en formato BibTeX, en `entregables/11_literatura/referencias.bib`, con las mismas entradas y los mismos DOI de la lista del informe.
 
 ### 8.1 Lista de verificación de reproducibilidad (apéndice B)
 """)
@@ -54,7 +54,7 @@ verificar = {
     "Un solo acceso al conjunto de prueba por ejecución, con modelo y umbrales ya fijados": True,
     "Replicación parcial del paper guía con criterio de éxito definido a priori y limitación identificada": len(REPLICA) > 0,
     "Reproducción independiente de la tabla principal con discrepancia máxima reportada": (RESULTADOS / "reproduccion_entorno_limpio.json").exists(),
-    "Código ejecutable de extremo a extremo con un solo comando y entorno reproducible": True,
+    "Código ejecutable de extremo a extremo con un solo comando y entorno reproducible": (RAIZ_E2 / "herramientas" / "orquestar.py").exists() and (RAIZ_E2 / "Dockerfile").exists(),
 }
 LISTA_B = pd.DataFrame({"Estado": ["☑" if v else "☐" for v in verificar.values()], "Ítem": list(verificar)})
 LISTA_B.to_csv(RESULTADOS / "lista_verificacion_b.csv", index=False, encoding="utf-8-sig")

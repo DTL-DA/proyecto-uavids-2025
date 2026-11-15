@@ -91,7 +91,8 @@ def main():
             correr(plan, "cv5x2", ",".join([top3[0], "LightGBM"]))
             correr(plan, "ablacion", top3[0])
             correr(plan, "curvas", ",".join(dict.fromkeys([top3[0], "DNN", "LightGBM"])))
-            correr(plan, "permutacion", ",".join(dict.fromkeys([m for m in top3 if m in baratos] + ["DNN", "LightGBM"])), "200")
+            # Preregistro: permutación de etiquetas en los modelos cuyo costo lo permita, más el baseline del Entregable 1
+            correr(plan, "permutacion", ",".join(dict.fromkeys(["DNN", "CNN 1D"] + [m for m in top3 if m in baratos] + ["LightGBM", "Logística"])), "200")
             correr(plan, "bootstrap", ",".join(dict.fromkeys([top3[0], "DNN", "LightGBM"])), "20")
             unir("complementarios", ["cv5x2", "ablacion", "curvas", "permutacion", "bootstrap"])
             ejecutar("complementarios", a)

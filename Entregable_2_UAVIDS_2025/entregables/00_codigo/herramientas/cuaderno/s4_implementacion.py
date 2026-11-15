@@ -100,6 +100,69 @@ Esto significa que el mismo presupuesto no produce el mismo beneficio en todos l
 Por tal motivo, se fijan para la ejecución definitiva las configuraciones de la tabla, elegidas solo con validación, y el resto del protocolo queda congelado.''')
 """)
 
+md("s4-ajuste-importancia-md", r"""
+**Importancia de los hiperparámetros.** La sección 11.1 del enunciado pide reportar, además del mejor valor, las curvas de importancia de los hiperparámetros. Como las 12 configuraciones son las mismas para los 13 modelos profundos, se ajusta un modelo de bloques sobre el F1 de validación centrado dentro de cada modelo, $c_{jt} = \mu + \beta_{lr} + \beta_{wd} + \beta_{lote} + \alpha_j + \varepsilon_{jt}$, con el modelo $j$ como bloque, y se contrasta cada factor con una ANOVA de tipo II, que estima su efecto ajustado por los otros dos, y con corrección de Holm por los tres factores. Las curvas muestran el F1 centrado medio de cada valor con su IC 95 % entre modelos. Este análisis es exploratorio: no estaba en el preregistro y no cambia las configuraciones elegidas.
+""")
+
+code("s4-ajuste-importancia", r"""
+import statsmodels.formula.api as smf
+from statsmodels.stats.anova import anova_lm
+
+imp = ajuste[ajuste["modelo"].isin(PROFUNDOS)].rename(columns={"hp_lr": "lr", "hp_weight_decay": "wd", "hp_batch": "lote"}).copy()
+imp["c"] = imp["f1_val"] - imp.groupby("modelo")["f1_val"].transform("mean")
+av_hp = anova_lm(smf.ols("c ~ C(modelo) + C(lr) + C(wd) + C(lote)", data=imp).fit(), typ=2)
+ss_res_hp = av_hp.loc["Residual", "sum_sq"]
+FACTORES_HP = {"lr": "Tasa de aprendizaje", "wd": "Weight decay", "lote": "Tamaño de lote"}
+p_holm_hp = E.holm([av_hp.loc[f"C({h})", "PR(>F)"] for h in FACTORES_HP])
+filas_hp = []
+for (h, nombre), p_h in zip(FACTORES_HP.items(), p_holm_hp):
+    por_modelo = imp.groupby(["modelo", h])["c"].mean().unstack()
+    curva = por_modelo.mean()
+    filas_hp.append({"Hiperparámetro": nombre, "Valores": len(curva), "F": av_hp.loc[f"C({h})", "F"], "p": av_hp.loc[f"C({h})", "PR(>F)"], "p Holm": p_h,
+                     "η² parcial": av_hp.loc[f"C({h})", "sum_sq"] / (av_hp.loc[f"C({h})", "sum_sq"] + ss_res_hp),
+                     "Mejor valor (marginal)": cientifico(float(curva.idxmax())) if h != "lote" else int(curva.idxmax()), "Rango de la curva": curva.max() - curva.min()})
+IMPORTANCIA_HP = pd.DataFrame(filas_hp)
+IMPORTANCIA_HP.to_csv(RESULTADOS / "importancia_hiperparametros.csv", index=False, encoding="utf-8-sig")
+tabla(IMPORTANCIA_HP.assign(p=IMPORTANCIA_HP["p"].map(p_exacto), **{"p Holm": IMPORTANCIA_HP["p Holm"].map(p_exacto)}), {"F": "{:.2f}", "η² parcial": "{:.3f}", "Rango de la curva": "{:.4f}"})
+fig, ejes = plt.subplots(1, 3, figsize=(11, 3.2), sharey=True)
+for j, (eje, (h, nombre)) in enumerate(zip(ejes, FACTORES_HP.items())):
+    por_modelo = imp.groupby(["modelo", h])["c"].mean().unstack()
+    media, de = por_modelo.mean(), por_modelo.std(ddof=1)
+    semi = stats.t.ppf(0.975, len(por_modelo) - 1) * de / np.sqrt(len(por_modelo))
+    x = np.arange(len(media))
+    eje.errorbar(x, media.to_numpy(), yerr=semi.to_numpy(), color=NEGRO, marker=MARCADORES[j], ms=5, mfc="white", lw=1, capsize=3)
+    eje.axhline(0, color=GRIS_CLARO, lw=1)
+    eje.set_xticks(x, [cientifico(float(v)) if h != "lote" else str(int(v)) for v in media.index], fontsize=8)
+    eje.set(title=nombre, xlabel="Valor")
+ejes[0].set_ylabel("F1 de validación centrado en el modelo")
+fig.suptitle("Curvas de importancia: F1 centrado medio de los 13 modelos profundos por valor de cada hiperparámetro (IC 95 % entre modelos)", fontsize=9.5)
+plt.tight_layout()
+plt.show()
+dom_hp = IMPORTANCIA_HP.loc[IMPORTANCIA_HP["η² parcial"].idxmax()]
+otros_hp = IMPORTANCIA_HP.drop(index=IMPORTANCIA_HP["η² parcial"].idxmax())
+h_dom = [h for h, n in FACTORES_HP.items() if n == dom_hp["Hiperparámetro"]][0]
+borde_hp = float(imp.groupby(h_dom)["c"].mean().idxmax()) == float(max(CONFIG["ajuste"]["espacio_profundos"][{"lote": "batch", "wd": "weight_decay"}.get(h_dom, h_dom)]))
+ART_HP = {"Tasa de aprendizaje": "la tasa de aprendizaje", "Weight decay": "el *weight decay*", "Tamaño de lote": "el tamaño de lote"}
+otros_sig = otros_hp[otros_hp["p Holm"] < ALFA]
+otros_ns = otros_hp[otros_hp["p Holm"] >= ALFA]
+texto_otros = ""
+if len(otros_ns):
+    sujeto = enumerar([ART_HP[n] for n in otros_ns["Hiperparámetro"]])
+    etas_ns, ps_ns = [num(v, 3) for v in otros_ns["η² parcial"]], [num(v, 3) for v in otros_ns["p Holm"]]
+    cifras_ns = (f"η² parcial de {enumerar(etas_ns)} y p de Holm de {enumerar(ps_ns)}, respectivamente" if len(otros_ns) > 1
+                 else f"η² parcial de {etas_ns[0]}, {valor_p(otros_ns['p Holm'].iloc[0])} tras Holm")
+    texto_otros += (f" {sujeto[0].upper() + sujeto[1:]} {'no tienen' if len(otros_ns) > 1 else 'no tiene'} un efecto significativo una vez ajustado por {ART_HP[dom_hp['Hiperparámetro']]} "
+                    f"({cifras_ns}).")
+if len(otros_sig):
+    sujeto = enumerar([ART_HP[n] for n in otros_sig["Hiperparámetro"]])
+    texto_otros += f" {sujeto[0].upper() + sujeto[1:]} también {'tienen' if len(otros_sig) > 1 else 'tiene'} un efecto significativo, aunque menor."
+interpretar(f'''**Interpretación.** El hiperparámetro que más explica el F1 de validación es {ART_HP[dom_hp["Hiperparámetro"]]}, con η² parcial de {num(dom_hp["η² parcial"], 3)} ({valor_p(dom_hp["p Holm"])} tras Holm); su curva sube {num(dom_hp["Rango de la curva"], 4)} entre el peor y el mejor valor, y el mejor es {dom_hp["Mejor valor (marginal)"]}.{texto_otros}
+
+Hay que tener en cuenta que las 12 configuraciones se muestrearon de la rejilla, de modo que los valores de los tres hiperparámetros no están balanceados y sus curvas marginales se mezclan entre sí: la ANOVA de tipo II separa esos efectos y es la que sustenta la lectura, y las curvas solo muestran la dirección.
+
+Por ello, se recomienda concentrar el presupuesto de ajuste del Entregable 3 en la tasa de aprendizaje, con menos valores de *weight decay* y de tamaño de lote{", y ampliar el rango de la tasa por encima de " + cientifico(float(max(CONFIG["ajuste"]["espacio_profundos"]["lr"]))) + ", porque el mejor valor quedó en el borde de la rejilla" if borde_hp and h_dom == "lr" else ""}.''')
+""")
+
 md("s4-hp", r"""
 **Hiperparámetros y estrategia de entrenamiento.** La tabla reúne lo que pide la sección 4.2 del enunciado para cada modelo. Todo el entrenamiento es en precisión simple (float32) en CPU, sin precisión mixta, porque no hay GPU.
 """)

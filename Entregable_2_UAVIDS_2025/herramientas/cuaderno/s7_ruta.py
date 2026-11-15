@@ -133,7 +133,9 @@ tabla(resumen_c.assign(**{c: resumen_c[c].map(p_exacto) for c in ["p (i) Holm", 
 """)
 
 md("s7-adecuacion", r"""
-**Criterio de adecuación de la solución.** Según la sección 7.2 del enunciado, un modelo es adecuado solo si cumple a la vez cuatro condiciones: (i) supera al baseline trivial con p ajustado < 0,05 y una mejora mayor que δ; (ii) su brecha entre entrenamiento y validación es menor que δg con evidencia estadística; (iii) sus probabilidades están calibradas, lo que aquí se verifica con un ECE menor que 0,05 tras el *temperature scaling* ajustado en validación, y se reporta además la pendiente de calibración media, y (iv) su desempeño en prueba es consistente con el de validación, es decir, el IC por bloques de la diferencia contiene al cero.
+**Criterio de adecuación de la solución.** Según la sección 7.2 del enunciado, un modelo es adecuado solo si cumple a la vez cuatro condiciones: (i) supera al baseline trivial con p ajustado < 0,05 y una mejora mayor que δ; (ii) su brecha entre entrenamiento y validación es menor que δg con evidencia estadística; (iii) sus probabilidades están calibradas, y (iv) su desempeño en prueba es consistente con el de validación, es decir, el IC por bloques de la diferencia contiene al cero.
+
+Hay que tener en cuenta que el preregistro fija δ, δg y el ECE como métrica secundaria, pero no un umbral numérico para la condición (iii). El umbral que se usa aquí, un ECE menor que 0,05 tras el *temperature scaling* ajustado en validación, se fijó al redactar esta sección, después de la ejecución definitiva. Por tal motivo, y según la política de hallazgos exploratorios de la sección 9.3 del enunciado, la condición (iii) y el veredicto de adecuación se declaran **exploratorios**: no se usan para elegir el modelo final, y la segunda tabla muestra cómo cambia el veredicto con umbrales de 0,03 a 0,07. La pendiente de calibración media se reporta como referencia.
 """)
 
 code("s7-adecuacion-calc", r"""
@@ -141,21 +143,32 @@ import re
 
 p_trivial = E.holm([stats.ttest_1samp(F1P[m] - F1P["Trivial"], 0).pvalue for m in [x for x in ORDEN if x != "Trivial"]])
 ece_t = CALIB.groupby("modelo")["ECE con T"].mean()
-filas_ad = []
+UMBRAL_ECE = 0.05  # fijado después de la ejecución definitiva: condición exploratoria
+filas_ad, sin_iii = [], {}
 for j, m in enumerate([x for x in ORDEN if x != "Trivial"]):
     br = BRECHAS.set_index("Modelo").loc[m]
     c1 = p_trivial[j] < ALFA and F1P[m].mean() - F1P["Trivial"].mean() > DELTA
     c2 = br["p Wilcoxon (g < δg)"] < ALFA
     pend = TABLA_A.set_index("Modelo").loc[m, "Pendiente de calibración (media de clases)"]
-    c3 = ece_t[m] < 0.05
+    c3 = ece_t[m] < UMBRAL_ECE
     ic_vp = [float(v.replace(",", ".")) for v in br["IC 95 % por bloques"].strip("[]").split("; ")]
     c4 = ic_vp[0] <= 0 <= ic_vp[1]
+    sin_iii[m] = c1 and c2 and c4
     filas_ad.append({"Modelo": m, "(i) Supera al trivial": "sí" if c1 else "no", "(ii) Brecha < δg": "sí" if c2 else "no", "(iii) ECE con temperatura < 0,05": "sí" if c3 else "no",
                      "Pendiente media": pend, "(iv) Prueba consistente con validación": "sí" if c4 else "no", "Adecuado": "sí" if all((c1, c2, c3, c4)) else "no"})
 ADECUACION = pd.DataFrame(filas_ad)
 ADECUACION.to_csv(RESULTADOS / "adecuacion.csv", index=False, encoding="utf-8-sig")
 tabla(ADECUACION, {"Pendiente media": "{:.3f}"})
 adecuados = ADECUACION.loc[ADECUACION["Adecuado"] == "sí", "Modelo"].tolist()
+# Sensibilidad del veredicto al umbral de la condición (iii), que no estaba en el preregistro
+filas_sens = []
+for u in [0.03, 0.04, 0.05, 0.06, 0.07]:
+    ok = [m for m in sin_iii if sin_iii[m] and ece_t[m] < u]
+    filas_sens.append({"Umbral del ECE con temperatura": u, "Modelos adecuados": len(ok), "Cuáles": enumerar(ok) if ok else "ninguno"})
+SENS_ECE = pd.DataFrame(filas_sens)
+SENS_ECE.to_csv(RESULTADOS / "adecuacion_sensibilidad_ece.csv", index=False, encoding="utf-8-sig")
+tabla(SENS_ECE, {"Umbral del ECE con temperatura": "{:.2f}"})
+n_sens = SENS_ECE.set_index("Umbral del ECE con temperatura")["Modelos adecuados"]
 falla = {c: ADECUACION.loc[ADECUACION[c] == "no", "Modelo"].tolist() for c in ["(i) Supera al trivial", "(ii) Brecha < δg", "(iii) ECE con temperatura < 0,05", "(iv) Prueba consistente con validación"]}
 peor_c = max(falla, key=lambda c: len(falla[c]))
 ece_t = cal_m["ECE con T"]
@@ -168,9 +181,9 @@ texto_borde = (f" Hay que tener en cuenta que la condición (iii) separa modelos
                f"frente a, por ejemplo, {adecuados[0]} con {num(ece_t[adecuados[0]], 4)}, de modo que el umbral decide más que la diferencia de calibración." if al_borde and adecuados and adecuados[0] in ece_t.index else "")
 n_peor = len(falla[peor_c])
 etiqueta_peor = re.sub(r"^[(][ivx]+[)] ", "", peor_c)
-interpretar(f'''**Interpretación.** {("Cumple" if len(adecuados) == 1 else "Cumplen") + " las cuatro condiciones de adecuación " + enumerar(adecuados) if adecuados else "Ningún modelo cumple las cuatro condiciones de adecuación"}{f", de {len(ADECUACION)} evaluados" if adecuados else ""}. {f"La condición que más modelos incumplen es la {peor_c.split(' ')[0]}, «{etiqueta_peor}», con {n_peor} {'modelo' if n_peor == 1 else 'modelos'}: {enumerar(falla[peor_c])}." if n_peor else "Ninguna condición se incumple."}
+interpretar(f'''**Interpretación.** {("Cumple" if len(adecuados) == 1 else "Cumplen") + " las cuatro condiciones de adecuación " + enumerar(adecuados) if adecuados else "Ningún modelo cumple las cuatro condiciones de adecuación"}{f", de {len(ADECUACION)} evaluados" if adecuados else ""}. {f"La condición que más modelos incumplen es la {peor_c.split(' ')[0]}, «{etiqueta_peor}», con {n_peor} {'modelo' if n_peor == 1 else 'modelos'}: {enumerar(falla[peor_c])}." if n_peor else "Ninguna condición se incumple."} En la tabla de sensibilidad, el número de modelos adecuados pasa de {n_sens.iloc[0]} con un umbral de 0,03 a {n_sens.iloc[-1]} con uno de 0,07{(lambda fuera: f", y {enumerar(fuera)} {'queda' if len(fuera) == 1 else 'quedan'} fuera con cualquier umbral, porque {'incumple' if len(fuera) == 1 else 'incumplen'} otra de las condiciones")([m for m in sin_iii if not sin_iii[m]]) if not all(sin_iii.values()) else ""}.
 
 Esto quiere decir que {"hay modelos que el benchmark puede declarar adecuados para este conjunto" + ((". " + (texto_razones + texto_borde).strip().rstrip(".")) if (texto_razones + texto_borde).strip() else "") if adecuados else "ningún modelo satisface a la vez todas las condiciones del enunciado, de modo que, con estos datos y esta partición, ninguno se puede declarar una solución adecuada en sentido estricto"}. {"Hay que tener en cuenta que la condición (iv) depende de la variación entre series y no solo de un defecto del modelo. " if falla["(iv) Prueba consistente con validación"] else ""}{"Todos los modelos superan al trivial por más de δ." if not falla["(i) Supera al trivial"] else ""}
 
-En consecuencia, se decide reportar el criterio tal como resulta, sin relajarlo después de ver los datos, y usar sus fallas como requisitos explícitos del modelo original del Entregable 3.''')
+En consecuencia, se decide reportar el veredicto con el umbral de 0,05 como resultado exploratorio, sin usarlo para elegir el modelo final, fijar en el preregistro del Entregable 3 un umbral de calibración antes de entrenar y usar las fallas de este criterio como requisitos explícitos del modelo original.''')
 """)

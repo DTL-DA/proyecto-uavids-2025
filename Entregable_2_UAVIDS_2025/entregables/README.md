@@ -10,13 +10,13 @@ Esta carpeta reúne, en el orden del enunciado, los productos del Entregable 2. 
 | `02_dataset_y_contrato/` | Dataset o instrucciones verificables para obtenerlo, con la Data Card y el contrato de datos (secciones 1.4 y 1.5 del informe) |
 | `03_preregistro/` | Preregistro fechado y versionado, con su adenda |
 | `04_auditoria_de_fuga/` | Reporte de auditoría de fuga |
-| `05_ficha_de_ruta/` | Ficha de ruta metodológica: tablas A, B y C y criterio de adecuación |
-| `06_tabla_comparativa/` | Tabla comparativa con métricas, costos e inferencia estadística |
-| `07_registro_y_fichas/` | Registro de experimentos y fichas de modelo |
-| `08_techo_e_incertidumbre/` | Reporte de techo de desempeño e incertidumbre |
+| `05_ficha_de_ruta/` | Ficha de ruta metodológica: tablas A, B y C, criterio de adecuación y su sensibilidad al umbral del ECE |
+| `06_tabla_comparativa/` | Tabla comparativa con métricas, costos e inferencia estadística, y KS y beneficio neto de la decisión de alarma |
+| `07_registro_y_fichas/` | Registro de experimentos, fichas de modelo e importancia de los hiperparámetros |
+| `08_techo_e_incertidumbre/` | Reporte de techo de desempeño, incertidumbre y calibración por clase |
 | `09_busqueda_de_arquitectura/` | Reporte de la búsqueda de arquitectura: las 1000 arquitecturas, las dos fases, los finalistas y el análisis de efectos |
 | `10_paper_guia/` | Paper guía: réplica parcial y limitación identificada |
-| `11_literatura/` | Revisión sistemática: hoja de extracción, puntaje del Top 10, mecanismos transferibles y consultas |
+| `11_literatura/` | Revisión sistemática: hoja de extracción, puntaje del Top 10, mecanismos transferibles, consultas y bibliografía en BibTeX |
 | `12_reproducibilidad/` | Lista de verificación de reproducibilidad (apéndice B), entorno y prueba de entorno limpio |
 | `13_defensa/` | Presentación oral con defensa técnica de las decisiones metodológicas: guion con el texto por diapositiva, cifras de apoyo y preguntas probables del jurado |
 | (cuaderno en la raíz) | `Entregable 2 - UAVIDS-2025.ipynb`, ejecutado de principio a fin |
