@@ -23,3 +23,4 @@ c768a0b | 2026-11-13 09:44:08 -0500 | Entregable 2: adenda del preregistro con l
 cc9ba63 | 2026-11-15 13:47:22 -0500 | Entregable 2: faltantes frente al enunciado (umbral del ECE exploratorio, BibTeX, análisis examinados y comando único)
 8d52417 | 2026-11-15 13:49:17 -0500 | Entregable 2: une la historia del Entregable 1 publicada en GitHub con la del Entregable 2
 837e87f | 2026-11-15 13:51:03 -0500 | Entregable 2: README de la raíz con los Entregables 1 y 2
+1451103 | 2026-11-15 13:58:52 -0500 | Entregable 2: cuaderno y entregables con los identificadores de commit publicados

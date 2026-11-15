@@ -34,3 +34,7 @@ _build/
 
 # El PDF del informe del Entregable 2 se regenera con organizar_entregables.py y viaja en el ZIP del correo
 /Entregable_2_UAVIDS_2025/entregables/01_informe_jupyter_book/Informe_Entregable_2.pdf
+
+# Material de preparación de la presentación oral: se queda en local
+/Entregable_2_UAVIDS_2025/defensa/
+/Entregable_2_UAVIDS_2025/herramientas/crear_guion_defensa.py

@@ -59,9 +59,9 @@ CONTENIDO = {
                        LIT / "registros_nuevos_e2.csv", LIT / "consultas_e2_wos_scopus_ieee.md", LIT / "referencias.bib"]),
     "12_reproducibilidad": ("Lista de verificación de reproducibilidad (apéndice B), entorno y prueba de entorno limpio",
                             [RAIZ / "requirements.txt", E2 / "Dockerfile", RES / "reproduccion_entorno_limpio.json", RES / "lista_verificacion_b.csv"]),
-    "13_defensa": ("Presentación oral con defensa técnica de las decisiones metodológicas: guion con el texto por diapositiva, cifras de apoyo y preguntas probables del jurado",
-                   [E2 / "defensa" / "Guion de defensa - Entregable 2 - UAVIDS-2025.docx"]),
 }
+# El material de preparación de la presentación oral no se entrega
+SIN_ENTREGAR = ("__pycache__", "*.pyc", "*.log", "crear_guion_defensa.py")
 
 README = """# Entregable 2 · Benchmark de Deep Learning sobre UAVIDS-2025
 
@@ -71,9 +71,6 @@ Esta carpeta reúne, en el orden del enunciado, los productos del Entregable 2. 
 | Carpeta | Entregable del enunciado |
 |---|---|
 {filas}| (cuaderno en la raíz) | `Entregable 2 - UAVIDS-2025.ipynb`, ejecutado de principio a fin |
-
-El guion de `13_defensa/` se genera con `herramientas/crear_guion_defensa.py` y acompaña las 16 diapositivas de la
-presentación oral, que se proyectan aparte.
 
 ## Cómo reproducir
 
@@ -158,7 +155,7 @@ def main():
         (DESTINO / carpeta).mkdir(parents=True)
         for f in archivos:
             if f.is_dir():
-                shutil.copytree(f, DESTINO / carpeta / f.name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.log"))
+                shutil.copytree(f, DESTINO / carpeta / f.name, ignore=shutil.ignore_patterns(*SIN_ENTREGAR))
             elif f.exists():
                 shutil.copy2(f, DESTINO / carpeta / f.name)
             else:
