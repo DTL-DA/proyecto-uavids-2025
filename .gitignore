@@ -1,17 +1,17 @@
-# Solo se versiona el entregable
+# Solo se versionan los entregables
 /*
 !/.gitignore
 !/README.md
 !/requirements.txt
+!/Entregable 1 - UAVIDS-2025.ipynb
 !/Entregable 2 - UAVIDS-2025.ipynb
 !/Entregable_1_UAVIDS_2025/
 !/Entregable_2_UAVIDS_2025/
 
-# Del Entregable 1 se hereda la partición y su declaración; el CSV se descarga
+# Del Entregable 1 se hereda la partición y su declaración; el CSV se descarga o se regenera al ejecutar el cuaderno
 /Entregable_1_UAVIDS_2025/datos/
 /Entregable_1_UAVIDS_2025/resultados/datos_preparados.npz
 /Entregable_1_UAVIDS_2025/resultados/resultados_listos.txt
-/Entregable_1_UAVIDS_2025/entregables/1_informe_jupyter_book/Informe_Entregable_1.pdf
 
 # Texto de terceros: los scripts de búsqueda vuelven a consultar las fuentes
 /Entregable_1_UAVIDS_2025/literatura/exportaciones/*
@@ -32,5 +32,5 @@ __pycache__/
 _build/
 *.log
 
-# El PDF del informe se regenera con organizar_entregables.py y viaja en el ZIP del correo
+# El PDF del informe del Entregable 2 se regenera con organizar_entregables.py y viaja en el ZIP del correo
 /Entregable_2_UAVIDS_2025/entregables/01_informe_jupyter_book/Informe_Entregable_2.pdf
