@@ -1,10 +1,53 @@
-# Detección de intrusiones en redes de drones: baseline de Deep Learning
+# Detección de intrusiones en redes de drones con Deep Learning (UAVIDS-2025)
 
-Primer entregable del proyecto final de Deep Learning (Maestría en Analítica de Datos, Universidad del Norte). Establece, con evidencia estadística, el nivel mínimo de desempeño que un modelo avanzado debe superar al clasificar flujos de red de un enjambre de drones en tráfico normal y cuatro ataques.
+Proyecto final de Deep Learning (Maestría en Analítica de Datos, Universidad del Norte). El objetivo es clasificar cada flujo de red de un enjambre de drones en tráfico normal o en uno de cuatro ataques (Blackhole, Flooding, Sybil y Wormhole) a partir de 16 atributos de tráfico. Cada entregable reutiliza la partición, el pipeline y las decisiones fijadas a priori en el anterior, de modo que los resultados se pueden comparar entre entregables.
 
-El informe completo es el cuaderno [`Entregable 1 - UAVIDS-2025.ipynb`](Entregable%201%20-%20UAVIDS-2025.ipynb), que se entrega ya ejecutado.
+| Entregable | Contenido | Dónde | Versión entregada |
+|---|---|---|---|
+| 1 | Estado del arte, EDA y baseline con tres modelos | `Entregable 1 - UAVIDS-2025.ipynb` y `Entregable_1_UAVIDS_2025/` | etiqueta `entregable-1` |
+| 2 | Benchmark de 16 modelos con inferencia estadística | `Entregable 2 - UAVIDS-2025.ipynb` y `Entregable_2_UAVIDS_2025/` | etiqueta `entregable-2` y su [release](https://github.com/DTL-DA/proyecto-uavids-2025/releases/tag/entregable-2) |
 
-## Resultado
+## Entregable 2: benchmark de 16 modelos
+
+El benchmark compara, con la misma partición por bloques de 1000 flujos, el mismo pipeline y el mismo presupuesto de ajuste, los tres modelos base del Entregable 1, el Top 10 de la revisión sistemática y tres líneas base: trivial, regresión logística y LightGBM. Cada modelo se entrena con 20 semillas; los cuatro modelos sin arquitectura definida en la literatura recorren además un espacio de 1000 arquitecturas en dos fases. Las preguntas, las pruebas y los márgenes se fijaron en el preregistro antes del primer entrenamiento.
+
+Los resultados principales son los siguientes:
+
+- **RQ1.** Ningún modelo del Top 10 supera a la CNN 1D del Entregable 1 (F1 macro de 0,8584 ± 0,0050) por más de δ = 0,01: tres son equivalentes a ella, tres quedan no concluyentes y cuatro quedan por debajo de forma significativa.
+- **RQ2.** LightGBM obtiene el mayor F1 macro de prueba, 0,8748 ± 0,0012, y supera a la CNN 1D por 0,0164, una diferencia significativa y relevante. Sin embargo, en la validación cruzada 5 × 2 la diferencia es de 0,0003, de modo que la ventaja depende de las series de esta prueba.
+- **La serie pesa más que la arquitectura.** El bloque de prueba explica el 93,1 % de la varianza del F1 por bloque, y el modelo, el 0,3 %.
+
+El informe completo es el cuaderno `Entregable 2 - UAVIDS-2025.ipynb`, que se entrega ya ejecutado, y su versión en Jupyter Book está en `Entregable_2_UAVIDS_2025/entregables/01_informe_jupyter_book/`. La tabla de [`Entregable_2_UAVIDS_2025/entregables/README.md`](Entregable_2_UAVIDS_2025/entregables/README.md) ubica cada producto que pide el enunciado.
+
+### Cómo reproducirlo
+
+Todos los comandos se ejecutan desde la raíz del repositorio, con Python 3.13 y en CPU.
+
+1. Descargar la versión entregada: `git clone --branch entregable-2 https://github.com/DTL-DA/proyecto-uavids-2025.git`.
+2. Instalar las dependencias, con sus versiones exactas: `pip install -r requirements.txt`. También se puede construir el contenedor de referencia: `docker build -f Entregable_2_UAVIDS_2025/Dockerfile -t uavids-e2 .`.
+3. Obtener los datos con `python Entregable_1_UAVIDS_2025/herramientas/obtener_datos.py`, que descarga `UAVIDS-2025.csv` y verifica su suma SHA-256.
+4. Descargar `Corridas_E2_probabilidades_y_pesos.zip` de la [release](https://github.com/DTL-DA/proyecto-uavids-2025/releases/tag/entregable-2) y descomprimirlo en la raíz. Agrega a `Entregable_2_UAVIDS_2025/resultados/corridas/` las probabilidades y los pesos de cada corrida, que no se versionan por su tamaño.
+5. Ejecutar el cuaderno: `python Entregable_2_UAVIDS_2025/herramientas/ejecutar_cuaderno.py "Entregable 2 - UAVIDS-2025.ipynb"`. No reentrena: lee las corridas guardadas y recalcula todas las tablas, pruebas y figuras en unos minutos.
+6. Para reentrenar todo, `python Entregable_2_UAVIDS_2025/herramientas/orquestar.py` encadena las fases en el orden del preregistro. En CPU toma decenas de horas: solo la búsqueda de arquitectura consumió 55,1 horas de proceso.
+
+Cada corrida tiene su registro en `Entregable_2_UAVIDS_2025/resultados/corridas/<fase>/<id>.json`, con la configuración, la semilla, las curvas, el tiempo y el equipo, y el registro consolidado está en `Entregable_2_UAVIDS_2025/entregables/07_registro_y_fichas/registro_experimentos.csv`.
+
+### Preregistro y control de versiones
+
+El preregistro (`Entregable_2_UAVIDS_2025/preregistro_e2.md`) y su adenda (`preregistro_e2_adenda.md`) están fechados con etiquetas de git:
+
+| Etiqueta | Fecha | Contenido |
+|---|---|---|
+| `preregistro-e2` | 12/11/2026, 13:13 | Preregistro, configuración y código, antes del primer entrenamiento |
+| `preregistro-e2-desviacion-1` | 12/11/2026, 13:59 | Desviación 1, antes de la fase 1 de la búsqueda |
+| `preregistro-e2-adenda-piloto` | 12/11/2026, 16:58 | Número de ejecuciones R, limitación del paper guía y número de finalistas k |
+| `preregistro-e2-adenda-arquitecturas` | 13/11/2026, 09:44 | Arquitecturas ganadoras de la fase 2, antes de la ejecución definitiva |
+
+Hay que tener en cuenta que la historia del Entregable 2 se publicó en este repositorio el 15/11/2026, después de la ejecución definitiva, y que antes de publicarla se cambió el correo del autor de sus commits por la dirección privada de GitHub. El contenido, las fechas y los mensajes de los commits y de las etiquetas son los originales, pero sus identificadores cambiaron. El orden completo, con fechas, está también en `Entregable_2_UAVIDS_2025/entregables/03_preregistro/historial_git_preregistro.txt`.
+
+## Entregable 1: baseline de Deep Learning
+
+El Entregable 1 fijó la métrica primaria (F1 macro), el margen δ, la unidad de independencia y la partición, y estableció el baseline con tres modelos:
 
 | Modelo | F1 macro en prueba (7 semillas) | IC 95 % |
 |---|---|---|
@@ -12,50 +55,8 @@ El informe completo es el cuaderno [`Entregable 1 - UAVIDS-2025.ipynb`](Entregab
 | DNN | 0,8548 ± 0,0110 | [0,8446; 0,8649] |
 | LSTM | 0,8423 ± 0,0135 | [0,8298; 0,8547] |
 
-Ningún par de modelos difiere tras la corrección de Holm. Un modelo avanzado debe alcanzar un F1 macro de al menos 0,8775 para considerarse una mejora distinguible y relevante, con esta misma partición y semillas pareadas.
+Ningún par de modelos difiere tras la corrección de Holm, y un modelo avanzado debe alcanzar un F1 macro de al menos 0,8775 para considerarse una mejora distinguible y relevante. Para revisarlo tal como se entregó, con su `README.md` y su `requirements.txt` originales, basta con `git checkout entregable-1`.
 
 ## Datos
 
-Se usa [UAVIDS-2025](https://www.kaggle.com/datasets/qinglizeng1997/uavids-2025) (Zenodo, CC BY 4.0, DOI [10.5281/zenodo.15336998](https://doi.org/10.5281/zenodo.15336998)). El CSV no se versiona: si `Entregable_1_UAVIDS_2025/datos/UAVIDS-2025.csv` no existe, el cuaderno lo descarga de Kaggle, y en cualquier caso verifica su suma SHA-256.
-
-## Cómo reproducirlo
-
-```bash
-pip install -r requirements.txt
-```
-
-Abra el cuaderno desde la raíz del repositorio y ejecute todas las celdas, en CPU. Las corridas ya están guardadas en `Entregable_1_UAVIDS_2025/resultados/corridas/`, de modo que el cuaderno las reutiliza en lugar de volver a entrenar y termina en unos minutos.
-
-## Entregables
-
-La tabla ubica cada producto que pide el enunciado, de modo que se pueda revisar punto por punto. Las rutas parten de `Entregable_1_UAVIDS_2025/`, salvo las del cuaderno y de `requirements.txt`, que están en la raíz.
-
-| # | Entregable | Ubicación |
-|---|---|---|
-| 1 | Informe en Jupyter Book | `entregables/1_informe_jupyter_book/`, con las fuentes del libro e `Informe_Entregable_1.pdf`; el libro aún no tiene enlace público |
-| 2 | Código ejecutable de extremo a extremo y versionado | `Entregable 1 - UAVIDS-2025.ipynb`, `herramientas/`, `literatura/` y `resultados/` |
-| 3 | Dataset | `entregables/3_dataset/obtener_datos.py`, que descarga el CSV y verifica su suma SHA-256 |
-| 4 | Tabla de síntesis de la literatura y diagrama de flujo | `entregables/4_literatura/`, con la tabla de síntesis, la frecuencia, las arquitecturas, los cuartiles, la verificación de cobertura de sinónimos y el diagrama PRISMA |
-| 5 | Tabla comparativa, baseline e inferencia estadística | `entregables/5_benchmark/` |
-| 6 | Dependencias, semillas y configuración de cada corrida | `entregables/6_reproducibilidad/` y, con el detalle de cada corrida, `resultados/corridas/` |
-| 7 | Declaración a priori | `entregables/7_declaracion_a_priori/` y, con la partición, `resultados/particion.npz` |
-
-Los archivos de `entregables/` se generan a partir del cuaderno, `resultados/` y `literatura/`, de modo que el análisis no depende de ellos. Para regenerarlos se ejecuta `python Entregable_1_UAVIDS_2025/herramientas/organizar_entregables.py`.
-
-## Contenido
-
-Las rutas parten de `Entregable_1_UAVIDS_2025/`.
-
-| Ruta | Contenido |
-|---|---|
-| `herramientas/crear_cuaderno.py` | Genera el cuaderno; conserva las salidas de las celdas cuyo código no cambió |
-| `herramientas/construir_libro.py` | Arma las fuentes del Jupyter Book a partir del cuaderno ejecutado |
-| `herramientas/organizar_entregables.py` | Reúne los entregables y arma el ZIP para enviarlos |
-| `herramientas/obtener_datos.py` | Descarga el conjunto de datos y verifica su suma SHA-256 |
-| `literatura/` | Búsqueda, depuración, cribado, extracción y tabla de frecuencia. Las exportaciones crudas y los resúmenes son texto de terceros y no se versionan; `buscar_literatura.py` vuelve a consultar las fuentes. `verificar_cobertura_sinonimos.py` documenta la verificación de cobertura en OpenAlex, con su cribado en `cribado_cobertura_sinonimos.csv` y su extracción en `estudios_cobertura.json` |
-| `resultados/declaracion_a_priori.json` | Métrica primaria, margen δ, unidad de independencia y partición |
-| `resultados/particion.npz` y `prueba.sha256` | Partición y suma de verificación del conjunto de prueba congelado |
-| `resultados/preregistro.json` | Piloto y número de ejecuciones, fechado antes de la fase definitiva |
-| `resultados/corridas/` | Semilla, hiperparámetros, curvas, tiempo y equipo de cada corrida |
-| `resultados/sensibilidad/` y `sensibilidad_dropout.csv` | Corridas y comparación con el *dropout* del código de los autores |
-| `resultados/baseline.json` | Baseline y umbral de mejora para los Entregables 2 y 3 |
+Se usa [UAVIDS-2025](https://www.kaggle.com/datasets/qinglizeng1997/uavids-2025) (Zenodo, CC BY 4.0, DOI [10.5281/zenodo.15336998](https://doi.org/10.5281/zenodo.15336998)). El CSV no se versiona: `obtener_datos.py` lo descarga y verifica su suma SHA-256, y el Entregable 2 comprueba además la suma del conjunto de prueba sellado en el Entregable 1.
