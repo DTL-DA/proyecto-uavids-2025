@@ -1,0 +1,1 @@
+{"variante": "V8_promedio", "particion": 2, "f1": 0.8425508405108563, "f1_experto_umbral": 0.8115332355259788, "f1_experto_suave": 0.8074939973646378, "conf_BW": 0.15983952702702703, "g_umbral_por_clase": [0.5, 0.5, 0.5, 0.5, 0.5], "epocas": 17, "segundos": 44.9, "parametros": 15228, "cota_lipschitz": 53.86798506238982, "divergente": false}

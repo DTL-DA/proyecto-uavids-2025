@@ -1,0 +1,1 @@
+{"variante": "V6_solo_umbral", "particion": 3, "f1": 0.8961772489690614, "f1_experto_umbral": 0.8961772489690614, "f1_experto_suave": 0.11544168630426466, "conf_BW": 0.17320447223801402, "g_umbral_por_clase": [1.0, 1.0, 1.0, 1.0, 1.0], "epocas": 16, "segundos": 48.1, "parametros": 15228, "cota_lipschitz": 33.873168210281804, "divergente": false}

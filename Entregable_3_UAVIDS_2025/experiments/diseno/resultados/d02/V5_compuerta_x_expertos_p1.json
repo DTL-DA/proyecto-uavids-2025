@@ -1,0 +1,1 @@
+{"variante": "V5_compuerta_x_expertos", "particion": 1, "f1": 0.7908389786502132, "f1_experto_umbral": 0.38917832444998524, "f1_experto_suave": 0.6224862500258184, "conf_BW": 0.01950162513542795, "g_umbral_por_clase": [0.048, 0.085, 0.018, 0.796, 0.934], "epocas": 17, "segundos": 65.4, "parametros": 15228, "cota_lipschitz": 306.9942161397306, "divergente": false}

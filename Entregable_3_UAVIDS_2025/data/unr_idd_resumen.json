@@ -1,0 +1,62 @@
+{
+ "conjunto": "unr_idd",
+ "filas_fuente": 37411,
+ "duplicadas_eliminadas": 27,
+ "clases": [
+  "Blackhole",
+  "Diversion",
+  "Normal",
+  "Overflow",
+  "PortScan",
+  "TCP-SYN"
+ ],
+ "atributos": [
+  "Received Packets",
+  "Received Bytes",
+  "Sent Bytes",
+  "Sent Packets",
+  "Port alive Duration (S)",
+  "Delta Received Packets",
+  "Delta Received Bytes",
+  "Delta Sent Bytes",
+  "Delta Sent Packets",
+  "Delta Port alive Duration (S)",
+  "Total Load/Rate",
+  "Total Load/Latest",
+  "Unknown Load/Rate",
+  "Unknown Load/Latest",
+  "Latest bytes counter",
+  "Active Flow Entries",
+  "Packets Looked Up",
+  "Packets Matched"
+ ],
+ "n_atributos": 18,
+ "conteo_por_particion": {
+  "ent": [
+   5942,
+   4149,
+   2830,
+   613,
+   6484,
+   6135
+  ],
+  "val": [
+   1239,
+   733,
+   471,
+   205,
+   1496,
+   1471
+  ],
+  "eva": [
+   1239,
+   733,
+   472,
+   204,
+   1496,
+   1472
+  ]
+ },
+ "bloques_compartidos": 0,
+ "sha256_procesado": "f5f06a32d3e27092c406c97c0c8c152c169e5ab2cf09fa5c5359075f218f6d51"
+}

@@ -1,0 +1,86 @@
+{
+ "configuracion": {
+  "T": 8,
+  "ocultas_umbral": [
+   64
+  ],
+  "ocultas_suave": [
+   64,
+   64
+  ],
+  "ocultas_compuerta": [
+   32
+  ],
+  "tau_min": 0.05,
+  "gamma": 0.01,
+  "compuerta": "aprendida",
+  "entrada_compuerta": "x"
+ },
+ "trabajos": [
+  {
+   "id": "piloto_Original_6001",
+   "fase": "piloto",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "batch": 512
+   },
+   "semilla": 6001,
+   "costo": 24.367571890687067,
+   "guardar_prob_val": true
+  },
+  {
+   "id": "piloto_Original_6002",
+   "fase": "piloto",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "batch": 512
+   },
+   "semilla": 6002,
+   "costo": 24.367571890687067,
+   "guardar_prob_val": true
+  },
+  {
+   "id": "piloto_Original_6003",
+   "fase": "piloto",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "batch": 512
+   },
+   "semilla": 6003,
+   "costo": 24.367571890687067,
+   "guardar_prob_val": true
+  },
+  {
+   "id": "piloto_Original_6004",
+   "fase": "piloto",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "batch": 512
+   },
+   "semilla": 6004,
+   "costo": 24.367571890687067,
+   "guardar_prob_val": true
+  },
+  {
+   "id": "piloto_Original_6005",
+   "fase": "piloto",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "batch": 512
+   },
+   "semilla": 6005,
+   "costo": 24.367571890687067,
+   "guardar_prob_val": true
+  }
+ ]
+}

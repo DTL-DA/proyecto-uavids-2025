@@ -1,0 +1,189 @@
+{
+ "configuracion": {
+  "T": 8,
+  "ocultas_umbral": [
+   64
+  ],
+  "ocultas_suave": [
+   64,
+   64
+  ],
+  "ocultas_compuerta": [
+   32
+  ],
+  "tau_min": 0.05,
+  "gamma": 0.01,
+  "compuerta": "aprendida",
+  "entrada_compuerta": "x"
+ },
+ "trabajos": [
+  {
+   "id": "ajuste_Original_4242_i00",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.0001,
+    "weight_decay": 0.0001,
+    "batch": 256
+   },
+   "semilla": 4242,
+   "costo": 15.0,
+   "intento": 0,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i01",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "batch": 512
+   },
+   "semilla": 4242,
+   "costo": 12.183785945343534,
+   "intento": 1,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i02",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 1e-05,
+    "batch": 512
+   },
+   "semilla": 4242,
+   "costo": 12.183785945343534,
+   "intento": 2,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i03",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "batch": 128
+   },
+   "semilla": 4242,
+   "costo": 18.467166200173743,
+   "intento": 3,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i04",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.0001,
+    "weight_decay": 0.0001,
+    "batch": 128
+   },
+   "semilla": 4242,
+   "costo": 18.467166200173743,
+   "intento": 4,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i05",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0,
+    "batch": 256
+   },
+   "semilla": 4242,
+   "costo": 15.0,
+   "intento": 5,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i06",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "batch": 512
+   },
+   "semilla": 4242,
+   "costo": 12.183785945343534,
+   "intento": 6,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i07",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 1e-05,
+    "batch": 128
+   },
+   "semilla": 4242,
+   "costo": 18.467166200173743,
+   "intento": 7,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i08",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "batch": 256
+   },
+   "semilla": 4242,
+   "costo": 15.0,
+   "intento": 8,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i09",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.003,
+    "weight_decay": 0.0,
+    "batch": 128
+   },
+   "semilla": 4242,
+   "costo": 18.467166200173743,
+   "intento": 9,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i10",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.0003,
+    "weight_decay": 0.0001,
+    "batch": 512
+   },
+   "semilla": 4242,
+   "costo": 12.183785945343534,
+   "intento": 10,
+   "max_epocas": 15
+  },
+  {
+   "id": "ajuste_Original_4242_i11",
+   "fase": "ajuste",
+   "modelo": "Original",
+   "hp": {
+    "lr": 0.0003,
+    "weight_decay": 1e-05,
+    "batch": 256
+   },
+   "semilla": 4242,
+   "costo": 15.0,
+   "intento": 11,
+   "max_epocas": 15
+  }
+ ]
+}

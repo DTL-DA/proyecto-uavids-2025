@@ -1,0 +1,1 @@
+{"variante": "V9_coop_x_expertos", "particion": 1, "f1": 0.7931318823729966, "f1_experto_umbral": 0.7996743979195887, "f1_experto_suave": 0.790892648945068, "conf_BW": 0.01986276634163958, "g_umbral_por_clase": [0.564, 0.577, 0.192, 0.518, 0.133], "epocas": 16, "segundos": 72.5, "parametros": 15228, "cota_lipschitz": 246.4888074871227, "divergente": false}

@@ -38,3 +38,12 @@ _build/
 # Material de preparación de la presentación oral: se queda en local
 /Entregable_2_UAVIDS_2025/defensa/
 /Entregable_2_UAVIDS_2025/herramientas/crear_guion_defensa.py
+
+# Entregable 3: se versiona la carpeta; los datos crudos de los conjuntos adicionales no (ver data/procedencia_conjuntos_adicionales.md)
+!/Entregable_3_UAVIDS_2025/
+/Entregable_3_UAVIDS_2025/data/raw/
+/Entregable_3_UAVIDS_2025/experiments/diseno/corridas/
+/Entregable_3_UAVIDS_2025/book/_build/
+/Entregable_3_UAVIDS_2025/experiments/**/*.npy
+/Entregable_3_UAVIDS_2025/experiments/**/*.pt
+/Entregable_3_UAVIDS_2025/experiments/**/*.tmp

@@ -1,0 +1,1 @@
+{"variante": "V7_solo_suave", "particion": 3, "f1": 0.8709791414166566, "f1_experto_umbral": 0.033444816053511704, "f1_experto_suave": 0.8709791414166566, "conf_BW": 0.21887436043206368, "g_umbral_por_clase": [0.0, 0.0, 0.0, 0.0, 0.0], "epocas": 9, "segundos": 26.0, "parametros": 15228, "cota_lipschitz": 9.59762947097741, "divergente": false}

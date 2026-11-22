@@ -1,0 +1,149 @@
+{
+ "alfa_ajustado": 0.004166666666666667,
+ "z_total": 4.1468,
+ "f1_val_original_piloto": [
+  0.9123,
+  0.9186,
+  0.9267,
+  0.9148,
+  0.9226
+ ],
+ "contrastes": [
+  {
+   "rival": "CNN-LSTM",
+   "familia": "confirmatoria",
+   "dif_media_val": 0.0008,
+   "sigma_d": 0.01667,
+   "R_necesarias": 48,
+   "MDE_con_20": 0.0155,
+   "potencia_con_20": 0.427
+  },
+  {
+   "rival": "Autoencoder",
+   "familia": "confirmatoria",
+   "dif_media_val": -0.0068,
+   "sigma_d": 0.00521,
+   "R_necesarias": 10,
+   "MDE_con_20": 0.0048,
+   "potencia_con_20": 1.0
+  },
+  {
+   "rival": "RNN",
+   "familia": "confirmatoria",
+   "dif_media_val": 0.0017,
+   "sigma_d": 0.00961,
+   "R_necesarias": 16,
+   "MDE_con_20": 0.0089,
+   "potencia_con_20": 0.963
+  },
+  {
+   "rival": "Transformer",
+   "familia": "confirmatoria",
+   "dif_media_val": -0.0023,
+   "sigma_d": 0.00954,
+   "R_necesarias": 16,
+   "MDE_con_20": 0.0088,
+   "potencia_con_20": 0.966
+  },
+  {
+   "rival": "BiLSTM",
+   "familia": "confirmatoria",
+   "dif_media_val": 0.0092,
+   "sigma_d": 0.01028,
+   "R_necesarias": 19,
+   "MDE_con_20": 0.0095,
+   "potencia_con_20": 0.931
+  },
+  {
+   "rival": "ResNet",
+   "familia": "confirmatoria",
+   "dif_media_val": -0.0029,
+   "sigma_d": 0.0059,
+   "R_necesarias": 10,
+   "MDE_con_20": 0.0055,
+   "potencia_con_20": 1.0
+  },
+  {
+   "rival": "GRU",
+   "familia": "confirmatoria",
+   "dif_media_val": -0.0071,
+   "sigma_d": 0.00996,
+   "R_necesarias": 18,
+   "MDE_con_20": 0.0092,
+   "potencia_con_20": 0.948
+  },
+  {
+   "rival": "KAN",
+   "familia": "confirmatoria",
+   "dif_media_val": -0.0117,
+   "sigma_d": 0.00611,
+   "R_necesarias": 10,
+   "MDE_con_20": 0.0057,
+   "potencia_con_20": 1.0
+  },
+  {
+   "rival": "TabNet",
+   "familia": "confirmatoria",
+   "dif_media_val": 0.0137,
+   "sigma_d": 0.01482,
+   "R_necesarias": 38,
+   "MDE_con_20": 0.0137,
+   "potencia_con_20": 0.56
+  },
+  {
+   "rival": "DBN",
+   "familia": "confirmatoria",
+   "dif_media_val": -0.01,
+   "sigma_d": 0.00628,
+   "R_necesarias": 10,
+   "MDE_con_20": 0.0058,
+   "potencia_con_20": 1.0
+  },
+  {
+   "rival": "LightGBM",
+   "familia": "confirmatoria",
+   "dif_media_val": 0.032,
+   "sigma_d": 0.00523,
+   "R_necesarias": 10,
+   "MDE_con_20": 0.0049,
+   "potencia_con_20": 1.0
+  },
+  {
+   "rival": "CNN 1D",
+   "familia": "confirmatoria",
+   "dif_media_val": -0.0111,
+   "sigma_d": 0.00812,
+   "R_necesarias": 12,
+   "MDE_con_20": 0.0075,
+   "potencia_con_20": 0.996
+  },
+  {
+   "rival": "DNN",
+   "familia": "exploratoria",
+   "dif_media_val": -0.0096,
+   "sigma_d": 0.00485,
+   "R_necesarias": 10,
+   "MDE_con_20": 0.0045,
+   "potencia_con_20": 1.0
+  },
+  {
+   "rival": "LSTM",
+   "familia": "exploratoria",
+   "dif_media_val": 0.0183,
+   "sigma_d": 0.01131,
+   "R_necesarias": 22,
+   "MDE_con_20": 0.0105,
+   "potencia_con_20": 0.862
+  },
+  {
+   "rival": "Logística",
+   "familia": "exploratoria",
+   "dif_media_val": 0.0223,
+   "sigma_d": 0.00582,
+   "R_necesarias": 10,
+   "MDE_con_20": 0.0054,
+   "potencia_con_20": 1.0
+  }
+ ],
+ "potencia_conjunta_con_20": 0.1955
+}

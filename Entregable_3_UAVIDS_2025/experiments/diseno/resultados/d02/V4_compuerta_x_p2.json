@@ -1,0 +1,1 @@
+{"variante": "V4_compuerta_x", "particion": 2, "f1": 0.8145498675442508, "f1_experto_umbral": 0.41862941257660224, "f1_experto_suave": 0.5405318598259766, "conf_BW": 0.16511824324324326, "g_umbral_por_clase": [0.346, 0.189, 0.017, 0.721, 0.624], "epocas": 13, "segundos": 50.3, "parametros": 14908, "cota_lipschitz": 23.11728442677559, "divergente": false}
