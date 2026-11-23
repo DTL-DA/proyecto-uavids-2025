@@ -28,7 +28,10 @@ def test_probabilidades_validas(modelo):
 
 def test_exactitud_coherente_con_metadatos():
     """El F1 de la exportación en memoria coincide con el registrado en metadata.json (prueba completa, sin calibrar)."""
-    from sklearn.metrics import f1_score
+    def f1_score(verdad, prediccion, average="macro"):
+        verdad, prediccion = np.asarray(verdad), np.asarray(prediccion)
+        f1 = [2 * ((verdad == k) & (prediccion == k)).sum() / max((verdad == k).sum() + (prediccion == k).sum(), 1) for k in range(len(I.CLASES))]
+        return float(np.mean(f1))
 
     prueba = uavids().query("particion == 'prueba'")
     for modelo in ("LightGBM", "Transformer"):
