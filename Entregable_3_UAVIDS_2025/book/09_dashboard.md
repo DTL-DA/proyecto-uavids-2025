@@ -11,7 +11,7 @@ kernelspec:
 
 # Dashboard y despliegue
 
-El dashboard es una aplicación multipágina de Dash (`use_pages=True`) que se despliega en Render y hace inferencia en CPU con ONNX Runtime. Nunca entrena ni importa PyTorch: carga los artefactos de `artifacts/` y los precalculados de `artifacts/dashboard/`.
+El dashboard es una aplicación multipágina de Dash (`use_pages=True`) que se despliega en Render, en **https://uavids-2025-dashboard.onrender.com**, y hace inferencia en CPU con ONNX Runtime. Nunca entrena ni importa PyTorch: carga los artefactos de `artifacts/` y los precalculados de `artifacts/dashboard/`.
 
 ## Arquitectura
 
@@ -59,8 +59,20 @@ Los 16 modelos ocupan unos 5 MB en ONNX, así que caben sin cuantizar. Aun así,
 1. El repositorio de GitHub contiene los tres entregables; `render.yaml` apunta el servicio a la carpeta `Entregable_3_UAVIDS_2025` con `rootDir`.
 2. Render instala `requirements.txt` y arranca con `gunicorn app:server --workers 1 --threads 4 --timeout 120`; `healthCheckPath: /` verifica que la portada responda.
 3. Las variables `OMP_NUM_THREADS`, `OPENBLAS_NUM_THREADS` y `MKL_NUM_THREADS` se fijan en 1 para no competir por la CPU compartida del plan gratuito.
+4. El servicio se creó el 23/11/2026 desde el repositorio público, rama `entregable-3`, con los mismos valores de `render.yaml`. En el plan gratuito se duerme tras 15 minutos sin visitas y tarda cerca de un minuto en despertar.
 
-**Prueba de humo.** Después de cada despliegue se verifica que las tres páginas respondan con código 200, que la predicción en vivo devuelva probabilidades que sumen 1 y que un flujo absurdo active el aviso fuera de dominio. Es la misma batería de `tests/test_dashboard.py`, ejecutada contra la URL pública. El resultado se anexa en el capítulo 11.
+**Prueba de humo.** Después de cada despliegue, `verificacion_externa/humo_dashboard.py` llama contra la URL pública a los mismos *callbacks* que usa el navegador: verifica que las tres páginas respondan con código 200, que un flujo de prueba al azar dé con cada uno de los 16 modelos probabilidades que sumen 1 y que un flujo absurdo active el aviso fuera de dominio. El mismo script corre contra el contenedor local con `--url http://localhost:8050`.
+
+```{code-cell} ipython3
+:tags: [hide-input]
+import json
+humo = json.loads((RAIZ / "experiments/resultados/humo_dashboard.json").read_text(encoding="utf-8"))
+print(f"{humo['fecha_utc']} | {humo['url']} | resultado: {'OK' if humo['todo_ok'] else 'FALLA'}")
+print("Páginas:", {p: v["codigo"] for p, v in humo["paginas"].items()}, "|", humo["flujo_de_prueba"])
+print("Aviso fuera de dominio con el flujo absurdo:", humo["flujo_absurdo"]["aviso_activo"])
+pd.DataFrame([{"Modelo": m, "Suma de probabilidades": v["suma_probabilidades"], "Aviso fuera de dominio": v["aviso_fuera_de_dominio"],
+               "Respuesta (s)": v["segundos"]} for m, v in humo["modelos"].items()])
+```
 
 ## Seguridad y robustez de la interfaz
 

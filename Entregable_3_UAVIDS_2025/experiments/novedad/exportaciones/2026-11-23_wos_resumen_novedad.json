@@ -1,0 +1,77 @@
+{
+ "fecha": "2026-11-23",
+ "fuente": "Web of Science Core Collection, Advanced Search (acceso institucional, Universidad del Norte); campo TS; sin filtros",
+ "nota": "Exportación delimitada por tabulaciones sin resumen; todos los registros ya se habían revisado con resumen en Scopus u OpenAlex",
+ "cadenas": {
+  "N1": {
+   "consulta": "TS=((\"mixture of experts\" OR \"gating network\" OR \"gated fusion\" OR \"dynamic ensemble selection\") AND (\"intrusion detection\" OR \"attack detection\") AND (UAV OR drone OR FANET OR \"unmanned aerial\"))",
+   "exportacion": "2026-11-23_WoS_N1.txt (ignorado por git)",
+   "total": 1,
+   "revisados": 1,
+   "relevantes": 1,
+   "nuevos": 0,
+   "registros": [
+    {
+     "titulo": "SkyVehiGuard-Net: A Mamba-MoE Framework for IoV Security Over Space-Air-Ground-Integrated Networks",
+     "fuente": "TRANSACTIONS ON EMERGING TELECOMMUNICATIONS TECHNOLOGIES",
+     "anio": 2026,
+     "doi": "10.1002/ett.70463",
+     "relevante": true,
+     "nota": "Duplicado de OpenAlex N1 y Scopus N1"
+    }
+   ]
+  },
+  "N2": {
+   "consulta": "TS=((\"mixture of experts\" OR \"gating network\") AND \"intrusion detection\" AND (\"decision tree\" OR \"gradient boosting\" OR \"tree-based\" OR \"soft tree\"))",
+   "exportacion": "2026-11-23_WoS_N2.txt (ignorado por git)",
+   "total": 1,
+   "revisados": 1,
+   "relevantes": 1,
+   "nuevos": 0,
+   "registros": [
+    {
+     "titulo": "A Systematic Multi-Paradigm Evaluation Framework for Network Intrusion Detection in Fog-IoT Environments: Deep Learning, Transformer, and Ensemble Methods Across Deployment Tiers",
+     "fuente": "SYMMETRY-BASEL",
+     "anio": 2026,
+     "doi": "10.3390/sym18091438",
+     "relevante": true,
+     "nota": "Duplicado de Scopus N2 (ACGE)"
+    }
+   ]
+  },
+  "N5": {
+   "consulta": "TS=((UAV OR drone OR FANET OR \"unmanned aerial\") AND \"intrusion detection\" AND (hybrid OR ensemble OR fusion) AND (\"gradient boosting\" OR LightGBM OR XGBoost OR \"random forest\" OR \"decision tree\") AND (\"neural network\" OR \"deep learning\"))",
+   "exportacion": "2026-11-23_WoS_N5.txt (ignorado por git)",
+   "total": 3,
+   "revisados": 3,
+   "relevantes": 1,
+   "nuevos": 0,
+   "registros": [
+    {
+     "titulo": "ASSESSING LEARNING-BASED MODELS FOR INTRUSION DETECTION IN UAV NETWORKS",
+     "fuente": "ARCHIVES FOR TECHNICAL SCIENCES",
+     "anio": 2026,
+     "doi": "10.70102/afts.2026.1836.229",
+     "relevante": false,
+     "nota": "Duplicado de OpenAlex N5 y Scopus N5"
+    },
+    {
+     "titulo": "Advanced explainable ensemble models for multi-class intrusion detection in heterogeneous drone and industrial networks",
+     "fuente": "JOURNAL ON INFORMATION SECURITY",
+     "anio": 2026,
+     "doi": "10.1186/s13635-026-00234-w",
+     "relevante": true,
+     "nota": "Duplicado de OpenAlex N5 y Scopus N5 (relevante)"
+    },
+    {
+     "titulo": "SBOA-TFT: A Bio-Inspired Temporal Fusion Framework for Transparent Intrusion Detection in Flying Ad Hoc Networks",
+     "fuente": "IET COMMUNICATIONS",
+     "anio": 2026,
+     "doi": "10.1049/cmu2.70226",
+     "relevante": false,
+     "nota": "Duplicado de OpenAlex N5 y Scopus N5"
+    }
+   ]
+  }
+ }
+}

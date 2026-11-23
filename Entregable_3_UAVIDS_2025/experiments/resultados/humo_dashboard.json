@@ -1,0 +1,140 @@
+{
+ "fecha_utc": "2026-11-23T16:08:33+00:00",
+ "url": "https://uavids-2025-dashboard.onrender.com",
+ "commit_local": "db5db0b",
+ "segundos_primera_peticion": 0.27,
+ "paginas": {
+  "/": {
+   "codigo": 200,
+   "segundos": 0.228
+  },
+  "/eda": {
+   "codigo": 200,
+   "segundos": 0.234
+  },
+  "/modelos": {
+   "codigo": 200,
+   "segundos": 0.242
+  }
+ },
+ "flujo_de_prueba": "Flujo de prueba FlowID 73 019 · clase real: Normal",
+ "modelos": {
+  "Autoencoder": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "Autoencoder predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.251
+  },
+  "BiLSTM": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "BiLSTM predice Normal con probabilidad calibrada de 99,7 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.327
+  },
+  "CNN 1D": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "CNN 1D predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.269
+  },
+  "CNN-LSTM": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "CNN-LSTM predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.259
+  },
+  "DBN": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "DBN predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.266
+  },
+  "DNN": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "DNN predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.26
+  },
+  "GRU": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "GRU predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.238
+  },
+  "KAN": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "KAN predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.274
+  },
+  "LSTM": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "LSTM predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.215
+  },
+  "LightGBM": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "LightGBM predice Normal con probabilidad calibrada de 96,6 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es FlowDuration/s.",
+   "segundos": 0.418
+  },
+  "Logística": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "Logística predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es LostPackets.",
+   "segundos": 0.234
+  },
+  "Original": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "Original predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.271
+  },
+  "RNN": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "RNN predice Normal con probabilidad calibrada de 99,9 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.263
+  },
+  "ResNet": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "ResNet predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.232
+  },
+  "TabNet": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "TabNet predice Normal con probabilidad calibrada de 99,9 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es TxBytes.",
+   "segundos": 0.404
+  },
+  "Transformer": {
+   "suma_probabilidades": 1.0,
+   "suma_ok": true,
+   "aviso_fuera_de_dominio": false,
+   "texto": "Transformer predice Normal con probabilidad calibrada de 100,0 %. El conjunto conforme al 90 % es {Normal}. El atributo que más sostiene la predicción es MeanPacketSize.",
+   "segundos": 0.288
+  }
+ },
+ "flujo_absurdo": {
+  "aviso_activo": true,
+  "mensaje": "Fuera de dominio: atributos fuera del rango del entrenamiento: FlowDuration/s, TxPackets, RxPackets, LostPackets, TxBytes, RxBytes, TxPacketRate/s, RxPacketRate/s, TxByteRate/s, RxByteRate/s, MeanDelay/s, MeanJitter/s, Throughput/Kbps, MeanPacketSize, PacketDropRate, AverageHopCount; distancia de Mahalanobis 428.8 > umbral del percentil 99 (11.0). La predicción puede no ser confiable."
+ },
+ "todo_ok": true
+}

@@ -1,0 +1,17 @@
+{
+ "fecha": "2026-11-23",
+ "fuente": "Scopus, Advanced document search (acceso institucional, Universidad del Norte); campo TITLE-ABS-KEY; sin filtros",
+ "cadena": "N1",
+ "consulta": "TITLE-ABS-KEY((\"mixture of experts\" OR \"gating network\" OR \"gated fusion\" OR \"dynamic ensemble selection\") AND (\"intrusion detection\" OR \"attack detection\") AND (UAV OR drone OR FANET OR \"unmanned aerial\"))",
+ "exportacion": "2026-11-23_Scopus_N1.csv (ignorado por git)",
+ "total": 4,
+ "registros": [
+  {"titulo": "SkyVehiGuard-Net: A Mamba-MoE Framework for IoV Security Over Space-Air-Ground-Integrated Networks", "fuente": "Transactions on Emerging Telecommunications Technologies", "anio": 2026, "doi": "10.1002/ett.70463", "tipo": "Article", "relevante": true, "nota": "Duplicado de OpenAlex N1"},
+  {"titulo": "Machine Learning based Intrusion Detection System for Secure Network Environments", "fuente": "2026 8th International Conference on Inventive Material Science and Applications, ICIMA 2026", "anio": 2026, "doi": "10.1109/ICIMA68728.2026.11564608", "tipo": "Conference paper", "relevante": true, "nota": "Duplicado de IEEE Xplore N1"},
+  {"titulo": "2026 10th International Conference on Computing, Communication, Control and Automation, ICCUBEA 2026", "fuente": "Actas (Conference review, 231 trabajos)", "anio": 2026, "tipo": "Conference review", "relevante": true, "nota": "Coincide por términos de trabajos distintos de las actas. Contiene 'a distributed mixture-of-experts framework for cross-dataset intrusion detection using a universal flow representation', trabajo nuevo; sin registro propio en Scopus ni en la web al 23/11/2026, clasificado solo por título"},
+  {"titulo": "8th Chinese Conference on Pattern Recognition and Computer Vision, PRCV 2025", "fuente": "Lecture Notes in Computer Science, 16286 LNCS (Conference review, 580 trabajos)", "anio": 2026, "tipo": "Conference review", "relevante": false, "nota": "Falso positivo: los términos vienen de trabajos distintos (mezcla de expertos para estimar la edad, detección de ataques de presentación facial, geolocalización de UAV)"}
+ ],
+ "revisados": 4,
+ "relevantes": 3,
+ "nuevos": 1
+}

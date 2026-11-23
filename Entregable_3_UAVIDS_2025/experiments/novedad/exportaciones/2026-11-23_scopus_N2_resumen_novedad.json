@@ -1,0 +1,31 @@
+{
+ "fecha": "2026-11-23",
+ "fuente": "Scopus, Advanced document search (acceso institucional, Universidad del Norte); campo TITLE-ABS-KEY; sin filtros",
+ "cadena": "N2",
+ "consulta": "TITLE-ABS-KEY((\"mixture of experts\" OR \"gating network\") AND \"intrusion detection\" AND (\"decision tree\" OR \"gradient boosting\" OR \"tree-based\" OR \"soft tree\"))",
+ "exportacion": "2026-11-23_Scopus_N2.csv (ignorado por git)",
+ "total": 2,
+ "registros": [
+  {
+   "titulo": "A Distributed Mixture-of-Experts Framework for Cross-Dataset Intrusion Detection Using a Universal Flow Representation",
+   "fuente": "2026 10th International Conference on Computing, Communication, Control and Automation, ICCUBEA 2026",
+   "anio": 2026,
+   "tipo": "Conference paper",
+   "doi": "10.1109/ICCUBEA69821.2026.11701822",
+   "relevante": true,
+   "nota": "Ya visto por título dentro de las actas de ICCUBEA 2026 (Scopus N1); aquí con registro y resumen propios. Un experto por conjunto de datos y metaaprendiz de regresión logística por stacking"
+  },
+  {
+   "titulo": "A Systematic Multi-Paradigm Evaluation Framework for Network Intrusion Detection in Fog-IoT Environments: Deep Learning, Transformer, and Ensemble Methods Across Deployment Tiers",
+   "fuente": "Symmetry",
+   "anio": 2026,
+   "tipo": "Article",
+   "doi": "10.3390/sym18091438",
+   "relevante": true,
+   "nota": "Nuevo. ACGE: regresión logística sobre cuatro rasgos de confianza del LightGBM que pondera sus probabilidades y las de un Transformer de 5 flujos; ajustada en validación después de entrenar los dos modelos; sin datos de UAV ni cota teórica. Trabajo más cercano en el mecanismo; clasificado con el texto completo (symmetry-18-01438-v2.pdf, sección 3.7, ignorado por git)"
+  }
+ ],
+ "revisados": 2,
+ "relevantes": 2,
+ "nuevos": 2
+}

@@ -10,7 +10,7 @@ Este entregable propone un modelo original para detectar intrusiones en redes de
 - **El original es el más robusto ante ruido y atributos faltantes.** Con ruido σ = 0,5 su F1 cae 0,182, frente a 0,324 de LightGBM. La cota de Lipschitz, sin embargo, no explica esa robustez (P4 falsa).
 - **El escenario de simulación pesa más que la arquitectura.** LightGBM gana en la prueba sellada (0,875), pero en la validación cruzada 5 × 2 empata con el original y con CNN 1D (0,860). Además, ningún modelo reconoce un escenario no visto: el acierto es menor del 10 %.
 
-El detalle está en el libro, publicado en **https://dtl-da.github.io/proyecto-uavids-2025/entregable-3/**. Su fuente es `book/`, que se compila ejecutando todas las celdas sobre los resultados versionados, y se publica con `python book/publicar.py` en la rama `gh-pages`.
+El detalle está en el libro, publicado en **https://dtl-da.github.io/proyecto-uavids-2025/entregable-3/**, y el dashboard está desplegado en **https://uavids-2025-dashboard.onrender.com** (plan gratuito de Render: la primera visita tras 15 minutos sin uso tarda cerca de un minuto). Su fuente es `book/`, que se compila ejecutando todas las celdas sobre los resultados versionados, y se publica con `python book/publicar.py` en la rama `gh-pages`.
 
 ## Estructura
 
@@ -39,7 +39,7 @@ Todos los comandos se ejecutan en CPU, con Python 3.13.
 3. **Pruebas.** Ejecutar `python -m pytest tests` desde `Entregable_3_UAVIDS_2025/`.
 4. **Reproducción rápida.** `python verificacion_externa/reproducir.py` verifica los datos, regenera la tabla principal del capítulo 7 y la compara celda por celda con la publicada, y reentrena tres corridas desde cero. Necesita las probabilidades de prueba de las corridas definitivas, que no se versionan por su tamaño y se publican con la *release*.
 5. **Libro.** `jupyter-book build book/` ejecuta todas las celdas y regenera tablas y figuras.
-6. **Dashboard.** `python app.py`, o `gunicorn app:server`, lo levanta en http://localhost:8050.
+6. **Dashboard.** `python app.py`, o `gunicorn app:server`, lo levanta en http://localhost:8050. `python verificacion_externa/humo_dashboard.py` hace la prueba de humo contra la versión publicada, o contra la local con `--url http://localhost:8050`.
 7. **Reentrenar todo.** Ejecutar `python training/ejecutar_definitivas.py principal|ablacion|adicionales`, `python training/ejecutar_robustez.py` y `python training/ejecutar_diagnosticos_adicionales.py`, y luego los análisis de `experiments/`. Cada corrida se salta si su JSON ya existe. En CPU toma del orden de un día.
 
 ## Protocolo y control de versiones

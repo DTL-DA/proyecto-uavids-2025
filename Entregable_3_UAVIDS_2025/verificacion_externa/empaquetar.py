@@ -45,7 +45,7 @@ def main():
         for p in archivos:
             z.write(RAIZ / p, p)
     sha = hashlib.sha256(DESTINO.read_bytes()).hexdigest()
-    DESTINO.with_suffix(".zip.sha256").write_text(f"{sha}  {DESTINO.name}\n", encoding="utf-8")
+    DESTINO.with_suffix(".zip.sha256").write_bytes(f"{sha}  {DESTINO.name}\n".encode("utf-8"))  # LF: sha256sum -c lo lee en cualquier sistema
     commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=RAIZ, capture_output=True, text=True).stdout.strip()
     print(f"{len(archivos)} archivos | {DESTINO.stat().st_size / 1e6:.1f} MB | commit {commit} | SHA-256 {sha}")
 

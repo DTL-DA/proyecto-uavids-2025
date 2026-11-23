@@ -1,0 +1,249 @@
+{
+ "fecha": "2026-11-23",
+ "fuente": "Scopus, Advanced document search (acceso institucional, Universidad del Norte); campo TITLE-ABS-KEY; sin filtros",
+ "cadena": "N5",
+ "consulta": "TITLE-ABS-KEY((UAV OR drone OR FANET OR \"unmanned aerial\") AND \"intrusion detection\" AND (hybrid OR ensemble OR fusion) AND (\"gradient boosting\" OR LightGBM OR XGBoost OR \"random forest\" OR \"decision tree\") AND (\"neural network\" OR \"deep learning\"))",
+ "exportacion": "2026-11-23_Scopus_N5.csv (ignorado por git)",
+ "total": 28,
+ "registros": [
+  {
+   "titulo": "6th International Conference on Science, Engineering Management and Information Technology, SEMIT 2026",
+   "fuente": "Communications in Computer and Information Science",
+   "anio": 2027,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "1st International Conference on Data Processing and Networking, ICDPN 2024",
+   "fuente": "Lecture Notes in Networks and Systems",
+   "anio": 2025,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles",
+   "fuente": "Proceedings of the 2026 IEEE International Conference on Computer, Information, and Telecommunication Systems, CITS 2026",
+   "anio": 2026,
+   "tipo": "Conference paper",
+   "doi": "10.1109/CITS70307.2026.11637173",
+   "relevante": true,
+   "nota": "Duplicado de OpenAlex N5 (relevante)"
+  },
+  {
+   "titulo": "1st International Conference on Information Technology and Artificial Intelligence, ITAI 2025",
+   "fuente": "Lecture Notes in Networks and Systems",
+   "anio": 2026,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "1st International Conference on Electrical Systems and Smart Technologies, ICESST 2024",
+   "fuente": "Sustainable Civil Infrastructures",
+   "anio": 2025,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "Advanced explainable ensemble models for multi-class intrusion detection in heterogeneous drone and industrial networks",
+   "fuente": "Journal on Information Security",
+   "anio": 2026,
+   "tipo": "Article",
+   "doi": "10.1186/s13635-026-00234-w",
+   "relevante": true,
+   "nota": "Duplicado de OpenAlex N5 (relevante)"
+  },
+  {
+   "titulo": "1st International Conference on Advances in Computing Research, ACR’23",
+   "fuente": "Lecture Notes in Networks and Systems",
+   "anio": 2023,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Contiene una revisión de ciberseguridad en UAV; no pertinente"
+  },
+  {
+   "titulo": "10th International Conference on Frontiers of Intelligent Computing: Theory and Applications, FICTA 2022",
+   "fuente": "Smart Innovation, Systems and Technologies",
+   "anio": 2023,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "2nd International Conference on Machine Intelligence and Emerging Technologies, MIET 2024",
+   "fuente": "Lecture Notes in Networks and Systems",
+   "anio": 2025,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "11th International Conference on Frontiers of Intelligent Computing: Theory and Applications, FICTA 2023",
+   "fuente": "Smart Innovation, Systems and Technologies",
+   "anio": 2023,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "11th International Conference on Frontiers of Intelligent Computing: Theory and Applications, FICTA 2023",
+   "fuente": "Smart Innovation, Systems and Technologies",
+   "anio": 2023,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "A Comprehensive Framework for Real-Time Detection of Cyberattacks in Drone Networks",
+   "fuente": "IC3IT 2026 - Proceedings of the 2nd International Conference on Innovative and Intelligent Information Technologies",
+   "anio": 2026,
+   "tipo": "Conference paper",
+   "doi": "10.1109/IC3IT69043.2026.11567536",
+   "relevante": true,
+   "nota": "Nuevo. Detectores en paralelo (trayectoria, Random Forest, LSTM) para enjambres de UAV, sin compuerta aprendida"
+  },
+  {
+   "titulo": "7th International Conference on Communication and Computational Technologies, ICCCT 2025",
+   "fuente": "Lecture Notes in Networks and Systems",
+   "anio": 2026,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "2022 IEEE Pune Section International Conference, PuneCon 2022",
+   "fuente": "2022 IEEE Pune Section International Conference, PuneCon 2022",
+   "anio": 2022,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "Hybrid Intelligent Security Framework for UAV-IoT Networks Using Explainable AI and Federated Learning",
+   "fuente": "CSRSWTC 2026 - 2026 Cross Strait Radio Science and Wireless Technology Conference, Proceedings",
+   "anio": 2026,
+   "tipo": "Conference paper",
+   "doi": "10.1109/CSRSWTC71154.2026.11669582",
+   "relevante": false,
+   "nota": "Nuevo. XGBoost y MLP evaluados por separado, sin fusión; CICIoT2023"
+  },
+  {
+   "titulo": "16th Asian Conference on Intelligent Information and Database Systems , ACIIDS 2024",
+   "fuente": "Communications in Computer and Information Science",
+   "anio": 2024,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "IFIP TC12/WG12.3 International Conference on Intelligent Information Processing, IIP 2004",
+   "fuente": "IFIP Advances in Information and Communication Technology",
+   "anio": 2005,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "9th International Conference on Smart City Applications, SCA 2024",
+   "fuente": "Lecture Notes in Networks and Systems",
+   "anio": 2025,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "16th Asian Conference on Intelligent Information and Database Systems , ACIIDS 2024",
+   "fuente": "Communications in Computer and Information Science",
+   "anio": 2024,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "Spectral Attention GNN Framework for Secure Telemetry in UAV and Satellite Communication Systems",
+   "fuente": "Proceedings - International Conference on Air Defense and Security, ICADS 2026",
+   "anio": 2026,
+   "tipo": "Conference paper",
+   "doi": "10.1109/ICADS69450.2026.11545511",
+   "relevante": false,
+   "nota": "Duplicado de OpenAlex N5"
+  },
+  {
+   "titulo": "Assessing Learning-Based Models for Intrusion Detection in UAV Networks",
+   "fuente": "Archives for Technical Sciences",
+   "anio": 2026,
+   "tipo": "Article",
+   "doi": "10.70102/afts.2026.1836.229",
+   "relevante": false,
+   "nota": "Duplicado de OpenAlex N5"
+  },
+  {
+   "titulo": "Machine Learning Algorithms to Strengthen Cyber Defense Mechanisms in Unmanned Aerial Vehicles",
+   "fuente": "2025 IEEE Space, Aerospace and Defence Conference, SPACE 2025",
+   "anio": 2025,
+   "tipo": "Conference paper",
+   "doi": "10.1109/SPACE65882.2025.11170598",
+   "relevante": false,
+   "nota": "Duplicado de OpenAlex N5"
+  },
+  {
+   "titulo": "3rd International Conference on Artificial Intelligence of Things and Systems, AIoTSys 2025",
+   "fuente": "Communications in Computer and Information Science",
+   "anio": 2026,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Contiene un IDS para UAV con aprendizaje por refuerzo profundo, sin fusión de árboles y redes; no pertinente"
+  },
+  {
+   "titulo": "International Conference on Sustainable Computing, ICSC 2025",
+   "fuente": "Lecture Notes in Electrical Engineering",
+   "anio": 2026,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "Toward Explainable and Generalizable Intrusion Detection for UAV Networks: A Comparative Multi-Dataset Evaluation",
+   "fuente": "IEEE Internet of Things Journal",
+   "anio": 2026,
+   "tipo": "Article",
+   "doi": "10.1109/JIOT.2026.3746624",
+   "relevante": true,
+   "nota": "Duplicado de OpenAlex N5 (relevante)"
+  },
+  {
+   "titulo": "2nd International Conference on Data Mining and Information Security, ICDMIS 2025",
+   "fuente": "Lecture Notes in Networks and Systems",
+   "anio": 2026,
+   "tipo": "Conference review",
+   "relevante": false,
+   "nota": "Actas: coincide por términos de trabajos distintos. Sin trabajos de intrusiones en UAV en la lista de títulos"
+  },
+  {
+   "titulo": "SBOA–TFT: A Bio-Inspired Temporal Fusion Framework for Transparent Intrusion Detection in Flying Ad Hoc Networks",
+   "fuente": "IET Communications",
+   "anio": 2026,
+   "tipo": "Article",
+   "doi": "10.1049/cmu2.70226",
+   "relevante": false,
+   "nota": "Duplicado de OpenAlex N5"
+  },
+  {
+   "titulo": "A Hybrid AI-Based Architecture for Drone Surveillance and Intrusion Control",
+   "fuente": "2025 International Conference on Next Generation Computing Systems: Intelligent System for Sustainable Development, ICNGCS 2025 - Conference Proceedings",
+   "anio": 2025,
+   "tipo": "Conference paper",
+   "doi": "10.1109/ICNGCS64900.2025.11183175",
+   "relevante": false,
+   "nota": "Nuevo. Detección física de drones por video (YOLOv8) con Random Forest para intrusiones de red; otro problema"
+  }
+ ],
+ "revisados": 28,
+ "relevantes": 4,
+ "nuevos": 1,
+ "actas_de_congreso": 18,
+ "nota": "Las actas se revisan por la lista de títulos de su resumen."
+}

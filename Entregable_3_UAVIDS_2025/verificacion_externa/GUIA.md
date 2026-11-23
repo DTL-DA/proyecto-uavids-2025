@@ -86,7 +86,7 @@ La carpeta `salida_reproduccion` queda en `C:\uavids` con el detalle completo.
 docker run --rm uavids-e3 python -m pytest tests
 ```
 
-Anota la línea final, del tipo `34 passed`.
+Anota la línea final, del tipo `36 passed`.
 
 **5. Compila el libro desde cero** (de 20 a 60 minutos; ejecuta todo el código del libro):
 
@@ -104,7 +104,7 @@ Anota si al final aparece `Finished generating HTML for book` y si hubo errores 
 docker run --rm -p 8050:8050 uavids-e3
 ```
 
-Abre http://localhost:8050, recorre las páginas, elige un flujo en la página de modelos y verifica que dé una predicción. Cierra con `Ctrl + C`. Si Donny te envió el enlace del dashboard publicado en Render, haz la misma revisión allí.
+Abre http://localhost:8050, recorre las páginas, elige un flujo en la página de modelos y verifica que dé una predicción. Cierra con `Ctrl + C`. Después haz la misma revisión en el dashboard publicado, https://uavids-2025-dashboard.onrender.com. La primera visita puede tardar cerca de un minuto, porque el plan gratuito de Render se duerme cuando nadie lo usa.
 
 **7. Llena y firma** el formato `reporte_reproduccion.md`.
 
