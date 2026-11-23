@@ -1,0 +1,35 @@
+title: "Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones"
+author: Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+copyright: "2026"
+only_build_toc_files: true
+
+# Las celdas se ejecutan al compilar: regeneran tablas y figuras desde los resultados versionados del repositorio
+# (las corridas costosas se precalculan con los scripts de training/ y experiments/, incluidos y documentados).
+execute:
+  execute_notebooks: force
+  timeout: 600
+  stderr_output: remove-warn
+
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - amsmath
+    - colon_fence
+    - html_image
+
+bibtex_bibfiles:
+  - references.bib
+
+sphinx:
+  config:
+    language: es
+    bibtex_reference_style: author_year
+    nb_merge_streams: true
+    numfig: true
+    math_number_all: true
+    suppress_warnings: ["myst.header", "mystnb.unknown_mime_type"]
+    html_theme_options:
+      show_toc_level: 2
+      use_download_button: true
+      use_fullscreen_button: true
+      home_page_in_toc: true

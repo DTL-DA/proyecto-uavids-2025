@@ -47,3 +47,8 @@ _build/
 /Entregable_3_UAVIDS_2025/experiments/**/*.npy
 /Entregable_3_UAVIDS_2025/experiments/**/*.pt
 /Entregable_3_UAVIDS_2025/experiments/**/*.tmp
+
+# Integración continua del Entregable 3
+!/.github/
+/Entregable_3_UAVIDS_2025/experiments/novedad/exportaciones/*
+!/Entregable_3_UAVIDS_2025/experiments/novedad/exportaciones/*_resumen_novedad.json

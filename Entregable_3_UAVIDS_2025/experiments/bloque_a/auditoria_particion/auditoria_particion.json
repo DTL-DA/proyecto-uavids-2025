@@ -1,0 +1,59 @@
+{
+ "flowid_es_posicion": true,
+ "filas": {
+  "total": 122171,
+  "entrenamiento": 73267,
+  "validacion": 17802,
+  "prueba": 22883,
+  "fuera (repetidas)": 8219
+ },
+ "bloques_compartidos_entre_particiones": {
+  "entrenamiento-validacion": 0,
+  "entrenamiento-prueba": 0,
+  "validacion-prueba": 0
+ },
+ "tramos": {
+  "numero": 8561,
+  "largo_mediano": 2.0,
+  "largo_maximo": 19180,
+  "tramos_que_cruzan_bloques": 38,
+  "tramos_en_varias_particiones": 26,
+  "filas_validacion_en_tramo_compartido_con_entrenamiento_%": 67.35,
+  "filas_prueba_en_tramo_compartido_con_entrenamiento_%": 70.51
+ },
+ "vecindad_validacion": {
+  "distancia_mediana_filas": 324.0,
+  "contiguo_%": 65.55,
+  "por_rango_%": {
+   "1 a 100": 15.28,
+   "101 a 300": 31.02,
+   "301 a 500": 30.71,
+   "501 a 1000": 22.98,
+   "más de 1000": 0.0
+  }
+ },
+ "vecindad_prueba": {
+  "distancia_mediana_filas": 315.0,
+  "contiguo_%": 63.02,
+  "por_rango_%": {
+   "1 a 100": 15.89,
+   "101 a 300": 31.85,
+   "301 a 500": 31.84,
+   "501 a 1000": 18.92,
+   "más de 1000": 1.5
+  }
+ },
+ "vecino_atributos_validacion": {
+  "mediana_contiguo": 0.20265941321849823,
+  "mediana_lejano": 0.19232240319252014,
+  "gemelos_<0.01_contiguo_%": 1.92,
+  "gemelos_<0.01_lejano_%": 0.38
+ },
+ "vecino_atributos_prueba": {
+  "mediana_contiguo": 0.23356149345636368,
+  "mediana_lejano": 0.1802239567041397,
+  "gemelos_<0.01_contiguo_%": 1.8,
+  "gemelos_<0.01_lejano_%": 0.87
+ },
+ "discrepancias_f1_registrado": 0
+}

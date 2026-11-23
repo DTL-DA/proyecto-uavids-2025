@@ -1,0 +1,21 @@
+﻿particion,grupo,clase,filas_cerca,filas_lejos,error_cerca,error_lejos,lejos_menos_cerca,IC95,p_unilateral
+validacion,LightGBM,Blackhole,560,971,0.1571,0.2858,0.1287,[-0.0729; 0.3250],0.3525
+validacion,LightGBM,Flooding,341,111,0.0389,0.0,-0.0389,[-0.1780; 0.0000],1.0
+validacion,LightGBM,Normal,627,1360,0.0031,0.0021,-0.0011,[-0.0056; 0.0037],0.6748
+validacion,LightGBM,Sybil,500,1675,0.01,0.4212,0.4112,[-0.0250; 0.9928],0.1529
+validacion,LightGBM,Wormhole,600,1000,0.1107,0.0404,-0.0702,[-0.1282; 0.0086],0.8689
+validacion,Redes (promedio de 13),Blackhole,560,971,0.1915,0.3158,0.1242,[-0.0877; 0.3359],0.3417
+validacion,Redes (promedio de 13),Flooding,341,111,0.0566,0.0565,-0.0001,[-0.1666; 0.0363],0.7055
+validacion,Redes (promedio de 13),Normal,627,1360,0.0147,0.0069,-0.0078,[-0.0241; 0.0082],0.8867
+validacion,Redes (promedio de 13),Sybil,500,1675,0.001,0.0309,0.0299,[0.0001; 0.0707],0.0199
+validacion,Redes (promedio de 13),Wormhole,600,1000,0.1061,0.0732,-0.033,[-0.0769; 0.0130],0.7331
+prueba,LightGBM,Blackhole,812,1136,0.0906,0.2259,0.1353,[-0.1220; 0.3822],0.354
+prueba,LightGBM,Flooding,335,673,0.0384,0.0053,-0.033,[-0.0545; 0.0109],0.8897
+prueba,LightGBM,Normal,878,883,0.019,0.0129,-0.0061,[-0.0366; 0.0189],0.636
+prueba,LightGBM,Sybil,900,429,0.1662,1.0,0.8338,[0.4983; 0.9535],0.0
+prueba,LightGBM,Wormhole,671,2442,0.1012,0.052,-0.0492,[-0.0785; -0.0020],0.9809
+prueba,Redes (promedio de 13),Blackhole,812,1136,0.132,0.2444,0.1123,[-0.1669; 0.3895],0.3689
+prueba,Redes (promedio de 13),Flooding,335,673,0.1428,0.0688,-0.074,[-0.1074; 0.0040],0.9739
+prueba,Redes (promedio de 13),Normal,878,883,0.0301,0.0272,-0.0029,[-0.0545; 0.0273],0.5528
+prueba,Redes (promedio de 13),Sybil,900,429,0.1072,0.9956,0.8883,[0.5891; 0.9359],0.0
+prueba,Redes (promedio de 13),Wormhole,671,2442,0.1233,0.1812,0.0579,[-0.0296; 0.1790],0.197

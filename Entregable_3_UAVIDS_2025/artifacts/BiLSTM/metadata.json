@@ -1,0 +1,176 @@
+{
+ "modelo": "BiLSTM",
+ "semilla": 6005,
+ "id_corrida": "definitiva_BiLSTM_6005",
+ "criterio_de_seleccion": "F1 de validación más cercana a la mediana de 20 semillas",
+ "hiperparametros": {
+  "lr": 0.003,
+  "weight_decay": 1e-05,
+  "batch": 128
+ },
+ "arquitectura": null,
+ "configuracion_original": null,
+ "epocas": 9,
+ "parametros": 530693,
+ "mac": 8406272,
+ "preprocesamiento": {
+  "transformacion": "log(1 + min(x, tope)), tope = 1 para PacketDropRate e infinito para el resto",
+  "media": [
+   5.747716495537087,
+   4.228059389430693,
+   3.5796912214922094,
+   2.793990145881359,
+   8.366469565354699,
+   7.633242482643735,
+   0.46634252784834185,
+   0.34869388517820776,
+   2.861682715015932,
+   2.30543227793657,
+   0.15482911029413163,
+   0.11336706968141469,
+   0.24451035568426108,
+   4.203057095248861,
+   0.3001952467132298,
+   0.1679254820985426
+  ],
+  "desviacion": [
+   1.5414756929436313,
+   1.8651865647143888,
+   2.1164517544525108,
+   1.6027127139906345,
+   1.938296436247515,
+   2.284224382527602,
+   0.6173923005960767,
+   0.522315953665251,
+   1.7729397248203667,
+   1.8368380515200147,
+   0.23169594462132975,
+   0.1807151793255847,
+   0.40532775324664366,
+   0.23998459776785824,
+   0.22098276269223782,
+   0.30597884101884415
+  ]
+ },
+ "entrada": [
+  {
+   "nombre": "FlowDuration/s",
+   "tipo": "float",
+   "minimo_entrenamiento": 7.62e-05,
+   "maximo_entrenamiento": 10591.8
+  },
+  {
+   "nombre": "TxPackets",
+   "tipo": "float",
+   "minimo_entrenamiento": 1.0,
+   "maximo_entrenamiento": 220886.0
+  },
+  {
+   "nombre": "RxPackets",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 63653.0
+  },
+  {
+   "nombre": "LostPackets",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 212557.0
+  },
+  {
+   "nombre": "TxBytes",
+   "tipo": "float",
+   "minimo_entrenamiento": 30.0,
+   "maximo_entrenamiento": 11265075.0
+  },
+  {
+   "nombre": "RxBytes",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 3246018.0
+  },
+  {
+   "nombre": "TxPacketRate/s",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0012252,
+   "maximo_entrenamiento": 33116.6
+  },
+  {
+   "nombre": "RxPacketRate/s",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 13115.8
+  },
+  {
+   "nombre": "TxByteRate/s",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.047783,
+   "maximo_entrenamiento": 2516860.0
+  },
+  {
+   "nombre": "RxByteRate/s",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 996800.0
+  },
+  {
+   "nombre": "MeanDelay/s",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 10.1685
+  },
+  {
+   "nombre": "MeanJitter/s",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 6.23963
+  },
+  {
+   "nombre": "Throughput/Kbps",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 7974.4
+  },
+  {
+   "nombre": "MeanPacketSize",
+   "tipo": "float",
+   "minimo_entrenamiento": 30.0,
+   "maximo_entrenamiento": 76.0
+  },
+  {
+   "nombre": "PacketDropRate",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 1.25
+  },
+  {
+   "nombre": "AverageHopCount",
+   "tipo": "float",
+   "minimo_entrenamiento": 0.0,
+   "maximo_entrenamiento": 58.0
+  }
+ ],
+ "salida": {
+  "nombre": "logits",
+  "clases": [
+   "Blackhole",
+   "Flooding",
+   "Normal",
+   "Sybil",
+   "Wormhole"
+  ]
+ },
+ "metricas": {
+  "f1_val": 0.9050856044432732,
+  "f1_prueba": 0.8567620091124273,
+  "f1_prueba_onnx": 0.8567620091124273
+ },
+ "temperatura": null,
+ "cuantil_conforme_90": null,
+ "versiones": {
+  "python": "3.13.14",
+  "torch": "2.6.0+cpu",
+  "onnxruntime": "1.20.1",
+  "onnx": "1.23.2"
+ }
+}

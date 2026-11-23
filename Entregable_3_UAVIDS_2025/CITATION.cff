@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "Si usa este software, cítelo como se indica a continuación."
+title: "Modelo original y validación rigurosa para detectar intrusiones en redes de drones (UAVIDS-2025), Entregable 3"
+type: software
+authors:
+  - family-names: Torres
+    given-names: Donny
+    affiliation: "Maestría en Analítica de Datos, Universidad del Norte"
+version: "1.0.0"
+date-released: "2026-11-26"
+license: MIT
+repository-code: "https://github.com/DTL-DA/proyecto-uavids-2025"
+keywords:
+  - intrusion detection
+  - UAV
+  - mixture of experts
+  - deep learning
+  - UAVIDS-2025
+references:
+  - type: dataset
+    title: "UAVIDS-2025"
+    authors:
+      - family-names: Zeng
+        given-names: Qingli
+      - family-names: Bashir
+        given-names: Abdalrahman
+      - family-names: Naït-Abdesselam
+        given-names: Farid
+    doi: "10.5281/zenodo.15336998"
+    year: 2025

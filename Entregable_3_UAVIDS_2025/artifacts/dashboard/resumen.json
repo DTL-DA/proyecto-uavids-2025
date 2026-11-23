@@ -1,0 +1,31 @@
+{
+ "R3 (supera a los 12)": false,
+ "contrastes que supera": [],
+ "contrastes donde es peor con significancia": [],
+ "potencia conjunta observada": 0.11518740486030543,
+ "friedman": {
+  "chi2": 103.55604395604394,
+  "p": 1.1163305721443733e-16,
+  "F Iman-Davenport": 14.420315067169222,
+  "p Iman-Davenport": 3.1799236041484017e-22,
+  "W de Kendall": 0.4314835164835164
+ },
+ "rangos medios (1 = mejor)": {
+  "Original": 8.6,
+  "CNN-LSTM": 4.1,
+  "Autoencoder": 5.65,
+  "RNN": 9.9,
+  "Transformer": 5.6,
+  "BiLSTM": 7.45,
+  "ResNet": 7.8,
+  "GRU": 8.5,
+  "KAN": 8.2,
+  "TabNet": 11.5,
+  "DBN": 6.2,
+  "LightGBM": 1.65,
+  "CNN 1D": 5.85
+ },
+ "F1 original medio (todas las semillas)": 0.849610684369738,
+ "semillas original": 48,
+ "cd_nemenyi": 4.07973766700898
+}

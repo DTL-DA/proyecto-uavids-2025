@@ -1,0 +1,98 @@
+{
+ "fecha": "2026-11-22",
+ "cadenas": {
+  "N1": "(\"mixture of experts\" OR \"gating network\" OR \"gated fusion\" OR \"dynamic ensemble selection\") AND (\"intrusion detection\" OR \"attack detection\") AND (UAV OR drone OR FANET OR \"unmanned aerial\")",
+  "N2": "(\"mixture of experts\" OR \"gating network\") AND \"intrusion detection\" AND (\"decision tree\" OR \"gradient boosting\" OR \"tree-based\" OR \"soft tree\")",
+  "N3": "(\"piecewise linear encoding\" OR \"numerical embedding\" OR \"soft binning\" OR \"learnable threshold\" OR \"soft decision tree\" OR \"neural decision tree\") AND (\"intrusion detection\" OR \"network traffic\")",
+  "N5": "(UAV OR drone OR FANET OR \"unmanned aerial\") AND \"intrusion detection\" AND (hybrid OR ensemble OR fusion) AND (\"gradient boosting\" OR LightGBM OR XGBoost OR \"random forest\" OR \"decision tree\") AND (\"neural network\" OR \"deep learning\")",
+  "N4": "(\"mixture of experts\" OR \"gating network\") AND (\"soft decision tree\" OR \"neural decision tree\" OR \"differentiable tree\" OR \"piecewise linear encoding\" OR \"numerical embeddings\") AND (tabular OR vision OR language OR \"time series\")",
+  "N7": "\"Lipschitz\" AND (\"mixture of experts\" OR \"gating network\")",
+  "N6": "(\"mezcla de expertos\" OR \"red de compuerta\" OR fusión) AND (\"detección de intrusiones\") AND (drones OR UAV OR \"vehículos aéreos no tripulados\")"
+ },
+ "resultados": [
+  {
+   "fuente": "OpenAlex",
+   "cadena": "N1",
+   "total": 3,
+   "exportados": 3
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "N2",
+   "total": 0,
+   "exportados": 0
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "N3",
+   "total": 3,
+   "exportados": 3
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "N5",
+   "total": 13,
+   "exportados": 13
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "N4",
+   "total": 1,
+   "exportados": 1
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "N7",
+   "total": 22,
+   "exportados": 22
+  },
+  {
+   "fuente": "OpenAlex",
+   "cadena": "N6",
+   "total": 0,
+   "exportados": 0
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "N1",
+   "total": 0,
+   "exportados": 0
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "N2",
+   "total": 1,
+   "exportados": 1
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "N3",
+   "total": 1,
+   "exportados": 1
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "N5",
+   "total": 1,
+   "exportados": 1
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "N4",
+   "total": 1,
+   "exportados": 1
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "N7",
+   "total": 13,
+   "exportados": 13
+  },
+  {
+   "fuente": "arXiv",
+   "cadena": "N6",
+   "total": 0,
+   "exportados": 0
+  }
+ ]
+}

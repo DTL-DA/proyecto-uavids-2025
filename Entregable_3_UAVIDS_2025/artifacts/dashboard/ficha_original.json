@@ -1,0 +1,31 @@
+{
+ "P1 (sin escalones sube la confusión B–W)": false,
+ "conf_BW": {
+  "A0_completo": 0.1525,
+  "A1_sin_compuerta": 0.1438,
+  "A2_sin_escalones": 0.143,
+  "A3_conjunto": 0.1355,
+  "A4_sin_balance": 0.1511,
+  "A5_solo_suave": 0.1462,
+  "A6_solo_umbral": 0.1509,
+  "CNN-LSTM (mejor red)": 0.123,
+  "LightGBM": 0.1001
+ },
+ "P2 (más peso al experto de umbrales en B y W que en Sybil)": true,
+ "peso_umbral_por_clase": {
+  "Blackhole": 0.692,
+  "Flooding": 0.439,
+  "Normal": 0.339,
+  "Sybil": 0.512,
+  "Wormhole": 0.884
+ },
+ "P3 (ventaja concentrada en B y W frente a CNN-LSTM)": false,
+ "diferencia_por_clase_vs_CNN-LSTM": {
+  "F1 Blackhole": -0.0288,
+  "F1 Flooding": -0.0094,
+  "F1 Normal": -0.0046,
+  "F1 Sybil": 0.0011,
+  "F1 Wormhole": -0.0313
+ },
+ "pruebas": "33 pruebas con pytest en integración continua (14 del modelo y 19 del dashboard): sobreajuste de un lote, reproducibilidad, formas, gradientes, Lipschitz, Jensen, guardado, ONNX e inferencia."
+}

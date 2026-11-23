@@ -1,0 +1,131 @@
+﻿modelo,perturbacion,severidad,f1,caída
+Original,ninguna,0.0,0.8637829599356343,0.0
+Original,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8446486987553999,0.019134261180234313
+Original,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7644420551376546,0.09934090479797963
+Original,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6817853118422417,0.18199764809339258
+Original,atributos faltantes imputados con la media,0.1,0.799176817712889,0.0646061422227453
+Original,atributos faltantes imputados con la media,0.25,0.7035308791394244,0.1602520807962099
+Original,atributos faltantes imputados con la media,0.5,0.533627467127669,0.3301554928079653
+Original,valores atípicos (un atributo ×10),0.01,0.863576285345062,0.00020667459057222004
+Original,valores atípicos (un atributo ×10),0.05,0.8604415854700667,0.0033413744655675925
+Original,valores atípicos (un atributo ×10),0.1,0.8568898394713017,0.006893120464332547
+CNN-LSTM,ninguna,0.0,0.8725751234211447,0.0
+CNN-LSTM,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8450582159462282,0.02751690747491653
+CNN-LSTM,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7457231150220449,0.12685200839909982
+CNN-LSTM,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6286031938468066,0.2439719295743381
+CNN-LSTM,atributos faltantes imputados con la media,0.1,0.7851188082843717,0.08745631513677299
+CNN-LSTM,atributos faltantes imputados con la media,0.25,0.639878503436243,0.23269661998490176
+CNN-LSTM,atributos faltantes imputados con la media,0.5,0.42000521657589013,0.4525699068452546
+CNN-LSTM,valores atípicos (un atributo ×10),0.01,0.8716873411388513,0.00088778228229347
+CNN-LSTM,valores atípicos (un atributo ×10),0.05,0.8680070362750705,0.004568087146074262
+CNN-LSTM,valores atípicos (un atributo ×10),0.1,0.8634347854405089,0.009140337980635849
+Autoencoder,ninguna,0.0,0.8690193233090071,0.0
+Autoencoder,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8514214470813188,0.01759787622768827
+Autoencoder,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7613131119249532,0.1077062113840539
+Autoencoder,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6626055500986114,0.20641377321039567
+Autoencoder,atributos faltantes imputados con la media,0.1,0.7811254632658409,0.08789386004316624
+Autoencoder,atributos faltantes imputados con la media,0.25,0.6653995928686213,0.20361973044038584
+Autoencoder,atributos faltantes imputados con la media,0.5,0.5054023424808425,0.3636169808281646
+Autoencoder,valores atípicos (un atributo ×10),0.01,0.8676177422908722,0.001401581018134923
+Autoencoder,valores atípicos (un atributo ×10),0.05,0.8620827312232281,0.006936592085779014
+Autoencoder,valores atípicos (un atributo ×10),0.1,0.854348919507192,0.014670403801815057
+RNN,ninguna,0.0,0.8450522725510119,0.0
+RNN,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8208951656047632,0.02415710694624873
+RNN,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7199950246135645,0.12505724793744744
+RNN,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6130542275571252,0.23199804499388665
+RNN,atributos faltantes imputados con la media,0.1,0.7511118600327564,0.09394041251825547
+RNN,atributos faltantes imputados con la media,0.25,0.6376881610016766,0.20736411154933532
+RNN,atributos faltantes imputados con la media,0.5,0.47471879612254897,0.3703334764284629
+RNN,valores atípicos (un atributo ×10),0.01,0.843916055181816,0.001136217369195891
+RNN,valores atípicos (un atributo ×10),0.05,0.8392823681882142,0.005769904362797673
+RNN,valores atípicos (un atributo ×10),0.1,0.8335256591486442,0.011526613402367714
+Transformer,ninguna,0.0,0.866429758449389,0.0
+Transformer,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8408295190541267,0.025600239395262236
+Transformer,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7184928981969675,0.14793686025242148
+Transformer,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6221930002864927,0.24423675816289625
+Transformer,atributos faltantes imputados con la media,0.1,0.7303644422086087,0.13606531624078022
+Transformer,atributos faltantes imputados con la media,0.25,0.6145020716573937,0.2519276867919953
+Transformer,atributos faltantes imputados con la media,0.5,0.48037786580076025,0.3860518926486287
+Transformer,valores atípicos (un atributo ×10),0.01,0.8639286663824318,0.0025010920669571446
+Transformer,valores atípicos (un atributo ×10),0.05,0.8549976702819677,0.01143208816742125
+Transformer,valores atípicos (un atributo ×10),0.1,0.844946442259271,0.021483316190118007
+BiLSTM,ninguna,0.0,0.8567620091124273,0.0
+BiLSTM,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8371387711223512,0.019623237990076037
+BiLSTM,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7416416165423397,0.11512039257008755
+BiLSTM,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6447389183143123,0.212023090798115
+BiLSTM,atributos faltantes imputados con la media,0.1,0.7720946852363293,0.08466732387609799
+BiLSTM,atributos faltantes imputados con la media,0.25,0.636919164883798,0.21984284422862932
+BiLSTM,atributos faltantes imputados con la media,0.5,0.435560991225183,0.4212010178872443
+BiLSTM,valores atípicos (un atributo ×10),0.01,0.8556761902239802,0.0010858188884470543
+BiLSTM,valores atípicos (un atributo ×10),0.05,0.8524538666606813,0.004308142451745933
+BiLSTM,valores atípicos (un atributo ×10),0.1,0.8493634803210017,0.0073985287914255515
+ResNet,ninguna,0.0,0.8469188546265093,0.0
+ResNet,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8352634446857252,0.011655409940784067
+ResNet,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7475874503180833,0.09933140430842602
+ResNet,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6518608542219384,0.19505800040457089
+ResNet,atributos faltantes imputados con la media,0.1,0.7544620038164469,0.09245685081006239
+ResNet,atributos faltantes imputados con la media,0.25,0.6310351411125734,0.21588371351393587
+ResNet,atributos faltantes imputados con la media,0.5,0.4801899094001739,0.36672894522633537
+ResNet,valores atípicos (un atributo ×10),0.01,0.8461018948815034,0.0008169597450058408
+ResNet,valores atípicos (un atributo ×10),0.05,0.8393979843134998,0.00752087031300952
+ResNet,valores atípicos (un atributo ×10),0.1,0.8317891050493575,0.015129749577151741
+GRU,ninguna,0.0,0.8640588973399582,0.0
+GRU,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8377076681075474,0.026351229232410844
+GRU,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7245181167503933,0.13954078058956487
+GRU,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6277561258254963,0.23630277151446188
+GRU,atributos faltantes imputados con la media,0.1,0.7723499053750762,0.09170899196488203
+GRU,atributos faltantes imputados con la media,0.25,0.6245125048014298,0.23954639253852839
+GRU,atributos faltantes imputados con la media,0.5,0.41103233686246055,0.4530265604774977
+GRU,valores atípicos (un atributo ×10),0.01,0.862876930303696,0.001181967036262166
+GRU,valores atípicos (un atributo ×10),0.05,0.8584091654846236,0.005649731855334572
+GRU,valores atípicos (un atributo ×10),0.1,0.854434484924098,0.009624412415860206
+KAN,ninguna,0.0,0.8546932241119855,0.0
+KAN,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8307665552823972,0.02392666882958827
+KAN,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7255176781693553,0.12917554594263014
+KAN,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6135414359412908,0.2411517881706946
+KAN,atributos faltantes imputados con la media,0.1,0.7624753155959124,0.09221790851607303
+KAN,atributos faltantes imputados con la media,0.25,0.6414539786594915,0.21323924545249395
+KAN,atributos faltantes imputados con la media,0.5,0.47603883690993143,0.378654387202054
+KAN,valores atípicos (un atributo ×10),0.01,0.8534023162978249,0.0012909078141605246
+KAN,valores atípicos (un atributo ×10),0.05,0.8493871626924442,0.005306061419541264
+KAN,valores atípicos (un atributo ×10),0.1,0.8435095354225599,0.011183688689425542
+TabNet,ninguna,0.0,0.8328941279766336,0.0
+TabNet,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8076747505902622,0.025219377386371478
+TabNet,ruido gaussiano (σ en el espacio estandarizado),0.3,0.7133989957053852,0.11949513227124842
+TabNet,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6084042891786882,0.22448983879794548
+TabNet,atributos faltantes imputados con la media,0.1,0.7144092563659274,0.1184848716107062
+TabNet,atributos faltantes imputados con la media,0.25,0.5932960790002018,0.2395980489764319
+TabNet,atributos faltantes imputados con la media,0.5,0.44134030784091677,0.3915538201357169
+TabNet,valores atípicos (un atributo ×10),0.01,0.8315122538627868,0.001381874113846826
+TabNet,valores atípicos (un atributo ×10),0.05,0.8260246730432745,0.006869454933359109
+TabNet,valores atípicos (un atributo ×10),0.1,0.8196266742780812,0.013267453698552423
+DBN,ninguna,0.0,0.8637729380317861,0.0
+DBN,ruido gaussiano (σ en el espacio estandarizado),0.1,0.8333944925860564,0.030378445445729763
+DBN,ruido gaussiano (σ en el espacio estandarizado),0.3,0.6844823969123052,0.17929054111948095
+DBN,ruido gaussiano (σ en el espacio estandarizado),0.5,0.592183332775112,0.2715896052566741
+DBN,atributos faltantes imputados con la media,0.1,0.7279196104949838,0.13585332753680235
+DBN,atributos faltantes imputados con la media,0.25,0.5884658790931869,0.2753070589385992
+DBN,atributos faltantes imputados con la media,0.5,0.4464453356897005,0.4173276023420856
+DBN,valores atípicos (un atributo ×10),0.01,0.8616666315565709,0.0021063064752152583
+DBN,valores atípicos (un atributo ×10),0.05,0.853305959374754,0.010466978657032167
+DBN,valores atípicos (un atributo ×10),0.1,0.8460454310325097,0.017727506999276388
+LightGBM,ninguna,0.0,0.8756629369246115,0.0
+LightGBM,ruido gaussiano (σ en el espacio estandarizado),0.1,0.761835620050654,0.11382731687395753
+LightGBM,ruido gaussiano (σ en el espacio estandarizado),0.3,0.6265505229255144,0.24911241399909712
+LightGBM,ruido gaussiano (σ en el espacio estandarizado),0.5,0.5516386655658834,0.32402427135872813
+LightGBM,atributos faltantes imputados con la media,0.1,0.8065493254364858,0.06911361148812567
+LightGBM,atributos faltantes imputados con la media,0.25,0.6908884187651909,0.1847745181594206
+LightGBM,atributos faltantes imputados con la media,0.5,0.46800929534535296,0.40765364157925854
+LightGBM,valores atípicos (un atributo ×10),0.01,0.8754544493032151,0.00020848762139635824
+LightGBM,valores atípicos (un atributo ×10),0.05,0.874247936420311,0.0014150005043005454
+LightGBM,valores atípicos (un atributo ×10),0.1,0.8722693372759617,0.0033935996486498254
+CNN 1D,ninguna,0.0,0.8609955625856671,0.0
+CNN 1D,ruido gaussiano (σ en el espacio estandarizado),0.1,0.843078204958981,0.017917357626686115
+CNN 1D,ruido gaussiano (σ en el espacio estandarizado),0.3,0.736542328926834,0.1244532336588331
+CNN 1D,ruido gaussiano (σ en el espacio estandarizado),0.5,0.6347913669414933,0.22620419564417382
+CNN 1D,atributos faltantes imputados con la media,0.1,0.7649924095130638,0.09600315307260332
+CNN 1D,atributos faltantes imputados con la media,0.25,0.6251627121226205,0.23583285046304658
+CNN 1D,atributos faltantes imputados con la media,0.5,0.42547837133361127,0.43551719125205585
+CNN 1D,valores atípicos (un atributo ×10),0.01,0.8601867375745513,0.000808825011115788
+CNN 1D,valores atípicos (un atributo ×10),0.05,0.8556613111893692,0.005334251396297951
+CNN 1D,valores atípicos (un atributo ×10),0.1,0.8532711414506533,0.007724421135013815

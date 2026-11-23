@@ -1,0 +1,19 @@
+# Despliegue en Render (plan gratuito). El repositorio contiene los tres entregables; el dashboard vive en esta carpeta.
+services:
+  - type: web
+    name: uavids-2025-dashboard
+    runtime: python
+    plan: free
+    rootDir: Entregable_3_UAVIDS_2025
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:server --workers 1 --threads 4 --timeout 120
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.1
+      - key: OMP_NUM_THREADS
+        value: "1"
+      - key: OPENBLAS_NUM_THREADS
+        value: "1"
+      - key: MKL_NUM_THREADS
+        value: "1"

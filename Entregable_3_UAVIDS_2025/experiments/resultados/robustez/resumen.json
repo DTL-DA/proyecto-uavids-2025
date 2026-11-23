@@ -1,0 +1,20 @@
+{
+ "kruskal_wallis": {
+  "H": 118.17378165115133,
+  "p": 1.4283986988171055e-19
+ },
+ "flujos que fallan los 13 modelos (%)": 7.673818992265,
+ "errores del original": 3166,
+ "interpretabilidad": {
+  "spearman_original_vs_lightgbm": 0.7911764705882354,
+  "p": 0.0002619464480824596
+ },
+ "estabilidad_explicaciones": {
+  "spearman_entre_semillas": [
+   0.9176470588235294,
+   0.8205882352941177,
+   0.9352941176470588
+  ],
+  "media": 0.8911764705882353
+ }
+}
