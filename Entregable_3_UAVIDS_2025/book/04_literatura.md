@@ -25,11 +25,11 @@ pd.set_option("display.max_colwidth", 300)
 
 ## Cadenas de búsqueda
 
-Se usaron siete cadenas, que combinan el mecanismo con el problema de aplicación, buscan el mecanismo en otras aplicaciones para ubicar su origen, buscan el origen de la propiedad demostrada e incluyen sinónimos en español. La primera consulta se hizo el 22/11/2026 en OpenAlex y arXiv, por programa (`experiments/novedad/buscar_novedad.py`), y se repite antes de la entrega.
+Se usaron siete cadenas, que combinan el mecanismo con el problema de aplicación, buscan el mecanismo en otras aplicaciones para ubicar su origen, buscan el origen de la propiedad demostrada e incluyen sinónimos en español. La primera consulta se hizo el 22/11/2026 en OpenAlex y arXiv, por programa (`experiments/novedad/buscar_novedad.py`). El 23/11/2026 se agregaron IEEE Xplore (N1) y la búsqueda por citación y en repositorios de código (`experiments/novedad/citacion_y_repositorios.py`). La búsqueda completa se repite antes de la entrega.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
-resumen = sorted(N.glob("exportaciones/*_resumen_novedad.json"))[-1]
+resumen = sorted(p for p in N.glob("exportaciones/*_resumen_novedad.json") if p.name[:10].replace("-", "").isdigit() and p.name[10:] == "_resumen_novedad.json")[-1]
 r = json.loads(resumen.read_text(encoding="utf-8"))
 cadenas = pd.DataFrame([{"Clave": k, "Cadena": v} for k, v in r["cadenas"].items()])
 conteos = pd.DataFrame(r["resultados"]).pivot(index="cadena", columns="fuente", values="total")
@@ -56,11 +56,11 @@ tabla("## Matriz de novedad (cuadro 2 del enunciado)", "## Clasificación")
 tabla("## Clasificación de la diferencia frente a cada trabajo cercano", "## Búsqueda por citación")
 ```
 
-**Las siete cadenas devuelven pocos registros: 3 para la mezcla de expertos aplicada a intrusiones en UAV en OpenAlex, ninguno en arXiv ni en español, y 13 para los híbridos de árboles y redes en UAV. Ninguno de los trabajos cercanos combina un experto de escalones suaves con uno suave mediante una compuerta por flujo.**
+**Las siete cadenas devuelven pocos registros: 3 para la mezcla de expertos aplicada a intrusiones en UAV en OpenAlex, 2 en IEEE Xplore, ninguno en arXiv ni en español, y 13 para los híbridos de árboles y redes en UAV. La búsqueda por citación sobre 56 obras que citan a los trabajos más cercanos y los 27 repositorios de código revisados agregan cuatro trabajos cercanos, pero ninguno combina un experto de escalones suaves con uno suave mediante una compuerta aprendida por flujo.**
 
-Así mismo, el trabajo más cercano en el problema, el estudio de UAVIDS-2025 de {cite:t}`zarkadis2026statistical`, compara árboles, redes y *stacking*, que es una regla de fusión estándar y una de las reglas contra las que se contrasta la compuerta propia, y llega por otro camino a la misma limitación: Blackhole y Wormhole comparten el soporte de su distribución. El trabajo más cercano en el mecanismo, la mezcla de expertos para intrusiones en 5G (arXiv 2412.03483), usa expertos homogéneos sobre una representación convolucional, enrutamiento disperso y entrenamiento conjunto. En todos los casos la diferencia es de mecanismo o de esquema de entrenamiento, que son las dos categorías que sustentan R1.
+Así mismo, el trabajo más cercano en el problema, el estudio de UAVIDS-2025 de {cite:t}`zarkadis2026statistical`, compara árboles, redes y *stacking*, que es una regla de fusión estándar y una de las reglas contra las que se contrasta la compuerta propia, y llega por otro camino a la misma limitación: Blackhole y Wormhole comparten el soporte de su distribución. El trabajo más cercano en la motivación es PS-CAHE {cite:p}`ma2026pscahe`, que sobre UAVIDS-2025 fija pesos de fusión para los pares de clases que se confunden; lo hace con pesos por par de clases sobre modelos externos, no con una compuerta aprendida por flujo, y su ventaja desaparece con nodos disjuntos. Los más cercanos en el mecanismo usan mezclas de expertos homogéneos: para intrusiones en 5G (arXiv 2412.03483), con enrutamiento disperso, y en Switch IDS {cite:p}`wang2025switchids`, para repartir el tráfico entre nodos de borde asistidos por aeronaves. La fusión de XGBoost y un MLP con un peso global {cite:p}`albalasmeh2026xgbmlp` y la compuerta ajustada fuera de muestra {cite:p}`alessa2026vgmoe` completan el grupo. En todos los casos la diferencia es de mecanismo o de esquema de entrenamiento, que son las dos categorías que sustentan R1.
 
-Por lo anterior, conviene declarar la novedad en los términos de la sección siguiente y dejarla sujeta a la confirmación de Scopus, Web of Science y el verificador externo.
+Por lo anterior, conviene declarar la novedad en los términos de la sección siguiente, con OpenAlex, IEEE Xplore y arXiv como las tres bases de la sección 6.3 del enunciado, y dejarla sujeta a la confirmación de Scopus y del verificador externo.
 
 ## Declaración de novedad
 
@@ -68,7 +68,8 @@ Al mejor de nuestro conocimiento y según la búsqueda descrita, no se encontrar
 
 Los trabajos más cercanos, y la diferencia de cada uno con la propuesta, son:
 
-- **La mezcla de expertos homogéneos para intrusiones en 5G:** la propuesta difiere en el mecanismo y en el esquema de entrenamiento.
+- **PS-CAHE sobre UAVIDS-2025** {cite:p}`ma2026pscahe`: comparte la motivación, que son los pares de clases que se confunden, pero fija pesos de fusión por par sobre modelos externos; la propuesta aprende una compuerta por flujo entre dos expertos internos de sesgo distinto, con entrenamiento cooperativo.
+- **Switch IDS** {cite:p}`wang2025switchids` **y la mezcla de expertos para intrusiones en 5G:** usan expertos homogéneos; la propuesta difiere en el mecanismo y en el esquema de entrenamiento.
 - **El estudio de *stacking* sobre UAVIDS-2025** {cite:p}`zarkadis2026statistical`: difiere en el mecanismo, porque la propuesta reemplaza una regla de fusión estándar por una compuerta aprendida por flujo.
 - **Las fuentes de las piezas** {cite:p}`jacobs1991adaptive,gorishniy2022embeddings`: las cuatro modificaciones algorítmicas están en `experiments/procedencia.md`.
 

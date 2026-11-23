@@ -32,6 +32,11 @@
 | arXiv | N3 a N5 | 3 | 3 | 0 | Duplicados de OpenAlex |
 | arXiv | N6 | 0 | 0 | 0 | Sin resultados |
 | arXiv | N7 | 13 | 13 | 0 | Duplicados de OpenAlex |
+| IEEE Xplore | N1 | 2 | 2 | 2 | (a) Switch IDS (Wang et al., IEEE IoT J., 2025): mezcla de expertos en un IDS para computación de borde asistida por aeronaves, con expertos homogéneos y pérdida de reparto de tráfico entre nodos. (b) Fusión con compuerta de Transformer y BiLSTM en aprendizaje federado (ICIMA 2026), sobre Edge-IIoTset y ToN-IoT |
+| OpenAlex, citación hacia adelante | Paper guía y 5 trabajos cercanos | 56 | 56 | 4 | PS-CAHE (2026), fusión heterogénea consciente de los pares que se confunden, sobre UAVIDS-2025; fusión XGBoost–MLP para 5G (2026); VG-MoE (2026); y, como evidencia de fuga, Aksu y Gümüş (2026) |
+| OpenAlex, citación hacia atrás | Referencias de los trabajos cercanos | 181 | 32 (por título) | 0 | Fuentes ya conocidas (Jacobs et al., 1991; Shazeer et al., 2017), ensambles de árboles para drones sin compuerta por flujo y una fusión de DNN en varios niveles para UAV en 6G (Expert Systems with Applications, 2024), revisada solo por título porque su resumen no está disponible |
+| GitHub | 6 consultas | 27 repositorios | 27 | 0 | Mezclas de expertos para intrusiones con expertos homogéneos (dmoe_nids, sparse MoE para IoT, hypergate-moe-ids, IDS-Using-MOE) y un repositorio de aprendizaje profundo sobre UAVIDS-2025; ninguno implementa un experto de escalones suaves |
+| Hugging Face Hub | 4 consultas | 1 | 1 | 0 | Sin modelos ni conjuntos de intrusiones; Papers with Code cerró en 2025 y redirige a Hugging Face |
 | Scopus | N1, N2, N5 | *(pendiente, Donny)* | | | |
 | Web of Science | N1, N2, N5 | *(pendiente, Donny)* | | | |
 
@@ -45,16 +50,27 @@
 | SkyVehiGuard-Net (2026) | Mamba + Transformer + MoE disperso + destilación; IoV | Otra arquitectura y otro problema | Mecanismo |
 | XAI en UAVIDS-2025, de árboles a híbridos (2026) | Compara árboles, redes y *stacking* (regla estándar) | Compuerta **por flujo** aprendida, con un experto neuronal de umbrales en lugar de un árbol externo; el *stacking* es una de nuestras reglas de comparación | Mecanismo |
 | EDND en salud industrial (2026) | Ensamble de árboles de decisión neuronales | Sin compuerta entre sesgos ni experto suave; otro problema | Mecanismo |
+| **PS-CAHE (Ma et al., 2026), sobre UAVIDS-2025** | Ensamble heterogéneo (XGBoost y otros) con atributos semánticos de protocolo y dos pesos de fusión elegidos fuera de muestra para los pares de clases que se confunden; F1 macro de 95,6 % en una partición por filas, y sin ventaja en una evaluación con nodos disjuntos | Compuerta **aprendida por flujo** entre un experto neuronal de escalones suaves y uno suave, entrenada de forma cooperativa y con cota de Lipschitz; PS-CAHE fija pesos por par de clases sobre modelos externos. Misma motivación (los pares que se confunden), otro mecanismo | Mecanismo y entrenamiento |
+| Switch IDS (Wang et al., 2025) | Mezcla de expertos homogéneos en un IDS por paquete para borde asistido por aeronaves, con pérdida de reparto entre nodos | La compuerta de la propuesta combina sesgos inductivos distintos para mejorar la clasificación, no para repartir carga; flujos de UAV | Mecanismo y entrenamiento |
+| Fusión XGBoost–MLP para 5G (Al-Balasmeh, 2026) | Fusión de probabilidades de un árbol y un MLP con un peso global elegido en validación | Peso **por flujo** aprendido por una compuerta, con el sesgo de umbral dentro de la red (escalones suaves) en lugar de un árbol externo | Mecanismo |
+| VG-MoE (AL-Essa et al., 2026) | Compuerta ajustada sobre predicciones fuera de muestra de expertos ya entrenados; NSL-KDD y CICIDS17 | Entrenamiento cooperativo de extremo a extremo con gradiente detenido, expertos de sesgo distinto, cota de Lipschitz; flujos de UAV | Entrenamiento y mecanismo |
 | Puigcerver et al. (2022); L2R (2026) | Robustez de la mezcla de expertos mediante Lipschitz de la compuerta y los expertos | La cota se deriva para una mezcla de probabilidades con codificador de escalones de temperatura mínima, y se aplica a intrusiones en UAV | Mecanismo (propiedad) |
 
 ## Búsqueda por citación y en repositorios de código
 
-*(Se completa el 23/11 con OpenAlex `cites:` y `referenced_works` de los tres trabajos más cercanos, y con búsquedas en GitHub, Papers with Code y Hugging Face Hub.)*
+Hecha el 23/11/2026 con `experiments/novedad/citacion_y_repositorios.py` (resultados en `exportaciones/2026-11-23_citacion_repositorios_resumen_novedad.json`).
+
+- **Hacia adelante:** obras que citan el paper guía, los tres trabajos más cercanos (*stacking* sobre UAVIDS-2025, CNN + MoE en 5G y Switch IDS) y las dos fuentes del mecanismo, filtradas por intrusiones (y por UAV en Jacobs et al., que tiene miles de citas): 56 obras. Aparecen cuatro trabajos cercanos nuevos, clasificados arriba.
+- **Hacia atrás:** referencias de esos trabajos con términos del mecanismo en el título: 32 de 181. No aparece ninguna compuerta por flujo entre sesgos distintos.
+- **Repositorios:** 27 repositorios en GitHub con seis consultas y ninguno pertinente en Hugging Face Hub. Las mezclas de expertos para intrusiones que aparecen usan expertos homogéneos y ninguna está aplicada a UAV.
+- **Evidencia convergente para el hallazgo alternativo:** PS-CAHE pierde su ventaja con nodos disjuntos, y Aksu y Gümüş (2026) muestran que las cifras altas en un benchmark público de UAV dependen de la forma de evaluar y de fugas de identificadores. Las dos refuerzan la conclusión de que en UAVIDS-2025 la partición pesa más que el modelo.
 
 ## Declaración de novedad (provisional; se confirma con Scopus, Web of Science, la búsqueda por citación y el verificador externo)
 
 Al mejor de nuestro conocimiento y según la búsqueda descrita, no se encontraron estudios que apliquen a la detección de intrusiones en redes de UAV una compuerta por flujo entre un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, entrenada con un esquema cooperativo y con cota de Lipschitz demostrada. Los trabajos más cercanos son:
 
+- PS-CAHE (2026), la fusión consciente de los pares que se confunden sobre UAVIDS-2025;
+- Switch IDS (2025), la mezcla de expertos homogéneos en un IDS para borde asistido por aeronaves;
 - la mezcla de expertos homogéneos para intrusiones en 5G (2024);
 - el estudio de *stacking* sobre UAVIDS-2025 (2026);
 - las fuentes del mecanismo (Jacobs et al., 1991; Gorishniy et al., 2022).

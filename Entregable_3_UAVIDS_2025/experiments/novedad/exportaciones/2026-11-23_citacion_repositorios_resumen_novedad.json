@@ -1,0 +1,651 @@
+{
+ "fecha": "2026-11-23",
+ "semillas": {
+  "Zeng et al. (2025), paper guía UAVIDS-2025": {
+   "openalex": "W4415222723",
+   "titulo": "UAVIDS-2025: A Benchmark Dataset for Intrusion Detection in UAV Networks Using Machine Learning Techniques",
+   "filtro hacia adelante": "intrusion",
+   "citantes filtrados": 26,
+   "citantes": [
+    {
+     "titulo": "A survey of intrusion detection datasets for communication networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1007/s10791-026-10486-2"
+    },
+    {
+     "titulo": "Federated Learning for Intrusion Detection in UAV Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.47000/tjmcs.1828534"
+    },
+    {
+     "titulo": "Quantum Machine Learning for UAV Swarm Intrusion Detection",
+     "anio": 2025,
+     "doi": "https://doi.org/10.1109/gcwkshps68340.2025.11590964"
+    },
+    {
+     "titulo": "Evaluation of Machine Learning Approaches for Intrusion Detection in UAV Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1007/978-3-032-37218-5_17"
+    },
+    {
+     "titulo": "ASSESSING LEARNING-BASED MODELS FOR INTRUSION DETECTION IN UAV NETWORKS",
+     "anio": 2026,
+     "doi": "https://doi.org/10.70102/afts.2026.1836.229"
+    },
+    {
+     "titulo": "APDQN: A DRL Model with Inter-Group Attention for UAV Intrusion Detection",
+     "anio": 2025,
+     "doi": "https://doi.org/10.1109/citce67565.2025.11360058"
+    },
+    {
+     "titulo": "UAV-CAS: A Calibrated Digital-Twin Dataset for Intrusion Detection in UAV Swarm Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.48550/arxiv.2606.17845"
+    },
+    {
+     "titulo": "A Unified ML Pipeline for Multiclass Intrusion Detection Across Enterprise Network and UAV Traffic",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/jcp6060193"
+    },
+    {
+     "titulo": "PS-CAHE: Protocol-Semantic and Confusion-Pair-Aware Fusion for UAV Intrusion Detection",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/info17100988"
+    },
+    {
+     "titulo": "FlowRAG: A Two-Stage Retrieval-Augmented Intrusion Detection System for Adaptive UAV Network Security",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/edge72783.2026.00031"
+    },
+    {
+     "titulo": "Securing UAV Swarms with Vision Transformers: A Byzantine-Robust Federated Learning Framework for Cross-Modal Intrusion Detection",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/drones10020125"
+    },
+    {
+     "titulo": "Data-Driven Intrusion Detection for UAV Networks: A Machine-Learning System for Multi-attack Recognition",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1007/978-981-92-6513-8_7"
+    },
+    {
+     "titulo": "Edge-Aware GATv2-BiLSTM Framework for Spatiotemporal Intrusion Detection in Autonomous UAV Command-and-Control Networks",
+     "anio": 2026,
+     "doi": null
+    },
+    {
+     "titulo": "XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/cits70307.2026.11637173"
+    },
+    {
+     "titulo": "FedGraph-ID: A Federated Graph Learning Framework for Intrusion Detection in UAV Networks Under Adversarial Settings",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/infocom59046.2026.11571676"
+    },
+    {
+     "titulo": "MAVLink Proxy Defense with Intrusion Detection, Safety Quarantine, and Dual-View Deception for UAV Command-and-Control",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1145/3843780.3844539"
+    },
+    {
+     "titulo": "Scalable hierarchical federated graph-transformer architecture for efficient multi-modal intrusion detection in 6G UAV-assisted vehicular IoT",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1038/s41598-026-60184-8"
+    },
+    {
+     "titulo": "HADAR-UAV: Risk-Calibrated One-Class Learning Framework for Zero-Day Intrusion Detection in Unmanned Aerial Vehicle Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.32604/cmc.2026.080874"
+    },
+    {
+     "titulo": "Certified and Adaptive Lightweight Convolutional Intrusion Detection forOn-Board UAV Network Defence in Electronic-Warfare-Contested Environments",
+     "anio": 2026,
+     "doi": "https://doi.org/10.2139/ssrn.7411186"
+    },
+    {
+     "titulo": "A Hierarchical Federated Learning Framework for Adaptive UAV Security in Smart Cities",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1016/j.trpro.2026.04.074"
+    },
+    {
+     "titulo": "Addressing Data Leakage in UAV Cyberattack Detection: A Realistic Machine Learning Benchmark",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/rast69551.2026.11672464"
+    },
+    {
+     "titulo": "Revisiting adversarial robustness in NIDS: a multi-dataset evaluation of test-time evasion attacks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1007/s10207-026-01353-8"
+    },
+    {
+     "titulo": "Adaptive Deep Reinforcement Learning for Resilient Cybersecurity in Smart-Logistics V2X Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1016/j.trpro.2026.04.082"
+    },
+    {
+     "titulo": "Port-Agnostic Anomaly Detection in Resource-Constrained UAV Networks: An Optuna-Assisted GBDT and XAI Architecture",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/idap71869.2026.11728105"
+    },
+    {
+     "titulo": "Source-Rate Representations and Attention Autoencoders for Leakage-Safe Zero-Day Sybil Detection in UAV Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/electronics15173966"
+    },
+    {
+     "titulo": "SwarmGuard: Serverless IDS for Byzantine UAV Swarms Under Dual-Layer Attack",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/cns69863.2026.11720887"
+    }
+   ],
+   "referencias": 25,
+   "referencias relacionadas con el mecanismo": [
+    {
+     "titulo": "A Hybrid Communication Scheme for Efficient and Low-Cost Deployment of Future Flying Ad-Hoc Network (FANET)",
+     "anio": 2019,
+     "doi": "https://doi.org/10.3390/drones3010016"
+    }
+   ]
+  },
+  "Zarkadis et al. (2026), XAI y stacking en UAVIDS-2025": {
+   "openalex": "W7161237262",
+   "titulo": "XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles",
+   "filtro hacia adelante": "intrusion",
+   "citantes filtrados": 3,
+   "citantes": [
+    {
+     "titulo": "PS-CAHE: Protocol-Semantic and Confusion-Pair-Aware Fusion for UAV Intrusion Detection",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/info17100988"
+    },
+    {
+     "titulo": "Explanation Trust Score for Reliable LLM Incident Reporting in IoMT",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/wimob70978.2026.11777994"
+    },
+    {
+     "titulo": "Port-Agnostic Anomaly Detection in Resource-Constrained UAV Networks: An Optuna-Assisted GBDT and XAI Architecture",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/idap71869.2026.11728105"
+    }
+   ],
+   "referencias": 30,
+   "referencias relacionadas con el mecanismo": [
+    {
+     "titulo": "Better by default: Strong pre-tuned MLPs and boosted trees on tabular data",
+     "anio": 2024,
+     "doi": "https://doi.org/10.52202/079017-0837"
+    },
+    {
+     "titulo": "EXPLAINING XGBOOST PREDICTIONS WITH SHAP VALUE: A COMPREHENSIVE GUIDE TO INTERPRETING DECISION TREE-BASED MODELS",
+     "anio": 2023,
+     "doi": "https://doi.org/10.3846/ntcs.2023.17901"
+    },
+    {
+     "titulo": "A Comparative Analysis of Ensemble‐Based Machine Learning Approaches With Explainable AI for Multi‐Class Intrusion Detection in Drone Networks",
+     "anio": 2025,
+     "doi": "https://doi.org/10.1002/spy2.70164"
+    },
+    {
+     "titulo": "Ensemble-IDS: An Ensemble Learning Framework for Enhancing AI-Based Network Intrusion Detection Tasks",
+     "anio": 2025,
+     "doi": "https://doi.org/10.3390/app151910579"
+    },
+    {
+     "titulo": "Multiple Intrusion Detection Using Shapley Additive Explanations and a Heterogeneous Ensemble Model in an Unmanned Aerial Vehicle’s Controller Area Network",
+     "anio": 2024,
+     "doi": "https://doi.org/10.3390/app14135487"
+    },
+    {
+     "titulo": "UAV Airborne Network Intrusion Detection Method Based on Improved Stratified Sampling and Ensemble Learning",
+     "anio": 2025,
+     "doi": "https://doi.org/10.3390/drones9090604"
+    },
+    {
+     "titulo": "Advanced explainable ensemble models for multi-class intrusion detection in heterogeneous drone and industrial networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1186/s13635-026-00234-w"
+    }
+   ]
+  },
+  "Wang et al. (2025), Switch IDS con mezcla de expertos": {
+   "openalex": "W4409356498",
+   "titulo": "Intelligent Intrusion Detection System With Autonomous Optimal Traffic Steering for Aerial-Aided Edge Computing",
+   "filtro hacia adelante": "intrusion",
+   "citantes filtrados": 2,
+   "citantes": [
+    {
+     "titulo": "A Lightweight Intrusion Detection and Prevention System for Smart Home Security",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/jiot.2026.3731138"
+    },
+    {
+     "titulo": "Hybrid Ensemble-based AI Intrusion Detection Framework Leveraging Sequential Deep Learning and Feature-Optimized Machine Learning for Real-Time Multi-Tier Network Threat Classification",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/icpcsn68523.2026.11544034"
+    }
+   ],
+   "referencias": 38,
+   "referencias relacionadas con el mecanismo": [
+    {
+     "titulo": "Performance and Features: Mitigating the Low-Rate TCP-Targeted DoS Attack via SDN",
+     "anio": 2021,
+     "doi": "https://doi.org/10.1109/jsac.2021.3126053"
+    },
+    {
+     "titulo": "An Intelligent Digital Twin Method Based on Spatio-Temporal Feature Fusion for IoT Attack Behavior Identification",
+     "anio": 2023,
+     "doi": "https://doi.org/10.1109/jsac.2023.3310091"
+    },
+    {
+     "titulo": "SDN/NFV-Based Security Service Function Tree for Cloud",
+     "anio": 2020,
+     "doi": "https://doi.org/10.1109/access.2020.2974569"
+    }
+   ]
+  },
+  "CNN + MoE para intrusiones en 5G (2024)": {
+   "openalex": "W7118167991",
+   "titulo": "Convolutional neural networks and mixture of experts for intrusion detection in 5G networks and beyond",
+   "filtro hacia adelante": "intrusion",
+   "citantes filtrados": 18,
+   "citantes": [
+    {
+     "titulo": "A Hybrid CNN–LSTM–Attention Framework for Intrusion Detection in Smart Mobility Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/fi18040210"
+    },
+    {
+     "titulo": "A Security-Aware and Explainable Framework for Reliable Intrusion Detection in Industrial IoT Environments",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/iccnse70788.2026.11636102"
+    },
+    {
+     "titulo": "AI-driven Intrusion Detection System for Open Radio Access Networks: A Survey",
+     "anio": 2026,
+     "doi": "https://doi.org/10.2139/ssrn.6293189"
+    },
+    {
+     "titulo": "An explainable XGBoost–MLP fusion framework for intrusion detection in 5G and beyond networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1007/s44163-026-02371-0"
+    },
+    {
+     "titulo": "Column-Wise Autoencoder Representation Learning for Intrusion Detection in Multi-MEC Edge Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/app16063055"
+    },
+    {
+     "titulo": "A Multi-Head Feature-Expert Detection framework for intrusion detection in the Internet of Medical Things",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1038/s41598-026-65467-8"
+    },
+    {
+     "titulo": "A Practical Enhancement for Intrusion Detection Systems With Validation-Gated Mixture-of-Experts (VG-MoE)",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/cai68641.2026.11536604"
+    },
+    {
+     "titulo": "Explainable Feature-Group-Aware Cross-Attentive Expert Fusion for IoMT Intrusion Detection",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/s26134293"
+    },
+    {
+     "titulo": "DEEP LEARNING-BASED INTRUSION DETECTION IN COMPUTER SYSTEMS AND NETWORKS: ADVANCES, HYBRIDS, AND CHALLENGES 2022–2026",
+     "anio": 2026,
+     "doi": "https://doi.org/10.20998/2522-9052.2026.3.09"
+    },
+    {
+     "titulo": "Benchmarking Deep Learning Architectures for Real-Time Intrusion Detection in Kubernetes-Orchestrated 5G Core Networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.64799/rebicte.v12.3"
+    },
+    {
+     "titulo": "A Fuzzy-Enhanced Cost-Aware LoRA Inference Model with Multiple Experts for Cross-Dataset Network Intrusion Detection",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/electronics15184283"
+    },
+    {
+     "titulo": "Heterogeneous Conditional Counter-Inspection: Configurable Error Control and Weak-Filter Recovery for 5G Network Intrusion Detection",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/fi18070381"
+    },
+    {
+     "titulo": "Supervised Mixture-of-Experts with Deep Neural Network Routing via Reinforcement Learning for Scalable Network Intrusion Detection Systems",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/imsa70415.2026.11700332"
+    },
+    {
+     "titulo": "Feature-Selected Machine Learning for 5G Intrusion Detection: Leakage-Aware Evaluation and Sensitivity to Sequence Metadata in 5G-NIDD",
+     "anio": 2026,
+     "doi": "https://doi.org/10.63318/waujpasv4i2_14"
+    },
+    {
+     "titulo": "LEAF: A Lightweight, Explainable, and Federated Attention Model for Trustworthy 5G Intrusion Detection Under a Leakage-Aware Benchmark",
+     "anio": 2026,
+     "doi": "https://doi.org/10.3390/jcp6060205"
+    },
+    {
+     "titulo": "Asymmetric class-conditional routing in a federated quantum mixture-of-experts improves imbalanced intrusion detection in edge industrial IoT networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1038/s41598-026-71421-5"
+    },
+    {
+     "titulo": "A Zero-Touch O-RAN Framework for Federated Few-Shot IDS with LLM-Oracle Verification",
+     "anio": 2025,
+     "doi": "https://doi.org/10.1109/globecom59602.2025.11432014"
+    },
+    {
+     "titulo": "CONSISTENT CLASSIFICATION OF NORMAL TRAFFIC AND UDP FLOOD ATTACKS IN FIFTH-GENERATION NETWORKS USING THE HYBRID AWRED METHOD",
+     "anio": 2026,
+     "doi": "https://doi.org/10.31673/2412-4338.2026.038414"
+    }
+   ],
+   "referencias": 39,
+   "referencias relacionadas con el mecanismo": [
+    {
+     "titulo": "Adaptive Mixtures of Local Experts",
+     "anio": 1991,
+     "doi": "https://doi.org/10.1162/neco.1991.3.1.79"
+    },
+    {
+     "titulo": "Kitsune: An Ensemble of Autoencoders for Online Network Intrusion Detection",
+     "anio": 2018,
+     "doi": "https://doi.org/10.14722/ndss.2018.23204"
+    },
+    {
+     "titulo": "Expert Gate: Lifelong Learning with a Network of Experts",
+     "anio": 2017,
+     "doi": "https://doi.org/10.1109/cvpr.2017.753"
+    },
+    {
+     "titulo": "A Survey on Mixture of Experts in Large Language Models",
+     "anio": 2025,
+     "doi": "https://doi.org/10.1109/tkde.2025.3554028"
+    },
+    {
+     "titulo": "Fusion of statistical importance for feature selection in Deep Neural Network-based Intrusion Detection System",
+     "anio": 2022,
+     "doi": "https://doi.org/10.1016/j.inffus.2022.09.026"
+    },
+    {
+     "titulo": "Real-time fusion multi-tier DNN-based collaborative IDPS with complementary features for secure UAV-enabled 6G networks",
+     "anio": 2024,
+     "doi": "https://doi.org/10.1016/j.eswa.2024.124215"
+    },
+    {
+     "titulo": "5G-SIID: an intelligent hybrid DDoS intrusion detector for 5G IoT networks",
+     "anio": 2024,
+     "doi": "https://doi.org/10.1007/s13042-024-02332-y"
+    },
+    {
+     "titulo": "Real-Time Clustering Based on Deep Embeddings for Threat Detection in 6G Networks",
+     "anio": 2023,
+     "doi": "https://doi.org/10.1109/access.2023.3325721"
+    },
+    {
+     "titulo": "A Deep Learning-based Malware Traffic Classifier for 5G Networks Employing Protocol-Agnostic and PCAP-to-Embeddings Techniques",
+     "anio": 2023,
+     "doi": "https://doi.org/10.1145/3590777.3590807"
+    },
+    {
+     "titulo": "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer",
+     "anio": 2017,
+     "doi": "https://doi.org/10.48550/arxiv.1701.06538"
+    }
+   ]
+  },
+  "Jacobs et al. (1991), mezcla de expertos": {
+   "openalex": "W2150884987",
+   "titulo": "Adaptive Mixtures of Local Experts",
+   "filtro hacia adelante": "intrusion AND (UAV OR drone OR FANET OR unmanned)",
+   "citantes filtrados": 1,
+   "citantes": [
+    {
+     "titulo": "Multi-modal Swarm Intelligence for Secure UAV Missions",
+     "anio": 2025,
+     "doi": "https://doi.org/10.1007/978-981-95-1050-4_6"
+    }
+   ],
+   "referencias": 13,
+   "referencias relacionadas con el mecanismo": [
+    {
+     "titulo": "A Tree-Structured Algorithm for Reducing Computation in Networks with Separable Basis Functions",
+     "anio": 1991,
+     "doi": "https://doi.org/10.1162/neco.1991.3.1.67"
+    },
+    {
+     "titulo": "A Modular Connectionist Architecture For Learning Piecewise Control Strategies",
+     "anio": 1991,
+     "doi": "https://doi.org/10.23919/acc.1991.4791648"
+    }
+   ]
+  },
+  "Gorishniy et al. (2022), codificación de atributos numéricos": {
+   "openalex": "W7133184119",
+   "titulo": "On Embeddings for Numerical Features in Tabular Deep Learning",
+   "filtro hacia adelante": "intrusion",
+   "citantes filtrados": 6,
+   "citantes": [
+    {
+     "titulo": "Feature Distribution Shift Mitigation with Contrastive Pretraining for Intrusion Detection",
+     "anio": 2024,
+     "doi": "https://doi.org/10.1109/icmlcn59089.2024.10624758"
+    },
+    {
+     "titulo": "Language Model Embedding and Boosting Ensemble Learning for Malicious Intrusion Detection",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1007/978-3-032-20897-2_70"
+    },
+    {
+     "titulo": "Retrieval‐Based Deep Hybrid Models for Robust Network Intrusion Detection",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1002/spy2.70263"
+    },
+    {
+     "titulo": "The Impact of Rotational Invariance on Tree- and Deep Learning-Based Network Intrusion Detection System",
+     "anio": 2023,
+     "doi": "https://doi.org/10.1109/rivf60135.2023.10471789"
+    },
+    {
+     "titulo": "TopoXNet: A lightweight behavior–relational context interaction model for intrusion detection in UAV networks",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1016/j.iot.2026.102156"
+    },
+    {
+     "titulo": "ARGUS: Budgeted Vehicular Intrusion Prevention via Calibrated Uncertainty and Conformal Risk Control",
+     "anio": 2026,
+     "doi": "https://doi.org/10.1109/jiot.2026.3732757"
+    }
+   ],
+   "referencias": 36,
+   "referencias relacionadas con el mecanismo": [
+    {
+     "titulo": "XGBoost: A Scalable Tree Boosting System",
+     "anio": 2016,
+     "doi": "https://doi.org/10.1145/2939672.2939785"
+    },
+    {
+     "titulo": "LightGBM: A Highly Efficient Gradient Boosting Decision Tree",
+     "anio": 2017,
+     "doi": null
+    },
+    {
+     "titulo": "CatBoost: unbiased boosting with categorical features",
+     "anio": 2018,
+     "doi": "https://doi.org/10.48550/arxiv.1706.09516"
+    },
+    {
+     "titulo": "Scaling Up the Accuracy of Naive-Bayes Classifiers : a Decision-Tree Hybrid",
+     "anio": 1996,
+     "doi": null
+    },
+    {
+     "titulo": "An Embedding Learning Framework for Numerical Features in CTR Prediction",
+     "anio": 2021,
+     "doi": "https://doi.org/10.1145/3447548.3467077"
+    },
+    {
+     "titulo": "Methods for Numeracy-Preserving Word Embeddings",
+     "anio": 2020,
+     "doi": "https://doi.org/10.18653/v1/2020.emnlp-main.384"
+    },
+    {
+     "titulo": "Comment Volume Prediction Using Neural Networks and Decision Trees",
+     "anio": 2015,
+     "doi": "https://doi.org/10.1109/uksim.2015.20"
+    },
+    {
+     "titulo": "Gradient Boosting Neural Networks: GrowNet",
+     "anio": 2020,
+     "doi": "https://doi.org/10.48550/arxiv.2002.07971"
+    },
+    {
+     "titulo": "The Tree Ensemble Layer: Differentiability meets Conditional Computation",
+     "anio": 2020,
+     "doi": "https://doi.org/10.48550/arxiv.2002.07772"
+    }
+   ]
+  }
+ },
+ "github": {
+  "mixture of experts intrusion detection": {
+   "total": 5,
+   "repositorios": [
+    {
+     "repo": "selimsidan/dmoe_nids",
+     "descripcion": "Dataset-expert mixture of experts for network intrusion detection (work in progress)",
+     "estrellas": 0
+    },
+    {
+     "repo": "Benmie2/Masters-Project_Cybersecurity",
+     "descripcion": "A LIGHTWEIGHT SPARSE MIXTURE-OF-EXPERTS FRAMEWORK FOR INTRUSION DETECTION IN RESOURCE-CONSTRAINED IOT NETWORKS.",
+     "estrellas": 0
+    },
+    {
+     "repo": "100jahidul614-sudo/hypergate-moe-ids",
+     "descripcion": "A prototype implementation of a Hypernetwork-based Mixture-of-Experts Intrusion Detection System (IDS) for IoMT environments.",
+     "estrellas": 0
+    },
+    {
+     "repo": "saarvisharma-sudo/IDS-Using-MOE",
+     "descripcion": "A Mixture-of-Experts architecture for network intrusion detection that routes traffic to specialized \"expert\" sub-models per attack category, rather than relying on a single monolithic classifier.",
+     "estrellas": 0
+    },
+    {
+     "repo": "Dhruti-aravind/FROST-IDS-Federated-Robust-Optimized-Secure-Threat-Detection-",
+     "descripcion": "FROST-IDS is a federated intrusion detection system that detects cyber threats while keeping false positives low. It uses a mixture-of-experts model and performance-weighted learning with threshold calibration to ensure reliable, real-world deployment.",
+     "estrellas": 0
+    }
+   ]
+  },
+  "gating network intrusion detection": {
+   "total": 19,
+   "repositorios": [
+    {
+     "repo": "AFAgarap/gru-svm",
+     "descripcion": "[ICMLC 2018] A Neural Network Architecture Combining Gated Recurrent Unit (GRU) and Support Vector Machine (SVM) for Intrusion Detection",
+     "estrellas": 172
+    },
+    {
+     "repo": "manojkumar-github/Intrusion-Detection-System-for-IoT-networks-using-Gated-Recurrent-Neural-Networks-GRU",
+     "descripcion": "An Intelligent Intrusion Detection System for IoT networks using Gated Recurrent Neural Networks (GRU) : A Deep Learning Approach",
+     "estrellas": 33
+    },
+    {
+     "repo": "hymoe/Intrusion-Detection-on-NSL-KDD",
+     "descripcion": "Unofficial repo of the research paper ”An Intrusion Detection System Using a Deep Neural Network with Gated Recurrent Units“. Developed using Keras, the deep learning model uses GRU / MLP.",
+     "estrellas": 32
+    },
+    {
+     "repo": "wuhustfu/TSIDS",
+     "descripcion": "This is for \"TSIDS: Spatial-temporal Fusion gating Multilayer Perceptron for Network Intrusion Detection\"",
+     "estrellas": 5
+    },
+    {
+     "repo": "xmtx2002/Cost-Aware-Confidence-Gated-Two-Stage-Network-Intrusion-Detection",
+     "descripcion": "Cost-Aware Confidence-Gated Two-Stage Network Intrusion Detection",
+     "estrellas": 1
+    },
+    {
+     "repo": "anuvarghese007/Deep-learning-based-IDS",
+     "descripcion": "Intrusion detection model using Gated Recurrent Unit (GRU) neural network by first selecting features based on Random Forest algorithm along with sequential forward feature selection",
+     "estrellas": 4
+    },
+    {
+     "repo": "Rabas-dev/Detection-of-Network-Intrusions-Using-Deep-Learning-Techniques",
+     "descripcion": "Deep-learning network intrusion detection dashboard (FastAPI + PyTorch), built as a software-quality-engineering case study with full test layering, CI, and ISO/IEC 25010 quality gates.",
+     "estrellas": 0
+    },
+    {
+     "repo": "yacerak/Deep-Learning-Based-Network-Intrusion-Detection-System-on-CICIDS2017",
+     "descripcion": "A progressive, multi-architecture framework for network intrusion detection combining Variational Autoencoders (VAE), LightGBM, a hierarchical gated ensemble, and CatBoost–MLP knowledge distillation on the CICIDS-2017 benchmark dataset.",
+     "estrellas": 0
+    },
+    {
+     "repo": "KostasEreksonas/Intrusion-Detection-on-NSL-KDD",
+     "descripcion": "Unofficial repo of the research paper ”An Intrusion Detection System Using a Deep Neural Network with Gated Recurrent Units“. Developed using Keras, the deep learning model uses GRU / MLP.",
+     "estrellas": 1
+    },
+    {
+     "repo": "Abiven-18/Self-Adaptive-IDS",
+     "descripcion": "Neural Gating Mechanism for Domain-Adaptive Network Intrusion Detection via Uncertainty-Penalised Contextual Bandit Arm Selection",
+     "estrellas": 0
+    }
+   ]
+  },
+  "UAVIDS-2025": {
+   "total": 2,
+   "repositorios": [
+    {
+     "repo": "FeisalAlaswad/UAVIDS2025",
+     "descripcion": "Deep learning intrusion detection on the UAVIDS-2025 dataset.",
+     "estrellas": 0
+    },
+    {
+     "repo": "DTL-DA/proyecto-uavids-2025",
+     "descripcion": null,
+     "estrellas": 0
+    }
+   ]
+  },
+  "UAV intrusion detection mixture": {
+   "total": 0,
+   "repositorios": []
+  },
+  "soft decision tree intrusion detection": {
+   "total": 1,
+   "repositorios": [
+    {
+     "repo": "marialindagomes/Hybrid-Ensemble-Network-IDS-CICIDS2017",
+     "descripcion": "This study proposes a hybrid Intrusion Detection System on the CICIDS2017 dataset using a soft-voting ensemble of Logistic Regression, Decision Tree, Random Forest, and XGBoost. Enhanced by feature selection and SMOTE, the model achieves 99.64% accuracy, precision, recall, and F1-score, outperforming single models with minimal false alarms.",
+     "estrellas": 0
+    }
+   ]
+  },
+  "drone intrusion detection gated": {
+   "total": 0,
+   "repositorios": []
+  }
+ },
+ "huggingface": {
+  "intrusion detection mixture of experts": {
+   "models": [],
+   "datasets": []
+  },
+  "UAVIDS": {
+   "models": [
+    "stelios93/uavid-scene-parse-150-lora"
+   ],
+   "datasets": []
+  },
+  "UAV intrusion detection": {
+   "models": [],
+   "datasets": []
+  },
+  "drone intrusion": {
+   "models": [],
+   "datasets": []
+  }
+ }
+}
