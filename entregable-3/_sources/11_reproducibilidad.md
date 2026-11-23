@@ -30,7 +30,7 @@ RAIZ = Path("..").resolve()
 | Rangos de hiperparámetros | lr ∈ {10⁻⁴, 3·10⁻⁴, 10⁻³, 3·10⁻³}, weight_decay ∈ {0, 10⁻⁵, 10⁻⁴}, lote ∈ {128, 256, 512}: las mismas 12 configuraciones para todos los modelos profundos | `configuracion/experimento.json` del E2 |
 | Número de ejecuciones y dispersión | De 20 a 48 semillas por modelo en el problema principal y 10 en cada conjunto adicional; media ± DE e IC 95 % | Capítulos 3, 7 y 8 |
 | Datos | UAVIDS-2025 (Zenodo, CC BY 4.0) verificado con SHA-256; tres conjuntos adicionales con procedencia, licencia y SHA-256 | `data/procedencia_conjuntos_adicionales.md` |
-| Código | Repositorio de GitHub `DTL-DA/proyecto-uavids-2025`, rama `entregable-3`, etiquetas `e3-estandar` y `e3-protocolo` | Raíz del repositorio |
+| Código | Repositorio de GitHub `DTL-DA/proyecto-uavids-2025`, rama `entregable-3`, etiquetas `e3-estandar` y `e3-protocolo`. Licencia MIT, confirmada por el autor el 23/11/2026; los datos conservan sus licencias (`DATA_STATEMENT.md`) | Raíz del repositorio, `LICENSE` |
 | Contenedor | `Dockerfile` (python:3.13-slim con `requirements-train.txt`) | `Entregable_3_UAVIDS_2025/Dockerfile` |
 | Integración continua | GitHub Actions ejecuta `pytest` en cada *push* | `.github/workflows/entregable3-pruebas.yml` |
 
@@ -60,13 +60,15 @@ La *release* `entregable-3` del repositorio de GitHub se archiva en Zenodo, que 
 
 ## Reproducción independiente
 
-La reproducción la hace **Imera Logreira**, colega que no participó en el diseño ni en el código, en su propio equipo y sin ayuda técnica del autor. Recibe el paquete `paquete_reproduccion_e3.zip`, que contiene el repositorio, el CSV de UAVIDS-2025 y las probabilidades de prueba de las corridas definitivas, junto con su SHA-256, y sigue la guía `verificacion_externa/GUIA.md`:
+La reproducción por una persona ajena al código, que piden las secciones 11 y 14.5.7 del enunciado, no se hizo, y se declara como limitación (capítulo 10). El procedimiento queda listo para que lo repita cualquier persona, incluidos los profesores al calificar, con los pasos de la sección "Cómo reproducirlo" del `README.md` del Entregable 3:
 
-1. construye el contenedor con el `Dockerfile`;
-2. ejecuta `python verificacion_externa/reproducir.py`, que verifica el SHA-256 de los datos y de la prueba sellada, vuelve a correr el análisis confirmatorio y compara celda por celda la tabla regenerada con la publicada (capítulo 7). También reentrena desde cero tres corridas definitivas (Original, LightGBM y CNN 1D con la semilla 6001) y compara su F1 y sus probabilidades;
-3. corre las pruebas unitarias, compila este libro desde cero y hace la prueba de humo del dashboard.
+1. construir el contenedor con el `Dockerfile`;
+2. ejecutar `python verificacion_externa/reproducir.py`, que verifica el SHA-256 de los datos y de la prueba sellada, vuelve a correr el análisis confirmatorio y compara celda por celda la tabla regenerada con la publicada (capítulo 7). También reentrena desde cero tres corridas definitivas (Original, LightGBM y CNN 1D con la semilla 6001) y compara su F1 y sus probabilidades;
+3. correr las pruebas unitarias, compilar este libro desde cero y hacer la prueba de humo del dashboard.
 
-Su reporte firmado (`verificacion_externa/reporte_reproduccion.md`), con la discrepancia máxima observada, y su concepto sobre la novedad (`verificacion_externa/concepto_novedad.md`, capítulo 4) se anexan aquí.
+El script necesita las probabilidades de prueba de las corridas definitivas, que no se versionan por su tamaño. Vienen, junto con el repositorio y el CSV de UAVIDS-2025, en `paquete_reproduccion_e3.zip`, que se publica con la *release* `entregable-3`.
+
+La corrida del autor con ese script (22/11/2026, Python 3.13.14 y PyTorch 2.6.0 en CPU, 10,4 minutos) encontró los datos íntegros, una discrepancia máxima de 0 en las 465 celdas de la tabla principal, ninguna decisión distinta y el mismo F1, bit a bit, en las tres corridas reentrenadas. Así mismo, el contenedor se construyó en frío desde el paquete de reproducción el 23/11/2026, y en él pasaron las 36 pruebas unitarias y arrancó el dashboard. Esto muestra que el procedimiento funciona de principio a fin, pero no reemplaza la verificación de un tercero.
 
 ## Declaración de autoría, contribuciones y uso de herramientas
 
@@ -76,12 +78,14 @@ Su reporte firmado (`verificacion_externa/reporte_reproduccion.md`), con la disc
 
 - escribir y depurar el código del modelo, las pruebas, el análisis y el dashboard;
 - ejecutar los experimentos según el protocolo preregistrado;
-- buscar en OpenAlex y arXiv;
+- buscar en OpenAlex, arXiv e IEEE Xplore, y hacer la búsqueda por citación y en repositorios de código;
 - redactar borradores de este libro.
+
+**Otras herramientas y servicios.** RunPod (GPU en la nube) para 31 corridas de BiLSTM y GRU de los conjuntos adicionales; GitHub Actions para la integración continua; GitHub Pages para publicar este libro y Render para el dashboard.
 
 Todas las decisiones metodológicas quedaron registradas con fecha en `design_log.md`, `protocolo.md` y el historial de Git. Las cifras del libro se regeneran desde los resultados al compilarlo. El autor revisó el código y el texto, y puede explicar y modificar en vivo cualquier parte del algoritmo, como exige la sección 6.5 del enunciado.
 
-Firma: ______________________ Donny Torres
+Firma: **Donny Torres**, autor, aprobada el 23/11/2026.
 
 ## Bibliografía
 

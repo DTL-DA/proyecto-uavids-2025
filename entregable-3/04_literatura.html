@@ -410,7 +410,7 @@
 </div>
 <section id="cadenas-de-busqueda">
 <h2>Cadenas de búsqueda<a class="headerlink" href="#cadenas-de-busqueda" title="Link to this heading">#</a></h2>
-<p>Se usaron siete cadenas, que combinan el mecanismo con el problema de aplicación, buscan el mecanismo en otras aplicaciones para ubicar su origen, buscan el origen de la propiedad demostrada e incluyen sinónimos en español. La primera consulta se hizo el 22/11/2026 en OpenAlex y arXiv, por programa (<code class="docutils literal notranslate"><span class="pre">experiments/novedad/buscar_novedad.py</span></code>). El 23/11/2026 se agregaron IEEE Xplore (N1) y la búsqueda por citación y en repositorios de código (<code class="docutils literal notranslate"><span class="pre">experiments/novedad/citacion_y_repositorios.py</span></code>). La búsqueda completa se repite antes de la entrega.</p>
+<p>Se usaron siete cadenas, que combinan el mecanismo con el problema de aplicación, buscan el mecanismo en otras aplicaciones para ubicar su origen, buscan el origen de la propiedad demostrada e incluyen sinónimos en español. La primera consulta se hizo el 22/11/2026 en OpenAlex y arXiv, por programa (<code class="docutils literal notranslate"><span class="pre">experiments/novedad/buscar_novedad.py</span></code>). El 23/11/2026 se agregaron IEEE Xplore (N1) y la búsqueda por citación y en repositorios de código (<code class="docutils literal notranslate"><span class="pre">experiments/novedad/citacion_y_repositorios.py</span></code>). La búsqueda completa se repitió el 23/11/2026 con el mismo programa, y los conteos coinciden con los del 22/11 salvo OpenAlex N7, que pasa de 22 a 23 por BRIDGE (ICML 2025), una mezcla de expertos en un modelo fundacional de grafos que trata otro problema y no cambia la declaración.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -429,7 +429,7 @@
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fecha de la consulta: 2026-11-22
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fecha de la consulta: 2026-11-23
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -496,7 +496,7 @@
       <th>5</th>
       <td>N7</td>
       <td>"Lipschitz" AND ("mixture of experts" OR "gating network")</td>
-      <td>22</td>
+      <td>23</td>
       <td>13</td>
     </tr>
     <tr>
@@ -714,20 +714,56 @@
     <tr>
       <th>17</th>
       <td>Scopus</td>
-      <td>N1, N2, N5</td>
-      <td>*(pendiente, Donny)*</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>N1</td>
+      <td>4</td>
+      <td>4</td>
+      <td>3</td>
+      <td>23/11/2026. SkyVehiGuard-Net (duplicado de OpenAlex) y la fusión con compuerta de ICIMA 2026 (duplicado de IEEE Xplore). Dos registros son actas de congreso que coinciden por términos de trabajos distintos: las de PRCV 2025 no son pertinentes; las de ICCUBEA 2026 contienen un trabajo nuevo, una ...</td>
     </tr>
     <tr>
       <th>18</th>
+      <td>Scopus</td>
+      <td>N2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>23/11/2026. (a) U-Flow MoE-IDS (Bhaskaran et al., ICCUBEA 2026), el trabajo de las actas de N1, ahora con registro y resumen propios. (b) ACGE (Abdelnaby, *Symmetry*, 2026), nuevo: compuerta aprendida por muestra entre LightGBM y un Transformer para intrusiones en fog-IoT; es el trabajo más cerc...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Scopus</td>
+      <td>N5</td>
+      <td>28</td>
+      <td>28</td>
+      <td>4</td>
+      <td>23/11/2026. 18 registros son actas de congreso que coinciden por términos de trabajos distintos; se revisan por la lista de títulos y solo traen una revisión de ciberseguridad en UAV y un IDS para UAV con aprendizaje por refuerzo, sin fusión de árboles y redes. De los 10 trabajos restantes, 7 ya...</td>
+    </tr>
+    <tr>
+      <th>20</th>
       <td>Web of Science</td>
-      <td>N1, N2, N5</td>
-      <td>*(pendiente, Donny)*</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>N1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>23/11/2026. SkyVehiGuard-Net, duplicado de OpenAlex y Scopus</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Web of Science</td>
+      <td>N2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>23/11/2026. ACGE, duplicado de Scopus; U-Flow MoE-IDS no está indexado</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Web of Science</td>
+      <td>N5</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>23/11/2026. Los tres ya estaban en OpenAlex y Scopus; el relevante es el de los ensambles explicables en redes de drones. Web of Science no agrega trabajos nuevos</td>
     </tr>
   </tbody>
 </table>
@@ -846,6 +882,27 @@
     </tr>
     <tr>
       <th>10</th>
+      <td>**ACGE (Abdelnaby, 2026), en fog-IoT**</td>
+      <td>Regresión logística sobre cuatro rasgos de la salida del LightGBM (probabilidad máxima, entropía, indicador de clase minoritaria y distancia a los centroides de sus hojas) que da un peso continuo para mezclar las probabilidades del LightGBM y de un Transformer que recibe 5 flujos consecutivos. S...</td>
+      <td>El experto de umbrales de la propuesta es neuronal y diferenciable (escalones suaves con umbrales aprendibles), no un LightGBM externo; la compuerta ve el flujo y no rasgos de confianza de un modelo, y se entrena con los expertos bajo el esquema cooperativo, no después y por separado; la mezcla ...</td>
+      <td>Mecanismo y entrenamiento</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>U-Flow MoE-IDS (Bhaskaran et al., ICCUBEA 2026)</td>
+      <td>Un experto por conjunto de datos (NSL-KDD, CICIDS2017, Bot-IoT) sobre un esquema común de atributos del flujo, entrenados en Apache Spark, y un metaaprendiz de regresión logística por *stacking* que fusiona sus predicciones; Macro-F1 entre 0,477 y 0,902 al dejar un conjunto por fuera</td>
+      <td>La compuerta de la propuesta elige por flujo entre sesgos inductivos distintos dentro de un mismo conjunto y se entrena de forma cooperativa con los expertos; el *stacking* es una de nuestras reglas de comparación; cota de Lipschitz; flujos de UAV</td>
+      <td>Mecanismo y entrenamiento</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Hedfi et al. (IC3IT 2026), enjambres de UAV</td>
+      <td>Tres detectores en paralelo: desvío de trayectoria, Random Forest sobre el tráfico y LSTM para ataques de varios pasos; el Random Forest es el mejor (94,4 % de exactitud)</td>
+      <td>No hay compuerta ni fusión aprendida entre los detectores; la propuesta pondera por flujo dos expertos de sesgo distinto</td>
+      <td>Mecanismo</td>
+    </tr>
+    <tr>
+      <th>13</th>
       <td>Puigcerver et al. (2022); L2R (2026)</td>
       <td>Robustez de la mezcla de expertos mediante Lipschitz de la compuerta y los expertos</td>
       <td>La cota se deriva para una mezcla de probabilidades con codificador de escalones de temperatura mínima, y se aplica a intrusiones en UAV</td>
@@ -855,24 +912,25 @@
 </table>
 </div></div></div>
 </div>
-<p><strong>Las siete cadenas devuelven pocos registros: 3 para la mezcla de expertos aplicada a intrusiones en UAV en OpenAlex, 2 en IEEE Xplore, ninguno en arXiv ni en español, y 13 para los híbridos de árboles y redes en UAV. La búsqueda por citación sobre 56 obras que citan a los trabajos más cercanos y los 27 repositorios de código revisados agregan cuatro trabajos cercanos, pero ninguno combina un experto de escalones suaves con uno suave mediante una compuerta aprendida por flujo.</strong></p>
-<p>Así mismo, el trabajo más cercano en el problema, el estudio de UAVIDS-2025 de <span class="bibtex-citation" id="id1">Zarkadis and Douligeris [<a class="reference internal" href="11_reproducibilidad.html#id99" title="Iakovos-Christos Zarkadis and Christos Douligeris. XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles. In International Conference on Computer, Information and Telecommunication Systems, 1–8. 2026. doi:10.1109/cits70307.2026.11637173.">2026</a>]</span>, compara árboles, redes y <em>stacking</em>, que es una regla de fusión estándar y una de las reglas contra las que se contrasta la compuerta propia, y llega por otro camino a la misma limitación: Blackhole y Wormhole comparten el soporte de su distribución. El trabajo más cercano en la motivación es PS-CAHE <span class="bibtex-citation" id="id2">[<a class="reference internal" href="11_reproducibilidad.html#id121" title="Ting Ma, ZheXin Miao, Nongtian Chen, and Peng Chen. PS-CAHE: Protocol-Semantic and Confusion-Pair-Aware Fusion for UAV Intrusion Detection. Information, 17(10):988, 2026. doi:10.3390/info17100988.">Ma <em>et al.</em>, 2026</a>]</span>, que sobre UAVIDS-2025 fija pesos de fusión para los pares de clases que se confunden; lo hace con pesos por par de clases sobre modelos externos, no con una compuerta aprendida por flujo, y su ventaja desaparece con nodos disjuntos. Los más cercanos en el mecanismo usan mezclas de expertos homogéneos: para intrusiones en 5G (arXiv 2412.03483), con enrutamiento disperso, y en Switch IDS <span class="bibtex-citation" id="id3">[<a class="reference internal" href="11_reproducibilidad.html#id120" title="Weilin Wang, Qi Xu, Huachun Zhou, Ruyun Zhang, and Keping Long. Intelligent Intrusion Detection System With Autonomous Optimal Traffic Steering for Aerial-Aided Edge Computing. IEEE Internet of Things Journal, 12(13):25849, 2025. doi:10.1109/jiot.2025.3559902.">Wang <em>et al.</em>, 2025</a>]</span>, para repartir el tráfico entre nodos de borde asistidos por aeronaves. La fusión de XGBoost y un MLP con un peso global <span class="bibtex-citation" id="id4">[<a class="reference internal" href="11_reproducibilidad.html#id122" title="Hani Al-Balasmeh. An explainable XGBoost–MLP fusion framework for intrusion detection in 5G and beyond networks. Discover Artificial Intelligence, 6:1573, 2026. doi:10.1007/s44163-026-02371-0.">Al-Balasmeh, 2026</a>]</span> y la compuerta ajustada fuera de muestra <span class="bibtex-citation" id="id5">[<a class="reference internal" href="11_reproducibilidad.html#id123" title="Malik AL-Essa, Wasim A. Ali, Michèle Roccotelli, and Maria Pia Fanti. A Practical Enhancement for Intrusion Detection Systems With Validation-Gated Mixture-of-Experts (VG-MoE). In IEEE Conference on Artificial Intelligence (CAI). 2026. doi:10.1109/cai68641.2026.11536604.">AL-Essa <em>et al.</em>, 2026</a>]</span> completan el grupo. En todos los casos la diferencia es de mecanismo o de esquema de entrenamiento, que son las dos categorías que sustentan R1.</p>
-<p>Por lo anterior, conviene declarar la novedad en los términos de la sección siguiente, con OpenAlex, IEEE Xplore y arXiv como las tres bases de la sección 6.3 del enunciado, y dejarla sujeta a la confirmación de Scopus y del verificador externo.</p>
+<p><strong>Las siete cadenas devuelven pocos registros: para la mezcla de expertos aplicada a intrusiones en UAV (N1), 3 en OpenAlex, 2 en IEEE Xplore, 4 en Scopus, 1 en Web of Science y ninguno en arXiv ni en español; para los híbridos de árboles y redes en UAV (N5), 13 en OpenAlex, 28 en Scopus, de los cuales 18 son actas de congreso, y 3 en Web of Science. La búsqueda por citación sobre 56 obras que citan a los trabajos más cercanos, los 27 repositorios de código revisados y las cadenas N1, N2 y N5 en Scopus agregan siete trabajos cercanos, y Web of Science solo devuelve trabajos ya encontrados; ninguno combina un experto de escalones suaves con uno suave mediante una compuerta aprendida por flujo.</strong></p>
+<p>Así mismo, el trabajo más cercano en el problema, el estudio de UAVIDS-2025 de <span class="bibtex-citation" id="id1">Zarkadis and Douligeris [<a class="reference internal" href="11_reproducibilidad.html#id99" title="Iakovos-Christos Zarkadis and Christos Douligeris. XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles. In International Conference on Computer, Information and Telecommunication Systems, 1–8. 2026. doi:10.1109/cits70307.2026.11637173.">2026</a>]</span>, compara árboles, redes y <em>stacking</em>, que es una regla de fusión estándar y una de las reglas contra las que se contrasta la compuerta propia, y llega por otro camino a la misma limitación: Blackhole y Wormhole comparten el soporte de su distribución. El trabajo más cercano en la motivación es PS-CAHE <span class="bibtex-citation" id="id2">[<a class="reference internal" href="11_reproducibilidad.html#id121" title="Ting Ma, ZheXin Miao, Nongtian Chen, and Peng Chen. PS-CAHE: Protocol-Semantic and Confusion-Pair-Aware Fusion for UAV Intrusion Detection. Information, 17(10):988, 2026. doi:10.3390/info17100988.">Ma <em>et al.</em>, 2026</a>]</span>, que sobre UAVIDS-2025 fija pesos de fusión para los pares de clases que se confunden; lo hace con pesos por par de clases sobre modelos externos, no con una compuerta aprendida por flujo, y su ventaja desaparece con nodos disjuntos. El más cercano en el mecanismo es ACGE <span class="bibtex-citation" id="id3">[<a class="reference internal" href="11_reproducibilidad.html#id124" title="Khalil M. Abdelnaby. A Systematic Multi-Paradigm Evaluation Framework for Network Intrusion Detection in Fog-IoT Environments: Deep Learning, Transformer, and Ensemble Methods Across Deployment Tiers. Symmetry, 18(9):1438, 2026. doi:10.3390/sym18091438.">Abdelnaby, 2026</a>]</span>, que en redes fog-IoT pondera por muestra un LightGBM y un Transformer con una regresión logística sobre cuatro rasgos de confianza del LightGBM, ajustada en validación después de entrenar los dos modelos; el mismo autor la presenta como una adaptación del <em>stacking</em> y de la mezcla de expertos, no como un mecanismo nuevo. Sin embargo, su experto de umbrales es un árbol externo, que no se entrena por gradiente y es discontinuo, mientras que la propuesta lleva el sesgo de umbral dentro de la red con escalones suaves, su compuerta ve el flujo, se entrena con los expertos bajo el esquema cooperativo y la pendiente de la mezcla queda acotada. Le siguen las mezclas de expertos homogéneos: para intrusiones en 5G (arXiv 2412.03483), con enrutamiento disperso, y en Switch IDS <span class="bibtex-citation" id="id4">[<a class="reference internal" href="11_reproducibilidad.html#id120" title="Weilin Wang, Qi Xu, Huachun Zhou, Ruyun Zhang, and Keping Long. Intelligent Intrusion Detection System With Autonomous Optimal Traffic Steering for Aerial-Aided Edge Computing. IEEE Internet of Things Journal, 12(13):25849, 2025. doi:10.1109/jiot.2025.3559902.">Wang <em>et al.</em>, 2025</a>]</span>, para repartir el tráfico entre nodos de borde asistidos por aeronaves. La fusión de XGBoost y un MLP con un peso global <span class="bibtex-citation" id="id5">[<a class="reference internal" href="11_reproducibilidad.html#id122" title="Hani Al-Balasmeh. An explainable XGBoost–MLP fusion framework for intrusion detection in 5G and beyond networks. Discover Artificial Intelligence, 6:1573, 2026. doi:10.1007/s44163-026-02371-0.">Al-Balasmeh, 2026</a>]</span>, la compuerta ajustada fuera de muestra <span class="bibtex-citation" id="id6">[<a class="reference internal" href="11_reproducibilidad.html#id123" title="Malik AL-Essa, Wasim A. Ali, Michèle Roccotelli, and Maria Pia Fanti. A Practical Enhancement for Intrusion Detection Systems With Validation-Gated Mixture-of-Experts (VG-MoE). In IEEE Conference on Artificial Intelligence (CAI). 2026. doi:10.1109/cai68641.2026.11536604.">AL-Essa <em>et al.</em>, 2026</a>]</span> y la mezcla de un experto por conjunto de datos con <em>stacking</em> de U-Flow MoE-IDS <span class="bibtex-citation" id="id7">[<a class="reference internal" href="11_reproducibilidad.html#id125" title="Hariharan Bhaskaran, K. Dhanya Sri, L. Jeevan Kumar, and B. P. Sreeja. A Distributed Mixture-of-Experts Framework for Cross-Dataset Intrusion Detection Using a Universal Flow Representation. In 10th International Conference on Computing, Communication, Control and Automation (ICCUBEA). 2026. doi:10.1109/ICCUBEA69821.2026.11701822.">Bhaskaran <em>et al.</em>, 2026</a>]</span> completan el grupo. En todos los casos la diferencia es de mecanismo o de esquema de entrenamiento, que son las dos categorías que sustentan R1.</p>
+<p>Por lo anterior, conviene declarar la novedad en los términos de la sección siguiente, con OpenAlex, IEEE Xplore y arXiv como las tres bases de la sección 6.3 del enunciado y Scopus y Web of Science como confirmación.</p>
 </section>
 <section id="declaracion-de-novedad">
 <h2>Declaración de novedad<a class="headerlink" href="#declaracion-de-novedad" title="Link to this heading">#</a></h2>
 <p>Al mejor de nuestro conocimiento y según la búsqueda descrita, no se encontraron estudios que apliquen a la detección de intrusiones en redes de UAV una compuerta por flujo entre un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, entrenada con un esquema cooperativo y con cota de Lipschitz demostrada.</p>
 <p>Los trabajos más cercanos, y la diferencia de cada uno con la propuesta, son:</p>
 <ul class="simple">
-<li><p><strong>PS-CAHE sobre UAVIDS-2025</strong> <span class="bibtex-citation" id="id6">[<a class="reference internal" href="11_reproducibilidad.html#id121" title="Ting Ma, ZheXin Miao, Nongtian Chen, and Peng Chen. PS-CAHE: Protocol-Semantic and Confusion-Pair-Aware Fusion for UAV Intrusion Detection. Information, 17(10):988, 2026. doi:10.3390/info17100988.">Ma <em>et al.</em>, 2026</a>]</span>: comparte la motivación, que son los pares de clases que se confunden, pero fija pesos de fusión por par sobre modelos externos; la propuesta aprende una compuerta por flujo entre dos expertos internos de sesgo distinto, con entrenamiento cooperativo.</p></li>
-<li><p><strong>Switch IDS</strong> <span class="bibtex-citation" id="id7">[<a class="reference internal" href="11_reproducibilidad.html#id120" title="Weilin Wang, Qi Xu, Huachun Zhou, Ruyun Zhang, and Keping Long. Intelligent Intrusion Detection System With Autonomous Optimal Traffic Steering for Aerial-Aided Edge Computing. IEEE Internet of Things Journal, 12(13):25849, 2025. doi:10.1109/jiot.2025.3559902.">Wang <em>et al.</em>, 2025</a>]</span> <strong>y la mezcla de expertos para intrusiones en 5G:</strong> usan expertos homogéneos; la propuesta difiere en el mecanismo y en el esquema de entrenamiento.</p></li>
-<li><p><strong>El estudio de <em>stacking</em> sobre UAVIDS-2025</strong> <span class="bibtex-citation" id="id8">[<a class="reference internal" href="11_reproducibilidad.html#id99" title="Iakovos-Christos Zarkadis and Christos Douligeris. XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles. In International Conference on Computer, Information and Telecommunication Systems, 1–8. 2026. doi:10.1109/cits70307.2026.11637173.">Zarkadis and Douligeris, 2026</a>]</span>: difiere en el mecanismo, porque la propuesta reemplaza una regla de fusión estándar por una compuerta aprendida por flujo.</p></li>
-<li><p><strong>Las fuentes de las piezas</strong> <span class="bibtex-citation" id="id9">[<a class="reference internal" href="11_reproducibilidad.html#id107" title="Yury Gorishniy, Ivan Rubachev, and Artem Babenko. On Embeddings for Numerical Features in Tabular Deep Learning. In Advances in Neural Information Processing Systems 35. 2022. doi:10.48550/arXiv.2203.05556.">Gorishniy <em>et al.</em>, 2022</a>, <a class="reference internal" href="11_reproducibilidad.html#id106" title="Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, and Geoffrey E. Hinton. Adaptive Mixtures of Local Experts. Neural Computation, 3(1):79–87, 1991. doi:10.1162/neco.1991.3.1.79.">Jacobs <em>et al.</em>, 1991</a>]</span>: las cuatro modificaciones algorítmicas están en <code class="docutils literal notranslate"><span class="pre">experiments/procedencia.md</span></code>.</p></li>
+<li><p><strong>PS-CAHE sobre UAVIDS-2025</strong> <span class="bibtex-citation" id="id8">[<a class="reference internal" href="11_reproducibilidad.html#id121" title="Ting Ma, ZheXin Miao, Nongtian Chen, and Peng Chen. PS-CAHE: Protocol-Semantic and Confusion-Pair-Aware Fusion for UAV Intrusion Detection. Information, 17(10):988, 2026. doi:10.3390/info17100988.">Ma <em>et al.</em>, 2026</a>]</span>: comparte la motivación, que son los pares de clases que se confunden, pero fija pesos de fusión por par sobre modelos externos; la propuesta aprende una compuerta por flujo entre dos expertos internos de sesgo distinto, con entrenamiento cooperativo.</p></li>
+<li><p><strong>ACGE en fog-IoT</strong> <span class="bibtex-citation" id="id9">[<a class="reference internal" href="11_reproducibilidad.html#id124" title="Khalil M. Abdelnaby. A Systematic Multi-Paradigm Evaluation Framework for Network Intrusion Detection in Fog-IoT Environments: Deep Learning, Transformer, and Ensemble Methods Across Deployment Tiers. Symmetry, 18(9):1438, 2026. doi:10.3390/sym18091438.">Abdelnaby, 2026</a>]</span>: es el más cercano en el mecanismo, porque pondera por muestra un árbol (LightGBM) y un Transformer con una compuerta aprendida; la propuesta reemplaza el árbol externo por un experto neuronal de escalones suaves, lo que permite entrenar la compuerta y los expertos de forma cooperativa y demostrar una cota de Lipschitz para la mezcla, que con un árbol discontinuo no existe.</p></li>
+<li><p><strong>Switch IDS</strong> <span class="bibtex-citation" id="id10">[<a class="reference internal" href="11_reproducibilidad.html#id120" title="Weilin Wang, Qi Xu, Huachun Zhou, Ruyun Zhang, and Keping Long. Intelligent Intrusion Detection System With Autonomous Optimal Traffic Steering for Aerial-Aided Edge Computing. IEEE Internet of Things Journal, 12(13):25849, 2025. doi:10.1109/jiot.2025.3559902.">Wang <em>et al.</em>, 2025</a>]</span> <strong>y la mezcla de expertos para intrusiones en 5G:</strong> usan expertos homogéneos; la propuesta difiere en el mecanismo y en el esquema de entrenamiento.</p></li>
+<li><p><strong>El estudio de <em>stacking</em> sobre UAVIDS-2025</strong> <span class="bibtex-citation" id="id11">[<a class="reference internal" href="11_reproducibilidad.html#id99" title="Iakovos-Christos Zarkadis and Christos Douligeris. XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles. In International Conference on Computer, Information and Telecommunication Systems, 1–8. 2026. doi:10.1109/cits70307.2026.11637173.">Zarkadis and Douligeris, 2026</a>]</span>: difiere en el mecanismo, porque la propuesta reemplaza una regla de fusión estándar por una compuerta aprendida por flujo.</p></li>
+<li><p><strong>Las fuentes de las piezas</strong> <span class="bibtex-citation" id="id12">[<a class="reference internal" href="11_reproducibilidad.html#id107" title="Yury Gorishniy, Ivan Rubachev, and Artem Babenko. On Embeddings for Numerical Features in Tabular Deep Learning. In Advances in Neural Information Processing Systems 35. 2022. doi:10.48550/arXiv.2203.05556.">Gorishniy <em>et al.</em>, 2022</a>, <a class="reference internal" href="11_reproducibilidad.html#id106" title="Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, and Geoffrey E. Hinton. Adaptive Mixtures of Local Experts. Neural Computation, 3(1):79–87, 1991. doi:10.1162/neco.1991.3.1.79.">Jacobs <em>et al.</em>, 1991</a>]</span>: las cuatro modificaciones algorítmicas están en <code class="docutils literal notranslate"><span class="pre">experiments/procedencia.md</span></code>.</p></li>
 </ul>
 </section>
 <section id="verificacion-por-un-tercero">
 <h2>Verificación por un tercero<a class="headerlink" href="#verificacion-por-un-tercero" title="Link to this heading">#</a></h2>
-<p><strong>Imera Logreira</strong>, colega ajena al diseño, repite las cadenas N1 y N5 en OpenAlex (y en Scopus si tiene acceso) antes de ver nuestra matriz, anota la fecha, el número de resultados y el trabajo más parecido, y confirma o refuta la declaración en el formato <code class="docutils literal notranslate"><span class="pre">verificacion_externa/concepto_novedad.md</span></code>. Su concepto firmado se anexa en el capítulo 11.</p>
+<p>Los profesores del curso indicaron el 23/11/2026 que esta verificación queda a su cargo, por lo que se omite en el informe. Para facilitarla, las cadenas exactas están en <code class="docutils literal notranslate"><span class="pre">experiments/novedad/buscar_novedad.py</span></code> (OpenAlex y arXiv) y en <code class="docutils literal notranslate"><span class="pre">experiments/novedad/cadenas_scopus_wos.md</span></code> (Scopus, Web of Science y los enlaces directos de OpenAlex para N1 y N5), y los conteos de cada consulta, con su fecha, en <code class="docutils literal notranslate"><span class="pre">experiments/novedad/exportaciones/</span></code>.</p>
 </section>
 </section>
 

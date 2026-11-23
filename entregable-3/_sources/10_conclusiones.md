@@ -37,7 +37,7 @@ adec = json.loads((R / "adecuacion/resumen.json").read_text(encoding="utf-8"))
 
 | Condición | Veredicto | Evidencia |
 |---|---|---|
-| **R1. Novedad para el problema** | Se cumple, sujeta a la verificación del tercero | La búsqueda en OpenAlex, IEEE Xplore y arXiv (cadenas N1 a N7, capítulo 4), con búsqueda por citación y en repositorios de código, no encontró estudios que apliquen a intrusiones en redes de UAV una compuerta por flujo entre un experto de escalones suaves y uno neuronal, entrenada de forma cooperativa. La diferencia con los trabajos más cercanos (la fusión por pares PS-CAHE y el *stacking* sobre UAVIDS-2025, y las mezclas de expertos homogéneos en 5G y en Switch IDS) es de mecanismo y de entrenamiento, no solo de aplicación. |
+| **R1. Novedad para el problema** | Se cumple | La búsqueda en OpenAlex, IEEE Xplore y arXiv (cadenas N1 a N7, capítulo 4), confirmada en Scopus y Web of Science, y con búsqueda por citación y en repositorios de código, no encontró estudios que apliquen a intrusiones en redes de UAV una compuerta por flujo entre un experto de escalones suaves y uno neuronal, entrenada de forma cooperativa. La diferencia con los trabajos más cercanos (la compuerta entre LightGBM y un Transformer de ACGE en fog-IoT, la fusión por pares PS-CAHE y el *stacking* sobre UAVIDS-2025, y las mezclas de expertos homogéneos en 5G y en Switch IDS) es de mecanismo y de entrenamiento, no solo de aplicación. La verificación por un tercero queda a cargo de los profesores del curso, por indicación suya (capítulo 4). |
 | **R2. Mecanismo propio, sin `import` ni código de terceros** | Se cumple | El mecanismo está programado desde su formulación en `src/original_model.py`, con PyTorch solo como motor tensorial, y lo cubren 14 pruebas unitarias (capítulo 6). La propiedad (cota de Lipschitz de la mezcla) está demostrada y verificada numéricamente (capítulo 5). |
 | **R3. Superioridad estadística sobre la familia** | **No se cumple** | Fallan las condiciones 1 a 5 de la sección 8.4 del enunciado y la condición 6 confirma que la conclusión no depende de la prueba (capítulo 8). |
 
@@ -64,7 +64,7 @@ Como se fijó en la sección 12 del protocolo antes de las corridas definitivas,
 - **Tope de épocas.** En UNSW-NB15, varias redes llegaron a las 30 épocas todavía mejorando (8 de 10 corridas de CNN-LSTM, GRU y DBN).
 - **Diseño fuera del óptimo de validación.** El barrido de sensibilidad posterior encontró dos variantes mejores en validación (T = 4 y τ_min = 0,2); no se adoptaron porque el diseño estaba congelado.
 - **La cota de Lipschitz es holgada**: es un peor caso global que no ordena las variantes por su robustez real.
-- **La verificación por un tercero** de la novedad y de la reproducción se hace en los días previos a la entrega (capítulos 4 y 11).
+- **Sin verificación de terceros.** La novedad la verifican los profesores del curso, por indicación suya (capítulo 4), y la reproducción por una persona ajena al código no se hizo; la del autor, en su equipo y en el contenedor, no encontró ninguna discrepancia (capítulo 11).
 
 ## Riesgos de uso
 
@@ -82,7 +82,8 @@ Por estas razones, el modelo es una herramienta de apoyo para un analista de seg
 3. **Atributos que separen Blackhole de Wormhole**, el núcleo del 7,7 % de flujos que fallan los 13 modelos.
 4. **Una cota de robustez local o certificada** (por ejemplo, por propagación de intervalos), más fina que la global, para contrastar de nuevo P4.
 5. **Predicción conforme bajo cambio de covariables**, ponderada o estratificada por escenario, para recuperar la cobertura declarada.
+6. **Una compuerta ajustada fuera de muestra**, al estilo de ACGE {cite:p}`abdelnaby2026acge`, entrenada con la etiqueta de cuál experto se equivoca menos en una partición que los expertos no usaron. Esto le daría a la compuerta la señal que le faltó en desarrollo y permitiría medir cuánto del margen del oráculo (0,871 frente a 0,845) se recupera. Con las probabilidades guardadas de las ablaciones A5 y A6 es un análisis barato, pero después del congelamiento solo podría reportarse como exploratorio.
 
 ## Declaración de uso de herramientas de IA
 
-Se usó Claude (Anthropic), un asistente de programación, como apoyo en la escritura y depuración del código, la ejecución de los experimentos según el protocolo preregistrado, las búsquedas en OpenAlex y arXiv y la redacción de borradores de este libro. Todas las decisiones metodológicas quedaron registradas con fecha en la bitácora de diseño, el protocolo y el historial de Git, y el autor revisó el código y el texto. La declaración completa de autoría, contribuciones y uso de herramientas, firmada, está en el capítulo 11, que es el último del libro, como pide la sección 12 del enunciado.
+Se usó Claude (Anthropic), un asistente de programación, como apoyo en la escritura y depuración del código, la ejecución de los experimentos según el protocolo preregistrado, las búsquedas en OpenAlex, arXiv e IEEE Xplore y la redacción de borradores de este libro. Todas las decisiones metodológicas quedaron registradas con fecha en la bitácora de diseño, el protocolo y el historial de Git, y el autor revisó el código y el texto. La declaración completa de autoría, contribuciones y uso de herramientas, firmada, está en el capítulo 11, que es el último del libro, como pide la sección 12 del enunciado.

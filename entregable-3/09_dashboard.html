@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -389,7 +389,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dashboard-y-despliegue">
 <h1>Dashboard y despliegue<a class="headerlink" href="#dashboard-y-despliegue" title="Link to this heading">#</a></h1>
-<p>El dashboard es una aplicación multipágina de Dash (<code class="docutils literal notranslate"><span class="pre">use_pages=True</span></code>) que se despliega en Render y hace inferencia en CPU con ONNX Runtime. Nunca entrena ni importa PyTorch: carga los artefactos de <code class="docutils literal notranslate"><span class="pre">artifacts/</span></code> y los precalculados de <code class="docutils literal notranslate"><span class="pre">artifacts/dashboard/</span></code>.</p>
+<p>El dashboard es una aplicación multipágina de Dash (<code class="docutils literal notranslate"><span class="pre">use_pages=True</span></code>) que se despliega en Render, en <strong>https://uavids-2025-dashboard.onrender.com</strong>, y hace inferencia en CPU con ONNX Runtime. Nunca entrena ni importa PyTorch: carga los artefactos de <code class="docutils literal notranslate"><span class="pre">artifacts/</span></code> y los precalculados de <code class="docutils literal notranslate"><span class="pre">artifacts/dashboard/</span></code>.</p>
 <section id="arquitectura">
 <h2>Arquitectura<a class="headerlink" href="#arquitectura" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -652,8 +652,174 @@
 <li><p>El repositorio de GitHub contiene los tres entregables; <code class="docutils literal notranslate"><span class="pre">render.yaml</span></code> apunta el servicio a la carpeta <code class="docutils literal notranslate"><span class="pre">Entregable_3_UAVIDS_2025</span></code> con <code class="docutils literal notranslate"><span class="pre">rootDir</span></code>.</p></li>
 <li><p>Render instala <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> y arranca con <code class="docutils literal notranslate"><span class="pre">gunicorn</span> <span class="pre">app:server</span> <span class="pre">--workers</span> <span class="pre">1</span> <span class="pre">--threads</span> <span class="pre">4</span> <span class="pre">--timeout</span> <span class="pre">120</span></code>; <code class="docutils literal notranslate"><span class="pre">healthCheckPath:</span> <span class="pre">/</span></code> verifica que la portada responda.</p></li>
 <li><p>Las variables <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code>, <code class="docutils literal notranslate"><span class="pre">OPENBLAS_NUM_THREADS</span></code> y <code class="docutils literal notranslate"><span class="pre">MKL_NUM_THREADS</span></code> se fijan en 1 para no competir por la CPU compartida del plan gratuito.</p></li>
+<li><p>El servicio se creó el 23/11/2026 desde el repositorio público, rama <code class="docutils literal notranslate"><span class="pre">entregable-3</span></code>, con los mismos valores de <code class="docutils literal notranslate"><span class="pre">render.yaml</span></code>. En el plan gratuito se duerme tras 15 minutos sin visitas y tarda cerca de un minuto en despertar.</p></li>
 </ol>
-<p><strong>Prueba de humo.</strong> Después de cada despliegue se verifica que las tres páginas respondan con código 200, que la predicción en vivo devuelva probabilidades que sumen 1 y que un flujo absurdo active el aviso fuera de dominio. Es la misma batería de <code class="docutils literal notranslate"><span class="pre">tests/test_dashboard.py</span></code>, ejecutada contra la URL pública. El resultado se anexa en el capítulo 11.</p>
+<p><strong>Prueba de humo.</strong> Después de cada despliegue, <code class="docutils literal notranslate"><span class="pre">verificacion_externa/humo_dashboard.py</span></code> llama contra la URL pública a los mismos <em>callbacks</em> que usa el navegador: verifica que las tres páginas respondan con código 200, que un flujo de prueba al azar dé con cada uno de los 16 modelos probabilidades que sumen 1 y que un flujo absurdo active el aviso fuera de dominio. El mismo script corre contra el contenedor local con <code class="docutils literal notranslate"><span class="pre">--url</span> <span class="pre">http://localhost:8050</span></code>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="n">humo</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/resultados/humo_dashboard.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">humo</span><span class="p">[</span><span class="s1">&#39;fecha_utc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">humo</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> | resultado: </span><span class="si">{</span><span class="s1">&#39;OK&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">humo</span><span class="p">[</span><span class="s1">&#39;todo_ok&#39;</span><span class="p">]</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FALLA&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Páginas:&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;codigo&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">humo</span><span class="p">[</span><span class="s2">&quot;paginas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span> <span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">humo</span><span class="p">[</span><span class="s2">&quot;flujo_de_prueba&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aviso fuera de dominio con el flujo absurdo:&quot;</span><span class="p">,</span> <span class="n">humo</span><span class="p">[</span><span class="s2">&quot;flujo_absurdo&quot;</span><span class="p">][</span><span class="s2">&quot;aviso_activo&quot;</span><span class="p">])</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s2">&quot;Modelo&quot;</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">&quot;Suma de probabilidades&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;suma_probabilidades&quot;</span><span class="p">],</span> <span class="s2">&quot;Aviso fuera de dominio&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;aviso_fuera_de_dominio&quot;</span><span class="p">],</span>
+               <span class="s2">&quot;Respuesta (s)&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;segundos&quot;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">humo</span><span class="p">[</span><span class="s2">&quot;modelos&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-11-23T16:08:33+00:00 | https://uavids-2025-dashboard.onrender.com | resultado: OK
+Páginas: {&#39;/&#39;: 200, &#39;/eda&#39;: 200, &#39;/modelos&#39;: 200} | Flujo de prueba FlowID 73 019 · clase real: Normal
+Aviso fuera de dominio con el flujo absurdo: True
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>Suma de probabilidades</th>
+      <th>Aviso fuera de dominio</th>
+      <th>Respuesta (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Autoencoder</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.251</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>BiLSTM</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.327</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CNN 1D</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.269</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CNN-LSTM</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.259</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DBN</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.266</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>DNN</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.260</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>GRU</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.238</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>KAN</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.274</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>LSTM</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.215</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>LightGBM</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.418</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Logística</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.234</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Original</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.271</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>RNN</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.263</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>ResNet</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.232</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>TabNet</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.404</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Transformer</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.288</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </section>
 <section id="seguridad-y-robustez-de-la-interfaz">
 <h2>Seguridad y robustez de la interfaz<a class="headerlink" href="#seguridad-y-robustez-de-la-interfaz" title="Link to this heading">#</a></h2>

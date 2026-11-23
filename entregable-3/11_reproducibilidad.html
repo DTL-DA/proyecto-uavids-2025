@@ -443,8 +443,8 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">data/procedencia_conjuntos_adicionales.md</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>Código</p></td>
-<td><p>Repositorio de GitHub <code class="docutils literal notranslate"><span class="pre">DTL-DA/proyecto-uavids-2025</span></code>, rama <code class="docutils literal notranslate"><span class="pre">entregable-3</span></code>, etiquetas <code class="docutils literal notranslate"><span class="pre">e3-estandar</span></code> y <code class="docutils literal notranslate"><span class="pre">e3-protocolo</span></code></p></td>
-<td><p>Raíz del repositorio</p></td>
+<td><p>Repositorio de GitHub <code class="docutils literal notranslate"><span class="pre">DTL-DA/proyecto-uavids-2025</span></code>, rama <code class="docutils literal notranslate"><span class="pre">entregable-3</span></code>, etiquetas <code class="docutils literal notranslate"><span class="pre">e3-estandar</span></code> y <code class="docutils literal notranslate"><span class="pre">e3-protocolo</span></code>. Licencia MIT, confirmada por el autor el 23/11/2026; los datos conservan sus licencias (<code class="docutils literal notranslate"><span class="pre">DATA_STATEMENT.md</span></code>)</p></td>
+<td><p>Raíz del repositorio, <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>Contenedor</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> (python:3.13-slim con <code class="docutils literal notranslate"><span class="pre">requirements-train.txt</span></code>)</p></td>
@@ -600,13 +600,14 @@
 </section>
 <section id="reproduccion-independiente">
 <h2>Reproducción independiente<a class="headerlink" href="#reproduccion-independiente" title="Link to this heading">#</a></h2>
-<p>La reproducción la hace <strong>Imera Logreira</strong>, colega que no participó en el diseño ni en el código, en su propio equipo y sin ayuda técnica del autor. Recibe el paquete <code class="docutils literal notranslate"><span class="pre">paquete_reproduccion_e3.zip</span></code>, que contiene el repositorio, el CSV de UAVIDS-2025 y las probabilidades de prueba de las corridas definitivas, junto con su SHA-256, y sigue la guía <code class="docutils literal notranslate"><span class="pre">verificacion_externa/GUIA.md</span></code>:</p>
+<p>La reproducción por una persona ajena al código, que piden las secciones 11 y 14.5.7 del enunciado, no se hizo, y se declara como limitación (capítulo 10). El procedimiento queda listo para que lo repita cualquier persona, incluidos los profesores al calificar, con los pasos de la sección «Cómo reproducirlo» del <code class="docutils literal notranslate"><span class="pre">README.md</span></code> del Entregable 3:</p>
 <ol class="arabic simple">
-<li><p>construye el contenedor con el <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>;</p></li>
-<li><p>ejecuta <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">verificacion_externa/reproducir.py</span></code>, que verifica el SHA-256 de los datos y de la prueba sellada, vuelve a correr el análisis confirmatorio y compara celda por celda la tabla regenerada con la publicada (capítulo 7). También reentrena desde cero tres corridas definitivas (Original, LightGBM y CNN 1D con la semilla 6001) y compara su F1 y sus probabilidades;</p></li>
-<li><p>corre las pruebas unitarias, compila este libro desde cero y hace la prueba de humo del dashboard.</p></li>
+<li><p>construir el contenedor con el <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>;</p></li>
+<li><p>ejecutar <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">verificacion_externa/reproducir.py</span></code>, que verifica el SHA-256 de los datos y de la prueba sellada, vuelve a correr el análisis confirmatorio y compara celda por celda la tabla regenerada con la publicada (capítulo 7). También reentrena desde cero tres corridas definitivas (Original, LightGBM y CNN 1D con la semilla 6001) y compara su F1 y sus probabilidades;</p></li>
+<li><p>correr las pruebas unitarias, compilar este libro desde cero y hacer la prueba de humo del dashboard.</p></li>
 </ol>
-<p>Su reporte firmado (<code class="docutils literal notranslate"><span class="pre">verificacion_externa/reporte_reproduccion.md</span></code>), con la discrepancia máxima observada, y su concepto sobre la novedad (<code class="docutils literal notranslate"><span class="pre">verificacion_externa/concepto_novedad.md</span></code>, capítulo 4) se anexan aquí.</p>
+<p>El script necesita las probabilidades de prueba de las corridas definitivas, que no se versionan por su tamaño. Vienen, junto con el repositorio y el CSV de UAVIDS-2025, en <code class="docutils literal notranslate"><span class="pre">paquete_reproduccion_e3.zip</span></code>, que se publica con la <em>release</em> <code class="docutils literal notranslate"><span class="pre">entregable-3</span></code>.</p>
+<p>La corrida del autor con ese script (22/11/2026, Python 3.13.14 y PyTorch 2.6.0 en CPU, 10,4 minutos) encontró los datos íntegros, una discrepancia máxima de 0 en las 465 celdas de la tabla principal, ninguna decisión distinta y el mismo F1, bit a bit, en las tres corridas reentrenadas. Así mismo, el contenedor se construyó en frío desde el paquete de reproducción el 23/11/2026, y en él pasaron las 36 pruebas unitarias y arrancó el dashboard. Esto muestra que el procedimiento funciona de principio a fin, pero no reemplaza la verificación de un tercero.</p>
 </section>
 <section id="declaracion-de-autoria-contribuciones-y-uso-de-herramientas">
 <h2>Declaración de autoría, contribuciones y uso de herramientas<a class="headerlink" href="#declaracion-de-autoria-contribuciones-y-uso-de-herramientas" title="Link to this heading">#</a></h2>
@@ -615,17 +616,22 @@
 <ul class="simple">
 <li><p>escribir y depurar el código del modelo, las pruebas, el análisis y el dashboard;</p></li>
 <li><p>ejecutar los experimentos según el protocolo preregistrado;</p></li>
-<li><p>buscar en OpenAlex y arXiv;</p></li>
+<li><p>buscar en OpenAlex, arXiv e IEEE Xplore, y hacer la búsqueda por citación y en repositorios de código;</p></li>
 <li><p>redactar borradores de este libro.</p></li>
 </ul>
+<p><strong>Otras herramientas y servicios.</strong> RunPod (GPU en la nube) para 31 corridas de BiLSTM y GRU de los conjuntos adicionales; GitHub Actions para la integración continua; GitHub Pages para publicar este libro y Render para el dashboard.</p>
 <p>Todas las decisiones metodológicas quedaron registradas con fecha en <code class="docutils literal notranslate"><span class="pre">design_log.md</span></code>, <code class="docutils literal notranslate"><span class="pre">protocolo.md</span></code> y el historial de Git. Las cifras del libro se regeneran desde los resultados al compilarlo. El autor revisó el código y el texto, y puede explicar y modificar en vivo cualquier parte del algoritmo, como exige la sección 6.5 del enunciado.</p>
-<p>Firma: ______________________ Donny Torres</p>
+<p>Firma: <strong>Donny Torres</strong>, autor, aprobada el 23/11/2026.</p>
 </section>
 <section id="bibliografia">
 <h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id1">
 <div role="list" class="citation-list">
 <div class="citation" id="id124" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Abd26<span class="fn-bracket">]</span></span>
+<p>Khalil M. Abdelnaby. A Systematic Multi-Paradigm Evaluation Framework for Network Intrusion Detection in Fog-IoT Environments: Deep Learning, Transformer, and Ensemble Methods Across Deployment Tiers. <em>Symmetry</em>, 18(9):1438, 2026. <a class="reference external" href="https://doi.org/10.3390/sym18091438">doi:10.3390/sym18091438</a>.</p>
+</div>
+<div class="citation" id="id126" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>AGumucs26<span class="fn-bracket">]</span></span>
 <p>İzel Ece Aksu and Fatma Gümüş. Source-Rate Representations and Attention Autoencoders for Leakage-Safe Zero-Day Sybil Detection in UAV Networks. <em>Electronics</em>, 15(17):3966, 2026. <a class="reference external" href="https://doi.org/10.3390/electronics15173966">doi:10.3390/electronics15173966</a>.</p>
 </div>
@@ -636,6 +642,10 @@
 <div class="citation" id="id123" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>AEARF26<span class="fn-bracket">]</span></span>
 <p>Malik AL-Essa, Wasim A. Ali, Michèle Roccotelli, and Maria Pia Fanti. A Practical Enhancement for Intrusion Detection Systems With Validation-Gated Mixture-of-Experts (VG-MoE). In <em>IEEE Conference on Artificial Intelligence (CAI)</em>. 2026. <a class="reference external" href="https://doi.org/10.1109/cai68641.2026.11536604">doi:10.1109/cai68641.2026.11536604</a>.</p>
+</div>
+<div class="citation" id="id125" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BDSJKS26<span class="fn-bracket">]</span></span>
+<p>Hariharan Bhaskaran, K. Dhanya Sri, L. Jeevan Kumar, and B. P. Sreeja. A Distributed Mixture-of-Experts Framework for Cross-Dataset Intrusion Detection Using a Universal Flow Representation. In <em>10th International Conference on Computing, Communication, Control and Automation (ICCUBEA)</em>. 2026. <a class="reference external" href="https://doi.org/10.1109/ICCUBEA69821.2026.11701822">doi:10.1109/ICCUBEA69821.2026.11701822</a>.</p>
 </div>
 <div class="citation" id="id115" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>DHS+23<span class="fn-bracket">]</span></span>

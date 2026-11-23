@@ -33,7 +33,7 @@ El Entregable 2 mostró que LightGBM, un modelo de árboles, supera a las 13 red
 **Específicos.**
 
 1. Corregir y auditar el Entregable 2, incluida la fuga de información entre particiones (capítulo 1).
-2. Documentar la novedad del modelo frente a la literatura, con verificación por un tercero (capítulo 4).
+2. Documentar la novedad del modelo frente a la literatura (capítulo 4).
 3. Demostrar una propiedad formal del modelo y verificarla numéricamente (capítulo 5).
 4. Comparar el modelo con la familia completa de contrastes bajo un protocolo preregistrado y en tres conjuntos adicionales (capítulos 7 y 8).
 5. Desplegar los modelos en un dashboard reproducible y documentado (capítulos 9 y 11).
@@ -45,14 +45,14 @@ El Entregable 2 mostró que LightGBM, un modelo de árboles, supera a las 13 red
 | 1. Trazabilidad de correcciones | Autoauditoría del E2, fuga de información, prueba de D3 y *ranking* antes y después |
 | 2. Datos | EDA, auditoría, ficha de los datos y conjuntos adicionales |
 | 3. Benchmarks | Top 10 y *baselines* fuertes, tabla maestra, exportación y prueba de ida y vuelta |
-| 4. Literatura y novedad | Cadenas de búsqueda, matriz de novedad, declaración y verificación por un tercero |
+| 4. Literatura y novedad | Cadenas de búsqueda, matriz de novedad, trabajos más cercanos y declaración de novedad |
 | 5. Modelo original: diseño | Limitación, hipótesis, formulación, pseudocódigo, demostración y bitácora |
 | 6. Modelo original: implementación | Código, pruebas, complejidad, ablación e interpretabilidad |
 | 7. Validación | Protocolo, potencia, contrastes, Friedman, pruebas admisibles y desviaciones |
 | 8. Evaluación ampliada | Conjuntos adicionales, robustez, P4, adecuación, calibración, eficiencia y balance de R3 |
 | 9. Dashboard | Arquitectura, despliegue, ficha del modelo y prueba de humo |
 | 10. Conclusiones | Hallazgos, veredicto sobre R1 a R3, amenazas, limitaciones, riesgos y trabajo futuro |
-| 11. Reproducibilidad | Entorno, semillas, lista de verificación, reproducción independiente, autoría y bibliografía |
+| 11. Reproducibilidad | Entorno, semillas, lista de verificación, reproducción del autor, autoría y bibliografía |
 
 ## Dashboard
 
