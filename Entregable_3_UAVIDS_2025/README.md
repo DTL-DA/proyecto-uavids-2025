@@ -10,7 +10,7 @@ Este entregable propone un modelo original para detectar intrusiones en redes de
 - **El original es el más robusto ante ruido y atributos faltantes.** Con ruido σ = 0,5 su F1 cae 0,182, frente a 0,324 de LightGBM. La cota de Lipschitz, sin embargo, no explica esa robustez (P4 falsa).
 - **El escenario de simulación pesa más que la arquitectura.** LightGBM gana en la prueba sellada (0,875), pero en la validación cruzada 5 × 2 empata con el original y con CNN 1D (0,860). Además, ningún modelo reconoce un escenario no visto: el acierto es menor del 10 %.
 
-El detalle está en el libro (`book/`), que se compila con las celdas ejecutadas a partir de los resultados versionados.
+El detalle está en el libro, publicado en **https://dtl-da.github.io/proyecto-uavids-2025/entregable-3/**. Su fuente es `book/`, que se compila ejecutando todas las celdas sobre los resultados versionados, y se publica con `python book/publicar.py` en la rama `gh-pages`.
 
 ## Estructura
 

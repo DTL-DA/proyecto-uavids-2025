@@ -10,7 +10,7 @@ Proyecto final de Deep Learning (Maestría en Analítica de Datos, Universidad d
 
 ## Entregable 3: modelo original y validación rigurosa
 
-Una compuerta por flujo entre un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, con entrenamiento cooperativo y una cota de Lipschitz demostrada, comparada bajo un protocolo preregistrado con el Top 10 del Entregable 2, LightGBM y CNN 1D en UAVIDS-2025 y en tres conjuntos adicionales. El modelo original no supera a la familia (R3 no se cumple), es el más robusto ante ruido y atributos faltantes, y el hallazgo principal es que el escenario de simulación pesa más que la arquitectura. El detalle, la forma de reproducirlo y el dashboard están en [`Entregable_3_UAVIDS_2025/README.md`](Entregable_3_UAVIDS_2025/README.md).
+Una compuerta por flujo entre un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, con entrenamiento cooperativo y una cota de Lipschitz demostrada, comparada bajo un protocolo preregistrado con el Top 10 del Entregable 2, LightGBM y CNN 1D en UAVIDS-2025 y en tres conjuntos adicionales. El modelo original no supera a la familia (R3 no se cumple), es el más robusto ante ruido y atributos faltantes, y el hallazgo principal es que el escenario de simulación pesa más que la arquitectura. El libro está publicado en https://dtl-da.github.io/proyecto-uavids-2025/entregable-3/, y el detalle, la forma de reproducirlo y el dashboard están en [`Entregable_3_UAVIDS_2025/README.md`](Entregable_3_UAVIDS_2025/README.md).
 
 ## Entregable 2: benchmark de 16 modelos
 
