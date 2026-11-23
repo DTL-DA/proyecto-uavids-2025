@@ -100,5 +100,109 @@
    "pendiente por log n": -0.00011610813450880261,
    "p": 0.9423892458072922
   }
+ },
+ "validación anidada (aproximación del E2)": {
+  "Original": {
+   "mejor F1 de validación en el ajuste": 0.9242389332238593,
+   "F1 medio de prueba": 0.8479456571619421,
+   "interno − externo": 0.07629327606191716
+  },
+  "E2 (mismo cálculo)": {
+   "DNN": 0.074,
+   "CNN 1D": 0.0749,
+   "LSTM": 0.0927,
+   "CNN-LSTM": 0.071,
+   "Autoencoder": 0.0693,
+   "RNN": 0.0942,
+   "Transformer": 0.0712,
+   "BiLSTM": 0.0752,
+   "ResNet": 0.077,
+   "GRU": 0.0823,
+   "KAN": 0.0844,
+   "TabNet": 0.0957,
+   "DBN": 0.0735,
+   "LightGBM": 0.0132,
+   "Logística": 0.0937
+  }
+ },
+ "diagnósticos en cada conjunto adicional": {
+  "UAV-NIDD": {
+   "reproducción: F1 de prueba idéntico al registrado": true,
+   "F1 prueba": 0.5495536300018665,
+   "F1 trivial (clase mayoritaria)": 0.09213315047999003,
+   "(i) supera al trivial": true,
+   "brecha g": 0.3239548633841765,
+   "p Wilcoxon (g < δg)": 1.0,
+   "(ii) brecha < δg": false,
+   "ECE": 0.08021605923402153,
+   "ECE con T": 0.0897303507885857,
+   "(iii) ECE con T < 0,05": false,
+   "pendiente media de calibración": 4.252516057432821,
+   "validación − prueba": 0.008094401330275725,
+   "IC 95 % por bloques": [
+    -0.3264943083807587,
+    0.34020963041299646
+   ],
+   "(iv) prueba consistente con validación": true,
+   "adecuado": false,
+   "permutación": {
+    "B": 200,
+    "F1 observado (6001)": 0.5411114403998917,
+    "F1 permutado máximo": 0.4881100724658339,
+    "p": 0.004975124378109453
+   }
+  },
+  "UNSW-NB15": {
+   "reproducción: F1 de prueba idéntico al registrado": true,
+   "F1 prueba": 0.6651015551088764,
+   "F1 trivial (clase mayoritaria)": 0.029348891781988844,
+   "(i) supera al trivial": true,
+   "brecha g": 0.01526245675657969,
+   "p Wilcoxon (g < δg)": 0.0009765625,
+   "(ii) brecha < δg": true,
+   "ECE": 0.03406838488305609,
+   "ECE con T": 0.04239236508522851,
+   "(iii) ECE con T < 0,05": true,
+   "pendiente media de calibración": 1.0402292991212827,
+   "validación − prueba": -0.0194158157059775,
+   "IC 95 % por bloques": [
+    -0.13130451878768443,
+    0.09644280568293215
+   ],
+   "(iv) prueba consistente con validación": true,
+   "adecuado": true,
+   "permutación": {
+    "B": 200,
+    "F1 observado (6001)": 0.666076905050115,
+    "F1 permutado máximo": 0.23110681233345798,
+    "p": 0.004975124378109453
+   }
+  },
+  "UNR-IDD": {
+   "reproducción: F1 de prueba idéntico al registrado": true,
+   "F1 prueba": 0.7646288550853394,
+   "F1 trivial (clase mayoritaria)": 0.07011623547056618,
+   "(i) supera al trivial": true,
+   "brecha g": 0.009710386937030002,
+   "p Wilcoxon (g < δg)": 0.0009765625,
+   "(ii) brecha < δg": true,
+   "ECE": 0.034819140287376205,
+   "ECE con T": 0.018727595423107448,
+   "(iii) ECE con T < 0,05": true,
+   "pendiente media de calibración": 1.7742724876866691,
+   "validación − prueba": 0.006437794084527493,
+   "IC 95 % por bloques": [
+    -0.10942211942484723,
+    0.09804183377552315
+   ],
+   "(iv) prueba consistente con validación": true,
+   "adecuado": true,
+   "permutación": {
+    "B": 200,
+    "F1 observado (6001)": 0.7627695211107951,
+    "F1 permutado máximo": 0.27367257677494156,
+    "p": 0.004975124378109453
+   }
+  }
  }
 }

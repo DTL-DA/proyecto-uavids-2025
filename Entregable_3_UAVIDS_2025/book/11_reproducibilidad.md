@@ -24,9 +24,9 @@ RAIZ = Path("..").resolve()
 | Ítem | Estado | Dónde |
 |---|---|---|
 | Versiones del software | Python 3.13.14; PyTorch 2.6.0 (CPU); versiones exactas en `requirements.txt` (dashboard) y `requirements-train.txt` (entrenamiento) | Raíz del Entregable 3 |
-| Hardware | Intel Core i5-1235U (10 núcleos, 12 hilos), 15,7 GB de RAM, Windows 11, sin GPU; 2 hilos por proceso y hasta 6 procesos en paralelo | Registro de cada corrida (`equipo`, `hilos`) |
-| Semillas | Definitivas: 6001 a 6048 (original y CNN-LSTM), 6001 a 6038 (TabNet) y 6001 a 6020 (demás); ajuste: 4242; piloto: 6001 a 6005; conjuntos adicionales: 6001 a 6010; partición de los conjuntos adicionales: 2027 | `protocolo.md`, sección 5 |
-| Determinismo | `random`, `numpy` y `torch` fijados en cada corrida; todo en CPU. Ninguna corrida usó GPU | `codigo/motor.fijar_semilla` |
+| Hardware | Intel Core i5-1235U (10 núcleos, 12 hilos), 15,7 GB de RAM, Windows 11; 2 hilos por proceso y hasta 6 procesos en paralelo. Además, una GPU NVIDIA RTX PRO 6000 Blackwell (porción MIG de 24 GB, 8 vCPU AMD EPYC 9554, RunPod) para 31 corridas | Registro de cada corrida (`equipo`, `hilos`, `dispositivo`, `gpu`) |
+| Semillas | Definitivas: 6001 a 6048 (original y CNN-LSTM), 6001 a 6038 (TabNet) y 6001 a 6020 (demás); ajuste: 4242; piloto: 6001 a 6005; conjuntos adicionales: 6001 a 6010; partición de los conjuntos adicionales: 2027; sensibilidad: 6001 a 6003; curvas de aprendizaje: 7101 a 7103; permutación de etiquetas: 9000 a 9199 | `protocolo.md`, sección 5, y `training/ejecutar_robustez.py` |
+| Determinismo | `random`, `numpy` y `torch` fijados en cada corrida, en CPU. Los reentrenamientos de control (3 corridas del problema principal y 30 de los conjuntos adicionales) reproducen el F1 bit a bit. Las 31 corridas en GPU (BiLSTM y GRU de los conjuntos adicionales, opción prevista en el protocolo) usaron el determinismo estricto de CUDA; con la misma semilla, el cambio de hardware movió el F1 unas dos desviaciones estándar entre semillas (capítulo 8) | `codigo/motor.fijar_semilla`, `training/ejecutar_gpu.py` |
 | Rangos de hiperparámetros | lr ∈ {10⁻⁴, 3·10⁻⁴, 10⁻³, 3·10⁻³}, weight_decay ∈ {0, 10⁻⁵, 10⁻⁴}, lote ∈ {128, 256, 512}: las mismas 12 configuraciones para todos los modelos profundos | `configuracion/experimento.json` del E2 |
 | Número de ejecuciones y dispersión | De 20 a 48 semillas por modelo en el problema principal y 10 en cada conjunto adicional; media ± DE e IC 95 % | Capítulos 3, 7 y 8 |
 | Datos | UAVIDS-2025 (Zenodo, CC BY 4.0) verificado con SHA-256; tres conjuntos adicionales con procedencia, licencia y SHA-256 | `data/procedencia_conjuntos_adicionales.md` |
@@ -37,20 +37,22 @@ RAIZ = Path("..").resolve()
 ```{code-cell} ipython3
 :tags: [hide-input]
 corridas = []
-for carpeta in ["definitiva", "ablacion", "adicionales", "ajuste", "piloto"]:
+for carpeta in ["ajuste", "piloto", "definitiva", "ablacion", "adicionales", "sensibilidad", "curvas", "cv5x2", "bootstrap", "permutacion", "diagnostico_adicionales"]:
     for p in (RAIZ / "experiments/resultados/corridas" / carpeta).glob("*.json"):
         if p.name.startswith("_"):
             continue
         r = json.loads(p.read_text(encoding="utf-8"))
-        corridas.append({"Fase": carpeta, "Modelo": r.get("modelo"), "Segundos": r.get("segundos", 0)})
+        if r.get("pendiente_gpu"):
+            continue
+        corridas.append({"Fase": carpeta, "Modelo": r.get("modelo"), "Segundos": r.get("segundos") or 0, "GPU": r.get("dispositivo", "cpu") != "cpu"})
 c = pd.DataFrame(corridas)
-tiempo = c.groupby("Fase").agg(Corridas=("Segundos", "size"), Horas_CPU=("Segundos", lambda s: s.sum() / 3600))
+tiempo = c.groupby("Fase").agg(Corridas=("Segundos", "size"), En_GPU=("GPU", "sum"), Horas_de_proceso=("Segundos", lambda s: s.sum() / 3600))
 tiempo.loc["Total"] = tiempo.sum()
-print("Tiempo de cómputo del Entregable 3 (horas de proceso, 2 hilos cada uno):")
+print("Tiempo de cómputo del Entregable 3 (horas de proceso, 2 hilos cada uno; las fases corren en paralelo con hasta 6 procesos):")
 tiempo.round(2)
 ```
 
-**Consumo energético estimado.** Con el TDP de 15 W del procesador, una cota superior del consumo es 15 W por las horas de reloj del cómputo, del orden de 0,1 kWh para todo el Entregable 3. Con una intensidad de la red de 0,1 a 0,4 kg de CO₂ equivalente por kWh, las emisiones quedan entre 10 y 50 g de CO₂ equivalente.
+**Consumo energético estimado.** Las corridas del Entregable 3 ocuparon unas 9,5 horas de reloj en la CPU (los registros de `experiments/resultados/registros/` dan 303 minutos para los conjuntos adicionales, 37 para las definitivas, 17 para la ablación, 30 para la robustez y cerca de una hora para los diagnósticos, más el diseño y el ajuste). Con el TDP de 15 W del procesador, eso es como mucho 0,15 kWh. La GPU estuvo encendida unos 25 minutos; aun suponiendo 150 W para la porción MIG, suma menos de 0,07 kWh. El total es del orden de 0,2 kWh y, con una intensidad de la red de 0,1 a 0,4 kg de CO₂ equivalente por kWh, las emisiones quedan entre 20 y 90 g de CO₂ equivalente.
 
 ## Archivo versionado con identificador persistente
 

@@ -278,7 +278,7 @@ ax.legend(frameon=False); plt.tight_layout(); plt.show()
 
 **El original cumple tres de las cuatro condiciones de adecuación del E2: supera al trivial (0,850 frente a 0,070), su brecha entre entrenamiento y validación es de 0,004, muy por debajo de δg = 0,05, y la diferencia entre validación y prueba tiene un IC por bloques que contiene al cero. Falla la calibración por un margen mínimo: su ECE con temperatura es de 0,053 frente al umbral de 0,05.**
 
-Así mismo, la prueba de permutación confirma que aprende señal real (F1 de 0,855 frente a un máximo de 0,434 con etiquetas permutadas, *p* = 0,005, el mínimo posible con 200 permutaciones), su optimismo por *bootstrap* (0,023) es del orden del de las redes y la mitad del de LightGBM (0,043), y su curva de aprendizaje es plana: con el 10 % del entrenamiento ya alcanza el F1 de validación que obtiene con todo, mientras que LightGBM sigue mejorando con más datos (pendiente significativa, *p* < 0,001). Hosmer-Lemeshow rechaza en las cinco clases, pero con 22 883 flujos rechaza cualquier desviación mínima, por lo que se reporta junto con la pendiente de calibración (0,73), que indica probabilidades algo extremas. La temperatura ajustada en validación es menor que 1 y no corrige ese sesgo en la prueba.
+Así mismo, la prueba de permutación confirma que aprende señal real (F1 de 0,855 frente a un máximo de 0,434 con etiquetas permutadas, *p* = 0,005, el mínimo posible con 200 permutaciones), la diferencia entre el mejor F1 de validación del ajuste y el F1 de prueba (0,076), que aproxima la validación anidada como en el E2, está en el rango de las redes (de 0,069 a 0,096, frente a 0,013 de LightGBM), su optimismo por *bootstrap* (0,023) es del orden del de las redes y la mitad del de LightGBM (0,043), y su curva de aprendizaje es plana: con el 10 % del entrenamiento ya alcanza el F1 de validación que obtiene con todo, mientras que LightGBM sigue mejorando con más datos (pendiente significativa, *p* < 0,001). Hosmer-Lemeshow rechaza en las cinco clases, pero con 22 883 flujos rechaza cualquier desviación mínima, por lo que se reporta junto con la pendiente de calibración (0,73), que indica probabilidades algo extremas. La temperatura ajustada en validación es menor que 1 y no corrige ese sesgo en la prueba.
 
 Por tal motivo, el original se declara no adecuado según el criterio del E2, con la misma salvedad que ese entregable: el umbral del ECE es exploratorio, y 9 de los 15 modelos del E2 fallan esa misma condición. La condición 5 de R3 tampoco se cumpliría, aun si el original superara a la familia.
 
@@ -308,6 +308,12 @@ if diag:
 else:
     print("Pendiente: training/ejecutar_diagnosticos_adicionales.py")
 ```
+
+**Al repetir los diagnósticos del E2 en cada conjunto adicional, el original es adecuado en UNSW-NB15 y en UNR-IDD, donde cumple las cuatro condiciones, y no lo es en UAV-NIDD: ahí la brecha entre entrenamiento y validación es de 0,32 (F1 de 0,89 en entrenamiento frente a 0,56 en validación) y el ECE con temperatura es de 0,090. En los tres conjuntos supera al trivial y a las 200 permutaciones de etiquetas (*p* = 0,005), y los 30 reentrenamientos reproducen bit a bit el F1 de prueba registrado.**
+
+Esto significa que en UAV-NIDD el original memoriza las ejecuciones de ataque del entrenamiento y no las transfiere a las de validación y prueba, que son otras ejecuciones, porque los bloques de 250 filas se reparten sin compartir ninguno. Es la misma dependencia de escenario de UAVIDS-2025, y explica por qué todos los modelos quedan entre 0,49 y 0,62 de F1 en ese conjunto. Además, la mejor permutación llega a 0,488 frente a 0,541 observado: la señal aprendida existe, pero el margen sobre el azar es pequeño.
+
+Por esta razón, la adecuación del original depende del conjunto: se cumple donde la validación representa a la prueba (UNSW-NB15 y UNR-IDD) y falla donde las particiones separan ejecuciones de ataque muy distintas, lo que refuerza el hallazgo principal del capítulo 10.
 
 ## Robustez a la elección de la prueba (condición 6)
 
@@ -365,7 +371,7 @@ pd.DataFrame([
     {"condición": "2. Tres pruebas con Holm y diferencia > δ", "cumple": "no", "evidencia": "ningún contraste con tres pruebas, ni con las preregistradas ni con las admisibles del cuadro 4"},
     {"condición": "3. Efecto no despreciable e IC > 0", "cumple": "no", "evidencia": "solo frente a TabNet y RNN hay efecto a favor no despreciable"},
     {"condición": "4. Consistencia en los conjuntos adicionales", "cumple": "no", "evidencia": f"mejor en {res_ad['conjuntos en que el original es el mejor en la media']} de 3; peor con significancia en UNSW-NB15"},
-    {"condición": "5. Adecuación del modelo (E2, sección 7.2)", "cumple": "no", "evidencia": "cumple (i), (ii) y (iv); falla (iii) por ECE de 0,053 frente a 0,05"},
+    {"condición": "5. Adecuación del modelo (E2, sección 7.2)", "cumple": "no", "evidencia": "en UAVIDS-2025 cumple (i), (ii) y (iv) y falla (iii) por ECE de 0,053 frente a 0,05; adecuado en UNSW-NB15 y UNR-IDD, no en UAV-NIDD"},
     {"condición": "6. Robustez a la elección de la prueba", "cumple": "sí (para la conclusión principal)", "evidencia": "ninguna prueba muestra superioridad del original; la ventaja de LightGBM no es robusta a la partición"},
 ])
 ```

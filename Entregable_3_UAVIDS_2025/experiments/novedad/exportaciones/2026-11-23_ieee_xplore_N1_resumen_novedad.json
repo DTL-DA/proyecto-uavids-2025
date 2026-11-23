@@ -1,0 +1,11 @@
+{
+ "fecha": "2026-11-23",
+ "fuente": "IEEE Xplore (búsqueda pública, sin sesión; campo por defecto: todos los metadatos)",
+ "cadena": "N1",
+ "total": 2,
+ "registros": [
+  {"titulo": "Intelligent Intrusion Detection System With Autonomous Optimal Traffic Steering for Aerial-Aided Edge Computing", "fuente": "IEEE Internet of Things Journal", "anio": 2025},
+  {"titulo": "Machine Learning based Intrusion Detection System for Secure Network Environments", "fuente": "2026 8th International Conference on Inventive Material Science and Applications (ICIMA)", "anio": 2026}
+ ],
+ "nota": "Revisión por título; pendiente leer los resúmenes para clasificar la diferencia."
+}

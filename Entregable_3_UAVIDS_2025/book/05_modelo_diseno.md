@@ -161,7 +161,7 @@ verificacion = pd.DataFrame(filas)
 verificacion
 ```
 
-**Interpretación.** En todas las semillas y escalas el cociente empírico máximo queda por debajo de la cota $K$, como exige el teorema, y la relación cociente/$K$ muestra cuán holgada es la cota en los datos reales.
+**En las 15 combinaciones de semilla y escala, el cociente empírico máximo (entre 1,80 y 2,68) queda por debajo de la cota $K$ (entre 24,3 y 34,8), como exige el teorema. La relación cociente/$K$ va de 0,06 a 0,09: la cota es entre 11 y 17 veces más holgada que lo observado.**
 
 Esto quiere decir que la garantía se cumple sin excepciones y que, como toda cota global obtenida con normas espectrales, es conservadora: el modelo es mucho más estable en la práctica de lo que la cota asegura en el peor caso.
 
@@ -199,7 +199,7 @@ diseno["Métrica"] = np.where(diseno["Partición"].str.startswith("por escenario
 diseno[["variante", "Partición", "Métrica", "métrica"]]
 ```
 
-**Interpretación.** La opción de invariancia por escenario (V-REx condicional por clase) bajó el acierto en el escenario no visto con los tres valores de λ y quedó descartada por la regla fijada antes de correr. En la partición por bloques, el experto de escalones suaves solo llega a 0,843 (LightGBM, 0,845), la compuerta entrenada en conjunto empeora a 0,832 porque los expertos se especializan, y el entrenamiento cooperativo la recupera a 0,842.
+**La opción de invariancia por escenario (V-REx condicional por clase) bajó el acierto en el escenario no visto con los tres valores de λ y quedó descartada por la regla fijada antes de correr. En la partición por bloques, el experto de escalones suaves solo llega a 0,843 (LightGBM, 0,845), la compuerta entrenada en conjunto empeora a 0,832 porque los expertos se especializan, y el entrenamiento cooperativo la recupera a 0,842.**
 
 Hay que tener en cuenta que la compuerta, en desarrollo, no capturó el margen del oráculo: aprende con filas en las que los dos expertos aciertan casi siempre y recibe poca señal de en qué falla cada uno fuera de muestra. Esto se declara antes de ver la confirmación y forma parte de la discusión del capítulo 10.
 

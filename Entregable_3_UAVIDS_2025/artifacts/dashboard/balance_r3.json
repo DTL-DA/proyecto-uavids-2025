@@ -22,7 +22,7 @@
  {
   "condición": "5. Adecuación (sección 7.2 del E2)",
   "cumple": "no",
-  "evidencia": "cumple (i), (ii) y (iv); falla la calibración: ECE con temperatura de 0.053 frente a 0,05"
+  "evidencia": "en UAVIDS-2025 cumple (i), (ii) y (iv) y falla la calibración (ECE con temperatura de 0.053 frente a 0,05); adecuado en UNSW-NB15 y UNR-IDD, no en UAV-NIDD"
  },
  {
   "condición": "6. Robustez a la elección de la prueba",

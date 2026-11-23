@@ -6,6 +6,11 @@ Proyecto final de Deep Learning (Maestría en Analítica de Datos, Universidad d
 |---|---|---|---|
 | 1 | Estado del arte, EDA y baseline con tres modelos | `Entregable 1 - UAVIDS-2025.ipynb` y `Entregable_1_UAVIDS_2025/` | etiqueta `entregable-1` |
 | 2 | Benchmark de 16 modelos con inferencia estadística | `Entregable 2 - UAVIDS-2025.ipynb` y `Entregable_2_UAVIDS_2025/` | etiqueta `entregable-2` y su [release](https://github.com/DTL-DA/proyecto-uavids-2025/releases/tag/entregable-2) |
+| 3 | Modelo original, validación preregistrada en cuatro conjuntos de datos y dashboard desplegado | `Entregable_3_UAVIDS_2025/` (ver su [README](Entregable_3_UAVIDS_2025/README.md)) | rama `entregable-3`; etiqueta `entregable-3` al entregar |
+
+## Entregable 3: modelo original y validación rigurosa
+
+Una compuerta por flujo entre un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, con entrenamiento cooperativo y una cota de Lipschitz demostrada, comparada bajo un protocolo preregistrado con el Top 10 del Entregable 2, LightGBM y CNN 1D en UAVIDS-2025 y en tres conjuntos adicionales. El modelo original no supera a la familia (R3 no se cumple), es el más robusto ante ruido y atributos faltantes, y el hallazgo principal es que el escenario de simulación pesa más que la arquitectura. El detalle, la forma de reproducirlo y el dashboard están en [`Entregable_3_UAVIDS_2025/README.md`](Entregable_3_UAVIDS_2025/README.md).
 
 ## Entregable 2: benchmark de 16 modelos
 

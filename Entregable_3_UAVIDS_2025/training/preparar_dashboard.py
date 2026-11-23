@@ -181,7 +181,7 @@ def copiar_analisis():
             {"condición": "4. Consistencia en los conjuntos adicionales", "cumple": "no",
              "evidencia": f"mejor en {rad['conjuntos en que el original es el mejor en la media']} de 3 conjuntos; peor con significancia en UNSW-NB15"},
             {"condición": "5. Adecuación (sección 7.2 del E2)", "cumple": "no",
-             "evidencia": f"cumple (i), (ii) y (iv); falla la calibración: ECE con temperatura de {a['ECE con T']:.3f} frente a 0,05"},
+             "evidencia": f"en UAVIDS-2025 cumple (i), (ii) y (iv) y falla la calibración (ECE con temperatura de {a['ECE con T']:.3f} frente a 0,05); adecuado en UNSW-NB15 y UNR-IDD, no en UAV-NIDD"},
             {"condición": "6. Robustez a la elección de la prueba", "cumple": "sí",
              "evidencia": f"ninguna prueba muestra superioridad del original; la ventaja de LightGBM desaparece en 5 × 2 (p de Nadeau-Bengio = {nb['p Nadeau-Bengio']:.2f})"}]
         (SALIDA / "balance_r3.json").write_text(json.dumps(balance, ensure_ascii=False, indent=1), encoding="utf-8")
