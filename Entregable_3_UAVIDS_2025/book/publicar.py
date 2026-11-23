@@ -42,7 +42,8 @@ def main():
             shutil.rmtree(arbol / DESTINO, ignore_errors=True)
             shutil.copytree(HTML, arbol / DESTINO)
             git("add", "-A", cwd=arbol)
-            git("commit", "-m", f"Libro del Entregable 3 compilado desde {commit}", cwd=arbol)
+            mensaje = f"Libro del Entregable 3 compilado desde {commit}" + "\n\n" + "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+            git("commit", "-m", mensaje, cwd=arbol)
             print(f"Listo: rama gh-pages con /{DESTINO}/ (libro de {commit}). Falta: git push origin gh-pages")
         finally:
             git("worktree", "remove", "--force", str(arbol))
