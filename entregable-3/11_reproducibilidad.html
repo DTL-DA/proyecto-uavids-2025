@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reproducibilidad, autoría y bibliografía &#8212; Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '11_reproducibilidad';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="Conclusiones, limitaciones y trabajo futuro" href="10_conclusiones.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_correcciones.html">Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_datos.html">Datos: EDA, auditoría y ficha de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Benchmarks: Top 10, baselines y exportación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y evidencia de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_diseno.html">Modelo original: limitación, fuente, hipótesis, teoría y diseño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelo_implementacion.html">Modelo original: implementación, pruebas, ablación e interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_validacion.html">Validación: protocolo y pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_evaluacion_ampliada.html">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_dashboard.html">Dashboard y despliegue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">Conclusiones, limitaciones y trabajo futuro</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reproducibilidad, autoría y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/11_reproducibilidad.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Reproducibilidad, autoría y bibliografía</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-verificacion-de-reproducibilidad">Lista de verificación de reproducibilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#archivo-versionado-con-identificador-persistente">Archivo versionado con identificador persistente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproduccion-independiente">Reproducción independiente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-de-autoria-contribuciones-y-uso-de-herramientas">Declaración de autoría, contribuciones y uso de herramientas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reproducibilidad-autoria-y-bibliografia">
+<h1>Reproducibilidad, autoría y bibliografía<a class="headerlink" href="#reproducibilidad-autoria-y-bibliografia" title="Link to this heading">#</a></h1>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">platform</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="lista-de-verificacion-de-reproducibilidad">
+<h2>Lista de verificación de reproducibilidad<a class="headerlink" href="#lista-de-verificacion-de-reproducibilidad" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ítem</p></th>
+<th class="head"><p>Estado</p></th>
+<th class="head"><p>Dónde</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Versiones del software</p></td>
+<td><p>Python 3.13.14; PyTorch 2.6.0 (CPU); versiones exactas en <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> (dashboard) y <code class="docutils literal notranslate"><span class="pre">requirements-train.txt</span></code> (entrenamiento)</p></td>
+<td><p>Raíz del Entregable 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hardware</p></td>
+<td><p>Intel Core i5-1235U (10 núcleos, 12 hilos), 15,7 GB de RAM, Windows 11; 2 hilos por proceso y hasta 6 procesos en paralelo. Además, una GPU NVIDIA RTX PRO 6000 Blackwell (porción MIG de 24 GB, 8 vCPU AMD EPYC 9554, RunPod) para 31 corridas</p></td>
+<td><p>Registro de cada corrida (<code class="docutils literal notranslate"><span class="pre">equipo</span></code>, <code class="docutils literal notranslate"><span class="pre">hilos</span></code>, <code class="docutils literal notranslate"><span class="pre">dispositivo</span></code>, <code class="docutils literal notranslate"><span class="pre">gpu</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Semillas</p></td>
+<td><p>Definitivas: 6001 a 6048 (original y CNN-LSTM), 6001 a 6038 (TabNet) y 6001 a 6020 (demás); ajuste: 4242; piloto: 6001 a 6005; conjuntos adicionales: 6001 a 6010; partición de los conjuntos adicionales: 2027; sensibilidad: 6001 a 6003; curvas de aprendizaje: 7101 a 7103; permutación de etiquetas: 9000 a 9199</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">protocolo.md</span></code>, sección 5, y <code class="docutils literal notranslate"><span class="pre">training/ejecutar_robustez.py</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Determinismo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> y <code class="docutils literal notranslate"><span class="pre">torch</span></code> fijados en cada corrida, en CPU. Los reentrenamientos de control (3 corridas del problema principal y 30 de los conjuntos adicionales) reproducen el F1 bit a bit. Las 31 corridas en GPU (BiLSTM y GRU de los conjuntos adicionales, opción prevista en el protocolo) usaron el determinismo estricto de CUDA; con la misma semilla, el cambio de hardware movió el F1 unas dos desviaciones estándar entre semillas (capítulo 8)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">codigo/motor.fijar_semilla</span></code>, <code class="docutils literal notranslate"><span class="pre">training/ejecutar_gpu.py</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Rangos de hiperparámetros</p></td>
+<td><p>lr ∈ {10⁻⁴, 3·10⁻⁴, 10⁻³, 3·10⁻³}, weight_decay ∈ {0, 10⁻⁵, 10⁻⁴}, lote ∈ {128, 256, 512}: las mismas 12 configuraciones para todos los modelos profundos</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">configuracion/experimento.json</span></code> del E2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Número de ejecuciones y dispersión</p></td>
+<td><p>De 20 a 48 semillas por modelo en el problema principal y 10 en cada conjunto adicional; media ± DE e IC 95 %</p></td>
+<td><p>Capítulos 3, 7 y 8</p></td>
+</tr>
+<tr class="row-even"><td><p>Datos</p></td>
+<td><p>UAVIDS-2025 (Zenodo, CC BY 4.0) verificado con SHA-256; tres conjuntos adicionales con procedencia, licencia y SHA-256</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data/procedencia_conjuntos_adicionales.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Código</p></td>
+<td><p>Repositorio de GitHub <code class="docutils literal notranslate"><span class="pre">DTL-DA/proyecto-uavids-2025</span></code>, rama <code class="docutils literal notranslate"><span class="pre">entregable-3</span></code>, etiquetas <code class="docutils literal notranslate"><span class="pre">e3-estandar</span></code> y <code class="docutils literal notranslate"><span class="pre">e3-protocolo</span></code></p></td>
+<td><p>Raíz del repositorio</p></td>
+</tr>
+<tr class="row-even"><td><p>Contenedor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> (python:3.13-slim con <code class="docutils literal notranslate"><span class="pre">requirements-train.txt</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Entregable_3_UAVIDS_2025/Dockerfile</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Integración continua</p></td>
+<td><p>GitHub Actions ejecuta <code class="docutils literal notranslate"><span class="pre">pytest</span></code> en cada <em>push</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/entregable3-pruebas.yml</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corridas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">carpeta</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ajuste&quot;</span><span class="p">,</span> <span class="s2">&quot;piloto&quot;</span><span class="p">,</span> <span class="s2">&quot;definitiva&quot;</span><span class="p">,</span> <span class="s2">&quot;ablacion&quot;</span><span class="p">,</span> <span class="s2">&quot;adicionales&quot;</span><span class="p">,</span> <span class="s2">&quot;sensibilidad&quot;</span><span class="p">,</span> <span class="s2">&quot;curvas&quot;</span><span class="p">,</span> <span class="s2">&quot;cv5x2&quot;</span><span class="p">,</span> <span class="s2">&quot;bootstrap&quot;</span><span class="p">,</span> <span class="s2">&quot;permutacion&quot;</span><span class="p">,</span> <span class="s2">&quot;diagnostico_adicionales&quot;</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/resultados/corridas&quot;</span> <span class="o">/</span> <span class="n">carpeta</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.json&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pendiente_gpu&quot;</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">corridas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;Fase&quot;</span><span class="p">:</span> <span class="n">carpeta</span><span class="p">,</span> <span class="s2">&quot;Modelo&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">),</span> <span class="s2">&quot;Segundos&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;segundos&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;GPU&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dispositivo&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;cpu&quot;</span><span class="p">})</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">corridas</span><span class="p">)</span>
+<span class="n">tiempo</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Fase&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">Corridas</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Segundos&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">),</span> <span class="n">En_GPU</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span> <span class="n">Horas_de_proceso</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Segundos&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">))</span>
+<span class="n">tiempo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tiempo</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tiempo de cómputo del Entregable 3 (horas de proceso, 2 hilos cada uno; las fases corren en paralelo con hasta 6 procesos):&quot;</span><span class="p">)</span>
+<span class="n">tiempo</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tiempo de cómputo del Entregable 3 (horas de proceso, 2 hilos cada uno; las fases corren en paralelo con hasta 6 procesos):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Corridas</th>
+      <th>En_GPU</th>
+      <th>Horas_de_proceso</th>
+    </tr>
+    <tr>
+      <th>Fase</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ablacion</th>
+      <td>120.0</td>
+      <td>0.0</td>
+      <td>1.66</td>
+    </tr>
+    <tr>
+      <th>adicionales</th>
+      <td>390.0</td>
+      <td>31.0</td>
+      <td>30.45</td>
+    </tr>
+    <tr>
+      <th>ajuste</th>
+      <td>12.0</td>
+      <td>0.0</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <th>bootstrap</th>
+      <td>20.0</td>
+      <td>0.0</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <th>curvas</th>
+      <td>36.0</td>
+      <td>0.0</td>
+      <td>0.57</td>
+    </tr>
+    <tr>
+      <th>cv5x2</th>
+      <td>10.0</td>
+      <td>0.0</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>definitiva</th>
+      <td>94.0</td>
+      <td>0.0</td>
+      <td>3.60</td>
+    </tr>
+    <tr>
+      <th>diagnostico_adicionales</th>
+      <td>630.0</td>
+      <td>0.0</td>
+      <td>3.61</td>
+    </tr>
+    <tr>
+      <th>permutacion</th>
+      <td>200.0</td>
+      <td>0.0</td>
+      <td>1.87</td>
+    </tr>
+    <tr>
+      <th>piloto</th>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>sensibilidad</th>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>0.24</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td>1541.0</td>
+      <td>31.0</td>
+      <td>42.53</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Consumo energético estimado.</strong> Las corridas del Entregable 3 ocuparon unas 9,5 horas de reloj en la CPU (los registros de <code class="docutils literal notranslate"><span class="pre">experiments/resultados/registros/</span></code> dan 303 minutos para los conjuntos adicionales, 37 para las definitivas, 17 para la ablación, 30 para la robustez y cerca de una hora para los diagnósticos, más el diseño y el ajuste). Con el TDP de 15 W del procesador, eso es como mucho 0,15 kWh. La GPU estuvo encendida unos 25 minutos; aun suponiendo 150 W para la porción MIG, suma menos de 0,07 kWh. El total es del orden de 0,2 kWh y, con una intensidad de la red de 0,1 a 0,4 kg de CO₂ equivalente por kWh, las emisiones quedan entre 20 y 90 g de CO₂ equivalente.</p>
+</section>
+<section id="archivo-versionado-con-identificador-persistente">
+<h2>Archivo versionado con identificador persistente<a class="headerlink" href="#archivo-versionado-con-identificador-persistente" title="Link to this heading">#</a></h2>
+<p>La <em>release</em> <code class="docutils literal notranslate"><span class="pre">entregable-3</span></code> del repositorio de GitHub se archiva en Zenodo, que le asigna un DOI. El DOI se cita aquí cuando se publique la <em>release</em> (sección 12, entregable 11).</p>
+</section>
+<section id="reproduccion-independiente">
+<h2>Reproducción independiente<a class="headerlink" href="#reproduccion-independiente" title="Link to this heading">#</a></h2>
+<p>La reproducción la hace <strong>Imera Logreira</strong>, colega que no participó en el diseño ni en el código, en su propio equipo y sin ayuda técnica del autor. Recibe el paquete <code class="docutils literal notranslate"><span class="pre">paquete_reproduccion_e3.zip</span></code>, que contiene el repositorio, el CSV de UAVIDS-2025 y las probabilidades de prueba de las corridas definitivas, junto con su SHA-256, y sigue la guía <code class="docutils literal notranslate"><span class="pre">verificacion_externa/GUIA.md</span></code>:</p>
+<ol class="arabic simple">
+<li><p>construye el contenedor con el <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>;</p></li>
+<li><p>ejecuta <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">verificacion_externa/reproducir.py</span></code>, que verifica el SHA-256 de los datos y de la prueba sellada, vuelve a correr el análisis confirmatorio y compara celda por celda la tabla regenerada con la publicada (capítulo 7). También reentrena desde cero tres corridas definitivas (Original, LightGBM y CNN 1D con la semilla 6001) y compara su F1 y sus probabilidades;</p></li>
+<li><p>corre las pruebas unitarias, compila este libro desde cero y hace la prueba de humo del dashboard.</p></li>
+</ol>
+<p>Su reporte firmado (<code class="docutils literal notranslate"><span class="pre">verificacion_externa/reporte_reproduccion.md</span></code>), con la discrepancia máxima observada, y su concepto sobre la novedad (<code class="docutils literal notranslate"><span class="pre">verificacion_externa/concepto_novedad.md</span></code>, capítulo 4) se anexan aquí.</p>
+</section>
+<section id="declaracion-de-autoria-contribuciones-y-uso-de-herramientas">
+<h2>Declaración de autoría, contribuciones y uso de herramientas<a class="headerlink" href="#declaracion-de-autoria-contribuciones-y-uso-de-herramientas" title="Link to this heading">#</a></h2>
+<p><strong>Autoría y contribuciones.</strong> Donny Torres es el autor único del proyecto: definió el problema, aprobó cada decisión del protocolo (conjuntos adicionales, mecanismo, familia de contrastes y fechas), revisó los resultados y responde por ellos en la sustentación.</p>
+<p><strong>Uso de herramientas de IA.</strong> Se usó Claude (Anthropic), un asistente de programación, como apoyo para:</p>
+<ul class="simple">
+<li><p>escribir y depurar el código del modelo, las pruebas, el análisis y el dashboard;</p></li>
+<li><p>ejecutar los experimentos según el protocolo preregistrado;</p></li>
+<li><p>buscar en OpenAlex y arXiv;</p></li>
+<li><p>redactar borradores de este libro.</p></li>
+</ul>
+<p>Todas las decisiones metodológicas quedaron registradas con fecha en <code class="docutils literal notranslate"><span class="pre">design_log.md</span></code>, <code class="docutils literal notranslate"><span class="pre">protocolo.md</span></code> y el historial de Git. Las cifras del libro se regeneran desde los resultados al compilarlo. El autor revisó el código y el texto, y puede explicar y modificar en vivo cualquier parte del algoritmo, como exige la sección 6.5 del enunciado.</p>
+<p>Firma: ______________________ Donny Torres</p>
+</section>
+<section id="bibliografia">
+<h2>Bibliografía<a class="headerlink" href="#bibliografia" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id1">
+<div role="list" class="citation-list">
+<div class="citation" id="id124" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AGumucs26<span class="fn-bracket">]</span></span>
+<p>İzel Ece Aksu and Fatma Gümüş. Source-Rate Representations and Attention Autoencoders for Leakage-Safe Zero-Day Sybil Detection in UAV Networks. <em>Electronics</em>, 15(17):3966, 2026. <a class="reference external" href="https://doi.org/10.3390/electronics15173966">doi:10.3390/electronics15173966</a>.</p>
+</div>
+<div class="citation" id="id122" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AB26<span class="fn-bracket">]</span></span>
+<p>Hani Al-Balasmeh. An explainable XGBoost–MLP fusion framework for intrusion detection in 5G and beyond networks. <em>Discover Artificial Intelligence</em>, 6:1573, 2026. <a class="reference external" href="https://doi.org/10.1007/s44163-026-02371-0">doi:10.1007/s44163-026-02371-0</a>.</p>
+</div>
+<div class="citation" id="id123" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AEARF26<span class="fn-bracket">]</span></span>
+<p>Malik AL-Essa, Wasim A. Ali, Michèle Roccotelli, and Maria Pia Fanti. A Practical Enhancement for Intrusion Detection Systems With Validation-Gated Mixture-of-Experts (VG-MoE). In <em>IEEE Conference on Artificial Intelligence (CAI)</em>. 2026. <a class="reference external" href="https://doi.org/10.1109/cai68641.2026.11536604">doi:10.1109/cai68641.2026.11536604</a>.</p>
+</div>
+<div class="citation" id="id115" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DHS+23<span class="fn-bracket">]</span></span>
+<p>Tapadhir Das, Osama Abu Hamdan, Raj Mani Shukla, Shamik Sengupta, and Engin Arslan. UNR-IDD: Intrusion Detection Dataset using Network Port Statistics. In <em>IEEE Consumer Communications &amp; Networking Conference (CCNC)</em>. 2023. URL: <a class="reference external" href="https://ieeexplore.ieee.org/document/10059640">https://ieeexplore.ieee.org/document/10059640</a>.</p>
+</div>
+<div class="citation" id="id107" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GRB22<span class="fn-bracket">]</span></span>
+<p>Yury Gorishniy, Ivan Rubachev, and Artem Babenko. On Embeddings for Numerical Features in Tabular Deep Learning. In <em>Advances in Neural Information Processing Systems 35</em>. 2022. <a class="reference external" href="https://doi.org/10.48550/arXiv.2203.05556">doi:10.48550/arXiv.2203.05556</a>.</p>
+</div>
+<div class="citation" id="id111" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GOV22<span class="fn-bracket">]</span></span>
+<p>Léo Grinsztajn, Edouard Oyallon, and Gaël Varoquaux. Why do tree-based models still outperform deep learning on typical tabular data? In <em>Advances in Neural Information Processing Systems 35, Datasets and Benchmarks Track</em>. 2022. <a class="reference external" href="https://doi.org/10.48550/arXiv.2207.08815">doi:10.48550/arXiv.2207.08815</a>.</p>
+</div>
+<div class="citation" id="id113" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HCK+25<span class="fn-bracket">]</span></span>
+<p>Hassan Jalil Hadi, Yue Cao, Muhammad Khurram Khan, Naveed Ahmad, Yulin Hu, and Chao Fu. UAV-NIDD: A Dynamic Dataset for Cybersecurity and Intrusion Detection in UAV Networks. <em>IEEE Transactions on Network Science and Engineering</em>, 12(4):2739–2758, 2025. <a class="reference external" href="https://doi.org/10.1109/TNSE.2025.3553442">doi:10.1109/TNSE.2025.3553442</a>.</p>
+</div>
+<div class="citation" id="id106" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JJNH91<span class="fn-bracket">]</span></span>
+<p>Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, and Geoffrey E. Hinton. Adaptive Mixtures of Local Experts. <em>Neural Computation</em>, 3(1):79–87, 1991. <a class="reference external" href="https://doi.org/10.1162/neco.1991.3.1.79">doi:10.1162/neco.1991.3.1.79</a>.</p>
+</div>
+<div class="citation" id="id109" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KN23<span class="fn-bracket">]</span></span>
+<p>Sayash Kapoor and Arvind Narayanan. Leakage and the reproducibility crisis in machine-learning-based science. <em>Patterns</em>, 4(9):100804, 2023. <a class="reference external" href="https://doi.org/10.1016/j.patter.2023.100804">doi:10.1016/j.patter.2023.100804</a>.</p>
+</div>
+<div class="citation" id="id119" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LL17<span class="fn-bracket">]</span></span>
+<p>Scott M. Lundberg and Su-In Lee. A Unified Approach to Interpreting Model Predictions. In <em>Advances in Neural Information Processing Systems 30</em>. 2017. <a class="reference external" href="https://doi.org/10.48550/arXiv.1705.07874">doi:10.48550/arXiv.1705.07874</a>.</p>
+</div>
+<div class="citation" id="id121" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MMCC26<span class="fn-bracket">]</span></span>
+<p>Ting Ma, ZheXin Miao, Nongtian Chen, and Peng Chen. PS-CAHE: Protocol-Semantic and Confusion-Pair-Aware Fusion for UAV Intrusion Detection. <em>Information</em>, 17(10):988, 2026. <a class="reference external" href="https://doi.org/10.3390/info17100988">doi:10.3390/info17100988</a>.</p>
+</div>
+<div class="citation" id="id116" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MBLI26<span class="fn-bracket">]</span></span>
+<p>Sripath Mishra, Bharat Bhargava, Zizheng Liu, and Shafkat Islam. UAV-CAS: A Calibrated Digital-Twin Dataset for Intrusion Detection in UAV Swarm Networks. arXiv:2606.17845; IEEE DataPort, DOI 10.21227/zgrg-z865, 2026.</p>
+</div>
+<div class="citation" id="id114" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MS15<span class="fn-bracket">]</span></span>
+<p>Nour Moustafa and Jill Slay. UNSW-NB15: a comprehensive data set for network intrusion detection systems (UNSW-NB15 network data set). In <em>Military Communications and Information Systems Conference (MilCIS)</em>. 2015. <a class="reference external" href="https://doi.org/10.1109/MilCIS.2015.7348942">doi:10.1109/MilCIS.2015.7348942</a>.</p>
+</div>
+<div class="citation" id="id108" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SMM+17<span class="fn-bracket">]</span></span>
+<p>Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc Le, Geoffrey Hinton, and Jeff Dean. Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer. In <em>International Conference on Learning Representations</em>. 2017. <a class="reference external" href="https://doi.org/10.48550/arXiv.1701.06538">doi:10.48550/arXiv.1701.06538</a>.</p>
+</div>
+<div class="citation" id="id120" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WXZ+25<span class="fn-bracket">]</span></span>
+<p>Weilin Wang, Qi Xu, Huachun Zhou, Ruyun Zhang, and Keping Long. Intelligent Intrusion Detection System With Autonomous Optimal Traffic Steering for Aerial-Aided Edge Computing. <em>IEEE Internet of Things Journal</em>, 12(13):25849, 2025. <a class="reference external" href="https://doi.org/10.1109/jiot.2025.3559902">doi:10.1109/jiot.2025.3559902</a>.</p>
+</div>
+<div class="citation" id="id99" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ZD26<span class="fn-bracket">]</span></span>
+<p>Iakovos-Christos Zarkadis and Christos Douligeris. XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles. In <em>International Conference on Computer, Information and Telecommunication Systems</em>, 1–8. 2026. <a class="reference external" href="https://doi.org/10.1109/cits70307.2026.11637173">doi:10.1109/cits70307.2026.11637173</a>.</p>
+</div>
+<div class="citation" id="id102" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ZBNA25a<span class="fn-bracket">]</span></span>
+<p>Q. Zeng, A. Bashir, and F. Nait-Abdesselam. UAVIDS-2025. Conjunto de datos, Zenodo, 2025. <a class="reference external" href="https://doi.org/10.5281/zenodo.15336998">doi:10.5281/zenodo.15336998</a>.</p>
+</div>
+<div class="citation" id="id101" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ZBNA25b<span class="fn-bracket">]</span></span>
+<p>Qingli Zeng, Abdalrahman Bashir, and Farid Naït-Abdesselam. UAVIDS-2025: A Benchmark Dataset for Intrusion Detection in UAV Networks Using Machine Learning Techniques. In <em>IEEE Conference on Communications and Network Security</em>, 1–9. 2025. <a class="reference external" href="https://doi.org/10.1109/cns66487.2025.11194990">doi:10.1109/cns66487.2025.11194990</a>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="10_conclusiones.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Conclusiones, limitaciones y trabajo futuro</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-verificacion-de-reproducibilidad">Lista de verificación de reproducibilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#archivo-versionado-con-identificador-persistente">Archivo versionado con identificador persistente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproduccion-independiente">Reproducción independiente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-de-autoria-contribuciones-y-uso-de-herramientas">Declaración de autoría, contribuciones y uso de herramientas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografía</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

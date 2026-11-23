@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Conclusiones, limitaciones y trabajo futuro &#8212; Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10_conclusiones';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Reproducibilidad, autoría y bibliografía" href="11_reproducibilidad.html" />
+    <link rel="prev" title="Dashboard y despliegue" href="09_dashboard.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_correcciones.html">Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_datos.html">Datos: EDA, auditoría y ficha de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Benchmarks: Top 10, baselines y exportación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y evidencia de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_diseno.html">Modelo original: limitación, fuente, hipótesis, teoría y diseño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelo_implementacion.html">Modelo original: implementación, pruebas, ablación e interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_validacion.html">Validación: protocolo y pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_evaluacion_ampliada.html">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_dashboard.html">Dashboard y despliegue</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conclusiones, limitaciones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_reproducibilidad.html">Reproducibilidad, autoría y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/10_conclusiones.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Conclusiones, limitaciones y trabajo futuro</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos">Hallazgos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#veredicto-sobre-r1-r2-y-r3">Veredicto sobre R1, R2 y R3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgo-alternativo">Hallazgo alternativo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amenazas-a-la-validez">Amenazas a la validez</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riesgos-de-uso">Riesgos de uso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">Trabajo futuro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-de-uso-de-herramientas-de-ia">Declaración de uso de herramientas de IA</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones-limitaciones-y-trabajo-futuro">
+<h1>Conclusiones, limitaciones y trabajo futuro<a class="headerlink" href="#conclusiones-limitaciones-y-trabajo-futuro" title="Link to this heading">#</a></h1>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/resultados&quot;</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;confirmatorio/resumen.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">c4</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;confirmatorio/sensibilidad_cuadro4.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">ad</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;adicionales/resumen.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">adec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;adecuacion/resumen.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="hallazgos">
+<h2>Hallazgos<a class="headerlink" href="#hallazgos" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>El modelo original no supera a la familia de contrastes.</strong> Con 48 semillas obtiene un F1 macro de 0,850 ± 0,012 en la prueba sellada, menor que el de 8 de los 12 rivales, y ningún contraste rechaza con tres pruebas, ni con las preregistradas ni con las seis admisibles del cuadro 4 (capítulo 7). En los conjuntos adicionales no es el mejor en ninguno y en UNSW-NB15 pierde con significancia frente a tres rivales (capítulo 8).</p></li>
+<li><p><strong>LightGBM es el modelo más fuerte en la prueba sellada, pero su ventaja no es robusta a la partición.</strong> Gana en UAVIDS-2025 (0,875), en UNSW-NB15 y en UNR-IDD, y tiene el mejor rango medio entre conjuntos. Sin embargo, en la validación cruzada 5 × 2 su F1 medio (0,860) es igual al del original y al de CNN 1D (<em>p</em> de Nadeau-Bengio de 0,99 y 0,97).</p></li>
+<li><p><strong>El escenario de simulación pesa más que la arquitectura.</strong> El 70,5 % de las filas de prueba pertenece a escenarios vistos en el entrenamiento (dependencia L3.2, capítulo 1), ningún modelo reconoce el escenario de Sybil aislado (acierto entre 4,8 % y 9,4 %, P5 cierta), la predicción conforme pierde su cobertura nominal en todos los modelos (de 0,82 a 0,89 frente al 0,90 declarado) y la ventaja de LightGBM desaparece al cambiar la partición.</p></li>
+<li><p><strong>El mecanismo no funciona como se predijo.</strong> La compuerta sí especializa a los expertos (P2: el 88 % del peso de Wormhole y el 69 % de Blackhole van al experto de umbrales), pero ese experto es el que peor separa esas dos clases: quitar el codificador de escalones mejora el F1 de 0,848 a 0,862 (P1 falsa) y la desventaja frente a CNN-LSTM se concentra justo en Blackhole y Wormhole (P3 falsa).</p></li>
+<li><p><strong>El original es el modelo más robusto ante ruido y atributos faltantes</strong>, con una caída de 0,182 frente a 0,324 de LightGBM con ruido σ = 0,5 y de 0,330 frente a 0,408 con la mitad de los atributos imputados. <strong>Pero la cota de Lipschitz demostrada no explica esa robustez:</strong> al bajar K de 39 a 21 la degradación no cambia (P4 falsa).</p></li>
+<li><p><strong>El original es adecuado en tres de las cuatro condiciones del E2:</strong> supera al trivial, no sobreajusta (brecha de 0,004) y su prueba es consistente con la validación; falla la calibración por 0,003 (ECE con temperatura de 0,053 frente a 0,05), como 9 de los 15 modelos del E2. En los conjuntos adicionales es adecuado en UNSW-NB15 y UNR-IDD, y no en UAV-NIDD, donde memoriza las ejecuciones de ataque del entrenamiento (F1 de 0,89 en entrenamiento frente a 0,56 en validación). Los 30 reentrenamientos de control reproducen bit a bit el F1 registrado.</p></li>
+</ol>
+</section>
+<section id="veredicto-sobre-r1-r2-y-r3">
+<h2>Veredicto sobre R1, R2 y R3<a class="headerlink" href="#veredicto-sobre-r1-r2-y-r3" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Condición</p></th>
+<th class="head"><p>Veredicto</p></th>
+<th class="head"><p>Evidencia</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>R1. Novedad para el problema</strong></p></td>
+<td><p>Se cumple, sujeta a la verificación del tercero</p></td>
+<td><p>La búsqueda en OpenAlex, IEEE Xplore y arXiv (cadenas N1 a N7, capítulo 4), con búsqueda por citación y en repositorios de código, no encontró estudios que apliquen a intrusiones en redes de UAV una compuerta por flujo entre un experto de escalones suaves y uno neuronal, entrenada de forma cooperativa. La diferencia con los trabajos más cercanos (la fusión por pares PS-CAHE y el <em>stacking</em> sobre UAVIDS-2025, y las mezclas de expertos homogéneos en 5G y en Switch IDS) es de mecanismo y de entrenamiento, no solo de aplicación.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>R2. Mecanismo propio, sin <code class="docutils literal notranslate"><span class="pre">import</span></code> ni código de terceros</strong></p></td>
+<td><p>Se cumple</p></td>
+<td><p>El mecanismo está programado desde su formulación en <code class="docutils literal notranslate"><span class="pre">src/original_model.py</span></code>, con PyTorch solo como motor tensorial, y lo cubren 14 pruebas unitarias (capítulo 6). La propiedad (cota de Lipschitz de la mezcla) está demostrada y verificada numéricamente (capítulo 5).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>R3. Superioridad estadística sobre la familia</strong></p></td>
+<td><p><strong>No se cumple</strong></p></td>
+<td><p>Fallan las condiciones 1 a 5 de la sección 8.4 del enunciado y la condición 6 confirma que la conclusión no depende de la prueba (capítulo 8).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Tope de calificación: 4,0</strong> (sección 14.1 del enunciado: R1 sí, R2 sí, R3 no).</p>
+</section>
+<section id="hallazgo-alternativo">
+<h2>Hallazgo alternativo<a class="headerlink" href="#hallazgo-alternativo" title="Link to this heading">#</a></h2>
+<p>Como se fijó en la sección 12 del protocolo antes de las corridas definitivas, el trabajo se sostiene en tres aportes que no dependen de que el original gane:</p>
+<ol class="arabic simple">
+<li><p><strong>Un <em>benchmark</em> riguroso y preregistrado de 13 modelos</strong> en el problema principal y en tres conjuntos adicionales, con el mismo presupuesto de ajuste, potencia por contraste, Holm por familia, seis pruebas admisibles y una tabla maestra con una fila por corrida (capítulo 11). Los reentrenamientos de control dieron el mismo F1, bit a bit, que las corridas registradas.</p></li>
+<li><p><strong>La explicación de por qué el escenario pesa más que la arquitectura en UAVIDS-2025</strong>, con tres evidencias independientes: la auditoría de fuga L3.2, la prueba de D3 por escenario no visto (ningún mecanismo de invariancia lo resolvió) y la desaparición de la ventaja de LightGBM en 5 × 2. La consecuencia práctica es que los <em>rankings</em> publicados sobre una sola partición de este conjunto, incluido el del E2, miden en buena parte qué escenarios cayeron en la prueba. Dos trabajos de 2026 llegan a lo mismo por otros caminos: la fusión PS-CAHE pierde su ventaja cuando se evalúa con nodos disjuntos <span class="bibtex-citation" id="id1">[<a class="reference internal" href="11_reproducibilidad.html#id121" title="Ting Ma, ZheXin Miao, Nongtian Chen, and Peng Chen. PS-CAHE: Protocol-Semantic and Confusion-Pair-Aware Fusion for UAV Intrusion Detection. Information, 17(10):988, 2026. doi:10.3390/info17100988.">Ma <em>et al.</em>, 2026</a>]</span>, y la detección de Sybil en un benchmark público de UAV solo se sostiene con una evaluación sin fugas de identificadores <span class="bibtex-citation" id="id2">[<a class="reference internal" href="11_reproducibilidad.html#id124" title="İzel Ece Aksu and Fatma Gümüş. Source-Rate Representations and Attention Autoencoders for Leakage-Safe Zero-Day Sybil Detection in UAV Networks. Electronics, 15(17):3966, 2026. doi:10.3390/electronics15173966.">Aksu and Gümüş, 2026</a>]</span>.</p></li>
+<li><p><strong>La medición de cuánto cierra la brecha entre árboles y redes un experto con escalones suaves y cuándo ayuda la compuerta.</strong> El oráculo que elige flujo por flujo entre un árbol y una red llega a 0,871 en desarrollo, frente a 0,845 de LightGBM, de modo que la selección por flujo tiene margen real; pero la compuerta aprendida no lo alcanza y el codificador de escalones, tal como se diseñó, resta. Es un resultado negativo bien medido, que acota el espacio de diseño para el siguiente intento.</p></li>
+</ol>
+</section>
+<section id="amenazas-a-la-validez">
+<h2>Amenazas a la validez<a class="headerlink" href="#amenazas-a-la-validez" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Validez interna.</strong> La prueba sellada comparte escenarios de simulación con el entrenamiento, de modo que las diferencias entre modelos combinan capacidad y composición de escenarios; las pruebas sobre flujos (McNemar, DeLong) los tratan como independientes y son anticonservadoras. El diseño del original se hizo en una partición de desarrollo tomada del entrenamiento del E2, sin ver la prueba, pero dentro de los mismos escenarios.</p></li>
+<li><p><strong>Validez externa.</strong> UAVIDS-2025 es una simulación (NS-3.24 con movilidad BOID), no tráfico real de drones. Los conjuntos adicionales cubren un banco real de UAV, una red empresarial y estadísticos de puertos SDN, pero con los hiperparámetros del problema principal y sin reajuste, lo que es equitativo y a la vez puede penalizar a los modelos más sensibles al ajuste.</p></li>
+<li><p><strong>Validez de constructo.</strong> El F1 macro se calcula sobre las clases presentes en cada prueba, y el umbral de calibración (ECE &lt; 0,05) es exploratorio desde el E2.</p></li>
+<li><p><strong>Validez de la conclusión.</strong> La potencia conjunta de la familia es de apenas 0,115 y solo 6 de los 12 contrastes alcanzan potencia de 0,90 para δ. Una conclusión de «no supera» con baja potencia sería débil si el original estuviera cerca de ganar, pero su F1 medio es menor que el de 8 rivales y la condición 1 falla sin necesidad de pruebas.</p></li>
+</ul>
+</section>
+<section id="limitaciones">
+<h2>Limitaciones<a class="headerlink" href="#limitaciones" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Desviaciones declaradas</strong> (capítulo 7): las pruebas T1 y T3 no coincidían al pie de la letra con la fila tabular del cuadro 4, lo que se corrigió con un análisis de sensibilidad posterior; 31 corridas de BiLSTM y GRU de los conjuntos adicionales se hicieron en GPU, y con la misma semilla el hardware movió el F1 unas dos desviaciones estándar entre semillas.</p></li>
+<li><p><strong>Tope de épocas.</strong> En UNSW-NB15, varias redes llegaron a las 30 épocas todavía mejorando (8 de 10 corridas de CNN-LSTM, GRU y DBN).</p></li>
+<li><p><strong>Diseño fuera del óptimo de validación.</strong> El barrido de sensibilidad posterior encontró dos variantes mejores en validación (T = 4 y τ_min = 0,2); no se adoptaron porque el diseño estaba congelado.</p></li>
+<li><p><strong>La cota de Lipschitz es holgada</strong>: es un peor caso global que no ordena las variantes por su robustez real.</p></li>
+<li><p><strong>La verificación por un tercero</strong> de la novedad y de la reproducción se hace en los días previos a la entrega (capítulos 4 y 11).</p></li>
+</ul>
+</section>
+<section id="riesgos-de-uso">
+<h2>Riesgos de uso<a class="headerlink" href="#riesgos-de-uso" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Falsos negativos en Blackhole y Wormhole.</strong> Son las clases con menor F1 del original (0,834 y 0,820): un ataque de agujero negro o de gusano puede pasar como otra clase.</p></li>
+<li><p><strong>Fallos silenciosos ante escenarios nuevos.</strong> Ante un escenario de red no visto, el acierto cae por debajo del 10 % sin que el modelo lo advierta; el dashboard mitiga este riesgo con un detector de entradas fuera de dominio (distancia de Mahalanobis), que no es infalible.</p></li>
+<li><p><strong>Exceso de confianza.</strong> Los conjuntos conformes cubren menos que lo declarado, y la pendiente de calibración (0,73) indica probabilidades algo extremas; el dashboard reporta la cobertura medida, no la nominal.</p></li>
+<li><p><strong>Manipulación adversaria.</strong> Un atacante que controle los contadores del flujo puede desplazar la entrada; la robustez ante ruido aleatorio que se midió no es robustez ante perturbaciones dirigidas.</p></li>
+</ul>
+<p>Por estas razones, el modelo es una herramienta de apoyo para un analista de seguridad y no debe bloquear tráfico de forma automática.</p>
+</section>
+<section id="trabajo-futuro">
+<h2>Trabajo futuro<a class="headerlink" href="#trabajo-futuro" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Un diseño con menos escalones y más suaves</strong> (T = 4, τ_min ≥ 0,2), sugerido por la sensibilidad y la ablación, evaluado con un protocolo nuevo y preregistrado.</p></li>
+<li><p><strong>Un protocolo de evaluación por escenarios</strong> (dejar escenarios completos fuera) como partición principal de UAVIDS-2025, que es la pregunta relevante para un despliegue.</p></li>
+<li><p><strong>Atributos que separen Blackhole de Wormhole</strong>, el núcleo del 7,7 % de flujos que fallan los 13 modelos.</p></li>
+<li><p><strong>Una cota de robustez local o certificada</strong> (por ejemplo, por propagación de intervalos), más fina que la global, para contrastar de nuevo P4.</p></li>
+<li><p><strong>Predicción conforme bajo cambio de covariables</strong>, ponderada o estratificada por escenario, para recuperar la cobertura declarada.</p></li>
+</ol>
+</section>
+<section id="declaracion-de-uso-de-herramientas-de-ia">
+<h2>Declaración de uso de herramientas de IA<a class="headerlink" href="#declaracion-de-uso-de-herramientas-de-ia" title="Link to this heading">#</a></h2>
+<p>Se usó Claude (Anthropic), un asistente de programación, como apoyo en la escritura y depuración del código, la ejecución de los experimentos según el protocolo preregistrado, las búsquedas en OpenAlex y arXiv y la redacción de borradores de este libro. Todas las decisiones metodológicas quedaron registradas con fecha en la bitácora de diseño, el protocolo y el historial de Git, y el autor revisó el código y el texto. La declaración completa de autoría, contribuciones y uso de herramientas, firmada, está en el capítulo 11, que es el último del libro, como pide la sección 12 del enunciado.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09_dashboard.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Dashboard y despliegue</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="11_reproducibilidad.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Reproducibilidad, autoría y bibliografía</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos">Hallazgos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#veredicto-sobre-r1-r2-y-r3">Veredicto sobre R1, R2 y R3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgo-alternativo">Hallazgo alternativo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amenazas-a-la-validez">Amenazas a la validez</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riesgos-de-uso">Riesgos de uso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">Trabajo futuro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaracion-de-uso-de-herramientas-de-ia">Declaración de uso de herramientas de IA</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

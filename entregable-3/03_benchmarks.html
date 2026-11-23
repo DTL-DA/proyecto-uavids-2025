@@ -1,0 +1,1141 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Benchmarks: Top 10, baselines y exportación &#8212; Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_benchmarks';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Revisión de literatura y evidencia de novedad" href="04_literatura.html" />
+    <link rel="prev" title="Datos: EDA, auditoría y ficha de datos" href="02_datos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_correcciones.html">Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_datos.html">Datos: EDA, auditoría y ficha de datos</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Benchmarks: Top 10, baselines y exportación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y evidencia de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_diseno.html">Modelo original: limitación, fuente, hipótesis, teoría y diseño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelo_implementacion.html">Modelo original: implementación, pruebas, ablación e interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_validacion.html">Validación: protocolo y pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_evaluacion_ampliada.html">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_dashboard.html">Dashboard y despliegue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">Conclusiones, limitaciones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_reproducibilidad.html">Reproducibilidad, autoría y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03_benchmarks.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Benchmarks: Top 10, baselines y exportación</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterio-de-seleccion-de-la-mejor-configuracion">Criterio de selección de la mejor configuración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-maestra">Tabla maestra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reentrenamiento-final-exportacion-y-prueba-de-ida-y-vuelta">Reentrenamiento final, exportación y prueba de ida y vuelta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costo-de-inferencia">Costo de inferencia</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="benchmarks-top-10-baselines-y-exportacion">
+<h1>Benchmarks: Top 10, baselines y exportación<a class="headerlink" href="#benchmarks-top-10-baselines-y-exportacion" title="Link to this heading">#</a></h1>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">110</span><span class="p">,</span> <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.precision&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">lideres</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;artifacts/dashboard/lideres.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="criterio-de-seleccion-de-la-mejor-configuracion">
+<h2>Criterio de selección de la mejor configuración<a class="headerlink" href="#criterio-de-seleccion-de-la-mejor-configuracion" title="Link to this heading">#</a></h2>
+<p>Para cada modelo del benchmark y cada <em>baseline</em> se usa la configuración elegida en el E2 por la <strong>mayor F1 macro media de validación</strong>, nunca por la prueba:</p>
+<ul class="simple">
+<li><p><strong>Modelos con hiperparámetros:</strong> las 12 configuraciones de (lr, weight_decay, lote).</p></li>
+<li><p><strong>Modelos con búsqueda de arquitectura</strong> (ResNet, Autoencoder, DBN y CNN-LSTM): la arquitectura ganadora de la fase 2, cuyo sesgo del ganador se reportó en el E2.</p></li>
+<li><p><strong>Modelo original:</strong> las mismas 12 configuraciones, con la misma regla (capítulo 7).</p></li>
+</ul>
+<p>Las configuraciones están congeladas con el SHA-256 del capítulo 1.</p>
+</section>
+<section id="tabla-maestra">
+<h2>Tabla maestra<a class="headerlink" href="#tabla-maestra" title="Link to this heading">#</a></h2>
+<p>La tabla maestra de experimentos (sección 12, entregable 8) es <code class="docutils literal notranslate"><span class="pre">experiments/resultados/tabla_maestra.csv</span></code>: una fila por corrida, con modelo, conjunto de datos, semilla, métricas de validación y prueba, épocas, tiempos y costo. Su resumen por modelo en el problema principal es la tabla de líderes:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="s2">&quot;Grupo&quot;</span><span class="p">,</span> <span class="s2">&quot;Familia&quot;</span><span class="p">,</span> <span class="s2">&quot;Semillas&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 macro&quot;</span><span class="p">,</span> <span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;IC95 inf&quot;</span><span class="p">,</span> <span class="s2">&quot;IC95 sup&quot;</span><span class="p">,</span> <span class="s2">&quot;ECE&quot;</span><span class="p">,</span> <span class="s2">&quot;Parámetros&quot;</span><span class="p">,</span> <span class="s2">&quot;FLOPs&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Latencia mediana (ms)&quot;</span><span class="p">,</span> <span class="s2">&quot;Latencia p95 (ms)&quot;</span><span class="p">,</span> <span class="s2">&quot;Entrenamiento (s)&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">lideres</span><span class="p">]</span>
+<span class="n">lideres</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>Grupo</th>
+      <th>Familia</th>
+      <th>Semillas</th>
+      <th>F1 macro</th>
+      <th>DE</th>
+      <th>IC95 inf</th>
+      <th>IC95 sup</th>
+      <th>ECE</th>
+      <th>Parámetros</th>
+      <th>FLOPs</th>
+      <th>Latencia mediana (ms)</th>
+      <th>Latencia p95 (ms)</th>
+      <th>Entrenamiento (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>LightGBM</td>
+      <td>Baseline fuerte</td>
+      <td>Árboles potenciados</td>
+      <td>20</td>
+      <td>0.8748</td>
+      <td>0.0012</td>
+      <td>0.8743</td>
+      <td>0.8753</td>
+      <td>0.0370</td>
+      <td>35516</td>
+      <td>NaN</td>
+      <td>0.1091</td>
+      <td>0.1448</td>
+      <td>14.4875</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Autoencoder</td>
+      <td>Top 10</td>
+      <td>Codificador-decodificador</td>
+      <td>20</td>
+      <td>0.8591</td>
+      <td>0.0095</td>
+      <td>0.8551</td>
+      <td>0.8633</td>
+      <td>0.0431</td>
+      <td>19093</td>
+      <td>1.9072e+04</td>
+      <td>0.1177</td>
+      <td>0.2079</td>
+      <td>35.3220</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CNN-LSTM</td>
+      <td>Top 10</td>
+      <td>Híbrida</td>
+      <td>48</td>
+      <td>0.8591</td>
+      <td>0.0186</td>
+      <td>0.8538</td>
+      <td>0.8641</td>
+      <td>0.0446</td>
+      <td>46213</td>
+      <td>9.2429e+05</td>
+      <td>0.1618</td>
+      <td>0.3085</td>
+      <td>215.1702</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CNN 1D</td>
+      <td>Baseline del E1</td>
+      <td>Convolucional</td>
+      <td>20</td>
+      <td>0.8584</td>
+      <td>0.0050</td>
+      <td>0.8562</td>
+      <td>0.8606</td>
+      <td>0.0422</td>
+      <td>39493</td>
+      <td>2.6586e+05</td>
+      <td>0.1318</td>
+      <td>0.2094</td>
+      <td>118.0715</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DNN</td>
+      <td>Base del E1</td>
+      <td>Perceptrón multicapa</td>
+      <td>20</td>
+      <td>0.8577</td>
+      <td>0.0084</td>
+      <td>0.8536</td>
+      <td>0.8608</td>
+      <td>0.0474</td>
+      <td>12677</td>
+      <td>2.4896e+04</td>
+      <td>0.0907</td>
+      <td>0.1465</td>
+      <td>40.9205</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Transformer</td>
+      <td>Top 10</td>
+      <td>Atención</td>
+      <td>20</td>
+      <td>0.8576</td>
+      <td>0.0127</td>
+      <td>0.8521</td>
+      <td>0.8629</td>
+      <td>0.0433</td>
+      <td>3381</td>
+      <td>2.2144e+04</td>
+      <td>0.2089</td>
+      <td>0.3447</td>
+      <td>51.6170</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DBN</td>
+      <td>Top 10</td>
+      <td>Generativa preentrenada</td>
+      <td>20</td>
+      <td>0.8569</td>
+      <td>0.0062</td>
+      <td>0.8542</td>
+      <td>0.8594</td>
+      <td>0.0498</td>
+      <td>9733</td>
+      <td>1.9072e+04</td>
+      <td>0.0797</td>
+      <td>0.1422</td>
+      <td>110.3980</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>ResNet</td>
+      <td>Top 10</td>
+      <td>Residual</td>
+      <td>20</td>
+      <td>0.8510</td>
+      <td>0.0126</td>
+      <td>0.8456</td>
+      <td>0.8565</td>
+      <td>0.0607</td>
+      <td>14245</td>
+      <td>2.6944e+04</td>
+      <td>0.1158</td>
+      <td>0.1575</td>
+      <td>48.7470</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Original</td>
+      <td>Modelo original</td>
+      <td>Mezcla con compuerta</td>
+      <td>48</td>
+      <td>0.8496</td>
+      <td>0.0117</td>
+      <td>0.8462</td>
+      <td>0.8527</td>
+      <td>0.0463</td>
+      <td>14908</td>
+      <td>2.9056e+04</td>
+      <td>0.1851</td>
+      <td>0.3129</td>
+      <td>25.3060</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>KAN</td>
+      <td>Top 10</td>
+      <td>Kolmogorov-Arnold</td>
+      <td>20</td>
+      <td>0.8488</td>
+      <td>0.0124</td>
+      <td>0.8432</td>
+      <td>0.8539</td>
+      <td>0.0484</td>
+      <td>4845</td>
+      <td>9.3760e+03</td>
+      <td>0.1423</td>
+      <td>0.2386</td>
+      <td>96.3330</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>GRU</td>
+      <td>Top 10</td>
+      <td>Recurrente</td>
+      <td>20</td>
+      <td>0.8474</td>
+      <td>0.0119</td>
+      <td>0.8422</td>
+      <td>0.8523</td>
+      <td>0.0441</td>
+      <td>96901</td>
+      <td>2.7825e+06</td>
+      <td>0.4077</td>
+      <td>0.8621</td>
+      <td>886.8390</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>BiLSTM</td>
+      <td>Top 10</td>
+      <td>Recurrente</td>
+      <td>20</td>
+      <td>0.8457</td>
+      <td>0.0238</td>
+      <td>0.8353</td>
+      <td>0.8554</td>
+      <td>0.0502</td>
+      <td>530693</td>
+      <td>1.6813e+07</td>
+      <td>1.3150</td>
+      <td>1.9007</td>
+      <td>2032.3160</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>RNN</td>
+      <td>Top 10</td>
+      <td>Recurrente</td>
+      <td>20</td>
+      <td>0.8371</td>
+      <td>0.0201</td>
+      <td>0.8290</td>
+      <td>0.8459</td>
+      <td>0.0662</td>
+      <td>38277</td>
+      <td>9.3926e+05</td>
+      <td>0.3114</td>
+      <td>0.9768</td>
+      <td>225.0155</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>TabNet</td>
+      <td>Top 10</td>
+      <td>Atención</td>
+      <td>38</td>
+      <td>0.8301</td>
+      <td>0.0222</td>
+      <td>0.8230</td>
+      <td>0.8370</td>
+      <td>0.0542</td>
+      <td>6728</td>
+      <td>1.7232e+04</td>
+      <td>0.6519</td>
+      <td>1.0397</td>
+      <td>265.3692</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>LSTM</td>
+      <td>Base del E1</td>
+      <td>Recurrente</td>
+      <td>20</td>
+      <td>0.8285</td>
+      <td>0.0259</td>
+      <td>0.8172</td>
+      <td>0.8395</td>
+      <td>0.0487</td>
+      <td>17477</td>
+      <td>5.3312e+05</td>
+      <td>0.1533</td>
+      <td>0.2598</td>
+      <td>157.9465</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Logística</td>
+      <td>Línea base</td>
+      <td>Lineal</td>
+      <td>20</td>
+      <td>0.8030</td>
+      <td>0.0000</td>
+      <td>0.8030</td>
+      <td>0.8030</td>
+      <td>0.0440</td>
+      <td>85</td>
+      <td>NaN</td>
+      <td>0.0946</td>
+      <td>0.1998</td>
+      <td>40.3100</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>LightGBM es el mejor modelo global (F1 macro de 0,875 ± 0,001 en 20 semillas), seguido de CNN-LSTM (0,859 ± 0,019 en 48 semillas) y de un grupo de redes entre 0,849 y 0,859. El modelo original queda en ese grupo (0,850 ± 0,012), por encima de KAN, GRU, BiLSTM, RNN, LSTM, TabNet y la regresión logística.</strong></p>
+<p>Así mismo, la dispersión entre semillas de LightGBM es una décima de la de las redes, de modo que su ventaja no es un efecto de la semilla, y LightGBM tiene el mejor rango medio de la prueba de Friedman con los 13 modelos de la familia (capítulo 7).</p>
+<p>Por esta razón, LightGBM es el <em>baseline</em> fuerte de referencia en el dashboard, y la tabla de líderes muestra todos los modelos con media ± DE e IC 95 %, no solo el ganador.</p>
+</section>
+<section id="reentrenamiento-final-exportacion-y-prueba-de-ida-y-vuelta">
+<h2>Reentrenamiento final, exportación y prueba de ida y vuelta<a class="headerlink" href="#reentrenamiento-final-exportacion-y-prueba-de-ida-y-vuelta" title="Link to this heading">#</a></h2>
+<p><strong>Política de reentrenamiento</strong>, idéntica para todos los modelos, incluido el original:</p>
+<ul class="simple">
+<li><p>Cada corrida definitiva se entrenó sobre el conjunto de entrenamiento completo, con el número de épocas fijado en validación por la parada temprana.</p></li>
+<li><p>Se exporta la corrida cuya F1 de validación es la más cercana a la mediana de las 20 primeras semillas, lo que la hace representativa y la elige sin mirar la prueba.</p></li>
+<li><p>El <em>checkpoint</em> completo (pesos, configuración y curvas) queda en el registro de cada corrida.</p></li>
+</ul>
+<p><strong>Exportación:</strong></p>
+<ul class="simple">
+<li><p>Las redes se exportan con <code class="docutils literal notranslate"><span class="pre">torch.onnx</span></code> (opset 17), LightGBM con <code class="docutils literal notranslate"><span class="pre">onnxmltools</span></code> y la regresión logística con <code class="docutils literal notranslate"><span class="pre">skl2onnx</span></code>.</p></li>
+<li><p>Cada modelo lleva su <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code>, con versiones, semilla, hiperparámetros, preprocesamiento (transformación, medias y desviaciones), esquema de entrada con los rangos del entrenamiento, clases, métricas, temperatura y cuantil conforme.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;artifacts/reporte_ida_y_vuelta.csv&quot;</span><span class="p">)</span>
+<span class="n">rt</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo</th>
+      <th>semilla</th>
+      <th>error_max_prob</th>
+      <th>misma_clase_%</th>
+      <th>f1_memoria</th>
+      <th>f1_onnx</th>
+      <th>dif_f1</th>
+      <th>kb</th>
+      <th>cumple_1e-4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>DNN</td>
+      <td>6013</td>
+      <td>5.6624e-07</td>
+      <td>100.0</td>
+      <td>0.8606</td>
+      <td>0.8606</td>
+      <td>0.0</td>
+      <td>50.6</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CNN 1D</td>
+      <td>6015</td>
+      <td>7.7486e-07</td>
+      <td>100.0</td>
+      <td>0.8610</td>
+      <td>0.8610</td>
+      <td>0.0</td>
+      <td>156.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LSTM</td>
+      <td>6006</td>
+      <td>2.5034e-06</td>
+      <td>100.0</td>
+      <td>0.8590</td>
+      <td>0.8590</td>
+      <td>0.0</td>
+      <td>70.1</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CNN-LSTM</td>
+      <td>6011</td>
+      <td>1.0729e-06</td>
+      <td>100.0</td>
+      <td>0.8726</td>
+      <td>0.8726</td>
+      <td>0.0</td>
+      <td>183.3</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Autoencoder</td>
+      <td>6002</td>
+      <td>5.0664e-07</td>
+      <td>100.0</td>
+      <td>0.8690</td>
+      <td>0.8690</td>
+      <td>0.0</td>
+      <td>39.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>RNN</td>
+      <td>6016</td>
+      <td>1.7881e-06</td>
+      <td>100.0</td>
+      <td>0.8451</td>
+      <td>0.8451</td>
+      <td>0.0</td>
+      <td>153.9</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Transformer</td>
+      <td>6006</td>
+      <td>3.2187e-06</td>
+      <td>100.0</td>
+      <td>0.8664</td>
+      <td>0.8664</td>
+      <td>0.0</td>
+      <td>26.2</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>BiLSTM</td>
+      <td>6005</td>
+      <td>1.5497e-06</td>
+      <td>100.0</td>
+      <td>0.8568</td>
+      <td>0.8568</td>
+      <td>0.0</td>
+      <td>2077.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ResNet</td>
+      <td>6001</td>
+      <td>1.0729e-06</td>
+      <td>100.0</td>
+      <td>0.8469</td>
+      <td>0.8469</td>
+      <td>0.0</td>
+      <td>62.9</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>GRU</td>
+      <td>6001</td>
+      <td>3.2187e-06</td>
+      <td>100.0</td>
+      <td>0.8641</td>
+      <td>0.8641</td>
+      <td>0.0</td>
+      <td>384.6</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>KAN</td>
+      <td>6001</td>
+      <td>5.0664e-06</td>
+      <td>100.0</td>
+      <td>0.8547</td>
+      <td>0.8547</td>
+      <td>0.0</td>
+      <td>26.5</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>TabNet</td>
+      <td>6008</td>
+      <td>2.7269e-05</td>
+      <td>100.0</td>
+      <td>0.8329</td>
+      <td>0.8329</td>
+      <td>0.0</td>
+      <td>211.6</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>DBN</td>
+      <td>6002</td>
+      <td>9.5367e-07</td>
+      <td>100.0</td>
+      <td>0.8638</td>
+      <td>0.8638</td>
+      <td>0.0</td>
+      <td>39.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>LightGBM</td>
+      <td>6002</td>
+      <td>2.7789e-02</td>
+      <td>100.0</td>
+      <td>0.8757</td>
+      <td>0.8757</td>
+      <td>0.0</td>
+      <td>1310.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Logística</td>
+      <td>6001</td>
+      <td>2.3842e-07</td>
+      <td>100.0</td>
+      <td>0.8030</td>
+      <td>0.8030</td>
+      <td>0.0</td>
+      <td>0.9</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Original</td>
+      <td>6008</td>
+      <td>6.5565e-07</td>
+      <td>100.0</td>
+      <td>0.8638</td>
+      <td>0.8638</td>
+      <td>0.0</td>
+      <td>63.8</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Las 14 redes (las 13 del E2 y el original) y la regresión logística reproducen en ONNX las probabilidades del modelo en memoria con un error absoluto máximo de entre 2 × 10⁻⁷ y 3 × 10⁻⁵, por debajo de la tolerancia declarada de 10⁻⁴, sobre los 22 883 flujos de la prueba. Las clases coinciden en el 100 % de los flujos y la diferencia de F1 macro es exactamente 0.</strong></p>
+<p>Hay que tener en cuenta la excepción de LightGBM: su error máximo es 0,028, aunque solo 5 de los 22 883 flujos (0,02 %) superan 10⁻⁴. El conversor de ONNX guarda los umbrales de los árboles en precisión simple, así que un flujo que cae justo en un umbral puede tomar la otra rama. Aun así, las clases coinciden en el 100 % de los flujos y el F1 es idéntico.</p>
+<p>En consecuencia, se declara para LightGBM una tolerancia de 10⁻⁴ en el 99,98 % de los flujos, con la métrica primaria sin cambio, y no se cuantiza ningún modelo: juntos ocupan unos 5 MB y caben en el plan gratuito de Render.</p>
+</section>
+<section id="costo-de-inferencia">
+<h2>Costo de inferencia<a class="headerlink" href="#costo-de-inferencia" title="Link to this heading">#</a></h2>
+<p>La latencia por flujo se midió en las mismas condiciones para todos los modelos: ONNX Runtime con un hilo, 300 flujos de prueba de a uno y 20 de calentamiento. Los parámetros y los FLOPs se cuentan con los mismos ganchos del E2. La frontera de Pareto entre desempeño y costo está en el capítulo 8.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_datos.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Datos: EDA, auditoría y ficha de datos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_literatura.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Revisión de literatura y evidencia de novedad</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterio-de-seleccion-de-la-mejor-configuracion">Criterio de selección de la mejor configuración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-maestra">Tabla maestra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reentrenamiento-final-exportacion-y-prueba-de-ida-y-vuelta">Reentrenamiento final, exportación y prueba de ida y vuelta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costo-de-inferencia">Costo de inferencia</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

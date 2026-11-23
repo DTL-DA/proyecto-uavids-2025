@@ -1,0 +1,1057 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelo original: implementación, pruebas, ablación e interpretabilidad &#8212; Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06_modelo_implementacion';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Validación: protocolo y pruebas de hipótesis" href="07_validacion.html" />
+    <link rel="prev" title="Modelo original: limitación, fuente, hipótesis, teoría y diseño" href="05_modelo_diseno.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_correcciones.html">Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_datos.html">Datos: EDA, auditoría y ficha de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Benchmarks: Top 10, baselines y exportación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y evidencia de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_diseno.html">Modelo original: limitación, fuente, hipótesis, teoría y diseño</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelo original: implementación, pruebas, ablación e interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_validacion.html">Validación: protocolo y pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_evaluacion_ampliada.html">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_dashboard.html">Dashboard y despliegue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">Conclusiones, limitaciones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_reproducibilidad.html">Reproducibilidad, autoría y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/06_modelo_implementacion.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelo original: implementación, pruebas, ablación e interpretabilidad</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-propia-r2">Implementación propia (R2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-unitarias">Pruebas unitarias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad">Complejidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ablacion">Ablación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predicciones-secundarias">Predicciones secundarias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad">Interpretabilidad</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelo-original-implementacion-pruebas-ablacion-e-interpretabilidad">
+<h1>Modelo original: implementación, pruebas, ablación e interpretabilidad<a class="headerlink" href="#modelo-original-implementacion-pruebas-ablacion-e-interpretabilidad" title="Link to this heading">#</a></h1>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/resultados&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">110</span><span class="p">,</span> <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.precision&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">CLASES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Blackhole&quot;</span><span class="p">,</span> <span class="s2">&quot;Flooding&quot;</span><span class="p">,</span> <span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Sybil&quot;</span><span class="p">,</span> <span class="s2">&quot;Wormhole&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="implementacion-propia-r2">
+<h2>Implementación propia (R2)<a class="headerlink" href="#implementacion-propia-r2" title="Link to this heading">#</a></h2>
+<p>El mecanismo está programado desde su formulación en <code class="docutils literal notranslate"><span class="pre">src/original_model.py</span></code>, sin <code class="docutils literal notranslate"><span class="pre">import</span></code> de un modelo de librería ni código de terceros. PyTorch se usa solo como motor tensorial: capas <code class="docutils literal notranslate"><span class="pre">nn.Linear</span></code>, <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code>, <code class="docutils literal notranslate"><span class="pre">softmax</span></code>, <code class="docutils literal notranslate"><span class="pre">logsumexp</span></code> y diferenciación automática.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pieza</p></th>
+<th class="head"><p>Archivo</p></th>
+<th class="head"><p>Qué hace</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EscalonesSuaves</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src/original_model.py</span></code></p></td>
+<td><p>Codificador <span class="math notranslate nohighlight">\(s_{j,t} = \sigma((x_j - \theta_{j,t})/\tau_j)\)</span> con umbrales y temperaturas aprendibles, <span class="math notranslate nohighlight">\(\tau_j \ge \tau_{\min}\)</span>, e inicialización por cuantiles</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ModeloOriginal</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src/original_model.py</span></code></p></td>
+<td><p>Expertos, compuerta y mezcla de probabilidades; devuelve <span class="math notranslate nohighlight">\(\log p(y \mid x)\)</span>; <code class="docutils literal notranslate"><span class="pre">cota_lipschitz()</span></code> calcula <span class="math notranslate nohighlight">\(K\)</span>; <code class="docutils literal notranslate"><span class="pre">perdida_cooperativa()</span></code> es el esquema de entrenamiento</p></td>
+</tr>
+<tr class="row-even"><td><p>Bucle de entrenamiento</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">training/entrenar_original.py</span></code></p></td>
+<td><p>Copia fiel de <code class="docutils literal notranslate"><span class="pre">codigo.motor.entrenar</span></code> del E2, con una sola línea distinta: la pérdida cooperativa</p></td>
+</tr>
+<tr class="row-odd"><td><p>Registro en el catálogo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">training/registro.py</span></code></p></td>
+<td><p>Agrega el modelo al catálogo del E2 sin modificar su código: mismos datos, transformación, optimizador, planificador, parada temprana, conteo de MAC y registro de corridas</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El modelo usa los ganchos que el motor del E2 ya ofrecía: <code class="docutils literal notranslate"><span class="pre">preentrenar(X,</span> <span class="pre">generador)</span></code>, con el que la red de creencia profunda inicializaba sus RBM y que aquí inicializa los umbrales en cuantiles, y la salida en log-probabilidades, que hace que la entropía cruzada estándar sea la log-verosimilitud de la mezcla.</p>
+</section>
+<section id="pruebas-unitarias">
+<h2>Pruebas unitarias<a class="headerlink" href="#pruebas-unitarias" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">tests/test_original_model.py</span></code> cubre los seis puntos de la sección 6.5 del enunciado y corre en integración continua (<code class="docutils literal notranslate"><span class="pre">.github/workflows/entregable3-pruebas.yml</span></code>) junto con las pruebas del dashboard.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Punto</p></th>
+<th class="head"><p>Prueba</p></th>
+<th class="head"><p>Qué verifica</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>(i)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">test_sobreajusta_lote_pequeno</span></code></p></td>
+<td><p>Pérdida menor que 0,1 en 300 pasos sobre 64 ejemplos sintéticos con 4 clases definidas por umbrales en dos ejes</p></td>
+</tr>
+<tr class="row-odd"><td><p>(ii)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">test_reproducible_con_misma_semilla</span></code></p></td>
+<td><p>Mismas probabilidades con la misma semilla</p></td>
+</tr>
+<tr class="row-even"><td><p>(iii)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">test_formas_y_probabilidades</span></code>, <code class="docutils literal notranslate"><span class="pre">test_entrada_invalida</span></code></p></td>
+<td><p>Salida (n, 5), probabilidades que suman 1, error claro con 7 atributos en lugar de 16 y con opciones desconocidas</p></td>
+</tr>
+<tr class="row-odd"><td><p>(iv)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">test_todos_los_parametros_reciben_gradiente</span></code></p></td>
+<td><p>Gradiente finito y no nulo en todos los parámetros, incluidos umbrales y temperaturas</p></td>
+</tr>
+<tr class="row-even"><td><p>(v)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">test_cota_lipschitz_no_se_excede</span></code> (5 configuraciones), <code class="docutils literal notranslate"><span class="pre">test_codificador_lipschitz</span></code>, <code class="docutils literal notranslate"><span class="pre">test_desigualdad_de_jensen_de_la_mezcla</span></code></p></td>
+<td><p>El cociente empírico nunca supera <span class="math notranslate nohighlight">\(K\)</span>; la cota del codificador; la desigualdad de Jensen flujo por flujo</p></td>
+</tr>
+<tr class="row-odd"><td><p>(vi)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">test_guardar_y_cargar_conserva_salidas</span></code>, <code class="docutils literal notranslate"><span class="pre">test_exportacion_onnx_ida_y_vuelta</span></code></p></td>
+<td><p>Mismas salidas tras guardar y cargar, y error menor que <span class="math notranslate nohighlight">\(10^{-4}\)</span> tras exportar a ONNX</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="complejidad">
+<h2>Complejidad<a class="headerlink" href="#complejidad" title="Link to this heading">#</a></h2>
+<p>Para un flujo con <span class="math notranslate nohighlight">\(d\)</span> atributos, <span class="math notranslate nohighlight">\(T\)</span> umbrales y anchos <span class="math notranslate nohighlight">\(h_u\)</span>, <span class="math notranslate nohighlight">\(h_{s1}\)</span>, <span class="math notranslate nohighlight">\(h_{s2}\)</span> y <span class="math notranslate nohighlight">\(h_g\)</span>, una pasada hacia adelante cuesta <span class="math notranslate nohighlight">\(O(dT + dT\,h_u + d\,h_{s1} + h_{s1}h_{s2} + d\,h_g)\)</span> operaciones, es decir, <span class="math notranslate nohighlight">\(O(d\,(T h_u + h_{s1} + h_g))\)</span>: es lineal en el número de atributos y no tiene término cuadrático, a diferencia de la atención del Transformer. El entrenamiento cuesta <span class="math notranslate nohighlight">\(O(N\,E)\)</span> veces eso, con <span class="math notranslate nohighlight">\(N\)</span> flujos y <span class="math notranslate nohighlight">\(E\)</span> épocas. Con los valores congelados (<span class="math notranslate nohighlight">\(d = 16\)</span>, <span class="math notranslate nohighlight">\(T = 8\)</span>, <span class="math notranslate nohighlight">\(h_u = 64\)</span>, <span class="math notranslate nohighlight">\(h_s = (64, 64)\)</span> y <span class="math notranslate nohighlight">\(h_g = 32\)</span>) son 14 908 parámetros y 14 528 multiplicaciones-acumulaciones por flujo.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/complejidad.csv&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;lote&quot;</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;µs por flujo&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;d = </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Tamaño del lote&quot;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;µs por flujo&quot;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Tiempo de inferencia por flujo&quot;</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="n">comp</span><span class="p">[</span><span class="s2">&quot;lote&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">16384</span><span class="p">]</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;ms por lote&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tiempo (lote de 16 384)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Número de atributos d&quot;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;ms por lote&quot;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">twinx</span><span class="p">();</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;parametros&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#EB6834&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;parámetros&quot;</span><span class="p">);</span> <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Parámetros&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Escalamiento con d&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">comp</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;lote&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;µs por flujo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/c4bce9d8737d4ef0e9208be4e549c44d34043da30f032613a3a7672212273264.png" src="_images/c4bce9d8737d4ef0e9208be4e549c44d34043da30f032613a3a7672212273264.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>lote</th>
+      <th>1</th>
+      <th>64</th>
+      <th>1024</th>
+      <th>16384</th>
+    </tr>
+    <tr>
+      <th>d</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>5295.26</td>
+      <td>83.0625</td>
+      <td>16.6851</td>
+      <td>2.1809</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2280.27</td>
+      <td>64.0056</td>
+      <td>10.8918</td>
+      <td>2.8627</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>1252.67</td>
+      <td>57.0631</td>
+      <td>10.6213</td>
+      <td>3.2320</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>1988.02</td>
+      <td>89.6934</td>
+      <td>15.0124</td>
+      <td>5.6372</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>El tiempo por flujo cae con el tamaño del lote hasta estabilizarse en pocos microsegundos, y tanto los parámetros como el tiempo con lotes grandes crecen de forma aproximadamente lineal con el número de atributos <span class="math notranslate nohighlight">\(d\)</span>, como predice el análisis asintótico.</strong></p>
+<p>Esto quiere decir que el costo del modelo lo dominan las capas lineales del experto de umbrales, cuya entrada tiene <span class="math notranslate nohighlight">\(dT\)</span> dimensiones, y que el modelo puede servir en tiempo real en un nodo con CPU modesta.</p>
+<p>En consecuencia, no hace falta cuantizarlo para el dashboard (64 KB en ONNX) y, si se aplicara a conjuntos con más atributos, conviene reducir <span class="math notranslate nohighlight">\(T\)</span> antes que los anchos.</p>
+</section>
+<section id="ablacion">
+<h2>Ablación<a class="headerlink" href="#ablacion" title="Link to this heading">#</a></h2>
+<p>Cada variante cambia un solo componente frente al modelo completo y usa las mismas 20 semillas (6001 a 6020), los mismos hiperparámetros y el mismo protocolo. La familia de la ablación tiene su propio Holm (protocolo, sección 9).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;ablacion/contrastes.csv&quot;</span><span class="p">)</span>
+<span class="n">abl</span><span class="p">[[</span><span class="s2">&quot;descripción&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 variante&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 completo&quot;</span><span class="p">,</span> <span class="s2">&quot;completo − variante&quot;</span><span class="p">,</span> <span class="s2">&quot;p t Holm&quot;</span><span class="p">,</span> <span class="s2">&quot;p Wilcoxon Holm&quot;</span><span class="p">,</span> <span class="s2">&quot;δ Cliff&quot;</span><span class="p">,</span> <span class="s2">&quot;conf B–W variante&quot;</span><span class="p">,</span> <span class="s2">&quot;conf B–W completo&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;el componente aporta&quot;</span><span class="p">,</span> <span class="s2">&quot;el componente resta&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>descripción</th>
+      <th>F1 variante</th>
+      <th>F1 completo</th>
+      <th>completo − variante</th>
+      <th>p t Holm</th>
+      <th>p Wilcoxon Holm</th>
+      <th>δ Cliff</th>
+      <th>conf B–W variante</th>
+      <th>conf B–W completo</th>
+      <th>el componente aporta</th>
+      <th>el componente resta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sin compuerta (promedio 1/2)</td>
+      <td>0.8539</td>
+      <td>0.8479</td>
+      <td>-0.0059</td>
+      <td>5.6832e-02</td>
+      <td>0.0612</td>
+      <td>-0.360</td>
+      <td>0.1437</td>
+      <td>0.1525</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sin escalones suaves (MLP sobre x)</td>
+      <td>0.8624</td>
+      <td>0.8479</td>
+      <td>-0.0145</td>
+      <td>7.0086e-05</td>
+      <td>0.0002</td>
+      <td>-0.810</td>
+      <td>0.1430</td>
+      <td>0.1525</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Entrenamiento conjunto clásico</td>
+      <td>0.8584</td>
+      <td>0.8479</td>
+      <td>-0.0105</td>
+      <td>1.0462e-01</td>
+      <td>0.0887</td>
+      <td>-0.420</td>
+      <td>0.1355</td>
+      <td>0.1525</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sin regularizador de balance (γ = 0)</td>
+      <td>0.8495</td>
+      <td>0.8479</td>
+      <td>-0.0016</td>
+      <td>5.8248e-01</td>
+      <td>0.2455</td>
+      <td>-0.115</td>
+      <td>0.1511</td>
+      <td>0.1525</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Solo el experto suave (modelo base)</td>
+      <td>0.8590</td>
+      <td>0.8479</td>
+      <td>-0.0110</td>
+      <td>3.4492e-03</td>
+      <td>0.0051</td>
+      <td>-0.640</td>
+      <td>0.1462</td>
+      <td>0.1525</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Solo el experto de umbrales</td>
+      <td>0.8450</td>
+      <td>0.8479</td>
+      <td>0.0029</td>
+      <td>5.8248e-01</td>
+      <td>0.1946</td>
+      <td>0.250</td>
+      <td>0.1509</td>
+      <td>0.1525</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;ablacion/por_semilla.csv&quot;</span><span class="p">)</span>
+<span class="n">orden</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A0_completo&quot;</span><span class="p">,</span> <span class="s2">&quot;A1_sin_compuerta&quot;</span><span class="p">,</span> <span class="s2">&quot;A2_sin_escalones&quot;</span><span class="p">,</span> <span class="s2">&quot;A3_conjunto&quot;</span><span class="p">,</span> <span class="s2">&quot;A4_sin_balance&quot;</span><span class="p">,</span> <span class="s2">&quot;A5_solo_suave&quot;</span><span class="p">,</span> <span class="s2">&quot;A6_solo_umbral&quot;</span><span class="p">,</span> <span class="s2">&quot;CNN-LSTM (mejor red)&quot;</span><span class="p">,</span> <span class="s2">&quot;LightGBM&quot;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+<span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="n">ps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ps</span><span class="p">[</span><span class="s2">&quot;variante&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">v</span><span class="p">,</span> <span class="s2">&quot;f1&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">orden</span><span class="p">]</span>
+<span class="n">cajas</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">datos</span><span class="p">,</span> <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tick_labels</span><span class="o">=</span><span class="n">orden</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cajas</span><span class="p">[</span><span class="s2">&quot;boxes&quot;</span><span class="p">],</span> <span class="n">orden</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;#EB6834&quot;</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="s2">&quot;A0_completo&quot;</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;#2A78D6&quot;</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;CNN-LSTM (mejor red)&quot;</span><span class="p">,</span> <span class="s2">&quot;LightGBM&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;#D5DAE1&quot;</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;F1 macro en prueba (20 semillas)&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ablación del modelo original frente a la mejor red y LightGBM&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/6f3637ce7730b1b77a40a424fc08247e83b43d95add7a3a247c8232ef2a68ec1.png" src="_images/6f3637ce7730b1b77a40a424fc08247e83b43d95add7a3a247c8232ef2a68ec1.png" />
+</div>
+</div>
+<p><strong>Quitar el codificador de escalones suaves (A2) mejora el F1 macro de 0,848 a 0,862, una diferencia significativa después de Holm (<em>p</em> de 0,0001 en la <em>t</em> y 0,0002 en Wilcoxon; δ de Cliff = −0,81). Usar solo el experto suave (A5) también es mejor (0,859). Quitar la compuerta (A1), el entrenamiento cooperativo (A3) o el regularizador de balance (A4) no cambia el F1 de forma significativa. Y usar solo el experto de umbrales (A6) da 0,845, sin diferencia con el modelo completo.</strong></p>
+<p>Esto significa que, en la prueba sellada, el componente central del mecanismo resta en lugar de sumar: los umbrales aprendidos en los escenarios de entrenamiento no transfieren a los segmentos de prueba, y la compuerta no compensa esa pérdida. Es lo contrario de lo observado en la partición de desarrollo, donde el experto de umbrales solo era el mejor diseño (0,843 frente a 0,824 del suave). La diferencia entre desarrollo y confirmación es otra manifestación de la dependencia por escenario: la partición de desarrollo comparte escenarios entre ajuste y evaluación, igual que la prueba, pero en otra proporción.</p>
+<p>Por tal motivo, la ablación se reporta como evidencia en contra de la hipótesis del mecanismo y no se itera el diseño con estos resultados, porque usar la prueba para rediseñar invalidaría la confirmación (sección 7.2 del enunciado).</p>
+</section>
+<section id="predicciones-secundarias">
+<h2>Predicciones secundarias<a class="headerlink" href="#predicciones-secundarias" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;ablacion/predicciones_secundarias.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">pesos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;ablacion/peso_compuerta_por_clase.csv&quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Predicción&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;P1: sin escalones sube la confusión B–W&quot;</span><span class="p">,</span> <span class="s2">&quot;P2: la compuerta pesa más el experto de umbrales en B y W que en Sybil&quot;</span><span class="p">,</span>
+                             <span class="s2">&quot;P3: la ventaja frente a CNN-LSTM se concentra en B y W&quot;</span><span class="p">],</span>
+              <span class="s2">&quot;¿Se cumple?&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;P1 (sin escalones sube la confusión B–W)&quot;</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;P2 (más peso al experto de umbrales en B y W que en Sybil)&quot;</span><span class="p">],</span>
+                              <span class="n">p</span><span class="p">[</span><span class="s2">&quot;P3 (ventaja concentrada en B y W frente a CNN-LSTM)&quot;</span><span class="p">]],</span>
+              <span class="s2">&quot;Evidencia&quot;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;conf. B–W completo </span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;conf_BW&#39;</span><span class="p">][</span><span class="s1">&#39;A0_completo&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">; sin escalones </span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;conf_BW&#39;</span><span class="p">][</span><span class="s1">&#39;A2_sin_escalones&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;peso medio hacia el experto de umbrales: &quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;peso_umbral_por_clase&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
+                            <span class="s2">&quot;original − CNN-LSTM por clase: &quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;F1 &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;diferencia_por_clase_vs_CNN-LSTM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">())]})</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Predicción</th>
+      <th>¿Se cumple?</th>
+      <th>Evidencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>P1: sin escalones sube la confusión B–W</td>
+      <td>False</td>
+      <td>conf. B–W completo 0.152; sin escalones 0.143</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>P2: la compuerta pesa más el experto de umbral...</td>
+      <td>True</td>
+      <td>peso medio hacia el experto de umbrales: Black...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>P3: la ventaja frente a CNN-LSTM se concentra ...</td>
+      <td>False</td>
+      <td>original − CNN-LSTM por clase: Blackhole -0.02...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>P2 se cumple: la compuerta envía al experto de umbrales el 88 % del peso en los flujos Wormhole y el 69 % en los Blackhole, frente al 51 % en Sybil y el 34 % en Normal. P1 y P3 no se cumplen: sin el codificador la confusión Blackhole–Wormhole baja de 0,153 a 0,143, y frente a CNN-LSTM el original pierde 0,029 de F1 en Blackhole y 0,031 en Wormhole.</strong></p>
+<p>En ese sentido, el mecanismo hace lo que se diseñó, porque la compuerta aprende a mandar los ataques de enrutamiento al experto de umbrales, pero la premisa causal falla: en la prueba, ese experto separa peor Blackhole de Wormhole que una red suave. El fallo de la hipótesis no es de implementación, sino de transferencia del sesgo.</p>
+<p>Con base en esto, se concluye que el sesgo de árbol que hace fuerte a LightGBM no se obtiene con escalones aprendidos por gradiente, y la explicación de esa diferencia queda como trabajo futuro (capítulo 10).</p>
+</section>
+<section id="interpretabilidad">
+<h2>Interpretabilidad<a class="headerlink" href="#interpretabilidad" title="Link to this heading">#</a></h2>
+<p>Se calcularon valores de Shapley de la probabilidad de la clase predicha por muestreo de permutaciones <span class="bibtex-citation" id="id1">[<a class="reference internal" href="11_reproducibilidad.html#id119" title="Scott M. Lundberg and Su-In Lee. A Unified Approach to Interpreting Model Predictions. In Advances in Neural Information Processing Systems 30. 2017. doi:10.48550/arXiv.1705.07874.">Lundberg and Lee, 2017</a>]</span>, con implementación propia (<code class="docutils literal notranslate"><span class="pre">experiments/analisis_robustez.py</span></code>), para 300 flujos de prueba (60 por clase) frente a un fondo de 50 flujos de entrenamiento, en el modelo original y en LightGBM, el mejor <em>benchmark</em>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/importancia_shapley.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">fid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/fidelidad_borrado.csv&quot;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/resumen.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">))</span>
+<span class="n">o</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Original&quot;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">o</span><span class="p">[</span><span class="s2">&quot;Original&quot;</span><span class="p">],</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#EB6834&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Original&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">o</span><span class="p">[</span><span class="s2">&quot;LightGBM&quot;</span><span class="p">],</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2A78D6&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;LightGBM&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">o</span><span class="o">.</span><span class="n">index</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;|φ| medio (probabilidad de la clase predicha)&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Importancia global por Shapley (ρ de Spearman entre modelos = </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;interpretabilidad&#39;</span><span class="p">][</span><span class="s1">&#39;spearman_original_vs_lightgbm&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estabilidad entre semillas del original (ρ de Spearman de la importancia):&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;estabilidad_explicaciones&quot;</span><span class="p">][</span><span class="s2">&quot;spearman_entre_semillas&quot;</span><span class="p">]])</span>
+<span class="n">fid</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/cecd0bef94d2d8bc86d0de1dda796a43abd62e618008b0361f1c5e5497405caa.png" src="_images/cecd0bef94d2d8bc86d0de1dda796a43abd62e618008b0361f1c5e5497405caa.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estabilidad entre semillas del original (ρ de Spearman de la importancia): [0.918, 0.821, 0.935]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo</th>
+      <th>k atributos borrados</th>
+      <th>caída de prob. (más importantes)</th>
+      <th>caída de prob. (al azar)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Original</td>
+      <td>1</td>
+      <td>0.4013</td>
+      <td>0.0568</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Original</td>
+      <td>3</td>
+      <td>0.6022</td>
+      <td>0.1555</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Original</td>
+      <td>5</td>
+      <td>0.7023</td>
+      <td>0.2415</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>LightGBM</td>
+      <td>1</td>
+      <td>0.4213</td>
+      <td>0.0560</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>LightGBM</td>
+      <td>3</td>
+      <td>0.6469</td>
+      <td>0.1369</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>LightGBM</td>
+      <td>5</td>
+      <td>0.7236</td>
+      <td>0.2935</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Los dos modelos se apoyan en atributos parecidos (ρ de Spearman de 0,79 entre sus importancias globales), y la importancia del original es estable entre semillas (ρ medio de 0,89). La prueba de borrado confirma la fidelidad: reemplazar por la mediana del fondo los atributos más importantes de cada flujo baja la probabilidad de la clase predicha mucho más que borrar el mismo número de atributos al azar.</strong></p>
+<p>Lo anterior indica que las explicaciones no son ruido de una semilla y que el original no depende de un atajo distinto al de LightGBM: usa la información de tasas, pérdida y rendimiento que el dominio asocia con cada ataque.</p>
+<p>Por ello, las explicaciones locales del dashboard (oclusión por atributo) se presentan como una ayuda para el analista y se acompañan del aviso fuera de dominio, porque la estabilidad de la importancia no garantiza que la predicción sea correcta.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_modelo_diseno.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Modelo original: limitación, fuente, hipótesis, teoría y diseño</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_validacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Validación: protocolo y pruebas de hipótesis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-propia-r2">Implementación propia (R2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-unitarias">Pruebas unitarias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad">Complejidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ablacion">Ablación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predicciones-secundarias">Predicciones secundarias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad">Interpretabilidad</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

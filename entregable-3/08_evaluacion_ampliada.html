@@ -1,0 +1,3592 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Evaluación ampliada: conjuntos adicionales, robustez y adecuación &#8212; Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08_evaluacion_ampliada';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Dashboard y despliegue" href="09_dashboard.html" />
+    <link rel="prev" title="Validación: protocolo y pruebas de hipótesis" href="07_validacion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_correcciones.html">Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_datos.html">Datos: EDA, auditoría y ficha de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Benchmarks: Top 10, baselines y exportación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y evidencia de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_diseno.html">Modelo original: limitación, fuente, hipótesis, teoría y diseño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelo_implementacion.html">Modelo original: implementación, pruebas, ablación e interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_validacion.html">Validación: protocolo y pruebas de hipótesis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_dashboard.html">Dashboard y despliegue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">Conclusiones, limitaciones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_reproducibilidad.html">Reproducibilidad, autoría y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/08_evaluacion_ampliada.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Evaluación ampliada: conjuntos adicionales, robustez y adecuación</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos-adicionales">Conjuntos adicionales</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-por-conjunto">Desempeño por conjunto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastes-del-original-en-cada-conjunto">Contrastes del original en cada conjunto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-entre-conjuntos-de-datos">Prueba entre conjuntos de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consistencia-condicion-4-de-r3">Consistencia (condición 4 de R3)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dos-fuentes-de-variacion-que-se-declaran">Dos fuentes de variación que se declaran</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez">Robustez</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbaciones-de-las-entradas">Perturbaciones de las entradas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cambio-de-distribucion-escenario-de-simulacion-no-visto-p5">Cambio de distribución: escenario de simulación no visto (P5)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estabilidad-entre-semillas-y-errores">Estabilidad entre semillas y errores</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-cota-de-lipschitz-frente-al-ruido-p4">La cota de Lipschitz frente al ruido (P4)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-del-diseno-validacion">Sensibilidad del diseño (validación)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adecuacion-del-modelo-original-condicion-5">Adecuación del modelo original (condición 5)</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibracion-y-prediccion-conforme">Calibración y predicción conforme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#los-mismos-diagnosticos-en-cada-conjunto-adicional">Los mismos diagnósticos en cada conjunto adicional</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-a-la-eleccion-de-la-prueba-condicion-6">Robustez a la elección de la prueba (condición 6)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escalabilidad-incertidumbre-e-interpretabilidad">Escalabilidad, incertidumbre e interpretabilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eficiencia-y-frontera-de-pareto">Eficiencia y frontera de Pareto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balance-de-las-seis-condiciones-de-r3">Balance de las seis condiciones de R3</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluacion-ampliada-conjuntos-adicionales-robustez-y-adecuacion">
+<h1>Evaluación ampliada: conjuntos adicionales, robustez y adecuación<a class="headerlink" href="#evaluacion-ampliada-conjuntos-adicionales-robustez-y-adecuacion" title="Link to this heading">#</a></h1>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/resultados&quot;</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;adicionales&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">110</span><span class="p">,</span> <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.precision&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">NARANJA</span><span class="p">,</span> <span class="n">AZUL</span><span class="p">,</span> <span class="n">GRIS</span> <span class="o">=</span> <span class="s2">&quot;#EB6834&quot;</span><span class="p">,</span> <span class="s2">&quot;#2A78D6&quot;</span><span class="p">,</span> <span class="s2">&quot;#8A94A6&quot;</span>
+<span class="n">CONJ</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;uav_nidd&quot;</span><span class="p">:</span> <span class="s2">&quot;UAV-NIDD&quot;</span><span class="p">,</span> <span class="s2">&quot;unsw_nb15&quot;</span><span class="p">:</span> <span class="s2">&quot;UNSW-NB15&quot;</span><span class="p">,</span> <span class="s2">&quot;unr_idd&quot;</span><span class="p">:</span> <span class="s2">&quot;UNR-IDD&quot;</span><span class="p">}</span>
+<span class="n">tablas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">A</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;tabla_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CONJ</span><span class="p">])</span>
+<span class="n">contrastes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">A</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;contrastes_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CONJ</span><span class="p">])</span>
+<span class="n">res_ad</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">A</span> <span class="o">/</span> <span class="s2">&quot;resumen.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">adec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;adecuacion/resumen.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Este capítulo responde a las condiciones 4, 5 y 6 de la definición operativa de superioridad (sección 8.4 del enunciado) y al cuadro 5 de robustez, calibración y eficiencia. Las condiciones 1 a 3 están en el capítulo 7; el balance de las seis condiciones, al final de este capítulo.</p>
+<section id="conjuntos-adicionales">
+<h2>Conjuntos adicionales<a class="headerlink" href="#conjuntos-adicionales" title="Link to this heading">#</a></h2>
+<p>Los tres conjuntos se eligieron el 22/11/2026, antes de entrenar cualquier modelo con ellos, y no se usaron para ninguna decisión de diseño (sección 5.3 del protocolo). Los 13 modelos de la familia se entrenaron con sus hiperparámetros y su arquitectura del problema principal, sin búsqueda nueva para ninguno, con 10 semillas (6001 a 6010), el mismo tope de 30 épocas y la misma parada temprana. Son 390 corridas, sin errores.</p>
+<section id="desempeno-por-conjunto">
+<h3>Desempeño por conjunto<a class="headerlink" href="#desempeno-por-conjunto" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tablas</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s2">&quot;F1 ± DE&quot;</span><span class="p">:</span> <span class="n">tablas</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; ± &quot;</span> <span class="o">+</span> <span class="n">tablas</span><span class="p">[</span><span class="s2">&quot;DE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">({</span><span class="n">c</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="s2">&quot;conjunto&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)[[</span><span class="s2">&quot;F1 ± DE&quot;</span><span class="p">,</span> <span class="s2">&quot;rango&quot;</span><span class="p">]]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CONJ</span><span class="o">.</span><span class="n">values</span><span class="p">()},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">UAV-NIDD</th>
+      <th colspan="2" halign="left">UNSW-NB15</th>
+      <th colspan="2" halign="left">UNR-IDD</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>F1 ± DE</th>
+      <th>rango</th>
+      <th>F1 ± DE</th>
+      <th>rango</th>
+      <th>F1 ± DE</th>
+      <th>rango</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Original</th>
+      <td>0.550 ± 0.025</td>
+      <td>11</td>
+      <td>0.665 ± 0.007</td>
+      <td>6</td>
+      <td>0.765 ± 0.014</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>CNN-LSTM</th>
+      <td>0.603 ± 0.023</td>
+      <td>2</td>
+      <td>0.681 ± 0.005</td>
+      <td>3</td>
+      <td>0.733 ± 0.023</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>Autoencoder</th>
+      <td>0.570 ± 0.038</td>
+      <td>6</td>
+      <td>0.668 ± 0.006</td>
+      <td>4</td>
+      <td>0.742 ± 0.008</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>RNN</th>
+      <td>0.594 ± 0.049</td>
+      <td>3</td>
+      <td>0.656 ± 0.017</td>
+      <td>10</td>
+      <td>0.719 ± 0.017</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>Transformer</th>
+      <td>0.588 ± 0.037</td>
+      <td>4</td>
+      <td>0.664 ± 0.006</td>
+      <td>7</td>
+      <td>0.752 ± 0.008</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>BiLSTM</th>
+      <td>0.553 ± 0.031</td>
+      <td>9</td>
+      <td>0.689 ± 0.014</td>
+      <td>2</td>
+      <td>0.798 ± 0.016</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>ResNet</th>
+      <td>0.544 ± 0.011</td>
+      <td>12</td>
+      <td>0.668 ± 0.008</td>
+      <td>5</td>
+      <td>0.762 ± 0.011</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>GRU</th>
+      <td>0.580 ± 0.030</td>
+      <td>5</td>
+      <td>0.656 ± 0.009</td>
+      <td>11</td>
+      <td>0.710 ± 0.014</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>KAN</th>
+      <td>0.554 ± 0.004</td>
+      <td>8</td>
+      <td>0.652 ± 0.008</td>
+      <td>12</td>
+      <td>0.745 ± 0.015</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>TabNet</th>
+      <td>0.490 ± 0.121</td>
+      <td>13</td>
+      <td>0.630 ± 0.016</td>
+      <td>13</td>
+      <td>0.705 ± 0.011</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>DBN</th>
+      <td>0.617 ± 0.011</td>
+      <td>1</td>
+      <td>0.661 ± 0.007</td>
+      <td>9</td>
+      <td>0.719 ± 0.008</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>LightGBM</th>
+      <td>0.562 ± 0.000</td>
+      <td>7</td>
+      <td>0.709 ± 0.002</td>
+      <td>1</td>
+      <td>0.829 ± 0.003</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>CNN 1D</th>
+      <td>0.552 ± 0.024</td>
+      <td>10</td>
+      <td>0.663 ± 0.015</td>
+      <td>8</td>
+      <td>0.750 ± 0.010</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ejes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ejes</span><span class="p">,</span> <span class="n">CONJ</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">tablas</span><span class="p">[</span><span class="n">tablas</span><span class="p">[</span><span class="s2">&quot;conjunto&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;modelo&quot;</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">],</span> <span class="n">xerr</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;DE&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">NARANJA</span> <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="s2">&quot;Original&quot;</span> <span class="k">else</span> <span class="n">AZUL</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;modelo&quot;</span><span class="p">]],</span> <span class="n">ecolor</span><span class="o">=</span><span class="n">GRIS</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;F1 macro de prueba (media ± DE, 10 semillas)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/00d9ea59cd04dc7cc23891df98b1b001c1c4b47f35b937f404b8a3385a7339b6.png" src="_images/00d9ea59cd04dc7cc23891df98b1b001c1c4b47f35b937f404b8a3385a7339b6.png" />
+</div>
+</div>
+<p><strong>El modelo original no es el mejor en ningún conjunto adicional: queda en el puesto 11 de 13 en UAV-NIDD (F1 de 0,550 frente a 0,617 de DBN), en el 6 en UNSW-NB15 (0,665 frente a 0,709 de LightGBM) y en el 3 en UNR-IDD (0,765 frente a 0,829 de LightGBM y 0,798 de BiLSTM).</strong></p>
+<p>Así mismo, el modelo que domina no cambia de un conjunto a otro tanto como el original: LightGBM es el mejor en UNSW-NB15 y en UNR-IDD, como en UAVIDS-2025, mientras que en UAV-NIDD queda séptimo y gana DBN, en un conjunto donde todos los modelos están entre 0,49 y 0,62 de F1 macro y las diferencias entre semillas son grandes (TabNet tiene una DE de 0,12).</p>
+<p>Por esta razón, la tabla se lee conjunto por conjunto, sin promediar F1 de escalas distintas, como pide la sección 8.3 del enunciado, y la comparación formal se hace con los contrastes pareados de cada conjunto y con la prueba entre conjuntos.</p>
+</section>
+<section id="contrastes-del-original-en-cada-conjunto">
+<h3>Contrastes del original en cada conjunto<a class="headerlink" href="#contrastes-del-original-en-cada-conjunto" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">marca</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;peor con significancia (T1 a T3)&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;peor (T1, T2 y T3)&quot;</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;peor con significancia (T1 y T2)&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;peor (T1 y T2)&quot;</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;supera&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;supera (R3)&quot;</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;mejor con significancia (T1 y T2)&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;mejor (T1 y T2)&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;no concluyente&quot;</span>
+<span class="n">contrastes</span><span class="p">[</span><span class="s2">&quot;lectura&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contrastes</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">marca</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">contrastes</span><span class="p">[</span><span class="s2">&quot;celda&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">contrastes</span><span class="p">[</span><span class="s2">&quot;diferencia&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:+.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; · &quot;</span> <span class="o">+</span> <span class="n">contrastes</span><span class="p">[</span><span class="s2">&quot;lectura&quot;</span><span class="p">]</span>
+<span class="n">contrastes</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;rival&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;conjunto&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;celda&quot;</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">CONJ</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>conjunto</th>
+      <th>UAV-NIDD</th>
+      <th>UNSW-NB15</th>
+      <th>UNR-IDD</th>
+    </tr>
+    <tr>
+      <th>rival</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Autoencoder</th>
+      <td>-0.021 · no concluyente</td>
+      <td>-0.003 · no concluyente</td>
+      <td>+0.023 · mejor (T1 y T2)</td>
+    </tr>
+    <tr>
+      <th>BiLSTM</th>
+      <td>-0.004 · no concluyente</td>
+      <td>-0.024 · peor (T1, T2 y T3)</td>
+      <td>-0.034 · peor (T1 y T2)</td>
+    </tr>
+    <tr>
+      <th>CNN 1D</th>
+      <td>-0.003 · no concluyente</td>
+      <td>+0.002 · no concluyente</td>
+      <td>+0.015 · no concluyente</td>
+    </tr>
+    <tr>
+      <th>CNN-LSTM</th>
+      <td>-0.053 · no concluyente</td>
+      <td>-0.015 · peor (T1, T2 y T3)</td>
+      <td>+0.031 · mejor (T1 y T2)</td>
+    </tr>
+    <tr>
+      <th>DBN</th>
+      <td>-0.067 · peor (T1 y T2)</td>
+      <td>+0.004 · no concluyente</td>
+      <td>+0.046 · mejor (T1 y T2)</td>
+    </tr>
+    <tr>
+      <th>GRU</th>
+      <td>-0.030 · no concluyente</td>
+      <td>+0.009 · no concluyente</td>
+      <td>+0.054 · mejor (T1 y T2)</td>
+    </tr>
+    <tr>
+      <th>KAN</th>
+      <td>-0.004 · no concluyente</td>
+      <td>+0.013 · no concluyente</td>
+      <td>+0.020 · no concluyente</td>
+    </tr>
+    <tr>
+      <th>LightGBM</th>
+      <td>-0.012 · no concluyente</td>
+      <td>-0.044 · peor (T1, T2 y T3)</td>
+      <td>-0.065 · peor (T1 y T2)</td>
+    </tr>
+    <tr>
+      <th>RNN</th>
+      <td>-0.045 · peor (T1 y T2)</td>
+      <td>+0.009 · no concluyente</td>
+      <td>+0.045 · supera (R3)</td>
+    </tr>
+    <tr>
+      <th>ResNet</th>
+      <td>+0.005 · no concluyente</td>
+      <td>-0.003 · no concluyente</td>
+      <td>+0.002 · no concluyente</td>
+    </tr>
+    <tr>
+      <th>TabNet</th>
+      <td>+0.059 · no concluyente</td>
+      <td>+0.035 · mejor (T1 y T2)</td>
+      <td>+0.059 · mejor (T1 y T2)</td>
+    </tr>
+    <tr>
+      <th>Transformer</th>
+      <td>-0.039 · no concluyente</td>
+      <td>+0.001 · no concluyente</td>
+      <td>+0.013 · no concluyente</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">c</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;bloques de prueba&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;bloques de prueba&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s2">&quot;potencia media para δ&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;potencia para delta&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span>
+                  <span class="s2">&quot;diferencia mínima detectable media&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;MDE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">)}</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">contrastes</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;conjunto&quot;</span><span class="p">)})</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bloques de prueba</th>
+      <th>potencia media para δ</th>
+      <th>diferencia mínima detectable media</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>UAV-NIDD</th>
+      <td>24.0</td>
+      <td>0.21</td>
+      <td>0.0373</td>
+    </tr>
+    <tr>
+      <th>UNR-IDD</th>
+      <td>23.0</td>
+      <td>0.37</td>
+      <td>0.0180</td>
+    </tr>
+    <tr>
+      <th>UNSW-NB15</th>
+      <td>687.0</td>
+      <td>0.71</td>
+      <td>0.0115</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>El original es significativamente peor que CNN-LSTM, BiLSTM y LightGBM en UNSW-NB15 con las tres pruebas, y en UNR-IDD supera con significancia a seis rivales (CNN-LSTM, Autoencoder, RNN, GRU, TabNet y DBN) según la <em>t</em> y Wilcoxon, a RNN con las tres pruebas, pero pierde frente a BiLSTM y LightGBM según esas dos. En UAV-NIDD ninguna diferencia resiste las tres pruebas; según la <em>t</em> y Wilcoxon, RNN y DBN son mejores.</strong></p>
+<p>Hay que tener en cuenta que la potencia cambia mucho entre conjuntos. Con 10 semillas, la potencia media para detectar δ = 0,01 es de 0,21 en UAV-NIDD, de 0,71 en UNSW-NB15 y de 0,37 en UNR-IDD, y la tercera prueba, el <em>bootstrap</em> por bloques, solo tiene 24 bloques de prueba en UAV-NIDD y 23 en UNR-IDD, frente a 687 en UNSW-NB15. Por eso las tres pruebas solo coinciden en UNSW-NB15, que es también el único conjunto donde el original pierde con todas.</p>
+<p>Por lo anterior, conviene leer UNR-IDD como el caso favorable al original (gana a la mitad de la familia con dos pruebas) y UNSW-NB15 como el desfavorable, sin generalizar ninguno de los dos.</p>
+</section>
+<section id="prueba-entre-conjuntos-de-datos">
+<h3>Prueba entre conjuntos de datos<a class="headerlink" href="#prueba-entre-conjuntos-de-datos" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">clave</span><span class="p">,</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="p">((</span><span class="s2">&quot;entre conjuntos (3 adicionales)&quot;</span><span class="p">,</span> <span class="s2">&quot;3 adicionales&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;entre conjuntos (3 adicionales + UAVIDS-2025, sensibilidad)&quot;</span><span class="p">,</span> <span class="s2">&quot;3 adicionales + UAVIDS-2025&quot;</span><span class="p">)):</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">res_ad</span><span class="p">[</span><span class="n">clave</span><span class="p">]</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;conjuntos&quot;</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span> <span class="s2">&quot;χ² de Friedman&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;friedman&quot;</span><span class="p">][</span><span class="s2">&quot;chi2&quot;</span><span class="p">],</span> <span class="s2">&quot;p Iman-Davenport&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;friedman&quot;</span><span class="p">][</span><span class="s2">&quot;p Iman-Davenport&quot;</span><span class="p">],</span>
+                  <span class="s2">&quot;W de Kendall&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;friedman&quot;</span><span class="p">][</span><span class="s2">&quot;W de Kendall&quot;</span><span class="p">],</span> <span class="s2">&quot;rango del original&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;rangos medios (1 = mejor)&quot;</span><span class="p">][</span><span class="s2">&quot;Original&quot;</span><span class="p">],</span>
+                  <span class="s2">&quot;mejor modelo (rango)&quot;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;rangos medios (1 = mejor)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">])})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">))</span>
+<span class="n">pares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">res_ad</span><span class="p">[</span><span class="s2">&quot;entre conjuntos (3 adicionales)&quot;</span><span class="p">][</span><span class="s2">&quot;pares&quot;</span><span class="p">])[[</span><span class="s2">&quot;rival&quot;</span><span class="p">,</span> <span class="s2">&quot;mejor en&quot;</span><span class="p">,</span> <span class="s2">&quot;p Wilcoxon&quot;</span><span class="p">,</span> <span class="s2">&quot;p Wilcoxon Holm&quot;</span><span class="p">,</span> <span class="s2">&quot;P(A &gt; B)&quot;</span><span class="p">,</span> <span class="s2">&quot;P(ROPE)&quot;</span><span class="p">,</span> <span class="s2">&quot;P(A &lt; B)&quot;</span><span class="p">]]</span>
+<span class="n">pares</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mejor en&quot;</span><span class="p">:</span> <span class="s2">&quot;conjuntos donde el original es mejor&quot;</span><span class="p">,</span> <span class="s2">&quot;P(A &gt; B)&quot;</span><span class="p">:</span> <span class="s2">&quot;P(original &gt; rival)&quot;</span><span class="p">,</span> <span class="s2">&quot;P(A &lt; B)&quot;</span><span class="p">:</span> <span class="s2">&quot;P(original &lt; rival)&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>conjuntos</th>
+      <th>χ² de Friedman</th>
+      <th>p Iman-Davenport</th>
+      <th>W de Kendall</th>
+      <th>rango del original</th>
+      <th>mejor modelo (rango)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3 adicionales</td>
+      <td>15.6923</td>
+      <td>0.1757</td>
+      <td>0.4359</td>
+      <td>6.67</td>
+      <td>(LightGBM, 3.0)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3 adicionales + UAVIDS-2025</td>
+      <td>22.3846</td>
+      <td>0.0126</td>
+      <td>0.4663</td>
+      <td>7.25</td>
+      <td>(LightGBM, 2.5)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rival</th>
+      <th>conjuntos donde el original es mejor</th>
+      <th>p Wilcoxon</th>
+      <th>p Wilcoxon Holm</th>
+      <th>P(original &gt; rival)</th>
+      <th>P(ROPE)</th>
+      <th>P(original &lt; rival)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN-LSTM</td>
+      <td>1</td>
+      <td>0.75</td>
+      <td>1.0</td>
+      <td>0.1547</td>
+      <td>0.2490</td>
+      <td>0.5964</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Autoencoder</td>
+      <td>1</td>
+      <td>1.00</td>
+      <td>1.0</td>
+      <td>0.1293</td>
+      <td>0.6077</td>
+      <td>0.2631</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>RNN</td>
+      <td>2</td>
+      <td>0.75</td>
+      <td>1.0</td>
+      <td>0.3098</td>
+      <td>0.3765</td>
+      <td>0.3137</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Transformer</td>
+      <td>2</td>
+      <td>1.00</td>
+      <td>1.0</td>
+      <td>0.0454</td>
+      <td>0.5570</td>
+      <td>0.3976</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BiLSTM</td>
+      <td>0</td>
+      <td>0.25</td>
+      <td>1.0</td>
+      <td>0.0000</td>
+      <td>0.2059</td>
+      <td>0.7941</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ResNet</td>
+      <td>2</td>
+      <td>0.75</td>
+      <td>1.0</td>
+      <td>0.0000</td>
+      <td>1.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>GRU</td>
+      <td>2</td>
+      <td>0.75</td>
+      <td>1.0</td>
+      <td>0.4340</td>
+      <td>0.2837</td>
+      <td>0.2824</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>KAN</td>
+      <td>2</td>
+      <td>0.50</td>
+      <td>1.0</td>
+      <td>0.2058</td>
+      <td>0.7942</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>TabNet</td>
+      <td>3</td>
+      <td>0.25</td>
+      <td>1.0</td>
+      <td>0.9747</td>
+      <td>0.0253</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>DBN</td>
+      <td>2</td>
+      <td>1.00</td>
+      <td>1.0</td>
+      <td>0.2833</td>
+      <td>0.2819</td>
+      <td>0.4348</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>LightGBM</td>
+      <td>0</td>
+      <td>0.25</td>
+      <td>1.0</td>
+      <td>0.0000</td>
+      <td>0.0929</td>
+      <td>0.9072</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>CNN 1D</td>
+      <td>2</td>
+      <td>0.75</td>
+      <td>1.0</td>
+      <td>0.0254</td>
+      <td>0.9746</td>
+      <td>0.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>La prueba de Friedman con la corrección de Iman-Davenport no rechaza la igualdad de los 13 modelos sobre los tres conjuntos adicionales (<em>p</em> = 0,18), pero sí al incluir UAVIDS-2025 (<em>p</em> = 0,013). En los dos casos LightGBM tiene el mejor rango medio (3,0 y 2,5) y el original queda en la mitad (6,7 y 7,25).</strong></p>
+<p>Esto significa que, con tres o cuatro conjuntos, la prueba global tiene muy poca potencia, como advierte la sección 8.3 del enunciado: con tres conjuntos el <em>p</em> más pequeño que puede dar Wilcoxon es 0,25, de modo que ningún contraste por pares entre conjuntos puede rechazar, y la prueba bayesiana, con tan pocas observaciones, reparte la probabilidad entre las tres regiones.</p>
+<p>Por tal motivo, la conclusión entre conjuntos se apoya en la consistencia por conjunto, que es la condición 4 de R3.</p>
+</section>
+<section id="consistencia-condicion-4-de-r3">
+<h3>Consistencia (condición 4 de R3)<a class="headerlink" href="#consistencia-condicion-4-de-r3" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">res_ad</span><span class="p">[</span><span class="s2">&quot;consistencia por conjunto&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">[[</span><span class="s2">&quot;F1 original&quot;</span><span class="p">,</span> <span class="s2">&quot;rango del original (de 13)&quot;</span><span class="p">,</span> <span class="s2">&quot;mejor rival&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 mejor rival&quot;</span><span class="p">,</span> <span class="s2">&quot;original mejor que todos en la media&quot;</span><span class="p">,</span>
+                                                     <span class="s2">&quot;rivales significativamente mejores (T1 a T3)&quot;</span><span class="p">,</span> <span class="s2">&quot;rivales significativamente peores (T1 y T2)&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>F1 original</th>
+      <th>rango del original (de 13)</th>
+      <th>mejor rival</th>
+      <th>F1 mejor rival</th>
+      <th>original mejor que todos en la media</th>
+      <th>rivales significativamente mejores (T1 a T3)</th>
+      <th>rivales significativamente peores (T1 y T2)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>UAV-NIDD</th>
+      <td>0.5496</td>
+      <td>11</td>
+      <td>DBN</td>
+      <td>0.6169</td>
+      <td>False</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>UNSW-NB15</th>
+      <td>0.6651</td>
+      <td>6</td>
+      <td>LightGBM</td>
+      <td>0.7088</td>
+      <td>False</td>
+      <td>[CNN-LSTM, BiLSTM, LightGBM]</td>
+      <td>[TabNet]</td>
+    </tr>
+    <tr>
+      <th>UNR-IDD</th>
+      <td>0.7646</td>
+      <td>3</td>
+      <td>LightGBM</td>
+      <td>0.8292</td>
+      <td>False</td>
+      <td>[]</td>
+      <td>[CNN-LSTM, Autoencoder, RNN, GRU, TabNet, DBN]</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>La condición 4 no se cumple: el original no es el mejor en la media en ninguno de los tres conjuntos (se exige en al menos dos), y en UNSW-NB15 es significativamente peor que tres rivales de la familia.</strong></p>
+<p>En ese sentido, los conjuntos adicionales confirman lo que mostró el problema principal: el original queda en el grupo intermedio de las redes, y su ventaja relativa aparece en el conjunto de menor dimensión (UNR-IDD, 18 atributos), donde los escalones suaves sobre pocos ejes compiten mejor con las redes que en UAV-NIDD (43 atributos) o UNSW-NB15 (38).</p>
+<p>Así las cosas, R3 falla también por consistencia, independientemente de las pruebas del capítulo 7, y el tope de 4,0 no depende de una sola partición ni de un solo conjunto.</p>
+</section>
+<section id="dos-fuentes-de-variacion-que-se-declaran">
+<h3>Dos fuentes de variación que se declaran<a class="headerlink" href="#dos-fuentes-de-variacion-que-se-declaran" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tope</span> <span class="o">=</span> <span class="n">tablas</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;conjunto&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;corridas en el tope de 30 épocas&quot;</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">CONJ</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+<span class="n">gpu</span> <span class="o">=</span> <span class="n">tablas</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;conjunto&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;corridas en GPU&quot;</span><span class="p">)[</span><span class="nb">list</span><span class="p">(</span><span class="n">CONJ</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+<span class="n">cpu_gpu</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;corridas&quot;</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))[</span><span class="s2">&quot;f1_eva&quot;</span><span class="p">]</span>
+           <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">((</span><span class="s2">&quot;CPU&quot;</span><span class="p">,</span> <span class="s2">&quot;verificacion_dispositivo/unr_idd_GRU_6001_cpu.json&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">,</span> <span class="s2">&quot;adicionales/unr_idd_GRU_6001.json&quot;</span><span class="p">))}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GRU, UNR-IDD, semilla 6001: F1 de prueba en CPU = </span><span class="si">{CPU:.4f}</span><span class="s2">, en GPU = </span><span class="si">{GPU:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">cpu_gpu</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">({</span><span class="s2">&quot;corridas en el tope de 30 épocas (de 10)&quot;</span><span class="p">:</span> <span class="n">tope</span><span class="p">,</span> <span class="s2">&quot;corridas en GPU (de 10)&quot;</span><span class="p">:</span> <span class="n">gpu</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GRU, UNR-IDD, semilla 6001: F1 de prueba en CPU = 0.7223, en GPU = 0.6959
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">corridas en el tope de 30 épocas (de 10)</th>
+      <th colspan="3" halign="left">corridas en GPU (de 10)</th>
+    </tr>
+    <tr>
+      <th>conjunto</th>
+      <th>UAV-NIDD</th>
+      <th>UNSW-NB15</th>
+      <th>UNR-IDD</th>
+      <th>UAV-NIDD</th>
+      <th>UNSW-NB15</th>
+      <th>UNR-IDD</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Autoencoder</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>BiLSTM</th>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>1.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>CNN 1D</th>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>6.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>CNN-LSTM</th>
+      <td>0.0</td>
+      <td>8.0</td>
+      <td>1.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>DBN</th>
+      <td>0.0</td>
+      <td>8.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>GRU</th>
+      <td>0.0</td>
+      <td>8.0</td>
+      <td>1.0</td>
+      <td>1</td>
+      <td>10</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>KAN</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>LightGBM</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Original</th>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>RNN</th>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ResNet</th>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>TabNet</th>
+      <td>0.0</td>
+      <td>7.0</td>
+      <td>6.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Transformer</th>
+      <td>0.0</td>
+      <td>6.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Treinta y una corridas de BiLSTM y GRU se hicieron en GPU, y con la misma semilla la GRU de UNR-IDD dio un F1 de prueba de 0,722 en CPU y de 0,696 en GPU. Además, en UNSW-NB15 varias redes tocaron el tope de 30 épocas: CNN-LSTM, GRU y DBN en 8 de sus 10 corridas, frente a 2 del original.</strong></p>
+<p>Hay que tener en cuenta que la diferencia entre CPU y GPU, de 0,026, equivale a unas dos desviaciones estándar entre semillas de esa GRU (0,014): el hardware es una fuente de variación del mismo orden que la semilla, como reconoce la sección 8.2 del enunciado. Sin embargo, la conclusión no depende de esas corridas: el mejor modelo de cada conjunto (DBN, LightGBM y LightGBM) y los tres rivales que superan al original con las tres pruebas en UNSW-NB15 (CNN-LSTM, BiLSTM y LightGBM) corrieron en CPU.</p>
+<p>Por lo anterior, se declara el dispositivo de cada corrida en la tabla maestra y el tope de épocas como limitación: los rivales que lo tocan pudieron quedar algo cortos de entrenamiento, lo que, si acaso, favorece al original.</p>
+</section>
+</section>
+<section id="robustez">
+<h2>Robustez<a class="headerlink" href="#robustez" title="Link to this heading">#</a></h2>
+<section id="perturbaciones-de-las-entradas">
+<h3>Perturbaciones de las entradas<a class="headerlink" href="#perturbaciones-de-las-entradas" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pert</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/perturbaciones.csv&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ejes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">))</span>
+<span class="n">titulos</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ruido gaussiano (σ en el espacio estandarizado)&quot;</span><span class="p">:</span> <span class="s2">&quot;Ruido gaussiano (σ)&quot;</span><span class="p">,</span> <span class="s2">&quot;atributos faltantes imputados con la media&quot;</span><span class="p">:</span> <span class="s2">&quot;Atributos faltantes (fracción)&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;valores atípicos (un atributo ×10)&quot;</span><span class="p">:</span> <span class="s2">&quot;Valores atípicos (fracción de flujos)&quot;</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">titulo</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ejes</span><span class="p">,</span> <span class="n">titulos</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">pert</span><span class="p">[</span><span class="n">pert</span><span class="p">[</span><span class="s2">&quot;perturbacion&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">):</span>
+        <span class="n">color</span><span class="p">,</span> <span class="n">ancho</span> <span class="o">=</span> <span class="p">(</span><span class="n">NARANJA</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">)</span> <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="s2">&quot;Original&quot;</span> <span class="k">else</span> <span class="p">((</span><span class="n">AZUL</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="s2">&quot;LightGBM&quot;</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;#C9CED6&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;severidad&quot;</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;caída&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">ancho</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">m</span> <span class="k">if</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Original&quot;</span><span class="p">,</span> <span class="s2">&quot;LightGBM&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">titulo</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Caída del F1 macro&quot;</span><span class="p">)</span>
+<span class="n">ejes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">pert</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;perturbacion&quot;</span><span class="p">,</span> <span class="s2">&quot;severidad&quot;</span><span class="p">],</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;caída&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/d419ea1b70873550310feb96d5b0bc405d79299e003aae7e8a036db3ff61341f.png" src="_images/d419ea1b70873550310feb96d5b0bc405d79299e003aae7e8a036db3ff61341f.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>perturbacion</th>
+      <th colspan="3" halign="left">atributos faltantes imputados con la media</th>
+      <th>ninguna</th>
+      <th colspan="3" halign="left">ruido gaussiano (σ en el espacio estandarizado)</th>
+      <th colspan="3" halign="left">valores atípicos (un atributo ×10)</th>
+    </tr>
+    <tr>
+      <th>severidad</th>
+      <th>0.10</th>
+      <th>0.25</th>
+      <th>0.50</th>
+      <th>0.00</th>
+      <th>0.10</th>
+      <th>0.30</th>
+      <th>0.50</th>
+      <th>0.01</th>
+      <th>0.05</th>
+      <th>0.10</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Autoencoder</th>
+      <td>0.088</td>
+      <td>0.204</td>
+      <td>0.364</td>
+      <td>0.0</td>
+      <td>0.018</td>
+      <td>0.108</td>
+      <td>0.206</td>
+      <td>0.001</td>
+      <td>0.007</td>
+      <td>0.015</td>
+    </tr>
+    <tr>
+      <th>BiLSTM</th>
+      <td>0.085</td>
+      <td>0.220</td>
+      <td>0.421</td>
+      <td>0.0</td>
+      <td>0.020</td>
+      <td>0.115</td>
+      <td>0.212</td>
+      <td>0.001</td>
+      <td>0.004</td>
+      <td>0.007</td>
+    </tr>
+    <tr>
+      <th>CNN 1D</th>
+      <td>0.096</td>
+      <td>0.236</td>
+      <td>0.436</td>
+      <td>0.0</td>
+      <td>0.018</td>
+      <td>0.124</td>
+      <td>0.226</td>
+      <td>0.001</td>
+      <td>0.005</td>
+      <td>0.008</td>
+    </tr>
+    <tr>
+      <th>CNN-LSTM</th>
+      <td>0.087</td>
+      <td>0.233</td>
+      <td>0.453</td>
+      <td>0.0</td>
+      <td>0.028</td>
+      <td>0.127</td>
+      <td>0.244</td>
+      <td>0.001</td>
+      <td>0.005</td>
+      <td>0.009</td>
+    </tr>
+    <tr>
+      <th>DBN</th>
+      <td>0.136</td>
+      <td>0.275</td>
+      <td>0.417</td>
+      <td>0.0</td>
+      <td>0.030</td>
+      <td>0.179</td>
+      <td>0.272</td>
+      <td>0.002</td>
+      <td>0.010</td>
+      <td>0.018</td>
+    </tr>
+    <tr>
+      <th>GRU</th>
+      <td>0.092</td>
+      <td>0.240</td>
+      <td>0.453</td>
+      <td>0.0</td>
+      <td>0.026</td>
+      <td>0.140</td>
+      <td>0.236</td>
+      <td>0.001</td>
+      <td>0.006</td>
+      <td>0.010</td>
+    </tr>
+    <tr>
+      <th>KAN</th>
+      <td>0.092</td>
+      <td>0.213</td>
+      <td>0.379</td>
+      <td>0.0</td>
+      <td>0.024</td>
+      <td>0.129</td>
+      <td>0.241</td>
+      <td>0.001</td>
+      <td>0.005</td>
+      <td>0.011</td>
+    </tr>
+    <tr>
+      <th>LightGBM</th>
+      <td>0.069</td>
+      <td>0.185</td>
+      <td>0.408</td>
+      <td>0.0</td>
+      <td>0.114</td>
+      <td>0.249</td>
+      <td>0.324</td>
+      <td>0.000</td>
+      <td>0.001</td>
+      <td>0.003</td>
+    </tr>
+    <tr>
+      <th>Original</th>
+      <td>0.065</td>
+      <td>0.160</td>
+      <td>0.330</td>
+      <td>0.0</td>
+      <td>0.019</td>
+      <td>0.099</td>
+      <td>0.182</td>
+      <td>0.000</td>
+      <td>0.003</td>
+      <td>0.007</td>
+    </tr>
+    <tr>
+      <th>RNN</th>
+      <td>0.094</td>
+      <td>0.207</td>
+      <td>0.370</td>
+      <td>0.0</td>
+      <td>0.024</td>
+      <td>0.125</td>
+      <td>0.232</td>
+      <td>0.001</td>
+      <td>0.006</td>
+      <td>0.012</td>
+    </tr>
+    <tr>
+      <th>ResNet</th>
+      <td>0.092</td>
+      <td>0.216</td>
+      <td>0.367</td>
+      <td>0.0</td>
+      <td>0.012</td>
+      <td>0.099</td>
+      <td>0.195</td>
+      <td>0.001</td>
+      <td>0.008</td>
+      <td>0.015</td>
+    </tr>
+    <tr>
+      <th>TabNet</th>
+      <td>0.118</td>
+      <td>0.240</td>
+      <td>0.392</td>
+      <td>0.0</td>
+      <td>0.025</td>
+      <td>0.119</td>
+      <td>0.224</td>
+      <td>0.001</td>
+      <td>0.007</td>
+      <td>0.013</td>
+    </tr>
+    <tr>
+      <th>Transformer</th>
+      <td>0.136</td>
+      <td>0.252</td>
+      <td>0.386</td>
+      <td>0.0</td>
+      <td>0.026</td>
+      <td>0.148</td>
+      <td>0.244</td>
+      <td>0.003</td>
+      <td>0.011</td>
+      <td>0.021</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>El original es el modelo más robusto ante el ruido gaussiano y ante los atributos faltantes: con σ = 0,5 su F1 cae 0,182, frente a 0,324 de LightGBM, el más frágil, y con la mitad de los atributos imputados cae 0,330, frente a 0,408 de LightGBM y 0,453 de CNN-LSTM. Ante valores atípicos, en cambio, LightGBM es el más estable (caída de 0,003 frente a 0,007 del original con el 10 % de los flujos alterados).</strong></p>
+<p>Esto significa que la ventaja de LightGBM en la prueba sellada se paga con fragilidad ante ruido: sus umbrales duros cambian de rama con perturbaciones pequeñas, mientras que los escalones suaves y el experto suave del original degradan la salida de forma gradual. A la inversa, un valor atípico solo mueve a un árbol hacia una hoja extrema, que ya existía, y por eso LightGBM lo absorbe mejor.</p>
+<p>Por esta razón, en un despliegue donde los contadores de flujo lleguen con ruido o incompletos, el original es una alternativa razonable a LightGBM, y el dashboard ofrece las dos con su incertidumbre.</p>
+</section>
+<section id="cambio-de-distribucion-escenario-de-simulacion-no-visto-p5">
+<h3>Cambio de distribución: escenario de simulación no visto (P5)<a class="headerlink" href="#cambio-de-distribucion-escenario-de-simulacion-no-visto-p5" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/cambio_distribucion.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo</th>
+      <th>acierto en el escenario de Sybil aislado (media)</th>
+      <th>DE</th>
+      <th>F1 macro sin el escenario</th>
+      <th>semillas</th>
+      <th>filas del escenario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Original</td>
+      <td>0.0940</td>
+      <td>0.0232</td>
+      <td>0.8891</td>
+      <td>48</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CNN-LSTM</td>
+      <td>0.0479</td>
+      <td>0.0271</td>
+      <td>0.9007</td>
+      <td>48</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Autoencoder</td>
+      <td>0.0836</td>
+      <td>0.0210</td>
+      <td>0.9000</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>RNN</td>
+      <td>0.0777</td>
+      <td>0.0282</td>
+      <td>0.8773</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Transformer</td>
+      <td>0.0612</td>
+      <td>0.0244</td>
+      <td>0.8990</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>BiLSTM</td>
+      <td>0.0713</td>
+      <td>0.0404</td>
+      <td>0.8856</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ResNet</td>
+      <td>0.0840</td>
+      <td>0.0252</td>
+      <td>0.8916</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>GRU</td>
+      <td>0.0716</td>
+      <td>0.0159</td>
+      <td>0.8887</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>KAN</td>
+      <td>0.0943</td>
+      <td>0.0264</td>
+      <td>0.8886</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>TabNet</td>
+      <td>0.0850</td>
+      <td>0.0386</td>
+      <td>0.8690</td>
+      <td>38</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>DBN</td>
+      <td>0.0803</td>
+      <td>0.0163</td>
+      <td>0.8972</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>LightGBM</td>
+      <td>0.0759</td>
+      <td>0.0133</td>
+      <td>0.9148</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>CNN 1D</td>
+      <td>0.0839</td>
+      <td>0.0123</td>
+      <td>0.8988</td>
+      <td>20</td>
+      <td>909</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Ningún modelo reconoce el escenario de Sybil aislado de la prueba (909 flujos de un escenario que no aparece en el entrenamiento): el acierto va de 4,8 % (CNN-LSTM) a 9,4 % (el original y KAN). La predicción secundaria P5 se cumple: el original tampoco generaliza a ese escenario.</strong></p>
+<p>En ese sentido, el resultado confirma la prueba de D3 del capítulo 1 y la dependencia L3.2: en UAVIDS-2025 el escenario de simulación pesa más que la arquitectura, y ningún mecanismo de los 13 modelos cierra esa brecha.</p>
+<p>Por lo anterior, se recomienda no desplegar ningún modelo de este benchmark sin una validación por escenarios en la red de destino, y el detector de entradas fuera de dominio del dashboard advierte cuando un flujo se aleja del entrenamiento.</p>
+</section>
+<section id="estabilidad-entre-semillas-y-errores">
+<h3>Estabilidad entre semillas y errores<a class="headerlink" href="#estabilidad-entre-semillas-y-errores" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">est</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/estabilidad_resumen.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;CV (%)&quot;</span><span class="p">)</span>
+<span class="n">rob</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/resumen.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kruskal-Wallis entre modelos: H = </span><span class="si">{</span><span class="n">rob</span><span class="p">[</span><span class="s1">&#39;kruskal_wallis&#39;</span><span class="p">][</span><span class="s1">&#39;H&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">rob</span><span class="p">[</span><span class="s1">&#39;kruskal_wallis&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flujos que fallan los 13 modelos: </span><span class="si">{</span><span class="n">rob</span><span class="p">[</span><span class="s1">&#39;flujos que fallan los 13 modelos (%)&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">est</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/errores_compartidos.csv&quot;</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/f1_por_clase.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kruskal-Wallis entre modelos: H = 118.2, p = 1.4e-19
+Flujos que fallan los 13 modelos: 7.7 %
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>count</th>
+      <th>CV (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>LightGBM</td>
+      <td>0.8748</td>
+      <td>0.0012</td>
+      <td>20</td>
+      <td>0.1404</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CNN 1D</td>
+      <td>0.8584</td>
+      <td>0.0050</td>
+      <td>20</td>
+      <td>0.5848</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DBN</td>
+      <td>0.8569</td>
+      <td>0.0062</td>
+      <td>20</td>
+      <td>0.7202</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Autoencoder</td>
+      <td>0.8591</td>
+      <td>0.0095</td>
+      <td>20</td>
+      <td>1.1057</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Original</td>
+      <td>0.8496</td>
+      <td>0.0117</td>
+      <td>48</td>
+      <td>1.3777</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>GRU</td>
+      <td>0.8474</td>
+      <td>0.0119</td>
+      <td>20</td>
+      <td>1.4055</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>KAN</td>
+      <td>0.8488</td>
+      <td>0.0124</td>
+      <td>20</td>
+      <td>1.4639</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Transformer</td>
+      <td>0.8576</td>
+      <td>0.0127</td>
+      <td>20</td>
+      <td>1.4758</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>ResNet</td>
+      <td>0.8510</td>
+      <td>0.0126</td>
+      <td>20</td>
+      <td>1.4865</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CNN-LSTM</td>
+      <td>0.8591</td>
+      <td>0.0186</td>
+      <td>48</td>
+      <td>2.1661</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>RNN</td>
+      <td>0.8371</td>
+      <td>0.0201</td>
+      <td>20</td>
+      <td>2.4011</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>TabNet</td>
+      <td>0.8301</td>
+      <td>0.0222</td>
+      <td>38</td>
+      <td>2.6781</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>BiLSTM</td>
+      <td>0.8457</td>
+      <td>0.0238</td>
+      <td>20</td>
+      <td>2.8106</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rival</th>
+      <th>errores del original también cometidos por el rival (%)</th>
+      <th>errores que comete solo el original (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN-LSTM</td>
+      <td>73.5944</td>
+      <td>26.4056</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Autoencoder</td>
+      <td>86.0392</td>
+      <td>13.9608</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>RNN</td>
+      <td>87.5869</td>
+      <td>12.4131</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Transformer</td>
+      <td>78.3639</td>
+      <td>21.6361</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BiLSTM</td>
+      <td>81.5224</td>
+      <td>18.4776</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ResNet</td>
+      <td>87.6500</td>
+      <td>12.3500</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>GRU</td>
+      <td>86.6077</td>
+      <td>13.3923</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>KAN</td>
+      <td>89.5452</td>
+      <td>10.4548</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>TabNet</td>
+      <td>93.3039</td>
+      <td>6.6961</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>DBN</td>
+      <td>86.4182</td>
+      <td>13.5818</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>LightGBM</td>
+      <td>61.4972</td>
+      <td>38.5028</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>CNN 1D</td>
+      <td>88.1238</td>
+      <td>11.8762</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Blackhole</th>
+      <th>Flooding</th>
+      <th>Normal</th>
+      <th>Sybil</th>
+      <th>Wormhole</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Original</th>
+      <td>0.8339</td>
+      <td>0.7960</td>
+      <td>0.9697</td>
+      <td>0.8546</td>
+      <td>0.8196</td>
+    </tr>
+    <tr>
+      <th>CNN-LSTM</th>
+      <td>0.8744</td>
+      <td>0.8097</td>
+      <td>0.9781</td>
+      <td>0.8577</td>
+      <td>0.8632</td>
+    </tr>
+    <tr>
+      <th>Autoencoder</th>
+      <td>0.8429</td>
+      <td>0.8163</td>
+      <td>0.9757</td>
+      <td>0.8669</td>
+      <td>0.8294</td>
+    </tr>
+    <tr>
+      <th>RNN</th>
+      <td>0.8282</td>
+      <td>0.8138</td>
+      <td>0.9728</td>
+      <td>0.8660</td>
+      <td>0.8036</td>
+    </tr>
+    <tr>
+      <th>Transformer</th>
+      <td>0.8577</td>
+      <td>0.8257</td>
+      <td>0.9775</td>
+      <td>0.8672</td>
+      <td>0.8452</td>
+    </tr>
+    <tr>
+      <th>BiLSTM</th>
+      <td>0.8612</td>
+      <td>0.7989</td>
+      <td>0.9733</td>
+      <td>0.8493</td>
+      <td>0.8500</td>
+    </tr>
+    <tr>
+      <th>ResNet</th>
+      <td>0.8324</td>
+      <td>0.8199</td>
+      <td>0.9742</td>
+      <td>0.8674</td>
+      <td>0.8220</td>
+    </tr>
+    <tr>
+      <th>GRU</th>
+      <td>0.8294</td>
+      <td>0.8201</td>
+      <td>0.9695</td>
+      <td>0.8687</td>
+      <td>0.8119</td>
+    </tr>
+    <tr>
+      <th>KAN</th>
+      <td>0.8276</td>
+      <td>0.8125</td>
+      <td>0.9752</td>
+      <td>0.8646</td>
+      <td>0.8119</td>
+    </tr>
+    <tr>
+      <th>TabNet</th>
+      <td>0.8245</td>
+      <td>0.7967</td>
+      <td>0.9710</td>
+      <td>0.8524</td>
+      <td>0.8047</td>
+    </tr>
+    <tr>
+      <th>DBN</th>
+      <td>0.8382</td>
+      <td>0.8167</td>
+      <td>0.9745</td>
+      <td>0.8583</td>
+      <td>0.8233</td>
+    </tr>
+    <tr>
+      <th>LightGBM</th>
+      <td>0.8871</td>
+      <td>0.8002</td>
+      <td>0.9822</td>
+      <td>0.8360</td>
+      <td>0.8755</td>
+    </tr>
+    <tr>
+      <th>CNN 1D</th>
+      <td>0.8413</td>
+      <td>0.8083</td>
+      <td>0.9754</td>
+      <td>0.8570</td>
+      <td>0.8246</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>El coeficiente de variación del F1 del original entre sus 48 semillas es de 1,4 %, en el rango de las redes (0,6 % a 2,8 %) y diez veces el de LightGBM (0,14 %). El 7,7 % de los flujos de prueba lo fallan los 13 modelos a la vez, y el 61,5 % de los errores del original los comete también LightGBM.</strong></p>
+<p>Así mismo, el F1 por clase muestra dónde pierde el original: en Blackhole (0,834) y Wormhole (0,820) queda por debajo de LightGBM (0,887 y 0,876) y de CNN-LSTM (0,874 y 0,863), mientras que en Sybil (0,855) supera a LightGBM (0,836). Son las mismas clases en las que la ablación del capítulo 6 encontró que la compuerta dirige Blackhole y Wormhole al experto de umbrales, que es el que peor los separa.</p>
+<p>Por tal motivo, la mejora pendiente del mecanismo está en la separación Blackhole–Wormhole, y el núcleo de errores comunes (7,7 %) marca un techo que ningún modelo de esta familia supera con estos atributos.</p>
+</section>
+</section>
+<section id="la-cota-de-lipschitz-frente-al-ruido-p4">
+<h2>La cota de Lipschitz frente al ruido (P4)<a class="headerlink" href="#la-cota-de-lipschitz-frente-al-ruido-p4" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;robustez/p4_sensibilidad_tau.csv&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">p4</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;tau_min&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;semilla&quot;</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.2</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">p4</span><span class="p">[</span><span class="s2">&quot;cota K&quot;</span><span class="p">],</span> <span class="n">p4</span><span class="p">[</span><span class="s2">&quot;caída con ruido σ=0.5&quot;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="n">AZUL</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">p4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">p4</span><span class="p">[</span><span class="s2">&quot;cota K&quot;</span><span class="p">],</span> <span class="n">p4</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;caída con ruido σ=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;σ = </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">: Spearman entre K y la caída = </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">statistic</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2"> (p = </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">pvalue</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Cota de Lipschitz K (teorema del capítulo 5)&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Caída del F1 con σ = 0,5&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cota K</th>
+      <th>f1_val</th>
+      <th>caída con ruido σ=0.1</th>
+      <th>caída con ruido σ=0.3</th>
+      <th>caída con ruido σ=0.5</th>
+    </tr>
+    <tr>
+      <th>tau_min</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.02</th>
+      <td>39.2829</td>
+      <td>0.9176</td>
+      <td>0.0106</td>
+      <td>0.0811</td>
+      <td>0.1678</td>
+    </tr>
+    <tr>
+      <th>0.05</th>
+      <td>32.4226</td>
+      <td>0.9192</td>
+      <td>0.0105</td>
+      <td>0.0793</td>
+      <td>0.1659</td>
+    </tr>
+    <tr>
+      <th>0.10</th>
+      <td>29.5391</td>
+      <td>0.9215</td>
+      <td>0.0107</td>
+      <td>0.0794</td>
+      <td>0.1666</td>
+    </tr>
+    <tr>
+      <th>0.20</th>
+      <td>20.6302</td>
+      <td>0.9280</td>
+      <td>0.0113</td>
+      <td>0.0852</td>
+      <td>0.1713</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>σ = 0.1: Spearman entre K y la caída = +0.06 (p = 0.86)
+σ = 0.3: Spearman entre K y la caída = -0.38 (p = 0.23)
+σ = 0.5: Spearman entre K y la caída = +0.29 (p = 0.37)
+</pre></div>
+</div>
+<img alt="_images/35dc7034a72f8772048e7b41a32513dbd82b7747ea010f18b684dc8096c79713.png" src="_images/35dc7034a72f8772048e7b41a32513dbd82b7747ea010f18b684dc8096c79713.png" />
+</div>
+</div>
+<p><strong>P4 es falsa: al subir τ_min de 0,02 a 0,2 la cota K baja de 39,3 a 20,6, como predice el teorema, pero la caída del F1 con ruido σ = 0,5 no cambia (se mantiene entre 0,166 y 0,171, sin tendencia), y la correlación de Spearman entre K y la caída no es significativa en ningún nivel de ruido (<em>p</em> entre 0,23 y 0,86).</strong></p>
+<p>Esto significa que la cota es válida, porque se verifica numéricamente en el capítulo 5, pero es demasiado holgada para ordenar las variantes por su robustez real: K es un peor caso global, producto de normas espectrales, y el ruido gaussiano explora sobre todo la región donde la red es mucho más suave que ese peor caso. La robustez del original frente a LightGBM, que sí es clara, viene de la suavidad de toda la arquitectura y no de las diferencias de K dentro del barrido.</p>
+<p>En consecuencia, la propiedad demostrada se presenta como una garantía teórica sin consecuencia práctica medible en este problema, y una cota más fina (local o certificada por intervalos) queda como trabajo futuro.</p>
+</section>
+<section id="sensibilidad-del-diseno-validacion">
+<h2>Sensibilidad del diseño (validación)<a class="headerlink" href="#sensibilidad-del-diseno-validacion" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sens</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;adecuacion/sensibilidad.csv&quot;</span><span class="p">)</span>
+<span class="n">sens</span><span class="p">[</span><span class="s2">&quot;diseño congelado&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sens</span><span class="p">[</span><span class="s2">&quot;variante&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">&quot;tau_min0.05&quot;</span><span class="p">)</span>
+<span class="n">sens</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variante</th>
+      <th>semillas</th>
+      <th>f1_val</th>
+      <th>de</th>
+      <th>f1_ent</th>
+      <th>epocas</th>
+      <th>diseño congelado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>T16</td>
+      <td>3</td>
+      <td>0.9210</td>
+      <td>0.0061</td>
+      <td>0.9294</td>
+      <td>10.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>T4</td>
+      <td>3</td>
+      <td>0.9310</td>
+      <td>0.0029</td>
+      <td>0.9326</td>
+      <td>12.3333</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>gamma0.0</td>
+      <td>3</td>
+      <td>0.9195</td>
+      <td>0.0074</td>
+      <td>0.9233</td>
+      <td>9.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>gamma0.1</td>
+      <td>3</td>
+      <td>0.9198</td>
+      <td>0.0069</td>
+      <td>0.9229</td>
+      <td>9.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>tau_min0.02</td>
+      <td>3</td>
+      <td>0.9176</td>
+      <td>0.0072</td>
+      <td>0.9243</td>
+      <td>9.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>tau_min0.05</td>
+      <td>3</td>
+      <td>0.9192</td>
+      <td>0.0072</td>
+      <td>0.9231</td>
+      <td>9.0000</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>tau_min0.1</td>
+      <td>3</td>
+      <td>0.9215</td>
+      <td>0.0065</td>
+      <td>0.9238</td>
+      <td>9.6667</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>tau_min0.2</td>
+      <td>3</td>
+      <td>0.9280</td>
+      <td>0.0058</td>
+      <td>0.9233</td>
+      <td>9.6667</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Sobre la validación y con tres semillas, el diseño congelado (T = 8, τ_min = 0,05, γ = 0,01) obtiene un F1 de 0,919, y dos variantes lo superan en más de δ: T = 4 escalones (0,931) y τ_min = 0,2 (0,928). El término de balance γ no cambia el resultado (0,920 con γ = 0 y con γ = 0,1).</strong></p>
+<p>Hay que tener en cuenta que son solo tres semillas y la partición de validación, y que el diseño se congeló antes en la partición de desarrollo (capítulo 5); este barrido es posterior y no se usa para cambiarlo, porque eso sería diseñar mirando resultados que ya incluyen la prueba. La dirección, sin embargo, coincide con la ablación: menos escalones y más suaves funcionan mejor, y el codificador de escalones, tal como se congeló, resta en lugar de sumar.</p>
+<p>Con base en esto, se propone como trabajo futuro un diseño con T = 4 y τ_min ≥ 0,2, evaluado con un protocolo nuevo y preregistrado.</p>
+</section>
+<section id="adecuacion-del-modelo-original-condicion-5">
+<h2>Adecuación del modelo original (condición 5)<a class="headerlink" href="#adecuacion-del-modelo-original-condicion-5" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;adecuacion/adecuacion_con_e2.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>(i) Supera al trivial</th>
+      <th>(ii) Brecha &lt; δg</th>
+      <th>(iii) ECE con temperatura &lt; 0,05</th>
+      <th>Pendiente media</th>
+      <th>(iv) Prueba consistente con validación</th>
+      <th>Adecuado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Original</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.7261</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DNN</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.6632</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CNN 1D</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.6725</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>LSTM</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.7841</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CNN-LSTM</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>0.7730</td>
+      <td>sí</td>
+      <td>sí</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Autoencoder</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>0.5821</td>
+      <td>sí</td>
+      <td>sí</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>RNN</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.6159</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Transformer</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>0.7376</td>
+      <td>sí</td>
+      <td>sí</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>BiLSTM</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>0.6904</td>
+      <td>sí</td>
+      <td>sí</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>ResNet</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.5899</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>GRU</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.6855</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>KAN</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.6334</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>TabNet</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.8402</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>DBN</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>0.7242</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>LightGBM</td>
+      <td>sí</td>
+      <td>no</td>
+      <td>sí</td>
+      <td>1.1186</td>
+      <td>sí</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Logística</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>sí</td>
+      <td>0.5954</td>
+      <td>sí</td>
+      <td>sí</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">adec</span><span class="p">[</span><span class="s2">&quot;adecuación del original (sección 7.2 del E2)&quot;</span><span class="p">]</span>
+<span class="n">pm</span><span class="p">,</span> <span class="n">ob</span><span class="p">,</span> <span class="n">ie</span> <span class="o">=</span> <span class="n">adec</span><span class="p">[</span><span class="s2">&quot;permutación de etiquetas&quot;</span><span class="p">],</span> <span class="n">adec</span><span class="p">[</span><span class="s2">&quot;optimismo por bootstrap&quot;</span><span class="p">],</span> <span class="n">adec</span><span class="p">[</span><span class="s2">&quot;validación anidada (aproximación del E2)&quot;</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;valor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;F1 trivial&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (p = </span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;p (i)&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;Brecha g&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (p = </span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;p Wilcoxon (g &lt; δg)&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+              <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;ECE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;ECE con T&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (T = </span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;T media&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;Pendiente media&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+              <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;Validación − prueba&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, IC [</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;IC 95 % por bloques&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">; </span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;IC 95 % por bloques&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span>
+              <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pm</span><span class="p">[</span><span class="s1">&#39;F1 observado (semilla 6001)&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> frente a máx. </span><span class="si">{</span><span class="n">pm</span><span class="p">[</span><span class="s1">&#39;F1 permutado máximo&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (p = </span><span class="si">{</span><span class="n">pm</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">pm</span><span class="p">[</span><span class="s1">&#39;permutaciones&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> permutaciones)&quot;</span><span class="p">,</span>
+              <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ob</span><span class="p">[</span><span class="s1">&#39;Original&#39;</span><span class="p">][</span><span class="s1">&#39;optimismo medio&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">ob</span><span class="p">[</span><span class="s1">&#39;Original&#39;</span><span class="p">][</span><span class="s1">&#39;IC 95 %&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">; LightGBM </span><span class="si">{</span><span class="n">ob</span><span class="p">[</span><span class="s1">&#39;LightGBM&#39;</span><span class="p">][</span><span class="s1">&#39;optimismo medio&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+              <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ie</span><span class="p">[</span><span class="s1">&#39;Original&#39;</span><span class="p">][</span><span class="s1">&#39;interno − externo&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (E2: de </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">ie</span><span class="p">[</span><span class="s1">&#39;E2 (mismo cálculo)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">ie</span><span class="p">[</span><span class="s1">&#39;E2 (mismo cálculo)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+              <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">adec</span><span class="p">[</span><span class="s1">&#39;curva de aprendizaje&#39;</span><span class="p">][</span><span class="s1">&#39;Original&#39;</span><span class="p">][</span><span class="s1">&#39;pendiente por log n&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">+.5f</span><span class="si">}</span><span class="s2"> (p = </span><span class="si">{</span><span class="n">adec</span><span class="p">[</span><span class="s1">&#39;curva de aprendizaje&#39;</span><span class="p">][</span><span class="s1">&#39;Original&#39;</span><span class="p">][</span><span class="s1">&#39;p&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">]},</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;(i) F1 del trivial&quot;</span><span class="p">,</span> <span class="s2">&quot;(ii) Brecha entrenamiento − validación&quot;</span><span class="p">,</span> <span class="s2">&quot;(iii) ECE antes → después de la temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;Pendiente de calibración (media de clases)&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;(iv) Validación − prueba&quot;</span><span class="p">,</span> <span class="s2">&quot;Permutación de etiquetas&quot;</span><span class="p">,</span> <span class="s2">&quot;Optimismo por bootstrap (20 réplicas)&quot;</span><span class="p">,</span> <span class="s2">&quot;Validación anidada: ajuste − prueba&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Curva de aprendizaje: pendiente por log n&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>(i) F1 del trivial</th>
+      <td>0.070 (p = 1.6e-38)</td>
+    </tr>
+    <tr>
+      <th>(ii) Brecha entrenamiento − validación</th>
+      <td>0.0044 (p = 9.5e-07)</td>
+    </tr>
+    <tr>
+      <th>(iii) ECE antes → después de la temperatura</th>
+      <td>0.0482 → 0.0527 (T = 0.917)</td>
+    </tr>
+    <tr>
+      <th>Pendiente de calibración (media de clases)</th>
+      <td>0.726</td>
+    </tr>
+    <tr>
+      <th>(iv) Validación − prueba</th>
+      <td>0.0706, IC [-0.048; 0.191]</td>
+    </tr>
+    <tr>
+      <th>Permutación de etiquetas</th>
+      <td>0.855 frente a máx. 0.434 (p = 0.005, 200 perm...</td>
+    </tr>
+    <tr>
+      <th>Optimismo por bootstrap (20 réplicas)</th>
+      <td>0.0232 (-0.0051, 0.0695); LightGBM 0.0434</td>
+    </tr>
+    <tr>
+      <th>Validación anidada: ajuste − prueba</th>
+      <td>0.0763 (E2: de 0.013 a 0.096)</td>
+    </tr>
+    <tr>
+      <th>Curva de aprendizaje: pendiente por log n</th>
+      <td>-0.00012 (p = 0.94)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cur</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;adecuacion/curvas.csv&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.2</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;fraccion&quot;</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;f1_val&quot;</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">m</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">NARANJA</span> <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="s2">&quot;Original&quot;</span> <span class="k">else</span> <span class="p">(</span><span class="n">AZUL</span> <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="s2">&quot;LightGBM&quot;</span> <span class="k">else</span> <span class="n">GRIS</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Fracción del entrenamiento (escala log)&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F1 macro de validación&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/464073490b35e4d31150926c10e29cb7fc43cdaad5fcbda1d3a30f9909b70fb8.png" src="_images/464073490b35e4d31150926c10e29cb7fc43cdaad5fcbda1d3a30f9909b70fb8.png" />
+</div>
+</div>
+<p><strong>El original cumple tres de las cuatro condiciones de adecuación del E2: supera al trivial (0,850 frente a 0,070), su brecha entre entrenamiento y validación es de 0,004, muy por debajo de δg = 0,05, y la diferencia entre validación y prueba tiene un IC por bloques que contiene al cero. Falla la calibración por un margen mínimo: su ECE con temperatura es de 0,053 frente al umbral de 0,05.</strong></p>
+<p>Así mismo, la prueba de permutación confirma que aprende señal real (F1 de 0,855 frente a un máximo de 0,434 con etiquetas permutadas, <em>p</em> = 0,005, el mínimo posible con 200 permutaciones), la diferencia entre el mejor F1 de validación del ajuste y el F1 de prueba (0,076), que aproxima la validación anidada como en el E2, está en el rango de las redes (de 0,069 a 0,096, frente a 0,013 de LightGBM), su optimismo por <em>bootstrap</em> (0,023) es del orden del de las redes y la mitad del de LightGBM (0,043), y su curva de aprendizaje es plana: con el 10 % del entrenamiento ya alcanza el F1 de validación que obtiene con todo, mientras que LightGBM sigue mejorando con más datos (pendiente significativa, <em>p</em> &lt; 0,001). Hosmer-Lemeshow rechaza en las cinco clases, pero con 22 883 flujos rechaza cualquier desviación mínima, por lo que se reporta junto con la pendiente de calibración (0,73), que indica probabilidades algo extremas. La temperatura ajustada en validación es menor que 1 y no corrige ese sesgo en la prueba.</p>
+<p>Por tal motivo, el original se declara no adecuado según el criterio del E2, con la misma salvedad que ese entregable: el umbral del ECE es exploratorio, y 9 de los 15 modelos del E2 fallan esa misma condición. La condición 5 de R3 tampoco se cumpliría, aun si el original superara a la familia.</p>
+<section id="calibracion-y-prediccion-conforme">
+<h3>Calibración y predicción conforme<a class="headerlink" href="#calibracion-y-prediccion-conforme" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cal</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;artifacts/dashboard/calibracion.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">m</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cal</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)})</span><span class="o">.</span><span class="n">T</span><span class="p">[[</span><span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;ece_antes&quot;</span><span class="p">,</span> <span class="s2">&quot;ece_despues&quot;</span><span class="p">,</span> <span class="s2">&quot;cobertura_prueba&quot;</span><span class="p">,</span> <span class="s2">&quot;tamano_medio_conjunto&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;cobertura_prueba&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperatura</th>
+      <th>ece_antes</th>
+      <th>ece_despues</th>
+      <th>cobertura_prueba</th>
+      <th>tamano_medio_conjunto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Logística</th>
+      <td>1.0148</td>
+      <td>0.0440</td>
+      <td>0.0423</td>
+      <td>0.8167</td>
+      <td>1.0137</td>
+    </tr>
+    <tr>
+      <th>ResNet</th>
+      <td>1.0578</td>
+      <td>0.0607</td>
+      <td>0.0594</td>
+      <td>0.8174</td>
+      <td>0.9442</td>
+    </tr>
+    <tr>
+      <th>TabNet</th>
+      <td>0.8822</td>
+      <td>0.0542</td>
+      <td>0.0637</td>
+      <td>0.8297</td>
+      <td>0.9920</td>
+    </tr>
+    <tr>
+      <th>DNN</th>
+      <td>1.0310</td>
+      <td>0.0474</td>
+      <td>0.0473</td>
+      <td>0.8300</td>
+      <td>0.9384</td>
+    </tr>
+    <tr>
+      <th>CNN 1D</th>
+      <td>0.9723</td>
+      <td>0.0422</td>
+      <td>0.0435</td>
+      <td>0.8322</td>
+      <td>0.9358</td>
+    </tr>
+    <tr>
+      <th>GRU</th>
+      <td>1.0153</td>
+      <td>0.0441</td>
+      <td>0.0436</td>
+      <td>0.8323</td>
+      <td>0.9353</td>
+    </tr>
+    <tr>
+      <th>DBN</th>
+      <td>1.0655</td>
+      <td>0.0498</td>
+      <td>0.0476</td>
+      <td>0.8325</td>
+      <td>0.9382</td>
+    </tr>
+    <tr>
+      <th>RNN</th>
+      <td>1.2057</td>
+      <td>0.0662</td>
+      <td>0.0535</td>
+      <td>0.8332</td>
+      <td>0.9651</td>
+    </tr>
+    <tr>
+      <th>KAN</th>
+      <td>0.8424</td>
+      <td>0.0484</td>
+      <td>0.0491</td>
+      <td>0.8339</td>
+      <td>0.9443</td>
+    </tr>
+    <tr>
+      <th>CNN-LSTM</th>
+      <td>0.8921</td>
+      <td>0.0446</td>
+      <td>0.0453</td>
+      <td>0.8438</td>
+      <td>0.9376</td>
+    </tr>
+    <tr>
+      <th>Autoencoder</th>
+      <td>1.0771</td>
+      <td>0.0431</td>
+      <td>0.0411</td>
+      <td>0.8440</td>
+      <td>0.9433</td>
+    </tr>
+    <tr>
+      <th>Original</th>
+      <td>0.9875</td>
+      <td>0.0463</td>
+      <td>0.0473</td>
+      <td>0.8463</td>
+      <td>0.9584</td>
+    </tr>
+    <tr>
+      <th>Transformer</th>
+      <td>0.9782</td>
+      <td>0.0433</td>
+      <td>0.0438</td>
+      <td>0.8520</td>
+      <td>0.9608</td>
+    </tr>
+    <tr>
+      <th>BiLSTM</th>
+      <td>1.1943</td>
+      <td>0.0502</td>
+      <td>0.0441</td>
+      <td>0.8547</td>
+      <td>0.9813</td>
+    </tr>
+    <tr>
+      <th>LSTM</th>
+      <td>1.1450</td>
+      <td>0.0487</td>
+      <td>0.0465</td>
+      <td>0.8591</td>
+      <td>0.9775</td>
+    </tr>
+    <tr>
+      <th>LightGBM</th>
+      <td>1.1040</td>
+      <td>0.0370</td>
+      <td>0.0316</td>
+      <td>0.8902</td>
+      <td>1.0092</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Con predicción conforme LAC calibrada en validación para una cobertura nominal del 90 %, ningún modelo la alcanza en la prueba: la cobertura va de 0,817 (ResNet y la regresión logística) a 0,890 (LightGBM), y la del original es de 0,846 con conjuntos de 0,96 clases en promedio.</strong></p>
+<p>Esto significa que la garantía de la predicción conforme, que supone que validación y prueba son intercambiables, se rompe en UAVIDS-2025 por la misma dependencia de escenario que explica la brecha entre validación y prueba. No es un defecto de un modelo en particular, sino de la partición.</p>
+<p>Por lo anterior, el dashboard muestra los conjuntos conformes con la advertencia de que su cobertura real medida es menor que la nominal, y reporta la cobertura observada de cada modelo.</p>
+</section>
+<section id="los-mismos-diagnosticos-en-cada-conjunto-adicional">
+<h3>Los mismos diagnósticos en cada conjunto adicional<a class="headerlink" href="#los-mismos-diagnosticos-en-cada-conjunto-adicional" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diag</span> <span class="o">=</span> <span class="n">adec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;diagnósticos en cada conjunto adicional&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">diag</span><span class="p">:</span>
+    <span class="n">tabla_diag</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">c</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;permutación&quot;</span><span class="p">},</span> <span class="s2">&quot;p de permutación&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;permutación&quot;</span><span class="p">][</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
+                                   <span class="s2">&quot;F1 permutado máximo&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;permutación&quot;</span><span class="p">][</span><span class="s2">&quot;F1 permutado máximo&quot;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">diag</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">tabla_diag</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pendiente: training/ejecutar_diagnosticos_adicionales.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>reproducción: F1 de prueba idéntico al registrado</th>
+      <th>F1 prueba</th>
+      <th>F1 trivial (clase mayoritaria)</th>
+      <th>(i) supera al trivial</th>
+      <th>brecha g</th>
+      <th>p Wilcoxon (g &lt; δg)</th>
+      <th>(ii) brecha &lt; δg</th>
+      <th>ECE</th>
+      <th>ECE con T</th>
+      <th>(iii) ECE con T &lt; 0,05</th>
+      <th>pendiente media de calibración</th>
+      <th>validación − prueba</th>
+      <th>IC 95 % por bloques</th>
+      <th>(iv) prueba consistente con validación</th>
+      <th>adecuado</th>
+      <th>p de permutación</th>
+      <th>F1 permutado máximo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>UAV-NIDD</th>
+      <td>True</td>
+      <td>0.5496</td>
+      <td>0.0921</td>
+      <td>True</td>
+      <td>0.324</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0.0802</td>
+      <td>0.0897</td>
+      <td>False</td>
+      <td>4.2525</td>
+      <td>0.0081</td>
+      <td>[-0.3264943083807587, 0.34020963041299646]</td>
+      <td>True</td>
+      <td>False</td>
+      <td>0.005</td>
+      <td>0.4881</td>
+    </tr>
+    <tr>
+      <th>UNSW-NB15</th>
+      <td>True</td>
+      <td>0.6651</td>
+      <td>0.0293</td>
+      <td>True</td>
+      <td>0.0153</td>
+      <td>0.001</td>
+      <td>True</td>
+      <td>0.0341</td>
+      <td>0.0424</td>
+      <td>True</td>
+      <td>1.0402</td>
+      <td>-0.0194</td>
+      <td>[-0.13130451878768443, 0.09644280568293215]</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.005</td>
+      <td>0.2311</td>
+    </tr>
+    <tr>
+      <th>UNR-IDD</th>
+      <td>True</td>
+      <td>0.7646</td>
+      <td>0.0701</td>
+      <td>True</td>
+      <td>0.0097</td>
+      <td>0.001</td>
+      <td>True</td>
+      <td>0.0348</td>
+      <td>0.0187</td>
+      <td>True</td>
+      <td>1.7743</td>
+      <td>0.0064</td>
+      <td>[-0.10942211942484723, 0.09804183377552315]</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.005</td>
+      <td>0.2737</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Al repetir los diagnósticos del E2 en cada conjunto adicional, el original es adecuado en UNSW-NB15 y en UNR-IDD, donde cumple las cuatro condiciones, y no lo es en UAV-NIDD: ahí la brecha entre entrenamiento y validación es de 0,32 (F1 de 0,89 en entrenamiento frente a 0,56 en validación) y el ECE con temperatura es de 0,090. En los tres conjuntos supera al trivial y a las 200 permutaciones de etiquetas (<em>p</em> = 0,005), y los 30 reentrenamientos reproducen bit a bit el F1 de prueba registrado.</strong></p>
+<p>Esto significa que en UAV-NIDD el original memoriza las ejecuciones de ataque del entrenamiento y no las transfiere a las de validación y prueba, que son otras ejecuciones, porque los bloques de 250 filas se reparten sin compartir ninguno. Es la misma dependencia de escenario de UAVIDS-2025, y explica por qué todos los modelos quedan entre 0,49 y 0,62 de F1 en ese conjunto. Además, la mejor permutación llega a 0,488 frente a 0,541 observado: la señal aprendida existe, pero el margen sobre el azar es pequeño.</p>
+<p>Por esta razón, la adecuación del original depende del conjunto: se cumple donde la validación representa a la prueba (UNSW-NB15 y UNR-IDD) y falla donde las particiones separan ejecuciones de ataque muy distintas, lo que refuerza el hallazgo principal del capítulo 10.</p>
+</section>
+</section>
+<section id="robustez-a-la-eleccion-de-la-prueba-condicion-6">
+<h2>Robustez a la elección de la prueba (condición 6)<a class="headerlink" href="#robustez-a-la-eleccion-de-la-prueba-condicion-6" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">adec</span><span class="p">[</span><span class="s2">&quot;Nadeau-Bengio y F 5x2cv (condición 6)&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>particiones</th>
+      <th>diferencia media</th>
+      <th>t Nadeau-Bengio</th>
+      <th>p Nadeau-Bengio</th>
+      <th>F 5x2cv</th>
+      <th>p F 5x2cv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>LightGBM</th>
+      <td>10.0</td>
+      <td>0.0002</td>
+      <td>0.0098</td>
+      <td>0.9924</td>
+      <td>0.6108</td>
+      <td>0.7631</td>
+    </tr>
+    <tr>
+      <th>CNN 1D</th>
+      <td>10.0</td>
+      <td>0.0006</td>
+      <td>0.0324</td>
+      <td>0.9748</td>
+      <td>1.3472</td>
+      <td>0.3907</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Con la <em>t</em> de Nadeau-Bengio y la <em>F</em> de 5 × 2 cv sobre las diez particiones de la validación cruzada del E2, el original no se distingue de LightGBM (diferencia media de +0,0002, <em>p</em> = 0,99) ni de CNN 1D (+0,0006, <em>p</em> = 0,97): los tres obtienen un F1 medio de 0,860.</strong></p>
+<p>Esto quiere decir que la conclusión principal es robusta a la elección de la prueba, porque ninguna, paramétrica o no paramétrica, con o sin la corrección de Nadeau-Bengio, muestra que el original supere a un rival. En cambio, la ventaja de LightGBM sobre el original, que en la prueba sellada es de 0,027 y respaldan las seis pruebas admisibles del capítulo 7, desaparece cuando la partición cambia.</p>
+<p>Por tal motivo, y como exige la condición 6 de la sección 8.4 del enunciado, la superioridad de LightGBM sobre el original se reporta como un resultado no robusto a la partición: depende de qué escenarios de simulación quedaron en la prueba sellada, igual que la brecha entre validación y prueba.</p>
+</section>
+<section id="escalabilidad-incertidumbre-e-interpretabilidad">
+<h2>Escalabilidad, incertidumbre e interpretabilidad<a class="headerlink" href="#escalabilidad-incertidumbre-e-interpretabilidad" title="Link to this heading">#</a></h2>
+<p>Tres contenidos del cuadro 7 para este capítulo están desarrollados en otros lugares del libro y aquí solo se enlazan:</p>
+<ul class="simple">
+<li><p><strong>Escalabilidad.</strong> El costo del original crece de forma lineal con el número de atributos y su tiempo por flujo se estabiliza en microsegundos con lotes grandes (capítulo 6, sección de complejidad). La curva de aprendizaje de este capítulo muestra la otra cara: con el 10 % del entrenamiento ya alcanza su F1 de validación.</p></li>
+<li><p><strong>Incertidumbre.</strong> Además de la calibración y la predicción conforme de este capítulo, la dispersión entre semillas se reporta con media, DE e IC 95 % en la tabla de líderes (capítulo 3) y en cada conjunto adicional.</p></li>
+<li><p><strong>Interpretabilidad.</strong> Los valores de Shapley, la fidelidad por borrado y la estabilidad de las explicaciones entre semillas están en el capítulo 6, junto con el peso de la compuerta por clase.</p></li>
+</ul>
+</section>
+<section id="eficiencia-y-frontera-de-pareto">
+<h2>Eficiencia y frontera de Pareto<a class="headerlink" href="#eficiencia-y-frontera-de-pareto" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;artifacts/dashboard/lideres.csv&quot;</span><span class="p">)</span>
+<span class="n">lid</span> <span class="o">=</span> <span class="n">lid</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Latencia mediana (ms)&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Latencia mediana (ms)&quot;</span><span class="p">)</span>
+<span class="n">lid</span><span class="p">[</span><span class="s2">&quot;Pareto&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lid</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lid</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cummax</span><span class="p">()</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">lid</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;Latencia mediana (ms)&quot;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">NARANJA</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Original&quot;</span> <span class="k">else</span> <span class="p">(</span><span class="n">AZUL</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;Pareto&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="n">GRIS</span><span class="p">),</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">],</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;Latencia mediana (ms)&quot;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">)</span>
+<span class="n">frontera</span> <span class="o">=</span> <span class="n">lid</span><span class="p">[</span><span class="n">lid</span><span class="p">[</span><span class="s2">&quot;Pareto&quot;</span><span class="p">]]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frontera</span><span class="p">[</span><span class="s2">&quot;Latencia mediana (ms)&quot;</span><span class="p">],</span> <span class="n">frontera</span><span class="p">[</span><span class="s2">&quot;F1 macro&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">AZUL</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Latencia mediana por flujo en ONNX Runtime, 1 hilo (ms, escala log)&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F1 macro de prueba&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">lid</span><span class="p">[[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 macro&quot;</span><span class="p">,</span> <span class="s2">&quot;Latencia mediana (ms)&quot;</span><span class="p">,</span> <span class="s2">&quot;Latencia p95 (ms)&quot;</span><span class="p">,</span> <span class="s2">&quot;Parámetros&quot;</span><span class="p">,</span> <span class="s2">&quot;FLOPs&quot;</span><span class="p">,</span> <span class="s2">&quot;Entrenamiento (s)&quot;</span><span class="p">,</span> <span class="s2">&quot;Pareto&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/bf8af1173671dbe58db6dbc5559f94923a1d61ca42d78980f1e657b7ee7d7cb1.png" src="_images/bf8af1173671dbe58db6dbc5559f94923a1d61ca42d78980f1e657b7ee7d7cb1.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>F1 macro</th>
+      <th>Latencia mediana (ms)</th>
+      <th>Latencia p95 (ms)</th>
+      <th>Parámetros</th>
+      <th>FLOPs</th>
+      <th>Entrenamiento (s)</th>
+      <th>Pareto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>DBN</td>
+      <td>0.8569</td>
+      <td>0.0797</td>
+      <td>0.1422</td>
+      <td>9733</td>
+      <td>1.9072e+04</td>
+      <td>110.3980</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DNN</td>
+      <td>0.8577</td>
+      <td>0.0907</td>
+      <td>0.1465</td>
+      <td>12677</td>
+      <td>2.4896e+04</td>
+      <td>40.9205</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Logística</td>
+      <td>0.8030</td>
+      <td>0.0946</td>
+      <td>0.1998</td>
+      <td>85</td>
+      <td>NaN</td>
+      <td>40.3100</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LightGBM</td>
+      <td>0.8748</td>
+      <td>0.1091</td>
+      <td>0.1448</td>
+      <td>35516</td>
+      <td>NaN</td>
+      <td>14.4875</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>ResNet</td>
+      <td>0.8510</td>
+      <td>0.1158</td>
+      <td>0.1575</td>
+      <td>14245</td>
+      <td>2.6944e+04</td>
+      <td>48.7470</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Autoencoder</td>
+      <td>0.8591</td>
+      <td>0.1177</td>
+      <td>0.2079</td>
+      <td>19093</td>
+      <td>1.9072e+04</td>
+      <td>35.3220</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CNN 1D</td>
+      <td>0.8584</td>
+      <td>0.1318</td>
+      <td>0.2094</td>
+      <td>39493</td>
+      <td>2.6586e+05</td>
+      <td>118.0715</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>KAN</td>
+      <td>0.8488</td>
+      <td>0.1423</td>
+      <td>0.2386</td>
+      <td>4845</td>
+      <td>9.3760e+03</td>
+      <td>96.3330</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>LSTM</td>
+      <td>0.8285</td>
+      <td>0.1533</td>
+      <td>0.2598</td>
+      <td>17477</td>
+      <td>5.3312e+05</td>
+      <td>157.9465</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CNN-LSTM</td>
+      <td>0.8591</td>
+      <td>0.1618</td>
+      <td>0.3085</td>
+      <td>46213</td>
+      <td>9.2429e+05</td>
+      <td>215.1702</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Original</td>
+      <td>0.8496</td>
+      <td>0.1851</td>
+      <td>0.3129</td>
+      <td>14908</td>
+      <td>2.9056e+04</td>
+      <td>25.3060</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Transformer</td>
+      <td>0.8576</td>
+      <td>0.2089</td>
+      <td>0.3447</td>
+      <td>3381</td>
+      <td>2.2144e+04</td>
+      <td>51.6170</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>RNN</td>
+      <td>0.8371</td>
+      <td>0.3114</td>
+      <td>0.9768</td>
+      <td>38277</td>
+      <td>9.3926e+05</td>
+      <td>225.0155</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>GRU</td>
+      <td>0.8474</td>
+      <td>0.4077</td>
+      <td>0.8621</td>
+      <td>96901</td>
+      <td>2.7825e+06</td>
+      <td>886.8390</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>TabNet</td>
+      <td>0.8301</td>
+      <td>0.6519</td>
+      <td>1.0397</td>
+      <td>6728</td>
+      <td>1.7232e+04</td>
+      <td>265.3692</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>BiLSTM</td>
+      <td>0.8457</td>
+      <td>1.3150</td>
+      <td>1.9007</td>
+      <td>530693</td>
+      <td>1.6813e+07</td>
+      <td>2032.3160</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>La frontera de Pareto entre F1 y latencia la forman DBN (0,080 ms), DNN (0,091 ms) y LightGBM (0,109 ms, el mejor F1). El original, con 0,185 ms por flujo, queda dominado: hay modelos más rápidos y con mayor F1.</strong></p>
+<p>Hay que tener en cuenta que todas las latencias están por debajo de 2 ms por flujo en un solo hilo de CPU, incluida la BiLSTM, la más lenta (1,3 ms), de modo que cualquiera de los 16 modelos procesa varios miles de flujos por segundo y la latencia no es una restricción para el dashboard. El original tiene 14 908 parámetros y 29 056 FLOPs por flujo, del orden de las redes densas y 36 veces menos parámetros que la BiLSTM.</p>
+<p>Por esta razón, la elección entre modelos se decide por el desempeño y la robustez, no por el costo de inferencia, y el capítulo 10 recoge esa elección.</p>
+</section>
+<section id="balance-de-las-seis-condiciones-de-r3">
+<h2>Balance de las seis condiciones de R3<a class="headerlink" href="#balance-de-las-seis-condiciones-de-r3" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c4</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;confirmatorio/sensibilidad_cuadro4.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">R</span> <span class="o">/</span> <span class="s2">&quot;confirmatorio/resumen.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">&quot;condición&quot;</span><span class="p">:</span> <span class="s2">&quot;1. Métrica media favorable frente a cada rival&quot;</span><span class="p">,</span> <span class="s2">&quot;cumple&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;evidencia&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;F1 medio menor que el de </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">c4</span><span class="p">[</span><span class="s1">&#39;rivales con media mayor que la del original&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> de los 12 rivales&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;condición&quot;</span><span class="p">:</span> <span class="s2">&quot;2. Tres pruebas con Holm y diferencia &gt; δ&quot;</span><span class="p">,</span> <span class="s2">&quot;cumple&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;evidencia&quot;</span><span class="p">:</span> <span class="s2">&quot;ningún contraste con tres pruebas, ni con las preregistradas ni con las admisibles del cuadro 4&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;condición&quot;</span><span class="p">:</span> <span class="s2">&quot;3. Efecto no despreciable e IC &gt; 0&quot;</span><span class="p">,</span> <span class="s2">&quot;cumple&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;evidencia&quot;</span><span class="p">:</span> <span class="s2">&quot;solo frente a TabNet y RNN hay efecto a favor no despreciable&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;condición&quot;</span><span class="p">:</span> <span class="s2">&quot;4. Consistencia en los conjuntos adicionales&quot;</span><span class="p">,</span> <span class="s2">&quot;cumple&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;evidencia&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;mejor en </span><span class="si">{</span><span class="n">res_ad</span><span class="p">[</span><span class="s1">&#39;conjuntos en que el original es el mejor en la media&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> de 3; peor con significancia en UNSW-NB15&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;condición&quot;</span><span class="p">:</span> <span class="s2">&quot;5. Adecuación del modelo (E2, sección 7.2)&quot;</span><span class="p">,</span> <span class="s2">&quot;cumple&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;evidencia&quot;</span><span class="p">:</span> <span class="s2">&quot;en UAVIDS-2025 cumple (i), (ii) y (iv) y falla (iii) por ECE de 0,053 frente a 0,05; adecuado en UNSW-NB15 y UNR-IDD, no en UAV-NIDD&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;condición&quot;</span><span class="p">:</span> <span class="s2">&quot;6. Robustez a la elección de la prueba&quot;</span><span class="p">,</span> <span class="s2">&quot;cumple&quot;</span><span class="p">:</span> <span class="s2">&quot;sí (para la conclusión principal)&quot;</span><span class="p">,</span> <span class="s2">&quot;evidencia&quot;</span><span class="p">:</span> <span class="s2">&quot;ninguna prueba muestra superioridad del original; la ventaja de LightGBM no es robusta a la partición&quot;</span><span class="p">},</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>condición</th>
+      <th>cumple</th>
+      <th>evidencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1. Métrica media favorable frente a cada rival</td>
+      <td>no</td>
+      <td>F1 medio menor que el de 8 de los 12 rivales</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2. Tres pruebas con Holm y diferencia &gt; δ</td>
+      <td>no</td>
+      <td>ningún contraste con tres pruebas, ni con las ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3. Efecto no despreciable e IC &gt; 0</td>
+      <td>no</td>
+      <td>solo frente a TabNet y RNN hay efecto a favor ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4. Consistencia en los conjuntos adicionales</td>
+      <td>no</td>
+      <td>mejor en 0 de 3; peor con significancia en UNS...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5. Adecuación del modelo (E2, sección 7.2)</td>
+      <td>no</td>
+      <td>en UAVIDS-2025 cumple (i), (ii) y (iv) y falla...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6. Robustez a la elección de la prueba</td>
+      <td>sí (para la conclusión principal)</td>
+      <td>ninguna prueba muestra superioridad del origin...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>El modelo original no cumple R3: falla las condiciones 1 a 5, y la condición 6 confirma que esa conclusión no depende de la prueba elegida. El tope de calificación es 4,0 (sección 14.1 del enunciado).</strong></p>
+<p>En síntesis, la evidencia de los cuatro conjuntos y de las seis pruebas admisibles apunta en la misma dirección: el original es una red del grupo intermedio, más robusta que el resto ante ruido y atributos faltantes, sin una ventaja de desempeño que resista la comparación con la familia completa.</p>
+<p>Por lo anterior, el trabajo se sostiene en el hallazgo alternativo preregistrado en la sección 12 del protocolo, que el capítulo 10 desarrolla.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_validacion.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Validación: protocolo y pruebas de hipótesis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="09_dashboard.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Dashboard y despliegue</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos-adicionales">Conjuntos adicionales</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-por-conjunto">Desempeño por conjunto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastes-del-original-en-cada-conjunto">Contrastes del original en cada conjunto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-entre-conjuntos-de-datos">Prueba entre conjuntos de datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consistencia-condicion-4-de-r3">Consistencia (condición 4 de R3)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dos-fuentes-de-variacion-que-se-declaran">Dos fuentes de variación que se declaran</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez">Robustez</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbaciones-de-las-entradas">Perturbaciones de las entradas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cambio-de-distribucion-escenario-de-simulacion-no-visto-p5">Cambio de distribución: escenario de simulación no visto (P5)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estabilidad-entre-semillas-y-errores">Estabilidad entre semillas y errores</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-cota-de-lipschitz-frente-al-ruido-p4">La cota de Lipschitz frente al ruido (P4)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-del-diseno-validacion">Sensibilidad del diseño (validación)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adecuacion-del-modelo-original-condicion-5">Adecuación del modelo original (condición 5)</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibracion-y-prediccion-conforme">Calibración y predicción conforme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#los-mismos-diagnosticos-en-cada-conjunto-adicional">Los mismos diagnósticos en cada conjunto adicional</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-a-la-eleccion-de-la-prueba-condicion-6">Robustez a la elección de la prueba (condición 6)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escalabilidad-incertidumbre-e-interpretabilidad">Escalabilidad, incertidumbre e interpretabilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eficiencia-y-frontera-de-pareto">Eficiencia y frontera de Pareto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balance-de-las-seis-condiciones-de-r3">Balance de las seis condiciones de R3</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

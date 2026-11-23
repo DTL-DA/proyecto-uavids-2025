@@ -1,0 +1,1129 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelo original: limitación, fuente, hipótesis, teoría y diseño &#8212; Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_modelo_diseno';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Modelo original: implementación, pruebas, ablación e interpretabilidad" href="06_modelo_implementacion.html" />
+    <link rel="prev" title="Revisión de literatura y evidencia de novedad" href="04_literatura.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_correcciones.html">Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_datos.html">Datos: EDA, auditoría y ficha de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Benchmarks: Top 10, baselines y exportación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y evidencia de novedad</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelo original: limitación, fuente, hipótesis, teoría y diseño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelo_implementacion.html">Modelo original: implementación, pruebas, ablación e interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_validacion.html">Validación: protocolo y pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_evaluacion_ampliada.html">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_dashboard.html">Dashboard y despliegue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">Conclusiones, limitaciones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_reproducibilidad.html">Reproducibilidad, autoría y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/05_modelo_diseno.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelo original: limitación, fuente, hipótesis, teoría y diseño</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitacion-identificada-con-evidencia">Limitación identificada con evidencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuente-del-mecanismo-y-transferencia">Fuente del mecanismo y transferencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hipotesis-del-mecanismo">Hipótesis del mecanismo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion">Formulación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedad-demostrada-cota-de-lipschitz">Propiedad demostrada: cota de Lipschitz</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-numerica">Verificación numérica</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocodigo">Pseudocódigo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disciplina-de-diseno">Disciplina de diseño</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelo-original-limitacion-fuente-hipotesis-teoria-y-diseno">
+<h1>Modelo original: limitación, fuente, hipótesis, teoría y diseño<a class="headerlink" href="#modelo-original-limitacion-fuente-hipotesis-teoria-y-diseno" title="Link to this heading">#</a></h1>
+<p>Este capítulo explica por qué se propone el modelo, de dónde viene su mecanismo, qué hipótesis pone a prueba, qué propiedad se demuestra y cómo se tomaron las decisiones de diseño sin tocar los datos de confirmación.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">RAIZ</span><span class="p">));</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;training&quot;</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.precision&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="limitacion-identificada-con-evidencia">
+<h2>Limitación identificada con evidencia<a class="headerlink" href="#limitacion-identificada-con-evidencia" title="Link to this heading">#</a></h2>
+<p>El paper guía <span class="bibtex-citation" id="id1">[<a class="reference internal" href="11_reproducibilidad.html#id101" title="Qingli Zeng, Abdalrahman Bashir, and Farid Naït-Abdesselam. UAVIDS-2025: A Benchmark Dataset for Intrusion Detection in UAV Networks Using Machine Learning Techniques. In IEEE Conference on Communications and Network Security, 1–9. 2025. doi:10.1109/cns66487.2025.11194990.">Zeng <em>et al.</em>, 2025</a>]</span> reporta que Blackhole y Wormhole son las clases que más se confunden en UAVIDS-2025, y <span class="bibtex-citation" id="id2">Zarkadis and Douligeris [<a class="reference internal" href="11_reproducibilidad.html#id99" title="Iakovos-Christos Zarkadis and Christos Douligeris. XAI and Statistical Analysis for Reliable Intrusion Detection in the UAVIDS-2025 Dataset: From Tree to Hybrid and Tabular DNN Ensembles. In International Conference on Computer, Information and Telecommunication Systems, 1–8. 2026. doi:10.1109/cits70307.2026.11637173.">2026</a>]</span> atribuyen esa confusión a que las dos clases comparten el soporte de su distribución en casi todos los atributos. En el Entregable 2 esa limitación quedó medida con el benchmark completo: en la prueba sellada, LightGBM confunde Blackhole con Wormhole en el 10,0 % de esos flujos y las redes del Top 10 entre el 12,3 y el 18,5 %, mientras que las redes reconocen mejor Sybil (F1 de hasta 0,864 frente a 0,834 de LightGBM). Es decir, los errores del sesgo de árbol, que parte el espacio con umbrales por eje, y los del sesgo neuronal, que ajusta funciones suaves, son <strong>complementarios</strong>, y una regla de fusión fija le da el mismo peso a cada modelo en todos los flujos.</p>
+<p>La cuantificación se hizo en la partición de desarrollo, que solo usa filas de entrenamiento del E2 (sección 7.2 del enunciado):</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d01</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/diseno/resultados/d01/resumen.csv&quot;</span><span class="p">)</span>
+<span class="n">d01</span> <span class="o">=</span> <span class="n">d01</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;modelo&quot;</span><span class="p">:</span> <span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="s2">&quot;f1_medio&quot;</span><span class="p">:</span> <span class="s2">&quot;F1 macro medio&quot;</span><span class="p">,</span> <span class="s2">&quot;f1_de&quot;</span><span class="p">:</span> <span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;conf_BW&quot;</span><span class="p">:</span> <span class="s2">&quot;Confusión B–W&quot;</span><span class="p">,</span> <span class="s2">&quot;desacuerdo&quot;</span><span class="p">:</span> <span class="s2">&quot;Flujos en desacuerdo (%)&quot;</span><span class="p">})</span>
+<span class="n">d01</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>F1 macro medio</th>
+      <th>DE</th>
+      <th>Confusión B–W</th>
+      <th>Flujos en desacuerdo (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN-LSTM</td>
+      <td>0.8415</td>
+      <td>0.0415</td>
+      <td>0.1226</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DNN</td>
+      <td>0.8369</td>
+      <td>0.0460</td>
+      <td>0.1263</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LightGBM</td>
+      <td>0.8453</td>
+      <td>0.0631</td>
+      <td>0.1036</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Transformer</td>
+      <td>0.8316</td>
+      <td>0.0404</td>
+      <td>0.1303</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Promedio LightGBM+DNN</td>
+      <td>0.8485</td>
+      <td>0.0569</td>
+      <td>0.1108</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Oráculo LightGBM|DNN</td>
+      <td>0.8710</td>
+      <td>0.0527</td>
+      <td>0.0898</td>
+      <td>5.8175</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Promedio LightGBM+Transformer</td>
+      <td>0.8416</td>
+      <td>0.0529</td>
+      <td>0.1199</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Oráculo LightGBM|Transformer</td>
+      <td>0.8647</td>
+      <td>0.0519</td>
+      <td>0.0909</td>
+      <td>5.5399</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Promedio LightGBM+CNN-LSTM</td>
+      <td>0.8482</td>
+      <td>0.0528</td>
+      <td>0.1139</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Oráculo LightGBM|CNN-LSTM</td>
+      <td>0.8675</td>
+      <td>0.0526</td>
+      <td>0.0888</td>
+      <td>4.9434</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Oráculo de los 4</td>
+      <td>0.8803</td>
+      <td>0.0503</td>
+      <td>0.0810</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>El oráculo que elige flujo por flujo entre LightGBM y el DNN llega a un F1 macro de 0,871, frente a 0,845 de LightGBM solo, aunque los dos modelos discrepan en apenas el 5,8 % de los flujos.</strong> El promedio simple de probabilidades se queda en 0,849.</p>
+<p>Esto significa que hay un margen de +0,026 que ninguna regla fija aprovecha, y que está concentrado en pocos flujos. Al revisar quién acierta cuando discrepan, la red acierta en Sybil y LightGBM en las demás clases; elegir por máxima confianza no aporta (0,848), pero una regla que confía en la red solo cuando predice Sybil sube a 0,856.</p>
+<p>Por tal motivo, se opta por un mecanismo que decida <strong>por flujo</strong> cuánto pesa cada sesgo inductivo, en lugar de una regla global.</p>
+</section>
+<section id="fuente-del-mecanismo-y-transferencia">
+<h2>Fuente del mecanismo y transferencia<a class="headerlink" href="#fuente-del-mecanismo-y-transferencia" title="Link to this heading">#</a></h2>
+<p>El mecanismo es propio, con tres piezas tomadas de otras aplicaciones y reimplementadas desde su formulación (<code class="docutils literal notranslate"><span class="pre">experiments/procedencia.md</span></code>):</p>
+<ul class="simple">
+<li><p>la mezcla de expertos con red de compuerta de <span class="bibtex-citation" id="id3">Jacobs <em>et al.</em> [<a class="reference internal" href="11_reproducibilidad.html#id106" title="Robert A. Jacobs, Michael I. Jordan, Steven J. Nowlan, and Geoffrey E. Hinton. Adaptive Mixtures of Local Experts. Neural Computation, 3(1):79–87, 1991. doi:10.1162/neco.1991.3.1.79.">1991</a>]</span>, propuesta para reconocimiento de vocales y patrones;</p></li>
+<li><p>la codificación de atributos numéricos de <span class="bibtex-citation" id="id4">Gorishniy <em>et al.</em> [<a class="reference internal" href="11_reproducibilidad.html#id107" title="Yury Gorishniy, Ivan Rubachev, and Artem Babenko. On Embeddings for Numerical Features in Tabular Deep Learning. In Advances in Neural Information Processing Systems 35. 2022. doi:10.48550/arXiv.2203.05556.">2022</a>]</span>, que le da a un MLP parte del sesgo de umbral de los árboles en datos tabulares generales;</p></li>
+<li><p>la regularización de balance de la compuerta de <span class="bibtex-citation" id="id5">Shazeer <em>et al.</em> [<a class="reference internal" href="11_reproducibilidad.html#id108" title="Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc Le, Geoffrey Hinton, and Jeff Dean. Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer. In International Conference on Learning Representations. 2017. doi:10.48550/arXiv.1701.06538.">2017</a>]</span>, propuesta para modelos de lenguaje.</p></li>
+</ul>
+<p>La propiedad estructural compartida es que la frontera entre clases en UAVIDS-2025 tiene partes alineadas con los ejes (umbrales en pérdida, retardo y tasa) y partes suaves (combinaciones de atributos), que es justo la situación en la que <span class="bibtex-citation" id="id6">Grinsztajn <em>et al.</em> [<a class="reference internal" href="11_reproducibilidad.html#id111" title="Léo Grinsztajn, Edouard Oyallon, and Gaël Varoquaux. Why do tree-based models still outperform deep learning on typical tabular data? In Advances in Neural Information Processing Systems 35, Datasets and Benchmarks Track. 2022. doi:10.48550/arXiv.2207.08815.">2022</a>]</span> muestran que los árboles y las redes fallan de formas distintas. Las modificaciones algorítmicas son cuatro: escalones sigmoides con umbrales y temperaturas aprendibles con temperatura mínima, entrenamiento cooperativo en lugar del conjunto, mezcla de probabilidades en lugar de logits y un regularizador KL de balance para dos expertos densos.</p>
+</section>
+<section id="hipotesis-del-mecanismo">
+<h2>Hipótesis del mecanismo<a class="headerlink" href="#hipotesis-del-mecanismo" title="Link to this heading">#</a></h2>
+<p>La hipótesis, preregistrada en <code class="docutils literal notranslate"><span class="pre">protocolo.md</span></code>, es causal y falsable: <strong>el codificador de escalones suaves da al modelo el sesgo de umbral por eje de los árboles y reduce la confusión Blackhole–Wormhole frente a las redes de sesgo suave, y la compuerta lo combina flujo por flujo con un experto suave que reconoce mejor Sybil; por tanto, el F1 macro del modelo supera al de la mejor red del Top 10 en al menos δ = 0,01, con la ventaja concentrada en Blackhole y Wormhole.</strong></p>
+<p>Las predicciones secundarias declaradas a priori son cinco:</p>
+<ul class="simple">
+<li><p><strong>P1.</strong> Sin el codificador, la confusión Blackhole–Wormhole sube.</p></li>
+<li><p><strong>P2.</strong> La compuerta pesa más el experto de umbrales en los flujos Blackhole y Wormhole que en los Sybil.</p></li>
+<li><p><strong>P3.</strong> La ventaja frente a la mejor red se concentra en esas dos clases.</p></li>
+<li><p><strong>P4.</strong> La variante con menor cota de Lipschitz se degrada menos ante ruido.</p></li>
+<li><p><strong>P5.</strong> El modelo tampoco generaliza a un escenario de simulación no visto.</p></li>
+</ul>
+</section>
+<section id="formulacion">
+<h2>Formulación<a class="headerlink" href="#formulacion" title="Link to this heading">#</a></h2>
+<p>Sea <span class="math notranslate nohighlight">\(x \in \mathbb{R}^{d}\)</span> el flujo transformado con <span class="math notranslate nohighlight">\(\log(1+x)\)</span> y estandarizado (<span class="math notranslate nohighlight">\(d = 16\)</span>), y <span class="math notranslate nohighlight">\(K_c = 5\)</span> el número de clases. El <strong>experto de umbrales</strong> codifica cada atributo con <span class="math notranslate nohighlight">\(T\)</span> escalones suaves:</p>
+<div class="math notranslate nohighlight" id="equation-eq-escalones">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-escalones" title="Link to this equation">#</a></span>\[
+s_{j,t}(x) = \sigma\!\left(\frac{x_j - \theta_{j,t}}{\tau_j}\right), \qquad \tau_j = \tau_{\min} + \operatorname{softplus}(\rho_j), \qquad t = 1,\dots,T,
+\]</div>
+<p>donde los umbrales <span class="math notranslate nohighlight">\(\theta_{j,t}\)</span> se inicializan en los cuantiles del entrenamiento y se aprenden, y la temperatura nunca baja de <span class="math notranslate nohighlight">\(\tau_{\min}\)</span>. Con <span class="math notranslate nohighlight">\(s(x) \in \mathbb{R}^{dT}\)</span>, los dos expertos y la compuerta son</p>
+<div class="math notranslate nohighlight" id="equation-eq-expertos">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-expertos" title="Link to this equation">#</a></span>\[
+p_u(x) = \operatorname{softmax}\big(\mathrm{MLP}_u(s(x))\big), \qquad p_s(x) = \operatorname{softmax}\big(\mathrm{MLP}_s(x)\big), \qquad g(x) = \operatorname{softmax}\big(\mathrm{MLP}_g(x)\big) \in \Delta^2,
+\]</div>
+<p>y la salida es la mezcla de probabilidades</p>
+<div class="math notranslate nohighlight" id="equation-eq-mezcla">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-mezcla" title="Link to this equation">#</a></span>\[
+p(y \mid x) = g_u(x)\, p_u(y \mid x) + g_s(x)\, p_s(y \mid x).
+\]</div>
+<p>El módulo devuelve <span class="math notranslate nohighlight">\(\log p(y \mid x)\)</span>; como las probabilidades suman uno, la entropía cruzada estándar sobre esa salida es exactamente la log-verosimilitud negativa de la mezcla, y el modelo entra sin cambios al motor de entrenamiento del E2. El <strong>entrenamiento cooperativo</strong> minimiza, en cada lote y con los pesos de clase <span class="math notranslate nohighlight">\(w\)</span> del E2,</p>
+<div class="math notranslate nohighlight" id="equation-eq-perdida">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-perdida" title="Link to this equation">#</a></span>\[
+\mathcal{L} = \mathrm{CE}_w\!\big(\log(g_u\,\bar p_u + g_s\,\bar p_s),\, y\big) + \mathrm{CE}_w(\log p_u, y) + \mathrm{CE}_w(\log p_s, y) + \gamma\,\mathrm{KL}\big(\bar g \,\|\, \mathcal{U}_2\big),
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\bar p_u\)</span> y <span class="math notranslate nohighlight">\(\bar p_s\)</span> indican gradiente detenido: el primer término solo entrena la compuerta y los dos siguientes mantienen a cada experto como un clasificador completo. El gradiente del primer término respecto de los logits <span class="math notranslate nohighlight">\(a\)</span> de la compuerta es <span class="math notranslate nohighlight">\(\partial\mathcal{L}_1/\partial a_k = w_y\,(g_k - r_k)\)</span>, con <span class="math notranslate nohighlight">\(r_k = g_k \bar p_k(y) / \sum_m g_m \bar p_m(y)\)</span> la responsabilidad posterior del experto <span class="math notranslate nohighlight">\(k\)</span>: la compuerta se mueve hacia el experto que mejor explica la etiqueta de cada flujo.</p>
+</section>
+<section id="propiedad-demostrada-cota-de-lipschitz">
+<h2>Propiedad demostrada: cota de Lipschitz<a class="headerlink" href="#propiedad-demostrada-cota-de-lipschitz" title="Link to this heading">#</a></h2>
+<p>Se demuestra una cota de estabilidad (cuadro 3 del enunciado, primera fila). Las tres herramientas son conocidas; el aporte es la cota explícita para esta arquitectura, que depende de <span class="math notranslate nohighlight">\(T\)</span> y de <span class="math notranslate nohighlight">\(\tau_{\min}\)</span>, los hiperparámetros propios del mecanismo.</p>
+<p><strong>Lema 1 (codificador).</strong> Para todo <span class="math notranslate nohighlight">\(x, x'\)</span>, <span class="math notranslate nohighlight">\(\;\|s(x) - s(x')\|_2 \le \dfrac{\sqrt{T}}{4\,\tau_*}\,\|x - x'\|_2\)</span>, con <span class="math notranslate nohighlight">\(\tau_* = \min_j \tau_j \ge \tau_{\min}\)</span>.</p>
+<p><em>Demostración.</em> Cada <span class="math notranslate nohighlight">\(s_{j,t}\)</span> depende solo de <span class="math notranslate nohighlight">\(x_j\)</span>. Como <span class="math notranslate nohighlight">\(\sigma'(u) = \sigma(u)(1 - \sigma(u)) \le 1/4\)</span>, el teorema del valor medio da <span class="math notranslate nohighlight">\(|s_{j,t}(x) - s_{j,t}(x')| \le |x_j - x'_j| / (4\tau_j)\)</span>. Sumando los cuadrados sobre <span class="math notranslate nohighlight">\(t\)</span> y <span class="math notranslate nohighlight">\(j\)</span>: <span class="math notranslate nohighlight">\(\|s(x) - s(x')\|_2^2 \le \sum_j T\,|x_j - x'_j|^2 / (16\tau_j^2) \le T\,\|x - x'\|_2^2/(16\tau_*^2)\)</span>. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Lema 2 (MLP con ReLU).</strong> Si <span class="math notranslate nohighlight">\(\mathrm{MLP}(z) = W_L\,\phi(\cdots\phi(W_1 z + b_1)\cdots) + b_L\)</span> con <span class="math notranslate nohighlight">\(\phi = \mathrm{ReLU}\)</span>, entonces es Lipschitz con constante <span class="math notranslate nohighlight">\(\prod_l \|W_l\|_2\)</span>, porque ReLU es 1-Lipschitz y la constante de una composición es a lo sumo el producto de las constantes. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Lema 3 (softmax).</strong> <span class="math notranslate nohighlight">\(\|\operatorname{softmax}(z) - \operatorname{softmax}(z')\|_2 \le \tfrac12\,\|z - z'\|_2\)</span>.</p>
+<p><em>Demostración.</em> El jacobiano es <span class="math notranslate nohighlight">\(J = \operatorname{diag}(p) - pp^\top\)</span>, que es la matriz de covarianza del vector indicador <span class="math notranslate nohighlight">\(e_Y\)</span> con <span class="math notranslate nohighlight">\(Y \sim p\)</span>. Para <span class="math notranslate nohighlight">\(\|v\|_2 = 1\)</span>, <span class="math notranslate nohighlight">\(v^\top J v = \operatorname{Var}(v_Y) \le (\max_i v_i - \min_i v_i)^2/4\)</span> por la desigualdad de Popoviciu, y <span class="math notranslate nohighlight">\(|v_i - v_j| \le \sqrt{2}\)</span> cuando <span class="math notranslate nohighlight">\(v_i^2 + v_j^2 \le 1\)</span>. Entonces <span class="math notranslate nohighlight">\(\|J\|_2 \le 1/2\)</span> y el valor medio a lo largo del segmento entre <span class="math notranslate nohighlight">\(z\)</span> y <span class="math notranslate nohighlight">\(z'\)</span> concluye. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Teorema (cota de Lipschitz de la mezcla).</strong> Con <span class="math notranslate nohighlight">\(L_u = \tfrac12\prod_l\|W^{u}_l\|_2\cdot\sqrt{T}/(4\tau_*)\)</span>, <span class="math notranslate nohighlight">\(L_s = \tfrac12\prod_l\|W^{s}_l\|_2\)</span> y <span class="math notranslate nohighlight">\(L_g = \tfrac12\prod_l\|W^{g}_l\|_2\)</span>, para todo <span class="math notranslate nohighlight">\(x, x'\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-cota">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-cota" title="Link to this equation">#</a></span>\[
+\|p(x) - p(x')\|_2 \;\le\; K\,\|x - x'\|_2, \qquad K = \sqrt{2}\,L_g + \max(L_u, L_s).
+\]</div>
+<p><em>Demostración.</em> Por los lemas 1 a 3, <span class="math notranslate nohighlight">\(p_u\)</span>, <span class="math notranslate nohighlight">\(p_s\)</span> y <span class="math notranslate nohighlight">\(g\)</span> son Lipschitz con constantes <span class="math notranslate nohighlight">\(L_u\)</span>, <span class="math notranslate nohighlight">\(L_s\)</span> y <span class="math notranslate nohighlight">\(L_g\)</span>. Escribiendo <span class="math notranslate nohighlight">\(\Delta\)</span> para la diferencia entre <span class="math notranslate nohighlight">\(x\)</span> y <span class="math notranslate nohighlight">\(x'\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta p = \sum_k \Delta g_k\, p_k(x) + \sum_k g_k(x')\,\Delta p_k ,
+\]</div>
+<p>de modo que <span class="math notranslate nohighlight">\(\|\Delta p\|_2 \le \sum_k |\Delta g_k|\,\|p_k(x)\|_2 + \sum_k g_k(x')\,\|\Delta p_k\|_2\)</span>. Como <span class="math notranslate nohighlight">\(\|p_k\|_2 \le \|p_k\|_1 = 1\)</span> y <span class="math notranslate nohighlight">\(\sum_k g_k(x') = 1\)</span>, queda <span class="math notranslate nohighlight">\(\|\Delta p\|_2 \le \|\Delta g\|_1 + \max_k\|\Delta p_k\|_2 \le \sqrt{2}\,\|\Delta g\|_2 + \max_k L_k \|\Delta x\|_2 \le (\sqrt{2}L_g + \max_k L_k)\,\|\Delta x\|_2\)</span>. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Lema 4 (Jensen de la mezcla).</strong> Para cada flujo, <span class="math notranslate nohighlight">\(-\log\sum_k g_k\,p_k(y) \le \sum_k g_k\,(-\log p_k(y))\)</span>, por la convexidad de <span class="math notranslate nohighlight">\(-\log\)</span>. La pérdida de la mezcla nunca supera la media ponderada de las pérdidas de los expertos y, si la compuerta elige al mejor experto del flujo, no supera la del mejor. <span class="math notranslate nohighlight">\(\square\)</span></p>
+<p><strong>Supuestos y honestidad teórica.</strong> El teorema no necesita supuestos sobre los datos: vale para cualquier entrada, en modo de evaluación (sin dropout). Tiene tres límites que se declaran:</p>
+<ul class="simple">
+<li><p>la cota es global y de peor caso, así que puede ser holgada; por eso se reporta el cociente empírico frente a <span class="math notranslate nohighlight">\(K\)</span>;</p></li>
+<li><p>se expresa en el espacio transformado y estandarizado, no en las unidades originales de los atributos;</p></li>
+<li><p>acota la sensibilidad de las probabilidades, no el error: una predicción estable puede ser estable y equivocada.</p></li>
+</ul>
+<p>La pertinencia práctica, es decir, que una <span class="math notranslate nohighlight">\(K\)</span> menor se traduzca en menos degradación ante ruido, se contrasta en el capítulo 8 (P4).</p>
+<section id="verificacion-numerica">
+<h3>Verificación numérica<a class="headerlink" href="#verificacion-numerica" title="Link to this heading">#</a></h3>
+<p>Las pruebas unitarias verifican la cota en datos sintéticos para las cinco configuraciones de compuerta (<code class="docutils literal notranslate"><span class="pre">tests/test_original_model.py</span></code>). Aquí se verifica sobre los modelos definitivos entrenados con las semillas 6001 a 6005, con pares de flujos de prueba perturbados en tres escalas:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span><span class="o">,</span><span class="w"> </span><span class="nn">registro</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ejecutar_original</span><span class="w"> </span><span class="kn">import</span> <span class="n">CONFIGURACION</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">codigo</span><span class="w"> </span><span class="kn">import</span> <span class="n">datos</span> <span class="k">as</span> <span class="n">D</span><span class="p">,</span> <span class="n">modelos</span> <span class="k">as</span> <span class="n">M</span>
+<span class="n">registro</span><span class="o">.</span><span class="n">registrar</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIGURACION</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">heredados</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">][</span><span class="n">h</span><span class="p">[</span><span class="s2">&quot;ids&quot;</span><span class="p">][</span><span class="s2">&quot;prueba&quot;</span><span class="p">]][:</span><span class="mi">4000</span><span class="p">])</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">semilla</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6001</span><span class="p">,</span> <span class="mi">6006</span><span class="p">):</span>
+    <span class="n">ruta</span> <span class="o">=</span> <span class="n">RAIZ</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;experiments/resultados/corridas/definitiva/definitiva_Original_</span><span class="si">{</span><span class="n">semilla</span><span class="si">}</span><span class="s2">.pt&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ruta</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">continue</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">construir</span><span class="p">(</span><span class="s2">&quot;Original&quot;</span><span class="p">);</span> <span class="n">m</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ruta</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">));</span> <span class="n">m</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">cota_lipschitz</span><span class="p">()</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">semilla</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">escala</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">):</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">escala</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">cociente</span> <span class="o">=</span> <span class="p">((</span><span class="n">m</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span> <span class="o">-</span> <span class="n">m</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span><span class="p">)</span><span class="o">.</span><span class="n">exp</span><span class="p">())</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;Semilla&quot;</span><span class="p">:</span> <span class="n">semilla</span><span class="p">,</span> <span class="s2">&quot;Escala de la perturbación&quot;</span><span class="p">:</span> <span class="n">escala</span><span class="p">,</span> <span class="s2">&quot;Cociente empírico máximo&quot;</span><span class="p">:</span> <span class="n">cociente</span><span class="p">,</span> <span class="s2">&quot;Cota K&quot;</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span>
+                      <span class="s2">&quot;Cociente / K&quot;</span><span class="p">:</span> <span class="n">cociente</span> <span class="o">/</span> <span class="n">K</span><span class="p">,</span> <span class="s2">&quot;¿Se cumple?&quot;</span><span class="p">:</span> <span class="n">cociente</span> <span class="o">&lt;=</span> <span class="n">K</span><span class="p">})</span>
+<span class="n">verificacion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">verificacion</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Semilla</th>
+      <th>Escala de la perturbación</th>
+      <th>Cociente empírico máximo</th>
+      <th>Cota K</th>
+      <th>Cociente / K</th>
+      <th>¿Se cumple?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6001</td>
+      <td>0.001</td>
+      <td>2.2042</td>
+      <td>32.1803</td>
+      <td>0.0685</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6001</td>
+      <td>0.010</td>
+      <td>2.0436</td>
+      <td>32.1803</td>
+      <td>0.0635</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6001</td>
+      <td>0.100</td>
+      <td>2.3028</td>
+      <td>32.1803</td>
+      <td>0.0716</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6002</td>
+      <td>0.001</td>
+      <td>2.4689</td>
+      <td>34.8049</td>
+      <td>0.0709</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6002</td>
+      <td>0.010</td>
+      <td>2.6055</td>
+      <td>34.8049</td>
+      <td>0.0749</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6002</td>
+      <td>0.100</td>
+      <td>2.6608</td>
+      <td>34.8049</td>
+      <td>0.0764</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6003</td>
+      <td>0.001</td>
+      <td>2.2435</td>
+      <td>30.2827</td>
+      <td>0.0741</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>6003</td>
+      <td>0.010</td>
+      <td>2.3342</td>
+      <td>30.2827</td>
+      <td>0.0771</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>6003</td>
+      <td>0.100</td>
+      <td>2.6311</td>
+      <td>30.2827</td>
+      <td>0.0869</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>6004</td>
+      <td>0.001</td>
+      <td>1.9890</td>
+      <td>24.2818</td>
+      <td>0.0819</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>6004</td>
+      <td>0.010</td>
+      <td>2.1786</td>
+      <td>24.2818</td>
+      <td>0.0897</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>6004</td>
+      <td>0.100</td>
+      <td>1.7963</td>
+      <td>24.2818</td>
+      <td>0.0740</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>6005</td>
+      <td>0.001</td>
+      <td>2.2432</td>
+      <td>34.3678</td>
+      <td>0.0653</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>6005</td>
+      <td>0.010</td>
+      <td>2.6776</td>
+      <td>34.3678</td>
+      <td>0.0779</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>6005</td>
+      <td>0.100</td>
+      <td>2.0293</td>
+      <td>34.3678</td>
+      <td>0.0590</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>En las 15 combinaciones de semilla y escala, el cociente empírico máximo (entre 1,80 y 2,68) queda por debajo de la cota <span class="math notranslate nohighlight">\(K\)</span> (entre 24,3 y 34,8), como exige el teorema. La relación cociente/<span class="math notranslate nohighlight">\(K\)</span> va de 0,06 a 0,09: la cota es entre 11 y 17 veces más holgada que lo observado.</strong></p>
+<p>Esto quiere decir que la garantía se cumple sin excepciones y que, como toda cota global obtenida con normas espectrales, es conservadora: el modelo es mucho más estable en la práctica de lo que la cota asegura en el peor caso.</p>
+<p>Por ello, se usa <span class="math notranslate nohighlight">\(K\)</span> como garantía de peor caso y como guía de diseño (una <span class="math notranslate nohighlight">\(\tau_{\min}\)</span> mayor la reduce), y la robustez real se mide con las perturbaciones controladas del capítulo 8.</p>
+</section>
+</section>
+<section id="pseudocodigo">
+<h2>Pseudocódigo<a class="headerlink" href="#pseudocodigo" title="Link to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Algoritmo: Compuerta cooperativa de sesgos complementarios
+Entrada: entrenamiento {(x_i, y_i)}, validación, T = 8, τ_min = 0,05, γ = 0,01, hiperparámetros de optimización (lr, wd, lote)
+Salida: parámetros Θ = (θ, ρ, MLP_u, MLP_s, MLP_g) y la cota K
+1. θ_{j,t} ← cuantil t/(T+1) del atributo j en el entrenamiento;  ρ_j ← softplus⁻¹(0,25 − τ_min)
+2. para época = 1, …, 30:
+3.     para cada lote B:
+4.         s ← σ((x − θ)/τ);  p_u ← softmax(MLP_u(s));  p_s ← softmax(MLP_s(x));  g ← softmax(MLP_g(x))
+5.         L ← CE_w(log(g_u·sg(p_u) + g_s·sg(p_s)), y) + CE_w(log p_u, y) + CE_w(log p_s, y) + γ·KL(media(g) ‖ U)
+6.         Θ ← Adam(Θ, ∇L) con recorte del gradiente en norma 5
+7.     F1_val ← F1 macro de p = g_u p_u + g_s p_s en validación;  ReduceLROnPlateau(pérdida de validación)
+8.     si F1_val no mejora en 6 épocas: detener y restaurar el mejor Θ
+9. K ← √2·L_g + max(L_u, L_s)   (ecuación de la cota)
+</pre></div>
+</div>
+</section>
+<section id="disciplina-de-diseno">
+<h2>Disciplina de diseño<a class="headerlink" href="#disciplina-de-diseno" title="Link to this heading">#</a></h2>
+<p>El diseño se tomó en dos particiones de desarrollo hechas solo con filas de entrenamiento del E2: una que deja fuera un escenario de simulación completo y otra por bloques. La validación y la prueba del E2 son el conjunto de confirmación. La bitácora completa está en <code class="docutils literal notranslate"><span class="pre">experiments/design_log.md</span></code>; el número total de variantes evaluadas es <strong>Nd = 10</strong>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d02</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/diseno/resultados/d02/resumen.csv&quot;</span><span class="p">)</span>
+<span class="n">d03</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/diseno/resultados/d03/resumen.csv&quot;</span><span class="p">)</span>
+<span class="n">d3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;experiments/bloque_a/prueba_d3/_resumen.csv&quot;</span><span class="p">)</span>
+<span class="n">diseno</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">d3</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Partición</span><span class="o">=</span><span class="s2">&quot;por escenario (9 pliegues)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;metodo&quot;</span><span class="p">:</span> <span class="s2">&quot;variante&quot;</span><span class="p">,</span> <span class="s2">&quot;acierto_fuera_medio&quot;</span><span class="p">:</span> <span class="s2">&quot;métrica&quot;</span><span class="p">})[[</span><span class="s2">&quot;variante&quot;</span><span class="p">,</span> <span class="s2">&quot;Partición&quot;</span><span class="p">,</span> <span class="s2">&quot;métrica&quot;</span><span class="p">]],</span>
+                    <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">d02</span><span class="p">,</span> <span class="n">d03</span><span class="p">])</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Partición</span><span class="o">=</span><span class="s2">&quot;por bloques (3 reparticiones)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="s2">&quot;métrica&quot;</span><span class="p">})[[</span><span class="s2">&quot;variante&quot;</span><span class="p">,</span> <span class="s2">&quot;Partición&quot;</span><span class="p">,</span> <span class="s2">&quot;métrica&quot;</span><span class="p">]]])</span>
+<span class="n">diseno</span><span class="p">[</span><span class="s2">&quot;Métrica&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diseno</span><span class="p">[</span><span class="s2">&quot;Partición&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;por escenario&quot;</span><span class="p">),</span> <span class="s2">&quot;acierto en el escenario no visto&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 macro de diseño&quot;</span><span class="p">)</span>
+<span class="n">diseno</span><span class="p">[[</span><span class="s2">&quot;variante&quot;</span><span class="p">,</span> <span class="s2">&quot;Partición&quot;</span><span class="p">,</span> <span class="s2">&quot;Métrica&quot;</span><span class="p">,</span> <span class="s2">&quot;métrica&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variante</th>
+      <th>Partición</th>
+      <th>Métrica</th>
+      <th>métrica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ERM</td>
+      <td>por escenario (9 pliegues)</td>
+      <td>acierto en el escenario no visto</td>
+      <td>0.4752</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VREx_1</td>
+      <td>por escenario (9 pliegues)</td>
+      <td>acierto en el escenario no visto</td>
+      <td>0.4320</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VREx_10</td>
+      <td>por escenario (9 pliegues)</td>
+      <td>acierto en el escenario no visto</td>
+      <td>0.4395</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>VREx_100</td>
+      <td>por escenario (9 pliegues)</td>
+      <td>acierto en el escenario no visto</td>
+      <td>0.4434</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>LightGBM</td>
+      <td>por escenario (9 pliegues)</td>
+      <td>acierto en el escenario no visto</td>
+      <td>0.4012</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>V4_compuerta_x</td>
+      <td>por bloques (3 reparticiones)</td>
+      <td>F1 macro de diseño</td>
+      <td>0.8315</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>V5_compuerta_x_expertos</td>
+      <td>por bloques (3 reparticiones)</td>
+      <td>F1 macro de diseño</td>
+      <td>0.8257</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>V6_solo_umbral</td>
+      <td>por bloques (3 reparticiones)</td>
+      <td>F1 macro de diseño</td>
+      <td>0.8431</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>V7_solo_suave</td>
+      <td>por bloques (3 reparticiones)</td>
+      <td>F1 macro de diseño</td>
+      <td>0.8242</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>V8_promedio</td>
+      <td>por bloques (3 reparticiones)</td>
+      <td>F1 macro de diseño</td>
+      <td>0.8373</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>V10_coop_x</td>
+      <td>por bloques (3 reparticiones)</td>
+      <td>F1 macro de diseño</td>
+      <td>0.8417</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>V9_coop_x_expertos</td>
+      <td>por bloques (3 reparticiones)</td>
+      <td>F1 macro de diseño</td>
+      <td>0.8390</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>La opción de invariancia por escenario (V-REx condicional por clase) bajó el acierto en el escenario no visto con los tres valores de λ y quedó descartada por la regla fijada antes de correr. En la partición por bloques, el experto de escalones suaves solo llega a 0,843 (LightGBM, 0,845), la compuerta entrenada en conjunto empeora a 0,832 porque los expertos se especializan, y el entrenamiento cooperativo la recupera a 0,842.</strong></p>
+<p>Hay que tener en cuenta que la compuerta, en desarrollo, no capturó el margen del oráculo: aprende con filas en las que los dos expertos aciertan casi siempre y recibe poca señal de en qué falla cada uno fuera de muestra. Esto se declara antes de ver la confirmación y forma parte de la discusión del capítulo 10.</p>
+<p>Con base en esto, se congeló la variante 10 (compuerta cooperativa que ve el flujo; T = 8, τ_min = 0,05, γ = 0,01) el 22/11/2026, antes del protocolo con etiqueta <code class="docutils literal notranslate"><span class="pre">e3-protocolo</span></code>. Su sesgo de selección es acotado porque Nd es pequeño, y la confirmación se hace en datos que no participaron en el diseño.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_literatura.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Revisión de literatura y evidencia de novedad</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_modelo_implementacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Modelo original: implementación, pruebas, ablación e interpretabilidad</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitacion-identificada-con-evidencia">Limitación identificada con evidencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuente-del-mecanismo-y-transferencia">Fuente del mecanismo y transferencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hipotesis-del-mecanismo">Hipótesis del mecanismo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion">Formulación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedad-demostrada-cota-de-lipschitz">Propiedad demostrada: cota de Lipschitz</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-numerica">Verificación numérica</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocodigo">Pseudocódigo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disciplina-de-diseno">Disciplina de diseño</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

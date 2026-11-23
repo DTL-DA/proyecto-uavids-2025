@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dashboard y despliegue &#8212; Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '09_dashboard';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Conclusiones, limitaciones y trabajo futuro" href="10_conclusiones.html" />
+    <link rel="prev" title="Evaluación ampliada: conjuntos adicionales, robustez y adecuación" href="08_evaluacion_ampliada.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_correcciones.html">Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_datos.html">Datos: EDA, auditoría y ficha de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Benchmarks: Top 10, baselines y exportación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y evidencia de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_diseno.html">Modelo original: limitación, fuente, hipótesis, teoría y diseño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelo_implementacion.html">Modelo original: implementación, pruebas, ablación e interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_validacion.html">Validación: protocolo y pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_evaluacion_ampliada.html">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Dashboard y despliegue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conclusiones.html">Conclusiones, limitaciones y trabajo futuro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_reproducibilidad.html">Reproducibilidad, autoría y bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/09_dashboard.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Dashboard y despliegue</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura">Arquitectura</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-cada-seccion">Contenido de cada sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memoria-y-rendimiento-en-el-plan-gratuito">Memoria y rendimiento en el plan gratuito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue-en-render">Despliegue en Render</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seguridad-y-robustez-de-la-interfaz">Seguridad y robustez de la interfaz</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dashboard-y-despliegue">
+<h1>Dashboard y despliegue<a class="headerlink" href="#dashboard-y-despliegue" title="Link to this heading">#</a></h1>
+<p>El dashboard es una aplicación multipágina de Dash (<code class="docutils literal notranslate"><span class="pre">use_pages=True</span></code>) que se despliega en Render y hace inferencia en CPU con ONNX Runtime. Nunca entrena ni importa PyTorch: carga los artefactos de <code class="docutils literal notranslate"><span class="pre">artifacts/</span></code> y los precalculados de <code class="docutils literal notranslate"><span class="pre">artifacts/dashboard/</span></code>.</p>
+<section id="arquitectura">
+<h2>Arquitectura<a class="headerlink" href="#arquitectura" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Capa</p></th>
+<th class="head"><p>Archivos</p></th>
+<th class="head"><p>Qué hace</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Interfaz</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">app.py</span></code>, <code class="docutils literal notranslate"><span class="pre">pages/contexto.py</span></code>, <code class="docutils literal notranslate"><span class="pre">pages/eda.py</span></code>, <code class="docutils literal notranslate"><span class="pre">pages/modelos.py</span></code>, <code class="docutils literal notranslate"><span class="pre">assets/estilos.css</span></code></p></td>
+<td><p>Una página por sección, barra de navegación y pie con el enlace a este libro</p></td>
+</tr>
+<tr class="row-odd"><td><p>Inferencia</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src/inference.py</span></code></p></td>
+<td><p>Carga bajo demanda de las sesiones ONNX (como mucho 6 vivas), preprocesamiento del E1, <em>temperature scaling</em>, conjunto conforme LAC al 90 %, aviso fuera de dominio y explicación local por oclusión</p></td>
+</tr>
+<tr class="row-even"><td><p>Datos y figuras</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src/data.py</span></code>, <code class="docutils literal notranslate"><span class="pre">src/plots.py</span></code></p></td>
+<td><p>Caché de los datos precalculados y una plantilla común de Plotly con la misma paleta por clase en todas las páginas</p></td>
+</tr>
+<tr class="row-odd"><td><p>Precálculo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">training/exportar_onnx.py</span></code>, <code class="docutils literal notranslate"><span class="pre">training/preparar_dashboard.py</span></code></p></td>
+<td><p>Exportación con prueba de ida y vuelta, calibración y conformal ajustados en validación, diagnósticos, tabla de líderes <strong>alimentada desde la tabla maestra</strong> (<code class="docutils literal notranslate"><span class="pre">experiments/resultados/tabla_maestra.csv</span></code>), conjuntos adicionales, robustez y balance de R3</p></td>
+</tr>
+<tr class="row-even"><td><p>Pruebas</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tests/test_dashboard.py</span></code></p></td>
+<td><p>Páginas, probabilidades válidas, coherencia con los metadatos, fuera de dominio, ida y vuelta y <strong>consistencia automática con la tabla maestra y con el análisis de los conjuntos adicionales</strong>, en integración continua</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="contenido-de-cada-seccion">
+<h2>Contenido de cada sección<a class="headerlink" href="#contenido-de-cada-seccion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Contexto:</strong> portada con la cifra clave, por qué importa, preguntas de investigación, ficha de datos, flujo metodológico, limitaciones, ética y autoría.</p></li>
+<li><p><strong>EDA:</strong> filtros de atributo, clase, partición y escala que actualizan con <em>callbacks</em> el balance de clases, la distribución por clase, el panel de estructura por escenario (el específico de este problema), el cambio de distribución entre particiones y la correlación de Spearman. Cada figura tiene su interpretación.</p></li>
+<li><p><strong>Modelos:</strong></p>
+<ul>
+<li><p>tabla de líderes con los 10 del Top 10, los <em>baselines</em> y el modelo original, ordenable y filtrable;</p></li>
+<li><p>intervalos del F1 por modelo;</p></li>
+<li><p>predicción en vivo con un flujo de prueba al azar o editado a mano, con probabilidades calibradas, conjunto conforme, aviso fuera de dominio y explicación local;</p></li>
+<li><p>diagnósticos del modelo elegido: matriz de confusión, curva de confiabilidad y F1 por clase frente a LightGBM;</p></li>
+<li><p>tabla de contrastes confirmatorios y diagrama de diferencia crítica;</p></li>
+<li><p>F1 de los 13 modelos en los tres conjuntos adicionales, sin promediar conjuntos;</p></li>
+<li><p>robustez ante ruido, atributos faltantes y valores atípicos, con selector de perturbación;</p></li>
+<li><p>balance de las seis condiciones de R3;</p></li>
+<li><p>ficha del modelo original con su pseudocódigo.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">RAIZ</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">lideres</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;artifacts/dashboard/lideres.csv&quot;</span><span class="p">)</span>
+<span class="n">tamanos</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">RAIZ</span> <span class="o">/</span> <span class="s2">&quot;artifacts&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*/model.onnx&quot;</span><span class="p">)}</span>
+<span class="n">lideres</span><span class="p">[</span><span class="s2">&quot;ONNX (KB)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lideres</span><span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;í&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">tamanos</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tamaño total de los modelos ONNX: </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">tamanos</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+<span class="n">lideres</span><span class="p">[[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="s2">&quot;Grupo&quot;</span><span class="p">,</span> <span class="s2">&quot;Parámetros&quot;</span><span class="p">,</span> <span class="s2">&quot;ONNX (KB)&quot;</span><span class="p">,</span> <span class="s2">&quot;Latencia mediana (ms)&quot;</span><span class="p">,</span> <span class="s2">&quot;Latencia p95 (ms)&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">lideres</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tamaño total de los modelos ONNX: 4.7 MB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>Grupo</th>
+      <th>Parámetros</th>
+      <th>ONNX (KB)</th>
+      <th>Latencia mediana (ms)</th>
+      <th>Latencia p95 (ms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>LightGBM</td>
+      <td>Baseline fuerte</td>
+      <td>35516</td>
+      <td>1310.0</td>
+      <td>0.10905</td>
+      <td>0.144810</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Autoencoder</td>
+      <td>Top 10</td>
+      <td>19093</td>
+      <td>39.5</td>
+      <td>0.11770</td>
+      <td>0.207940</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CNN-LSTM</td>
+      <td>Top 10</td>
+      <td>46213</td>
+      <td>183.3</td>
+      <td>0.16175</td>
+      <td>0.308525</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CNN 1D</td>
+      <td>Baseline del E1</td>
+      <td>39493</td>
+      <td>156.0</td>
+      <td>0.13180</td>
+      <td>0.209390</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DNN</td>
+      <td>Base del E1</td>
+      <td>12677</td>
+      <td>50.6</td>
+      <td>0.09075</td>
+      <td>0.146535</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Transformer</td>
+      <td>Top 10</td>
+      <td>3381</td>
+      <td>26.2</td>
+      <td>0.20890</td>
+      <td>0.344650</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DBN</td>
+      <td>Top 10</td>
+      <td>9733</td>
+      <td>39.0</td>
+      <td>0.07970</td>
+      <td>0.142210</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>ResNet</td>
+      <td>Top 10</td>
+      <td>14245</td>
+      <td>62.9</td>
+      <td>0.11580</td>
+      <td>0.157535</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Original</td>
+      <td>Modelo original</td>
+      <td>14908</td>
+      <td>63.8</td>
+      <td>0.18505</td>
+      <td>0.312925</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>KAN</td>
+      <td>Top 10</td>
+      <td>4845</td>
+      <td>26.5</td>
+      <td>0.14230</td>
+      <td>0.238630</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>GRU</td>
+      <td>Top 10</td>
+      <td>96901</td>
+      <td>384.6</td>
+      <td>0.40770</td>
+      <td>0.862110</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>BiLSTM</td>
+      <td>Top 10</td>
+      <td>530693</td>
+      <td>2077.5</td>
+      <td>1.31495</td>
+      <td>1.900715</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>RNN</td>
+      <td>Top 10</td>
+      <td>38277</td>
+      <td>153.9</td>
+      <td>0.31145</td>
+      <td>0.976805</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>TabNet</td>
+      <td>Top 10</td>
+      <td>6728</td>
+      <td>211.6</td>
+      <td>0.65190</td>
+      <td>1.039715</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>LSTM</td>
+      <td>Base del E1</td>
+      <td>17477</td>
+      <td>70.1</td>
+      <td>0.15330</td>
+      <td>0.259785</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Logística</td>
+      <td>Línea base</td>
+      <td>85</td>
+      <td>0.9</td>
+      <td>0.09455</td>
+      <td>0.199750</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="memoria-y-rendimiento-en-el-plan-gratuito">
+<h2>Memoria y rendimiento en el plan gratuito<a class="headerlink" href="#memoria-y-rendimiento-en-el-plan-gratuito" title="Link to this heading">#</a></h2>
+<p>Los 16 modelos ocupan unos 5 MB en ONNX, así que caben sin cuantizar. Aun así, las sesiones se cargan bajo demanda y se limitan a seis vivas, ONNX Runtime corre con un solo hilo, y los datos del EDA (6,7 MB en Parquet) se cargan una sola vez al iniciar. La aplicación no carga PyTorch, scikit-learn ni LightGBM: solo <code class="docutils literal notranslate"><span class="pre">onnxruntime</span></code>, <code class="docutils literal notranslate"><span class="pre">dash</span></code>, <code class="docutils literal notranslate"><span class="pre">plotly</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> y <code class="docutils literal notranslate"><span class="pre">pyarrow</span></code> (<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>).</p>
+</section>
+<section id="despliegue-en-render">
+<h2>Despliegue en Render<a class="headerlink" href="#despliegue-en-render" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>El repositorio de GitHub contiene los tres entregables; <code class="docutils literal notranslate"><span class="pre">render.yaml</span></code> apunta el servicio a la carpeta <code class="docutils literal notranslate"><span class="pre">Entregable_3_UAVIDS_2025</span></code> con <code class="docutils literal notranslate"><span class="pre">rootDir</span></code>.</p></li>
+<li><p>Render instala <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> y arranca con <code class="docutils literal notranslate"><span class="pre">gunicorn</span> <span class="pre">app:server</span> <span class="pre">--workers</span> <span class="pre">1</span> <span class="pre">--threads</span> <span class="pre">4</span> <span class="pre">--timeout</span> <span class="pre">120</span></code>; <code class="docutils literal notranslate"><span class="pre">healthCheckPath:</span> <span class="pre">/</span></code> verifica que la portada responda.</p></li>
+<li><p>Las variables <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code>, <code class="docutils literal notranslate"><span class="pre">OPENBLAS_NUM_THREADS</span></code> y <code class="docutils literal notranslate"><span class="pre">MKL_NUM_THREADS</span></code> se fijan en 1 para no competir por la CPU compartida del plan gratuito.</p></li>
+</ol>
+<p><strong>Prueba de humo.</strong> Después de cada despliegue se verifica que las tres páginas respondan con código 200, que la predicción en vivo devuelva probabilidades que sumen 1 y que un flujo absurdo active el aviso fuera de dominio. Es la misma batería de <code class="docutils literal notranslate"><span class="pre">tests/test_dashboard.py</span></code>, ejecutada contra la URL pública. El resultado se anexa en el capítulo 11.</p>
+</section>
+<section id="seguridad-y-robustez-de-la-interfaz">
+<h2>Seguridad y robustez de la interfaz<a class="headerlink" href="#seguridad-y-robustez-de-la-interfaz" title="Link to this heading">#</a></h2>
+<p>Las entradas numéricas se validan: un valor vacío no dispara la predicción y uno fuera de rango activa el aviso. La aplicación no guarda datos del usuario ni usa almacenamiento externo. Las explicaciones por oclusión cuestan 16 inferencias por predicción, unos pocos milisegundos en CPU.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="08_evaluacion_ampliada.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="10_conclusiones.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Conclusiones, limitaciones y trabajo futuro</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura">Arquitectura</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-cada-seccion">Contenido de cada sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memoria-y-rendimiento-en-el-plan-gratuito">Memoria y rendimiento en el plan gratuito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue-en-render">Despliegue en Render</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seguridad-y-robustez-de-la-interfaz">Seguridad y robustez de la interfaz</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Donny Torres · Maestría en Analítica de Datos, Universidad del Norte
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
