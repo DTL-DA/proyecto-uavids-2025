@@ -1,0 +1,1 @@
+{"id": "unsw_nb15_LightGBM_6005", "conjunto": "unsw_nb15", "modelo": "LightGBM", "semilla": 6005, "costo": 3, "epocas": 33, "f1_val": 0.6792914090862303, "f1_eva": 0.7078104328085447, "segundos": 26.1, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 16456}

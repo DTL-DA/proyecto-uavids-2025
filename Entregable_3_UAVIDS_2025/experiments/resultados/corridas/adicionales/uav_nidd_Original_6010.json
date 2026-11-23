@@ -1,0 +1,1 @@
+{"id": "uav_nidd_Original_6010", "conjunto": "uav_nidd", "modelo": "Original", "semilla": 6010, "costo": 6, "epocas": 15, "divergente": false, "parametros": 31697, "f1_val": 0.5530076018959866, "f1_eva": 0.5422438340544802, "segundos": 56.8, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18160}

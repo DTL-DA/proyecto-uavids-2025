@@ -1,0 +1,17 @@
+﻿Modelo,(i) Supera al trivial,(ii) Brecha < δg,"(iii) ECE con temperatura < 0,05",Pendiente media,(iv) Prueba consistente con validación,Adecuado
+Original,sí,sí,no,0.7260931493734438,sí,no
+DNN,sí,sí,no,0.6632246131127969,sí,no
+CNN 1D,sí,sí,no,0.6725497357799368,sí,no
+LSTM,sí,sí,no,0.7841041699221817,sí,no
+CNN-LSTM,sí,sí,sí,0.7730315162153787,sí,sí
+Autoencoder,sí,sí,sí,0.5820647271347678,sí,sí
+RNN,sí,sí,no,0.6158728536591501,sí,no
+Transformer,sí,sí,sí,0.7376126517995638,sí,sí
+BiLSTM,sí,sí,sí,0.6904402058952417,sí,sí
+ResNet,sí,sí,no,0.5899245385313596,sí,no
+GRU,sí,sí,no,0.6854993841435041,sí,no
+KAN,sí,sí,no,0.6334346917172698,sí,no
+TabNet,sí,sí,no,0.8402365947356033,sí,no
+DBN,sí,sí,no,0.7242000181611653,sí,no
+LightGBM,sí,no,sí,1.1185652692265144,sí,no
+Logística,sí,sí,sí,0.5954273136413549,sí,sí

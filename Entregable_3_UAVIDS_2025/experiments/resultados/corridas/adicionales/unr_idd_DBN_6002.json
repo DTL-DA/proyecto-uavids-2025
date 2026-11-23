@@ -1,0 +1,1 @@
+{"id": "unr_idd_DBN_6002", "conjunto": "unr_idd", "modelo": "DBN", "semilla": 6002, "costo": 1.5, "epocas": 14, "divergente": false, "parametros": 9926, "f1_val": 0.7081012272513542, "f1_eva": 0.7127964343908942, "segundos": 24.0, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 30080}

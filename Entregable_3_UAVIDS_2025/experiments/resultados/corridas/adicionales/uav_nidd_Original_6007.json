@@ -1,0 +1,1 @@
+{"id": "uav_nidd_Original_6007", "conjunto": "uav_nidd", "modelo": "Original", "semilla": 6007, "costo": 6, "epocas": 7, "divergente": false, "parametros": 31697, "f1_val": 0.5887786739367478, "f1_eva": 0.6218082189683208, "segundos": 28.9, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 16456}

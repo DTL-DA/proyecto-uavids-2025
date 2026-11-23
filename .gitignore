@@ -52,3 +52,6 @@ _build/
 !/.github/
 /Entregable_3_UAVIDS_2025/experiments/novedad/exportaciones/*
 !/Entregable_3_UAVIDS_2025/experiments/novedad/exportaciones/*_resumen_novedad.json
+
+# Salida local de reproducir.py: la de la verificadora se copia a verificacion_externa/resultados/
+/Entregable_3_UAVIDS_2025/verificacion_externa/salida/

@@ -1,0 +1,25 @@
+{
+ "R3 estricto (supera a los 12)": false,
+ "rivales con media mayor que la del original": [
+  "CNN-LSTM",
+  "Autoencoder",
+  "Transformer",
+  "ResNet",
+  "KAN",
+  "DBN",
+  "LightGBM",
+  "CNN 1D"
+ ],
+ "contrastes que supera (R3 estricto)": [],
+ "rivales mejores con al menos 3 pruebas admisibles": [
+  "CNN-LSTM",
+  "Autoencoder",
+  "DBN",
+  "LightGBM",
+  "CNN 1D"
+ ],
+ "rivales peores con al menos 3 pruebas admisibles": [],
+ "n_prueba": 22883,
+ "n_entrenamiento": 73267,
+ "factor Nadeau-Bengio n_prueba/n_entrenamiento": 0.312323419820656
+}

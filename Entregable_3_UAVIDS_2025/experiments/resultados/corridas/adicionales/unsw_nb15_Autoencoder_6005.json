@@ -1,0 +1,1 @@
+{"id": "unsw_nb15_Autoencoder_6005", "conjunto": "unsw_nb15", "modelo": "Autoencoder", "semilla": 6005, "costo": 7.5, "epocas": 18, "divergente": false, "parametros": 22191, "f1_val": 0.656065682372818, "f1_eva": 0.6637584188812244, "segundos": 29.8, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 30080}

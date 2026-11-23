@@ -161,3 +161,35 @@ def rangos_friedman(rangos: dict, cd: float | None) -> go.Figure:
     fig.update_xaxes(title_text="Rango medio en las semillas (1 = mejor)")
     fig.update_yaxes(autorange="reversed")
     return fig.update_layout(title="Rangos medios de Friedman (diagrama de diferencia crítica)", height=max(360, 26 * len(orden) + 80), showlegend=False)
+
+
+# ------------------------------------------------------------------------------------------------ evaluación ampliada
+COLOR_CONJUNTO = {"UAV-NIDD": "#2A78D6", "UNSW-NB15": "#1BAF7A", "UNR-IDD": "#EDA100"}
+
+
+def adicionales(t: pd.DataFrame) -> go.Figure:
+    """F1 macro medio de cada modelo en los tres conjuntos adicionales (el original resaltado)."""
+    orden = t.groupby("modelo")["rango"].mean().sort_values(ascending=False).index.tolist()
+    fig = go.Figure()
+    for c, g in t.groupby("conjunto"):
+        g = g.set_index("modelo").loc[orden].reset_index()
+        fig.add_trace(go.Scatter(x=g["F1 macro"], y=g["modelo"], mode="markers", name=c,
+                                 marker=dict(size=[13 if m == "Original" else 9 for m in g["modelo"]], color=COLOR_CONJUNTO.get(c, GRIS),
+                                             line=dict(width=[2 if m == "Original" else 0 for m in g["modelo"]], color=NARANJA)),
+                                 customdata=np.stack([g["DE"], g["rango"]], 1),
+                                 hovertemplate="%{y} en " + c + ": %{x:.3f} (DE %{customdata[0]:.3f}; puesto %{customdata[1]} de 13)<extra></extra>"))
+    fig.update_xaxes(title_text="F1 macro medio en prueba (10 semillas; no se promedian conjuntos)")
+    return fig.update_layout(title="Conjuntos adicionales: F1 macro por modelo", height=max(380, 26 * len(orden) + 100))
+
+
+def robustez(t: pd.DataFrame, perturbacion: str) -> go.Figure:
+    """Caída del F1 macro según la severidad de una perturbación; el original y LightGBM resaltados."""
+    g = t[t["perturbacion"] == perturbacion]
+    fig = go.Figure()
+    for m, s in g.groupby("modelo"):
+        color, ancho = (NARANJA, 3) if m == "Original" else ((AZUL, 2.5) if m == "LightGBM" else ("#C9CED6", 1.2))
+        fig.add_trace(go.Scatter(x=s["severidad"], y=s["caída"], mode="lines+markers", name=m, line=dict(color=color, width=ancho),
+                                 showlegend=m in ("Original", "LightGBM"), hovertemplate=m + ": caída %{y:.3f} con severidad %{x}<extra></extra>"))
+    fig.update_xaxes(title_text="Severidad")
+    fig.update_yaxes(title_text="Caída del F1 macro")
+    return fig.update_layout(title=f"Robustez: {perturbacion}", height=360)

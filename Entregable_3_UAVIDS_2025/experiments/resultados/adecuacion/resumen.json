@@ -1,0 +1,104 @@
+{
+ "adecuación del original (sección 7.2 del E2)": {
+  "Modelo": "Original",
+  "(i) Supera al trivial": "sí",
+  "p (i)": 1.6318412198205286e-38,
+  "F1 trivial": 0.06982180217877501,
+  "(ii) Brecha < δg": "sí",
+  "Brecha g": 0.004362753746833597,
+  "p Wilcoxon (g < δg)": 9.5367431640625e-07,
+  "(iii) ECE con temperatura < 0,05": "no",
+  "ECE": 0.04816743090233696,
+  "ECE con T": 0.05269587037144572,
+  "T media": 0.9168012907223932,
+  "Pendiente media": 0.7260931493734438,
+  "Hosmer-Lemeshow p por clase (mediana sobre semillas)": {
+   "Blackhole": 0.0,
+   "Flooding": 0.0,
+   "Normal": 0.0,
+   "Sybil": 0.0,
+   "Wormhole": 0.0
+  },
+  "(iv) Prueba consistente con validación": "sí",
+  "Validación − prueba": 0.0706304624690135,
+  "IC 95 % por bloques": [
+   -0.04773507466879427,
+   0.19063829198788262
+  ],
+  "Adecuado": "no",
+  "CV entre semillas (%)": 1.057186560925856
+ },
+ "permutación de etiquetas": {
+  "permutaciones": 200,
+  "F1 observado (semilla 6001)": 0.8553838687038209,
+  "F1 permutado medio": 0.204803136596414,
+  "F1 permutado máximo": 0.43401770698167946,
+  "p": 0.004975124378109453
+ },
+ "optimismo por bootstrap": {
+  "Original": {
+   "réplicas": 20,
+   "optimismo medio": 0.023190762583048204,
+   "IC 95 %": [
+    -0.0051,
+    0.0695
+   ]
+  },
+  "LightGBM": {
+   "réplicas": 20,
+   "optimismo medio": 0.04336850228498308,
+   "IC 95 %": [
+    0.0131,
+    0.0838
+   ]
+  },
+  "CNN 1D": {
+   "réplicas": 20,
+   "optimismo medio": 0.02421525513003044,
+   "IC 95 %": [
+    0.0006,
+    0.0682
+   ]
+  },
+  "DNN": {
+   "réplicas": 20,
+   "optimismo medio": 0.024613219948725406,
+   "IC 95 %": [
+    -0.0046,
+    0.0719
+   ]
+  }
+ },
+ "Nadeau-Bengio y F 5x2cv (condición 6)": {
+  "LightGBM": {
+   "particiones": 10,
+   "diferencia media": 0.00022555742670776757,
+   "t Nadeau-Bengio": 0.009804264753469835,
+   "p Nadeau-Bengio": 0.9923913414786789,
+   "F 5x2cv": 0.6108160044939669,
+   "p F 5x2cv": 0.7630739448295637
+  },
+  "CNN 1D": {
+   "particiones": 10,
+   "diferencia media": 0.0005600776347754799,
+   "t Nadeau-Bengio": 0.032421922360925615,
+   "p Nadeau-Bengio": 0.9748432216440932,
+   "F 5x2cv": 1.3472062044919,
+   "p F 5x2cv": 0.39068433959253557
+  }
+ },
+ "curva de aprendizaje": {
+  "CNN-LSTM": {
+   "pendiente por log n": 1.7145173599495438e-05,
+   "p": 0.9890376138649394
+  },
+  "LightGBM": {
+   "pendiente por log n": 0.0034586518116966765,
+   "p": 5.0771282466225945e-05
+  },
+  "Original": {
+   "pendiente por log n": -0.00011610813450880261,
+   "p": 0.9423892458072922
+  }
+ }
+}

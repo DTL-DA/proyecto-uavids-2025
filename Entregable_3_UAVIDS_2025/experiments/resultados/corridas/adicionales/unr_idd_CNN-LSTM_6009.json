@@ -1,0 +1,1 @@
+{"id": "unr_idd_CNN-LSTM_6009", "conjunto": "unr_idd", "modelo": "CNN-LSTM", "semilla": 6009, "costo": 12, "epocas": 17, "divergente": false, "parametros": 46278, "f1_val": 0.772997565005097, "f1_eva": 0.7312882065244303, "segundos": 133.5, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 30080}

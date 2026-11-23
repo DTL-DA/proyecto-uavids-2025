@@ -74,4 +74,4 @@ Los trabajos más cercanos, y la diferencia de cada uno con la propuesta, son:
 
 ## Verificación por un tercero
 
-Una persona ajena al diseño repite las cadenas N1 y N5 y anota la fecha, el número de resultados y su concepto. El concepto se anexa en el capítulo 11.
+**Imera Logreira**, colega ajena al diseño, repite las cadenas N1 y N5 en OpenAlex (y en Scopus si tiene acceso) antes de ver nuestra matriz, anota la fecha, el número de resultados y el trabajo más parecido, y confirma o refuta la declaración en el formato `verificacion_externa/concepto_novedad.md`. Su concepto firmado se anexa en el capítulo 11.

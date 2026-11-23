@@ -1,0 +1,1 @@
+{"id": "uav_nidd_RNN_6002", "conjunto": "uav_nidd", "modelo": "RNN", "semilla": 6002, "costo": 24, "epocas": 9, "divergente": false, "parametros": 38406, "f1_val": 0.5878181200625155, "f1_eva": 0.620619718266347, "segundos": 129.8, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18016}

@@ -1,0 +1,1 @@
+{"id": "unsw_nb15_KAN_6002", "conjunto": "unsw_nb15", "modelo": "KAN", "semilla": 6002, "costo": 6.8999999999999995, "epocas": 22, "divergente": false, "parametros": 8191, "f1_val": 0.6419771084772319, "f1_eva": 0.6537996603913108, "segundos": 90.3, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 22824}

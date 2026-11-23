@@ -1,0 +1,32 @@
+[
+ {
+  "condición": "1. Métrica media favorable frente a cada rival",
+  "cumple": "no",
+  "evidencia": "F1 medio menor que el de 8 de los 12 rivales"
+ },
+ {
+  "condición": "2. Tres pruebas con Holm y diferencia > δ",
+  "cumple": "no",
+  "evidencia": "ningún contraste rechaza con tres pruebas (preregistradas ni admisibles del cuadro 4)"
+ },
+ {
+  "condición": "3. Efecto no despreciable e IC > 0",
+  "cumple": "no",
+  "evidencia": "solo frente a TabNet y RNN hay efecto a favor no despreciable"
+ },
+ {
+  "condición": "4. Consistencia en los conjuntos adicionales",
+  "cumple": "no",
+  "evidencia": "mejor en 0 de 3 conjuntos; peor con significancia en UNSW-NB15"
+ },
+ {
+  "condición": "5. Adecuación (sección 7.2 del E2)",
+  "cumple": "no",
+  "evidencia": "cumple (i), (ii) y (iv); falla la calibración: ECE con temperatura de 0.053 frente a 0,05"
+ },
+ {
+  "condición": "6. Robustez a la elección de la prueba",
+  "cumple": "sí",
+  "evidencia": "ninguna prueba muestra superioridad del original; la ventaja de LightGBM desaparece en 5 × 2 (p de Nadeau-Bengio = 0.99)"
+ }
+]

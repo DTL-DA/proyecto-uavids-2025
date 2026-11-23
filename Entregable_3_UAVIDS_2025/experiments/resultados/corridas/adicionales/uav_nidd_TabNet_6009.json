@@ -1,0 +1,1 @@
+{"id": "uav_nidd_TabNet_6009", "conjunto": "uav_nidd", "modelo": "TabNet", "semilla": 6009, "costo": 42, "epocas": 15, "divergente": false, "parametros": 8518, "f1_val": 0.3300431504775269, "f1_eva": 0.35561447484146685, "segundos": 120.7, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18016}

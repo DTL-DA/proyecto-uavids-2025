@@ -27,5 +27,5 @@
   "F1 Sybil": 0.0011,
   "F1 Wormhole": -0.0313
  },
- "pruebas": "33 pruebas con pytest en integración continua (14 del modelo y 19 del dashboard): sobreajuste de un lote, reproducibilidad, formas, gradientes, Lipschitz, Jensen, guardado, ONNX e inferencia."
+ "pruebas": "pruebas con pytest en integración continua: del modelo (sobreajuste de un lote, reproducibilidad, formas, gradientes, Lipschitz, Jensen, guardado y ONNX) y del dashboard (páginas, inferencia, conformal, fuera de dominio, ida y vuelta y consistencia con la tabla maestra)."
 }

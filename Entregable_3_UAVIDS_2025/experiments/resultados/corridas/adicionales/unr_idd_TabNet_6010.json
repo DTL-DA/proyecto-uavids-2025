@@ -1,0 +1,1 @@
+{"id": "unr_idd_TabNet_6010", "conjunto": "unr_idd", "modelo": "TabNet", "semilla": 6010, "costo": 14, "epocas": 30, "divergente": false, "parametros": 6868, "f1_val": 0.713683784892846, "f1_eva": 0.7016818740447267, "segundos": 178.2, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 16456}

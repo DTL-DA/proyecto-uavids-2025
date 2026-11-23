@@ -1,0 +1,1 @@
+{"id": "uav_nidd_LightGBM_6009", "conjunto": "uav_nidd", "modelo": "LightGBM", "semilla": 6009, "costo": 3, "epocas": 17, "f1_val": 0.5016828223503157, "f1_eva": 0.5617276602034262, "segundos": 4.9, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18016}

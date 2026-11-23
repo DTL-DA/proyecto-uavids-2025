@@ -1,0 +1,1 @@
+{"id": "uav_nidd_BiLSTM_6001", "conjunto": "uav_nidd", "modelo": "BiLSTM", "semilla": 6001, "costo": 150, "epocas": 7, "divergente": false, "parametros": 530950, "f1_val": 0.5656351944914044, "f1_eva": 0.526914298449084, "segundos": 1567.0, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 22824}

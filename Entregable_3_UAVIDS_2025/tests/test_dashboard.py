@@ -52,3 +52,32 @@ def test_reporte_ida_y_vuelta():
     assert (redes["error_max_prob"] < 1e-4).all()
     assert (t["misma_clase_%"] == 100).all()
     assert (t["dif_f1"].abs() < 1e-9).all()
+
+
+def test_lideres_consistentes_con_tabla_maestra():
+    """El dashboard se alimenta de la tabla maestra: la tabla de líderes publicada debe coincidir con ella (sección 9 del enunciado)."""
+    from pathlib import Path
+
+    raiz = Path(__file__).resolve().parents[1]
+    lideres = pd.read_csv(raiz / "artifacts" / "dashboard" / "lideres.csv").set_index("Modelo")
+    maestra = pd.read_csv(raiz / "experiments" / "resultados" / "tabla_maestra.csv")
+    defin = maestra[(maestra["fase"] == "definitiva") & (maestra["conjunto"] == "UAVIDS-2025") & maestra["f1_eva"].notna()]
+    resumen = defin.groupby("modelo")["f1_eva"].agg(["mean", "std", "count"])
+    for modelo, fila in lideres.iterrows():
+        assert int(fila["Semillas"]) == int(resumen.loc[modelo, "count"]), modelo
+        assert abs(fila["F1 macro"] - resumen.loc[modelo, "mean"]) < 1e-9, modelo
+        assert abs(fila["DE"] - resumen.loc[modelo, "std"]) < 1e-9, modelo
+
+
+def test_adicionales_consistentes_con_analisis():
+    """Los F1 de los conjuntos adicionales que muestra el dashboard son los del análisis del capítulo 8."""
+    from pathlib import Path
+
+    raiz = Path(__file__).resolve().parents[1]
+    ruta = raiz / "artifacts" / "dashboard" / "adicionales.csv"
+    if not ruta.exists():
+        pytest.skip("conjuntos adicionales aún sin publicar en el dashboard")
+    tablero = pd.read_csv(ruta).set_index(["conjunto", "modelo"])["F1 macro"]
+    for c in ("uav_nidd", "unsw_nb15", "unr_idd"):
+        t = pd.read_csv(raiz / "experiments" / "resultados" / "adicionales" / f"tabla_{c}.csv").set_index(["conjunto", "modelo"])["F1 macro"]
+        assert ((tablero.loc[t.index] - t).abs() < 1e-12).all()

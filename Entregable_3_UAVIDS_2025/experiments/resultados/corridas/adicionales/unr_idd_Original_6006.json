@@ -1,0 +1,1 @@
+{"id": "unr_idd_Original_6006", "conjunto": "unr_idd", "modelo": "Original", "semilla": 6006, "costo": 2, "epocas": 20, "divergente": false, "parametros": 16272, "f1_val": 0.7664288077654445, "f1_eva": 0.7567637651982885, "segundos": 25.7, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 27964}

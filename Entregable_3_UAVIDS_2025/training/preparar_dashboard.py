@@ -7,8 +7,12 @@ Genera:
   artifacts/dashboard/calibracion.json   temperatura y cuantil conforme LAC al 90 % (ajustados en VALIDACIÓN), ECE antes y
                                          después, y la matriz de precisión y el umbral p99 de Mahalanobis (fuera de dominio)
   artifacts/dashboard/diagnosticos.json  matriz de confusión, F1 por clase y curva de confiabilidad en prueba (corrida exportada)
-  artifacts/dashboard/lideres.csv        tabla de líderes: F1 macro medio ± DE de todas las semillas, IC 95 %, ECE, parámetros,
-                                         FLOPs, latencia ONNX (con --latencia) y tiempo de entrenamiento
+  artifacts/dashboard/lideres.csv        tabla de líderes ALIMENTADA DESDE LA TABLA MAESTRA (experiments/resultados/tabla_maestra.csv,
+                                         fase definitiva de UAVIDS-2025): F1 macro medio ± DE de todas las semillas, IC 95 %, ECE,
+                                         parámetros, FLOPs, latencia ONNX (con --latencia) y tiempo de entrenamiento
+  artifacts/dashboard/adicionales.csv, adicionales_contrastes.csv, robustez.csv y balance_r3.json   conjuntos adicionales,
+                                         perturbaciones y balance de las seis condiciones de R3 (capítulo 8 del libro)
+Requiere haber corrido antes experiments/tabla_maestra.py y los análisis de experiments/.
 """
 from __future__ import annotations
 
@@ -31,6 +35,7 @@ from codigo import modelos as M  # noqa: E402
 from src import inference as I  # noqa: E402
 
 SALIDA = RAIZ / "artifacts" / "dashboard"
+TABLA_MAESTRA = RAIZ / "experiments" / "resultados" / "tabla_maestra.csv"
 GRUPO = {**{m: "Top 10" for m in ["CNN-LSTM", "Autoencoder", "RNN", "Transformer", "BiLSTM", "ResNet", "GRU", "KAN", "TabNet", "DBN"]},
          "LightGBM": "Baseline fuerte", "CNN 1D": "Baseline del E1", "DNN": "Base del E1", "LSTM": "Base del E1", "Logística": "Línea base", "Original": "Modelo original"}
 FAMILIA = {**{k: v["familia"] for k, v in M.CATALOGO.items()}, "LightGBM": "Árboles potenciados", "Logística": "Lineal", "Original": "Mezcla con compuerta"}
@@ -110,10 +115,16 @@ def latencia(modelo, repeticiones=300):
     return float(np.median(t)), float(np.percentile(t, 95))
 
 
+def corridas_maestra(modelo):
+    """Filas de la tabla maestra con las semillas definitivas del modelo en UAVIDS-2025 (E2 y E3)."""
+    t = pd.read_csv(TABLA_MAESTRA)
+    return t[(t["fase"] == "definitiva") & (t["conjunto"] == "UAVIDS-2025") & (t["modelo"] == modelo) & t["f1_eva"].notna()]
+
+
 def lideres(modelos, cal, con_latencia):
     filas = []
     for m in modelos:
-        rs = corridas(m)
+        rs = corridas_maestra(m).to_dict("records")
         f1 = np.array([r["f1_eva"] for r in rs])
         boot = np.random.default_rng(0).choice(f1, (5000, len(f1))).mean(1)
         meta = I.metadatos(m)
@@ -141,8 +152,39 @@ def copiar_analisis():
     abl = RAIZ / "experiments" / "resultados" / "ablacion"
     if (abl / "predicciones_secundarias.json").exists():
         ficha = json.loads((abl / "predicciones_secundarias.json").read_text(encoding="utf-8"))
-        ficha["pruebas"] = "33 pruebas con pytest en integración continua (14 del modelo y 19 del dashboard): sobreajuste de un lote, reproducibilidad, formas, gradientes, Lipschitz, Jensen, guardado, ONNX e inferencia."
+        ficha["pruebas"] = ("pruebas con pytest en integración continua: del modelo (sobreajuste de un lote, reproducibilidad, formas, gradientes, "
+                            "Lipschitz, Jensen, guardado y ONNX) y del dashboard (páginas, inferencia, conformal, fuera de dominio, ida y vuelta y "
+                            "consistencia con la tabla maestra).")
         (SALIDA / "ficha_original.json").write_text(json.dumps(ficha, ensure_ascii=False, indent=1), encoding="utf-8")
+    res = RAIZ / "experiments" / "resultados"
+    ad = res / "adicionales"
+    if (ad / "resumen.json").exists():
+        conj = ("uav_nidd", "unsw_nb15", "unr_idd")
+        tab = pd.concat([pd.read_csv(ad / f"tabla_{c}.csv") for c in conj])
+        tab[["conjunto", "modelo", "F1 macro", "DE", "rango", "corridas en GPU"]].to_csv(SALIDA / "adicionales.csv", index=False, encoding="utf-8-sig")
+        con = pd.concat([pd.read_csv(ad / f"contrastes_{c}.csv") for c in conj])
+        con[["conjunto", "rival", "diferencia", "p T1 t Holm", "p T2 Wilcoxon Holm", "p T3 bootstrap bloques Holm", "peor con significancia (T1 a T3)",
+             "peor con significancia (T1 y T2)", "mejor con significancia (T1 y T2)", "supera"]].to_csv(SALIDA / "adicionales_contrastes.csv", index=False, encoding="utf-8-sig")
+    if (res / "robustez" / "perturbaciones.csv").exists():
+        pd.read_csv(res / "robustez" / "perturbaciones.csv").to_csv(SALIDA / "robustez.csv", index=False, encoding="utf-8-sig")
+    rutas = [res / "confirmatorio" / "sensibilidad_cuadro4.json", ad / "resumen.json", res / "adecuacion" / "resumen.json"]
+    if all(r.exists() for r in rutas):
+        c4, rad, adec = (json.loads(r.read_text(encoding="utf-8")) for r in rutas)
+        a = adec["adecuación del original (sección 7.2 del E2)"]
+        nb = adec["Nadeau-Bengio y F 5x2cv (condición 6)"]["LightGBM"]
+        balance = [
+            {"condición": "1. Métrica media favorable frente a cada rival", "cumple": "no",
+             "evidencia": f"F1 medio menor que el de {len(c4['rivales con media mayor que la del original'])} de los 12 rivales"},
+            {"condición": "2. Tres pruebas con Holm y diferencia > δ", "cumple": "no",
+             "evidencia": "ningún contraste rechaza con tres pruebas (preregistradas ni admisibles del cuadro 4)"},
+            {"condición": "3. Efecto no despreciable e IC > 0", "cumple": "no", "evidencia": "solo frente a TabNet y RNN hay efecto a favor no despreciable"},
+            {"condición": "4. Consistencia en los conjuntos adicionales", "cumple": "no",
+             "evidencia": f"mejor en {rad['conjuntos en que el original es el mejor en la media']} de 3 conjuntos; peor con significancia en UNSW-NB15"},
+            {"condición": "5. Adecuación (sección 7.2 del E2)", "cumple": "no",
+             "evidencia": f"cumple (i), (ii) y (iv); falla la calibración: ECE con temperatura de {a['ECE con T']:.3f} frente a 0,05"},
+            {"condición": "6. Robustez a la elección de la prueba", "cumple": "sí",
+             "evidencia": f"ninguna prueba muestra superioridad del original; la ventaja de LightGBM desaparece en 5 × 2 (p de Nadeau-Bengio = {nb['p Nadeau-Bengio']:.2f})"}]
+        (SALIDA / "balance_r3.json").write_text(json.dumps(balance, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
 def main():

@@ -29,7 +29,7 @@ pd.set_option("display.precision", 4)
 
 ## Protocolo preregistrado
 
-El protocolo (`experiments/protocolo.md`) se congeló el 22/11/2026 con la etiqueta de Git `e3-protocolo`, antes de cualquier corrida definitiva, y la declaración del estándar lleva la etiqueta anterior `e3-estandar`. Fija las hipótesis, las predicciones secundarias, la métrica primaria y δ, la fuente del mecanismo, los tres conjuntos adicionales, las particiones, las semillas, el determinismo, la familia de contrastes, las pruebas, la corrección de Holm, el presupuesto de ajuste, el análisis de potencia y *Nd*. No hubo desviaciones en el problema principal. La única corrección se hizo en la partición de los conjuntos adicionales, antes de etiquetar el protocolo y de entrenar cualquier modelo, y está documentada en su sección 5.3.
+El protocolo (`experiments/protocolo.md`) se congeló el 22/11/2026 con la etiqueta de Git `e3-protocolo`, antes de cualquier corrida definitiva, y la declaración del estándar lleva la etiqueta anterior `e3-estandar`. Fija las hipótesis, las predicciones secundarias, la métrica primaria y δ, la fuente del mecanismo, los tres conjuntos adicionales, las particiones, las semillas, el determinismo, la familia de contrastes, las pruebas, la corrección de Holm, el presupuesto de ajuste, el análisis de potencia y *Nd*. Las desviaciones posteriores al congelamiento se declaran, con su justificación, en la última sección de este capítulo.
 
 **Equidad del presupuesto.** El modelo original recibió las mismas 12 configuraciones de (lr, weight_decay, lote) que los 13 modelos profundos del E2, el mismo máximo de 30 épocas, la misma parada temprana sobre el F1 macro de validación con paciencia 6, la misma pérdida ponderada y el mismo recorte del gradiente, con el motor de entrenamiento del E2 (capítulo 6). El presupuesto se midió en número de configuraciones.
 
@@ -124,6 +124,39 @@ La conclusión principal, que R3 no se cumple, se mantiene con las cuatro varian
 - el subconjunto de las 20 primeras semillas;
 - la *t* corregida de Nadeau-Bengio sobre la validación cruzada 5 × 2 (capítulo 8).
 
+## Pruebas admisibles del cuadro 4 (sensibilidad)
+
+```{code-cell} ipython3
+:tags: [hide-input]
+c4 = pd.read_csv(C / "sensibilidad_cuadro4.csv")
+c4[["rival", "diferencia", "p A1 Wilcoxon Holm", "p A2 t Nadeau-Bengio Holm", "p A3 McNemar Holm", "p A4 Friedman post hoc Holm",
+    "P(original>rival) bayes", "P(original<rival) bayes", "DeLong clases a favor", "DeLong clases en contra",
+    "pruebas a favor del original", "pruebas en contra del original", "supera (R3 estricto)"]].fillna("")
+```
+
+La fila "F1. Tabular" del cuadro 4 del enunciado admite la *t* pareada con corrección de Nadeau-Bengio, la *F* de 5 × 2 cv, Wilcoxon, McNemar y DeLong, Friedman con Holm y la prueba bayesiana con ROPE. Dos de las tres pruebas preregistradas no coinciden al pie de la letra con esa lista: T1 es la *t* pareada sin la corrección y T3, el *bootstrap* por bloques, figura en la fila de problemas espaciales. Por eso se repite el análisis con seis pruebas admisibles, con Holm aparte para cada una:
+
+- **A1.** Wilcoxon sobre las semillas.
+- **A2.** *t* con corrección de Nadeau-Bengio sobre las semillas.
+- **A3.** McNemar exacta sobre los aciertos del ensamble.
+- **A4.** Friedman con *post hoc* de Holm.
+- **A5.** Bayesiana con ROPE, que cuenta como rechazo cuando la probabilidad posterior supera 0,95.
+- **A6.** DeLong sobre el AUC uno contra todos de cada clase, que cuenta como rechazo cuando al menos 3 de las 5 clases son significativas en el mismo sentido.
+
+La *F* de 5 × 2 cv y Nadeau-Bengio sobre 5 × 2 están en el capítulo 8.
+
+**Con las pruebas admisibles la conclusión no cambia: el modelo original no supera a ningún rival con tres pruebas, y cinco rivales son mejores que él con tres o más: LightGBM (con las seis), CNN-LSTM (con cuatro), Autoencoder, DBN y CNN 1D (con tres cada uno). Frente a TabNet solo lo favorecen Wilcoxon y la bayesiana, con P(original > TabNet) = 0,994.**
+
+Hay que tener en cuenta que McNemar (A3) y DeLong (A6) tratan los 22 883 flujos como si fueran independientes, cuando están agrupados por escenario, de modo que son anticonservadoras. Si se cuentan solo las pruebas sobre semillas (A1, A2, A4 y A5), únicamente LightGBM es mejor con tres o más, con las cuatro. Además, la *t* con corrección de Nadeau-Bengio infla la varianza con el factor n_prueba/n_entrenamiento = 0,31 aunque el entrenamiento no cambie entre semillas, y solo rechaza frente a LightGBM.
+
+Por tal motivo, se mantiene la decisión preregistrada (R3 no se cumple y el tope es 4,0) y la batería admisible se reporta como sensibilidad. En ninguna combinación de pruebas el original supera a un rival. La superioridad de LightGBM queda respaldada por todas, aunque el capítulo 8 muestra que desaparece en la validación cruzada 5 × 2 y la reporta como resultado no robusto a la partición, como pide la condición 6 de la sección 8.4 del enunciado.
+
 ## Ajuste y sobreajuste del modelo original
 
 La prueba de permutación de etiquetas, el optimismo por *bootstrap* y la curva de aprendizaje se reportan en el capítulo 8 con las corridas de `training/ejecutar_robustez.py`. Su F1 medio de prueba (0,850) supera ampliamente al clasificador trivial (0,070). La brecha media entre validación (0,919 en el piloto) y prueba es de unos 0,07, del mismo orden que la de las demás redes del E2, porque se debe a la dependencia por escenario documentada en el capítulo 1 y no a un sobreajuste propio del modelo.
+
+## Desviaciones del protocolo
+
+1. **Pruebas del cuadro 4 (23/11/2026, después de ver los resultados).** El protocolo citó la fila tabular del cuadro 4 para T1 a T3, pero T3 pertenece a la fila espacial y T1 no lleva la corrección de Nadeau-Bengio. No se reemplazó la decisión preregistrada: se agregó la sensibilidad con las pruebas admisibles de la sección anterior (`experiments/analisis_cuadro4.py`). La conclusión es la misma, y el cambio no podía favorecer al original, porque su F1 medio ya es menor que el de 8 de los 12 rivales.
+2. **GPU en 31 corridas de los conjuntos adicionales (23/11/2026).** Las GRU de UNSW-NB15, las BiLSTM y GRU de UNR-IDD y una GRU de UAV-NIDD corrieron en una GPU NVIDIA RTX PRO 6000 Blackwell (porción MIG de 24 GB, PyTorch 2.8.0 y CUDA 12.8), con determinismo estricto de CUDA. Es la opción prevista en la sección 5 del protocolo, solo para BiLSTM y GRU de esos conjuntos. Con la misma semilla, la GRU de UNR-IDD dio un F1 de prueba de 0,722 en CPU y de 0,696 en GPU, una variación del orden de dos desviaciones estándar entre semillas, que se discute en el capítulo 8.
+3. **Partición de los conjuntos adicionales (22/11/2026, antes de etiquetar el protocolo y de entrenar cualquier modelo).** Los bloques de 1000 filas sin estratificar dejaban clases fuera de la prueba; se cambiaron por bloques de 250 filas estratificados por clase (sección 5.3 del protocolo).

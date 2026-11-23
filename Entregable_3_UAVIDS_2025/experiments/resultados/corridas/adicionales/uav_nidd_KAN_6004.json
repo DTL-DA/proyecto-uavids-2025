@@ -1,0 +1,1 @@
+{"id": "uav_nidd_KAN_6004", "conjunto": "uav_nidd", "modelo": "KAN", "semilla": 6004, "costo": 6.8999999999999995, "epocas": 10, "divergente": false, "parametros": 8885, "f1_val": 0.5570161427719568, "f1_eva": 0.5547274174410081, "segundos": 32.5, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 30080}

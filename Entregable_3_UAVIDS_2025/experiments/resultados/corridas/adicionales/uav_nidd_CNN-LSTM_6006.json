@@ -1,0 +1,1 @@
+{"id": "uav_nidd_CNN-LSTM_6006", "conjunto": "uav_nidd", "modelo": "CNN-LSTM", "semilla": 6006, "costo": 36, "epocas": 7, "divergente": false, "parametros": 46278, "f1_val": 0.5891261516261516, "f1_eva": 0.6160405774257539, "segundos": 115.2, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 16456}

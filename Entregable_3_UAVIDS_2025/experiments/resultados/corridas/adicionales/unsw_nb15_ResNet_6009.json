@@ -1,0 +1,1 @@
+{"id": "unsw_nb15_ResNet_6009", "conjunto": "unsw_nb15", "modelo": "ResNet", "semilla": 6009, "costo": 13.5, "epocas": 30, "divergente": false, "parametros": 17193, "f1_val": 0.665205312029009, "f1_eva": 0.6727932430667009, "segundos": 78.8, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18016}

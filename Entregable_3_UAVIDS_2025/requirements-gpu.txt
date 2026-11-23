@@ -1,0 +1,8 @@
+# Máquina con GPU (RunPod) solo para las BiLSTM y GRU de los conjuntos adicionales (sección 5 de protocolo.md).
+# Misma versión de PyTorch que el entorno de CPU (2.6.0), compilada para CUDA 12.4.
+--extra-index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0
+numpy
+pandas
+scipy
+scikit-learn

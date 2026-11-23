@@ -1,0 +1,1 @@
+{"id": "uav_nidd_DBN_6006", "conjunto": "uav_nidd", "modelo": "DBN", "semilla": 6006, "costo": 4.5, "epocas": 10, "divergente": false, "parametros": 11526, "f1_val": 0.5892304166078962, "f1_eva": 0.6221058460834349, "segundos": 16.4, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 27964}

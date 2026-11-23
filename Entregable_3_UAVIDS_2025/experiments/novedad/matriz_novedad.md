@@ -63,4 +63,4 @@ Frente a todos ellos, la diferencia es de mecanismo o de esquema de entrenamient
 
 ## Verificación por un tercero (D7)
 
-Una persona ajena al diseño repite **N1 y N5** en OpenAlex (https://openalex.org, filtro "title and abstract") o en Scopus, anota la fecha y el número de resultados, revisa los títulos y confirma o refuta la declaración. Su concepto firmado se anexa al capítulo 4 del libro.
+Imera Logreira, colega ajena al diseño, repite **N1 y N5** en OpenAlex (https://openalex.org, filtro "title and abstract") o en Scopus, anota la fecha y el número de resultados, revisa los títulos y confirma o refuta la declaración. Su concepto firmado se anexa al capítulo 4 del libro.

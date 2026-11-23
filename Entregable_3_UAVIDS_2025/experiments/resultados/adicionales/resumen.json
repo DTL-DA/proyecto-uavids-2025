@@ -1,0 +1,625 @@
+{
+ "consistencia por conjunto": {
+  "UAV-NIDD": {
+   "F1 original": 0.5495536300018665,
+   "rango del original (de 13)": 11,
+   "mejor rival": "DBN",
+   "F1 mejor rival": 0.6169349165878013,
+   "original mejor que todos en la media": false,
+   "rivales significativamente mejores (T1 a T3)": [],
+   "rivales significativamente mejores (T1 y T2)": [
+    "RNN",
+    "DBN"
+   ],
+   "rivales significativamente peores (T1 y T2)": [],
+   "contrastes que supera (R3)": []
+  },
+  "UNSW-NB15": {
+   "F1 original": 0.6651015551088764,
+   "rango del original (de 13)": 6,
+   "mejor rival": "LightGBM",
+   "F1 mejor rival": 0.7087631546109756,
+   "original mejor que todos en la media": false,
+   "rivales significativamente mejores (T1 a T3)": [
+    "CNN-LSTM",
+    "BiLSTM",
+    "LightGBM"
+   ],
+   "rivales significativamente mejores (T1 y T2)": [
+    "CNN-LSTM",
+    "BiLSTM",
+    "LightGBM"
+   ],
+   "rivales significativamente peores (T1 y T2)": [
+    "TabNet"
+   ],
+   "contrastes que supera (R3)": []
+  },
+  "UNR-IDD": {
+   "F1 original": 0.7646288550853394,
+   "rango del original (de 13)": 3,
+   "mejor rival": "LightGBM",
+   "F1 mejor rival": 0.8292014054574274,
+   "original mejor que todos en la media": false,
+   "rivales significativamente mejores (T1 a T3)": [],
+   "rivales significativamente mejores (T1 y T2)": [
+    "BiLSTM",
+    "LightGBM"
+   ],
+   "rivales significativamente peores (T1 y T2)": [
+    "CNN-LSTM",
+    "Autoencoder",
+    "RNN",
+    "GRU",
+    "TabNet",
+    "DBN"
+   ],
+   "contrastes que supera (R3)": [
+    "RNN"
+   ]
+  }
+ },
+ "conjuntos en que el original es el mejor en la media": 0,
+ "no es significativamente peor que ningún rival en ningún conjunto (T1 a T3)": false,
+ "condición 4 de R3 (mejor en al menos 2 de 3 y nunca peor con significancia)": false,
+ "entre conjuntos (3 adicionales)": {
+  "conjuntos": [
+   "UAV-NIDD",
+   "UNR-IDD",
+   "UNSW-NB15"
+  ],
+  "friedman": {
+   "chi2": 15.692307692307708,
+   "p": 0.20573881157124219,
+   "F Iman-Davenport": 1.545454545454548,
+   "p Iman-Davenport": 0.17568860528114694,
+   "W de Kendall": 0.43589743589743635
+  },
+  "rangos medios (1 = mejor)": {
+   "Original": 6.67,
+   "CNN-LSTM": 4.67,
+   "Autoencoder": 6.0,
+   "RNN": 7.67,
+   "Transformer": 5.33,
+   "BiLSTM": 4.33,
+   "ResNet": 7.0,
+   "GRU": 9.33,
+   "KAN": 9.0,
+   "TabNet": 13.0,
+   "DBN": 7.0,
+   "LightGBM": 3.0,
+   "CNN 1D": 8.0
+  },
+  "pares": [
+   {
+    "rival": "CNN-LSTM",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0533,
+     "UNR-IDD": 0.0313,
+     "UNSW-NB15": -0.0154
+    },
+    "mejor en": 1,
+    "p Wilcoxon": 0.75,
+    "P(A < B)": 0.59635,
+    "P(ROPE)": 0.249,
+    "P(A > B)": 0.15465,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "Autoencoder",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0207,
+     "UNR-IDD": 0.0229,
+     "UNSW-NB15": -0.0031
+    },
+    "mejor en": 1,
+    "p Wilcoxon": 1.0,
+    "P(A < B)": 0.26305,
+    "P(ROPE)": 0.6077,
+    "P(A > B)": 0.12925,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "RNN",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0448,
+     "UNR-IDD": 0.0452,
+     "UNSW-NB15": 0.0089
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 0.75,
+    "P(A < B)": 0.3137,
+    "P(ROPE)": 0.3765,
+    "P(A > B)": 0.3098,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "Transformer",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0386,
+     "UNR-IDD": 0.013,
+     "UNSW-NB15": 0.0009
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 1.0,
+    "P(A < B)": 0.3976,
+    "P(ROPE)": 0.557,
+    "P(A > B)": 0.0454,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "BiLSTM",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0036,
+     "UNR-IDD": -0.0336,
+     "UNSW-NB15": -0.024
+    },
+    "mejor en": 0,
+    "p Wilcoxon": 0.25,
+    "P(A < B)": 0.79405,
+    "P(ROPE)": 0.20595,
+    "P(A > B)": 0.0,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "ResNet",
+    "diferencias por conjunto": {
+     "UAV-NIDD": 0.0053,
+     "UNR-IDD": 0.0022,
+     "UNSW-NB15": -0.0026
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 0.75,
+    "P(A < B)": 0.0,
+    "P(ROPE)": 1.0,
+    "P(A > B)": 0.0,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "GRU",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0304,
+     "UNR-IDD": 0.0544,
+     "UNSW-NB15": 0.0093
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 0.75,
+    "P(A < B)": 0.2824,
+    "P(ROPE)": 0.28365,
+    "P(A > B)": 0.43395,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "KAN",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0041,
+     "UNR-IDD": 0.0199,
+     "UNSW-NB15": 0.0129
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 0.5,
+    "P(A < B)": 0.0,
+    "P(ROPE)": 0.7942,
+    "P(A > B)": 0.2058,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "TabNet",
+    "diferencias por conjunto": {
+     "UAV-NIDD": 0.0592,
+     "UNR-IDD": 0.0593,
+     "UNSW-NB15": 0.0348
+    },
+    "mejor en": 3,
+    "p Wilcoxon": 0.25,
+    "P(A < B)": 0.0,
+    "P(ROPE)": 0.0253,
+    "P(A > B)": 0.9747,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "DBN",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0674,
+     "UNR-IDD": 0.0459,
+     "UNSW-NB15": 0.0039
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 1.0,
+    "P(A < B)": 0.43475,
+    "P(ROPE)": 0.28195,
+    "P(A > B)": 0.2833,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "LightGBM",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0122,
+     "UNR-IDD": -0.0646,
+     "UNSW-NB15": -0.0437
+    },
+    "mejor en": 0,
+    "p Wilcoxon": 0.25,
+    "P(A < B)": 0.90715,
+    "P(ROPE)": 0.09285,
+    "P(A > B)": 0.0,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "CNN 1D",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0027,
+     "UNR-IDD": 0.0148,
+     "UNSW-NB15": 0.0023
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 0.75,
+    "P(A < B)": 0.0,
+    "P(ROPE)": 0.9746,
+    "P(A > B)": 0.0254,
+    "p Wilcoxon Holm": 1.0
+   }
+  ],
+  "p Wilcoxon mínimo alcanzable": 0.25,
+  "medias": {
+   "Original": {
+    "UAV-NIDD": 0.5496,
+    "UNR-IDD": 0.7646,
+    "UNSW-NB15": 0.6651
+   },
+   "CNN-LSTM": {
+    "UAV-NIDD": 0.6029,
+    "UNR-IDD": 0.7334,
+    "UNSW-NB15": 0.6805
+   },
+   "Autoencoder": {
+    "UAV-NIDD": 0.5703,
+    "UNR-IDD": 0.7417,
+    "UNSW-NB15": 0.6682
+   },
+   "RNN": {
+    "UAV-NIDD": 0.5943,
+    "UNR-IDD": 0.7194,
+    "UNSW-NB15": 0.6562
+   },
+   "Transformer": {
+    "UAV-NIDD": 0.5882,
+    "UNR-IDD": 0.7516,
+    "UNSW-NB15": 0.6642
+   },
+   "BiLSTM": {
+    "UAV-NIDD": 0.5532,
+    "UNR-IDD": 0.7983,
+    "UNSW-NB15": 0.6891
+   },
+   "ResNet": {
+    "UAV-NIDD": 0.5442,
+    "UNR-IDD": 0.7624,
+    "UNSW-NB15": 0.6677
+   },
+   "GRU": {
+    "UAV-NIDD": 0.58,
+    "UNR-IDD": 0.7102,
+    "UNSW-NB15": 0.6558
+   },
+   "KAN": {
+    "UAV-NIDD": 0.5537,
+    "UNR-IDD": 0.7447,
+    "UNSW-NB15": 0.6522
+   },
+   "TabNet": {
+    "UAV-NIDD": 0.4904,
+    "UNR-IDD": 0.7053,
+    "UNSW-NB15": 0.6303
+   },
+   "DBN": {
+    "UAV-NIDD": 0.6169,
+    "UNR-IDD": 0.7187,
+    "UNSW-NB15": 0.6612
+   },
+   "LightGBM": {
+    "UAV-NIDD": 0.5618,
+    "UNR-IDD": 0.8292,
+    "UNSW-NB15": 0.7088
+   },
+   "CNN 1D": {
+    "UAV-NIDD": 0.5523,
+    "UNR-IDD": 0.7499,
+    "UNSW-NB15": 0.6628
+   }
+  }
+ },
+ "entre conjuntos (3 adicionales + UAVIDS-2025, sensibilidad)": {
+  "conjuntos": [
+   "UAV-NIDD",
+   "UNR-IDD",
+   "UNSW-NB15",
+   "UAVIDS-2025"
+  ],
+  "friedman": {
+   "chi2": 22.384615384615387,
+   "p": 0.033428581668337363,
+   "F Iman-Davenport": 2.621621621621622,
+   "p Iman-Davenport": 0.012643603733980404,
+   "W de Kendall": 0.4663461538461539
+  },
+  "rangos medios (1 = mejor)": {
+   "Original": 7.25,
+   "CNN-LSTM": 4.0,
+   "Autoencoder": 5.25,
+   "RNN": 8.75,
+   "Transformer": 5.25,
+   "BiLSTM": 6.0,
+   "ResNet": 7.0,
+   "GRU": 9.5,
+   "KAN": 8.75,
+   "TabNet": 13.0,
+   "DBN": 6.75,
+   "LightGBM": 2.5,
+   "CNN 1D": 7.0
+  },
+  "pares": [
+   {
+    "rival": "CNN-LSTM",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0533,
+     "UNR-IDD": 0.0313,
+     "UNSW-NB15": -0.0154,
+     "UAVIDS-2025": -0.0146
+    },
+    "mejor en": 1,
+    "p Wilcoxon": 0.625,
+    "P(A < B)": 0.6514,
+    "P(ROPE)": 0.28485,
+    "P(A > B)": 0.06375,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "Autoencoder",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0207,
+     "UNR-IDD": 0.0229,
+     "UNSW-NB15": -0.0031,
+     "UAVIDS-2025": -0.0111
+    },
+    "mejor en": 1,
+    "p Wilcoxon": 0.875,
+    "P(A < B)": 0.26615,
+    "P(ROPE)": 0.68875,
+    "P(A > B)": 0.0451,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "RNN",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0448,
+     "UNR-IDD": 0.0452,
+     "UNSW-NB15": 0.0089,
+     "UAVIDS-2025": 0.0108
+    },
+    "mejor en": 3,
+    "p Wilcoxon": 0.625,
+    "P(A < B)": 0.25705,
+    "P(ROPE)": 0.39655,
+    "P(A > B)": 0.3464,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "Transformer",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0386,
+     "UNR-IDD": 0.013,
+     "UNSW-NB15": 0.0009,
+     "UAVIDS-2025": -0.0097
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 0.875,
+    "P(A < B)": 0.27545,
+    "P(ROPE)": 0.7101,
+    "P(A > B)": 0.01445,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "BiLSTM",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0036,
+     "UNR-IDD": -0.0336,
+     "UNSW-NB15": -0.024,
+     "UAVIDS-2025": 0.0022
+    },
+    "mejor en": 1,
+    "p Wilcoxon": 0.25,
+    "P(A < B)": 0.66405,
+    "P(ROPE)": 0.33595,
+    "P(A > B)": 0.0,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "ResNet",
+    "diferencias por conjunto": {
+     "UAV-NIDD": 0.0053,
+     "UNR-IDD": 0.0022,
+     "UNSW-NB15": -0.0026,
+     "UAVIDS-2025": -0.003
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 1.0,
+    "P(A < B)": 0.0,
+    "P(ROPE)": 1.0,
+    "P(A > B)": 0.0,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "GRU",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0304,
+     "UNR-IDD": 0.0544,
+     "UNSW-NB15": 0.0093,
+     "UAVIDS-2025": 0.0005
+    },
+    "mejor en": 3,
+    "p Wilcoxon": 0.625,
+    "P(A < B)": 0.2284,
+    "P(ROPE)": 0.43885,
+    "P(A > B)": 0.33275,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "KAN",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0041,
+     "UNR-IDD": 0.0199,
+     "UNSW-NB15": 0.0129,
+     "UAVIDS-2025": -0.0009
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 0.625,
+    "P(A < B)": 0.0,
+    "P(ROPE)": 0.92335,
+    "P(A > B)": 0.07665,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "TabNet",
+    "diferencias por conjunto": {
+     "UAV-NIDD": 0.0592,
+     "UNR-IDD": 0.0593,
+     "UNSW-NB15": 0.0348,
+     "UAVIDS-2025": 0.023
+    },
+    "mejor en": 4,
+    "p Wilcoxon": 0.125,
+    "P(A < B)": 0.0,
+    "P(ROPE)": 0.00835,
+    "P(A > B)": 0.99165,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "DBN",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0674,
+     "UNR-IDD": 0.0459,
+     "UNSW-NB15": 0.0039,
+     "UAVIDS-2025": -0.0089
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 0.875,
+    "P(A < B)": 0.33425,
+    "P(ROPE)": 0.4382,
+    "P(A > B)": 0.22755,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "LightGBM",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0122,
+     "UNR-IDD": -0.0646,
+     "UNSW-NB15": -0.0437,
+     "UAVIDS-2025": -0.0269
+    },
+    "mejor en": 0,
+    "p Wilcoxon": 0.125,
+    "P(A < B)": 0.96715,
+    "P(ROPE)": 0.03285,
+    "P(A > B)": 0.0,
+    "p Wilcoxon Holm": 1.0
+   },
+   {
+    "rival": "CNN 1D",
+    "diferencias por conjunto": {
+     "UAV-NIDD": -0.0027,
+     "UNR-IDD": 0.0148,
+     "UNSW-NB15": 0.0023,
+     "UAVIDS-2025": -0.0105
+    },
+    "mejor en": 2,
+    "p Wilcoxon": 1.0,
+    "P(A < B)": 0.0079,
+    "P(ROPE)": 0.98535,
+    "P(A > B)": 0.00675,
+    "p Wilcoxon Holm": 1.0
+   }
+  ],
+  "p Wilcoxon mínimo alcanzable": 0.125,
+  "medias": {
+   "Original": {
+    "UAV-NIDD": 0.5496,
+    "UNR-IDD": 0.7646,
+    "UNSW-NB15": 0.6651,
+    "UAVIDS-2025": 0.8479
+   },
+   "CNN-LSTM": {
+    "UAV-NIDD": 0.6029,
+    "UNR-IDD": 0.7334,
+    "UNSW-NB15": 0.6805,
+    "UAVIDS-2025": 0.8626
+   },
+   "Autoencoder": {
+    "UAV-NIDD": 0.5703,
+    "UNR-IDD": 0.7417,
+    "UNSW-NB15": 0.6682,
+    "UAVIDS-2025": 0.8591
+   },
+   "RNN": {
+    "UAV-NIDD": 0.5943,
+    "UNR-IDD": 0.7194,
+    "UNSW-NB15": 0.6562,
+    "UAVIDS-2025": 0.8371
+   },
+   "Transformer": {
+    "UAV-NIDD": 0.5882,
+    "UNR-IDD": 0.7516,
+    "UNSW-NB15": 0.6642,
+    "UAVIDS-2025": 0.8576
+   },
+   "BiLSTM": {
+    "UAV-NIDD": 0.5532,
+    "UNR-IDD": 0.7983,
+    "UNSW-NB15": 0.6891,
+    "UAVIDS-2025": 0.8457
+   },
+   "ResNet": {
+    "UAV-NIDD": 0.5442,
+    "UNR-IDD": 0.7624,
+    "UNSW-NB15": 0.6677,
+    "UAVIDS-2025": 0.851
+   },
+   "GRU": {
+    "UAV-NIDD": 0.58,
+    "UNR-IDD": 0.7102,
+    "UNSW-NB15": 0.6558,
+    "UAVIDS-2025": 0.8474
+   },
+   "KAN": {
+    "UAV-NIDD": 0.5537,
+    "UNR-IDD": 0.7447,
+    "UNSW-NB15": 0.6522,
+    "UAVIDS-2025": 0.8488
+   },
+   "TabNet": {
+    "UAV-NIDD": 0.4904,
+    "UNR-IDD": 0.7053,
+    "UNSW-NB15": 0.6303,
+    "UAVIDS-2025": 0.8249
+   },
+   "DBN": {
+    "UAV-NIDD": 0.6169,
+    "UNR-IDD": 0.7187,
+    "UNSW-NB15": 0.6612,
+    "UAVIDS-2025": 0.8569
+   },
+   "LightGBM": {
+    "UAV-NIDD": 0.5618,
+    "UNR-IDD": 0.8292,
+    "UNSW-NB15": 0.7088,
+    "UAVIDS-2025": 0.8748
+   },
+   "CNN 1D": {
+    "UAV-NIDD": 0.5523,
+    "UNR-IDD": 0.7499,
+    "UNSW-NB15": 0.6628,
+    "UAVIDS-2025": 0.8584
+   }
+  }
+ }
+}

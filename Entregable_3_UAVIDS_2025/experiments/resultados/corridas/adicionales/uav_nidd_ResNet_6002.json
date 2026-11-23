@@ -1,0 +1,1 @@
+{"id": "uav_nidd_ResNet_6002", "conjunto": "uav_nidd", "modelo": "ResNet", "semilla": 6002, "costo": 13.5, "epocas": 9, "divergente": false, "parametros": 17734, "f1_val": 0.554249547920434, "f1_eva": 0.5376821065533667, "segundos": 16.1, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 27964}

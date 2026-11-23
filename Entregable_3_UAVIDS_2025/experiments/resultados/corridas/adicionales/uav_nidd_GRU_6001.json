@@ -1,0 +1,1 @@
+{"id": "uav_nidd_GRU_6001", "conjunto": "uav_nidd", "modelo": "GRU", "semilla": 6001, "costo": 72, "epocas": 7, "divergente": false, "parametros": 97030, "f1_val": 0.5628707445312603, "f1_eva": 0.5876539319260087, "segundos": 493.4, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 27964}

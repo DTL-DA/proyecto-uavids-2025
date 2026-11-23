@@ -50,3 +50,21 @@ def robustez() -> pd.DataFrame | None:
 def ficha_original() -> dict:
     ruta = TABLERO / "ficha_original.json"
     return json.loads(ruta.read_text(encoding="utf-8")) if ruta.exists() else {}
+
+
+@lru_cache(maxsize=1)
+def adicionales() -> pd.DataFrame | None:
+    ruta = TABLERO / "adicionales.csv"
+    return pd.read_csv(ruta) if ruta.exists() else None
+
+
+@lru_cache(maxsize=1)
+def adicionales_contrastes() -> pd.DataFrame | None:
+    ruta = TABLERO / "adicionales_contrastes.csv"
+    return pd.read_csv(ruta) if ruta.exists() else None
+
+
+@lru_cache(maxsize=1)
+def balance_r3() -> list:
+    ruta = TABLERO / "balance_r3.json"
+    return json.loads(ruta.read_text(encoding="utf-8")) if ruta.exists() else []

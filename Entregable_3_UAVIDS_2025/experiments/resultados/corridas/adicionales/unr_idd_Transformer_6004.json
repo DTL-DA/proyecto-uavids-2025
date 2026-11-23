@@ -1,0 +1,1 @@
+{"id": "unr_idd_Transformer_6004", "conjunto": "unr_idd", "modelo": "Transformer", "semilla": 6004, "costo": 2.8, "epocas": 14, "divergente": false, "parametros": 3702, "f1_val": 0.7519428680462629, "f1_eva": 0.734498897796828, "segundos": 25.4, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18016}

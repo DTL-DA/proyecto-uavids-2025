@@ -1,0 +1,1 @@
+{"id": "unsw_nb15_RNN_6006", "conjunto": "unsw_nb15", "modelo": "RNN", "semilla": 6006, "costo": 24, "epocas": 24, "divergente": false, "parametros": 38793, "f1_val": 0.6399741674462455, "f1_eva": 0.6453073754522117, "segundos": 325.7, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 16456}

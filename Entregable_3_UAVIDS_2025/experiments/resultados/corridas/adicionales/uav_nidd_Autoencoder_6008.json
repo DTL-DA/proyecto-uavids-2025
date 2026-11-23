@@ -1,0 +1,1 @@
+{"id": "uav_nidd_Autoencoder_6008", "conjunto": "uav_nidd", "modelo": "Autoencoder", "semilla": 6008, "costo": 7.5, "epocas": 13, "divergente": false, "parametros": 22641, "f1_val": 0.5536125625735426, "f1_eva": 0.5430690107203627, "segundos": 20.2, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18160}

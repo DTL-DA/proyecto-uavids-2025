@@ -1,0 +1,1 @@
+{"id": "unsw_nb15_BiLSTM_6005", "conjunto": "unsw_nb15", "modelo": "BiLSTM", "semilla": 6005, "costo": 150, "epocas": 30, "divergente": false, "parametros": 531721, "f1_val": 0.6661339738840415, "f1_eva": 0.692208852487741, "segundos": 6313.0, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 30080}

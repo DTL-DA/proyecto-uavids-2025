@@ -1,0 +1,1 @@
+{"id": "uav_nidd_CNN_1D_6004", "conjunto": "uav_nidd", "modelo": "CNN 1D", "semilla": 6004, "costo": 7.5, "epocas": 10, "divergente": false, "parametros": 92806, "f1_val": 0.5538079819370526, "f1_eva": 0.5455137017135703, "segundos": 57.0, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18160}

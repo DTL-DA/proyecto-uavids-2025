@@ -6,7 +6,7 @@ from dash import Input, Output, State, callback, dash_table, dcc, html
 
 from src import inference as I
 from src import plots
-from src.data import contrastes, diagnosticos, ficha_original, lideres, resumen, uavids
+from src.data import adicionales, balance_r3, contrastes, diagnosticos, ficha_original, lideres, resumen, robustez, uavids
 
 dash.register_page(__name__, path="/modelos", name="3. Modelos", title="Modelos · UAVIDS-2025", order=3)
 
@@ -94,13 +94,46 @@ def layout():
                  html.P([html.B("Procedencia: "), "propio, con piezas de Jacobs et al. (1991), Gorishniy et al. (2022) y Shazeer et al. (2017), reimplementadas desde "
                          "su formulación (experiments/procedencia.md)."]),
                  html.P([html.B("Propiedad demostrada: "), "cota de Lipschitz de las probabilidades respecto de la entrada, verificada numéricamente en las "
-                         "pruebas unitarias."]),
+                         "pruebas unitarias. Su contraste empírico (P4) no se cumplió: al bajar la cota, la degradación ante ruido no cambia."]),
                  html.P([html.B("Pruebas unitarias: "), f.get("pruebas", "14 pruebas con pytest en integración continua (sobreajuste de un lote, reproducibilidad, "
                                                               "formas, gradientes, Lipschitz, Jensen, guardado y ONNX).")]),
                  html.P([html.B("Uso previsto y límites: "), "apoyo a un analista de seguridad de un enjambre simulado; no generaliza a escenarios de simulación "
                          "no vistos (ver la página de contexto y MODEL_CARD.md)."], className="mb-0")], lg=6),
         dbc.Col(html.Pre(PSEUDOCODIGO, className="pseudocodigo"), lg=6)]))
-    return html.Div([html.H2("Modelos", className="mb-3"), lider, intervalos, prediccion, diagnostico, comparacion, ficha])
+    ad = adicionales()
+    adicional = _card(html.H3("Conjuntos adicionales (UAV-NIDD, UNSW-NB15 y UNR-IDD)", className="h5"),
+                      html.P("Los 13 modelos con sus hiperparámetros del problema principal, sin búsqueda nueva, y 10 semillas por conjunto. "
+                             "Cada conjunto se lee por separado: no se promedian F1 de escalas distintas.", className="nota"),
+                      dcc.Graph(figure=plots.adicionales(ad), config=plots.CONFIG) if ad is not None else plots_vacia("Conjuntos adicionales: pendientes"),
+                      html.P("El original queda en los puestos 11, 6 y 3 de 13 y no es el mejor en ningún conjunto; en UNSW-NB15 pierde con significancia "
+                             "frente a CNN-LSTM, BiLSTM y LightGBM, y en UNR-IDD supera a seis rivales según la t y Wilcoxon.", className="insight mt-2 mb-0"))
+    rob = robustez()
+    robusto = _card(html.H3("Robustez ante perturbaciones de la entrada", className="h5"),
+                    dcc.Dropdown(sorted(x for x in rob["perturbacion"].unique() if x != "ninguna") if rob is not None else [], None, id="m-perturbacion", clearable=False,
+                                 placeholder="Elige una perturbación", className="mb-2"),
+                    dcc.Graph(id="m-robustez", config=plots.CONFIG),
+                    html.P("El original es el más robusto ante ruido gaussiano y atributos faltantes; LightGBM, ante valores atípicos.", className="insight mt-2 mb-0"))
+    bal = balance_r3()
+    balance = _card(html.H3("Balance de las seis condiciones de superioridad (R3)", className="h5"),
+                    dash_table.DataTable(data=bal, columns=[{"name": c, "id": c} for c in ("condición", "cumple", "evidencia")],
+                                         style_table={"overflowX": "auto"}, style_cell={"fontSize": 12, "padding": "6px", "whiteSpace": "normal", "textAlign": "left"},
+                                         style_header={"fontWeight": 700, "backgroundColor": "#f4f6f9"}) if bal else html.P("Pendiente.", className="nota"),
+                    html.P("R3 no se cumple: el tope de calificación es 4,0. El detalle está en los capítulos 7 y 8 del libro.", className="insight mt-2 mb-0"))
+    return html.Div([html.H2("Modelos", className="mb-3"), lider, intervalos, prediccion, diagnostico, comparacion, adicional, robusto, balance, ficha])
+
+
+def plots_vacia(texto):
+    return dcc.Graph(figure=plots.vacia(texto, 200), config=plots.CONFIG)
+
+
+@callback(Output("m-robustez", "figure"), Input("m-perturbacion", "value"))
+def grafica_robustez(perturbacion):
+    rob = robustez()
+    if rob is None:
+        return plots.vacia("Robustez: pendiente", 200)
+    opciones = sorted(x for x in rob["perturbacion"].unique() if x != "ninguna")
+    eleccion = perturbacion or next((o for o in opciones if o.startswith("ruido")), opciones[0])
+    return plots.robustez(rob[rob["perturbacion"] != "ninguna"], eleccion)
 
 
 @callback([Output(f"m-x{j}", "value") for j in range(len(I.ATRIBUTOS))] + [Output("m-verdad", "children")],

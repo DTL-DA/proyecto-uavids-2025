@@ -58,7 +58,13 @@ La *release* `entregable-3` del repositorio de GitHub se archiva en Zenodo, que 
 
 ## Reproducción independiente
 
-Una persona ajena al código ejecuta, en el contenedor, `jupyter-book build book/` y `python experiments/analisis_confirmatorio.py`, regenera la tabla principal de resultados (capítulo 7) y reporta la discrepancia máxima frente a la tabla publicada. Su reporte se anexa aquí, junto con su concepto sobre la búsqueda de novedad (capítulo 4).
+La reproducción la hace **Imera Logreira**, colega que no participó en el diseño ni en el código, en su propio equipo y sin ayuda técnica del autor. Recibe el paquete `paquete_reproduccion_e3.zip`, que contiene el repositorio, el CSV de UAVIDS-2025 y las probabilidades de prueba de las corridas definitivas, junto con su SHA-256, y sigue la guía `verificacion_externa/GUIA.md`:
+
+1. construye el contenedor con el `Dockerfile`;
+2. ejecuta `python verificacion_externa/reproducir.py`, que verifica el SHA-256 de los datos y de la prueba sellada, vuelve a correr el análisis confirmatorio y compara celda por celda la tabla regenerada con la publicada (capítulo 7). También reentrena desde cero tres corridas definitivas (Original, LightGBM y CNN 1D con la semilla 6001) y compara su F1 y sus probabilidades;
+3. corre las pruebas unitarias, compila este libro desde cero y hace la prueba de humo del dashboard.
+
+Su reporte firmado (`verificacion_externa/reporte_reproduccion.md`), con la discrepancia máxima observada, y su concepto sobre la novedad (`verificacion_externa/concepto_novedad.md`, capítulo 4) se anexan aquí.
 
 ## Declaración de autoría, contribuciones y uso de herramientas
 

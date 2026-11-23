@@ -1,0 +1,1 @@
+{"id": "unsw_nb15_Original_6004", "conjunto": "unsw_nb15", "modelo": "Original", "semilla": 6004, "costo": 6, "epocas": 19, "divergente": false, "parametros": 29002, "f1_val": 0.6467122043878792, "f1_eva": 0.6630185598627407, "segundos": 45.4, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 18016}

@@ -1,0 +1,1 @@
+{"id": "unsw_nb15_CNN_1D_6008", "conjunto": "unsw_nb15", "modelo": "CNN 1D", "semilla": 6008, "costo": 7.5, "epocas": 18, "divergente": false, "parametros": 84809, "f1_val": 0.6354673197524286, "f1_eva": 0.6752545690222552, "segundos": 129.6, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 30080}

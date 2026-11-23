@@ -1,0 +1,1 @@
+{"id": "unr_idd_Autoencoder_6003", "conjunto": "unr_idd", "modelo": "Autoencoder", "semilla": 6003, "costo": 2.5, "epocas": 26, "divergente": false, "parametros": 19416, "f1_val": 0.7540601243097083, "f1_eva": 0.7431583084337944, "segundos": 30.0, "hilos": 2, "equipo": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel | Windows 11 | torch 2.6.0+cpu", "pid": 22824}

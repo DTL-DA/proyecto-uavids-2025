@@ -20,8 +20,8 @@ El dashboard es una aplicación multipágina de Dash (`use_pages=True`) que se d
 | Interfaz | `app.py`, `pages/contexto.py`, `pages/eda.py`, `pages/modelos.py`, `assets/estilos.css` | Una página por sección, barra de navegación y pie con el enlace a este libro |
 | Inferencia | `src/inference.py` | Carga bajo demanda de las sesiones ONNX (como mucho 6 vivas), preprocesamiento del E1, *temperature scaling*, conjunto conforme LAC al 90 %, aviso fuera de dominio y explicación local por oclusión |
 | Datos y figuras | `src/data.py`, `src/plots.py` | Caché de los datos precalculados y una plantilla común de Plotly con la misma paleta por clase en todas las páginas |
-| Precálculo | `training/exportar_onnx.py`, `training/preparar_dashboard.py` | Exportación con prueba de ida y vuelta, calibración y conformal ajustados en validación, diagnósticos y tabla de líderes |
-| Pruebas | `tests/test_dashboard.py` | Páginas, probabilidades válidas, coherencia con los metadatos, fuera de dominio e ida y vuelta, en integración continua |
+| Precálculo | `training/exportar_onnx.py`, `training/preparar_dashboard.py` | Exportación con prueba de ida y vuelta, calibración y conformal ajustados en validación, diagnósticos, tabla de líderes **alimentada desde la tabla maestra** (`experiments/resultados/tabla_maestra.csv`), conjuntos adicionales, robustez y balance de R3 |
+| Pruebas | `tests/test_dashboard.py` | Páginas, probabilidades válidas, coherencia con los metadatos, fuera de dominio, ida y vuelta y **consistencia automática con la tabla maestra y con el análisis de los conjuntos adicionales**, en integración continua |
 
 ## Contenido de cada sección
 
@@ -33,6 +33,9 @@ El dashboard es una aplicación multipágina de Dash (`use_pages=True`) que se d
   - predicción en vivo con un flujo de prueba al azar o editado a mano, con probabilidades calibradas, conjunto conforme, aviso fuera de dominio y explicación local;
   - diagnósticos del modelo elegido: matriz de confusión, curva de confiabilidad y F1 por clase frente a LightGBM;
   - tabla de contrastes confirmatorios y diagrama de diferencia crítica;
+  - F1 de los 13 modelos en los tres conjuntos adicionales, sin promediar conjuntos;
+  - robustez ante ruido, atributos faltantes y valores atípicos, con selector de perturbación;
+  - balance de las seis condiciones de R3;
   - ficha del modelo original con su pseudocódigo.
 
 ```{code-cell} ipython3
