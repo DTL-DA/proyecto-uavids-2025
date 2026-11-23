@@ -30,7 +30,7 @@ RAIZ = Path("..").resolve()
 | Rangos de hiperparámetros | lr ∈ {10⁻⁴, 3·10⁻⁴, 10⁻³, 3·10⁻³}, weight_decay ∈ {0, 10⁻⁵, 10⁻⁴}, lote ∈ {128, 256, 512}: las mismas 12 configuraciones para todos los modelos profundos | `configuracion/experimento.json` del E2 |
 | Número de ejecuciones y dispersión | De 20 a 48 semillas por modelo en el problema principal y 10 en cada conjunto adicional; media ± DE e IC 95 % | Capítulos 3, 7 y 8 |
 | Datos | UAVIDS-2025 (Zenodo, CC BY 4.0) verificado con SHA-256; tres conjuntos adicionales con procedencia, licencia y SHA-256 | `data/procedencia_conjuntos_adicionales.md` |
-| Código | Repositorio de GitHub `DTL-DA/proyecto-uavids-2025`, rama `entregable-3`, etiquetas `e3-estandar` y `e3-protocolo` | Raíz del repositorio |
+| Código | Repositorio de GitHub `DTL-DA/proyecto-uavids-2025`, rama `entregable-3`, etiquetas `e3-estandar` y `e3-protocolo`. Licencia MIT, confirmada por el autor el 23/11/2026; los datos conservan sus licencias (`DATA_STATEMENT.md`) | Raíz del repositorio, `LICENSE` |
 | Contenedor | `Dockerfile` (python:3.13-slim con `requirements-train.txt`) | `Entregable_3_UAVIDS_2025/Dockerfile` |
 | Integración continua | GitHub Actions ejecuta `pytest` en cada *push* | `.github/workflows/entregable3-pruebas.yml` |
 
@@ -76,12 +76,14 @@ Su reporte firmado (`verificacion_externa/reporte_reproduccion.md`), con la disc
 
 - escribir y depurar el código del modelo, las pruebas, el análisis y el dashboard;
 - ejecutar los experimentos según el protocolo preregistrado;
-- buscar en OpenAlex y arXiv;
+- buscar en OpenAlex, arXiv e IEEE Xplore, y hacer la búsqueda por citación y en repositorios de código;
 - redactar borradores de este libro.
+
+**Otras herramientas y servicios.** RunPod (GPU en la nube) para 31 corridas de BiLSTM y GRU de los conjuntos adicionales; GitHub Actions para la integración continua; GitHub Pages para publicar este libro y Render para el dashboard.
 
 Todas las decisiones metodológicas quedaron registradas con fecha en `design_log.md`, `protocolo.md` y el historial de Git. Las cifras del libro se regeneran desde los resultados al compilarlo. El autor revisó el código y el texto, y puede explicar y modificar en vivo cualquier parte del algoritmo, como exige la sección 6.5 del enunciado.
 
-Firma: ______________________ Donny Torres
+Firma: **Donny Torres**, autor, aprobada el 23/11/2026.
 
 ## Bibliografía
 
