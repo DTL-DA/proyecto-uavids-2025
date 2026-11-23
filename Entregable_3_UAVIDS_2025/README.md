@@ -22,9 +22,9 @@ El detalle está en el libro, publicado en **https://dtl-da.github.io/proyecto-u
 | `experiments/` | Estándar, procedencia, protocolo preregistrado, bitácora de diseño, búsqueda de novedad y análisis (confirmatorio, cuadro 4, ablación, adicionales, robustez y adecuación) |
 | `experiments/resultados/` | Registros JSON por corrida, tablas y resúmenes; `tabla_maestra.csv` tiene una fila por corrida |
 | `artifacts/` | 16 modelos en ONNX con su `metadata.json`, y los precalculados del dashboard |
-| `book/` | Jupyter Book: introducción y capítulos 1 a 11 |
+| `book/` | Jupyter Book: introducción y capítulos 1 a 11; `crear_cuaderno.py` arma con ellos el cuaderno ejecutado `Entregable 3 - UAVIDS-2025.ipynb` de la raíz |
 | `tests/` | Pruebas unitarias del modelo y del dashboard |
-| `verificacion_externa/` | Guía, formatos y script para la verificación por un tercero |
+| `verificacion_externa/` | Scripts de reproducción (`reproducir.py`), del paquete de reproducción (`empaquetar.py`) y de la prueba de humo del dashboard (`humo_dashboard.py`) |
 | `MODEL_CARD.md`, `DATA_STATEMENT.md`, `CITATION.cff`, `LICENSE` | Ficha del modelo, declaración de los datos, cita y licencia |
 | `Dockerfile`, `requirements.txt`, `requirements-train.txt`, `render.yaml` | Entorno del dashboard, entorno completo y despliegue en Render |
 
@@ -37,7 +37,7 @@ Todos los comandos se ejecutan en CPU, con Python 3.13.
    - instalar las dependencias con `pip install -r Entregable_3_UAVIDS_2025/requirements-train.txt`;
    - construir el contenedor desde la raíz del repositorio con `docker build -t uavids-e3 -f Entregable_3_UAVIDS_2025/Dockerfile .`.
 3. **Pruebas.** Ejecutar `python -m pytest tests` desde `Entregable_3_UAVIDS_2025/`.
-4. **Reproducción rápida.** `python verificacion_externa/reproducir.py` verifica los datos, regenera la tabla principal del capítulo 7 y la compara celda por celda con la publicada, y reentrena tres corridas desde cero. Necesita las probabilidades de prueba de las corridas definitivas, que no se versionan por su tamaño y se publican con la *release*.
+4. **Reproducción rápida.** `python verificacion_externa/reproducir.py` verifica los datos, regenera la tabla principal del capítulo 7 y la compara celda por celda con la publicada, y reentrena tres corridas desde cero. Necesita las probabilidades de prueba de las corridas definitivas, que no se versionan por su tamaño. Vienen en `paquete_reproduccion_e3.zip`, publicado con la *release* `entregable-3` junto con su SHA-256, que trae además el repositorio y el CSV de UAVIDS-2025. Basta con descomprimirlo en una carpeta de ruta corta y, desde su raíz, ejecutar `docker build -t uavids-e3 -f Entregable_3_UAVIDS_2025/Dockerfile .` y luego `docker run --rm uavids-e3 python verificacion_externa/reproducir.py`, que tarda de 10 a 30 minutos en CPU y termina con un bloque `===== RESULTADO =====` con la discrepancia máxima.
 5. **Libro.** `jupyter-book build book/` ejecuta todas las celdas y regenera tablas y figuras.
 6. **Dashboard.** `python app.py`, o `gunicorn app:server`, lo levanta en http://localhost:8050. `python verificacion_externa/humo_dashboard.py` hace la prueba de humo contra la versión publicada, o contra la local con `--url http://localhost:8050`.
 7. **Reentrenar todo.** Ejecutar `python training/ejecutar_definitivas.py principal|ablacion|adicionales`, `python training/ejecutar_robustez.py` y `python training/ejecutar_diagnosticos_adicionales.py`, y luego los análisis de `experiments/`. Cada corrida se salta si su JSON ya existe. En CPU toma del orden de un día.

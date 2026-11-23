@@ -1,6 +1,6 @@
 """Reproducción independiente del Entregable 3 (secciones 11, 12 ítem 13 y 14.5.7 del enunciado).
 
-La ejecuta una persona ajena al código, dentro del contenedor (ver GUIA.md):
+Se ejecuta dentro del contenedor, desde la raíz de paquete_reproduccion_e3.zip (ver "Cómo reproducirlo" en README.md):
 
     docker run --name repro uavids-e3 python verificacion_externa/reproducir.py
 

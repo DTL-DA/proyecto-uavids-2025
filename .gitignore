@@ -3,8 +3,10 @@
 !/.gitignore
 !/README.md
 !/requirements.txt
+!/.zenodo.json
 !/Entregable 1 - UAVIDS-2025.ipynb
 !/Entregable 2 - UAVIDS-2025.ipynb
+!/Entregable 3 - UAVIDS-2025.ipynb
 !/Entregable_1_UAVIDS_2025/
 !/Entregable_2_UAVIDS_2025/
 
@@ -53,5 +55,5 @@ _build/
 /Entregable_3_UAVIDS_2025/experiments/novedad/exportaciones/*
 !/Entregable_3_UAVIDS_2025/experiments/novedad/exportaciones/*_resumen_novedad.json
 
-# Salida local de reproducir.py: la de la verificadora se copia a verificacion_externa/resultados/
+# Salida local de reproducir.py
 /Entregable_3_UAVIDS_2025/verificacion_externa/salida/

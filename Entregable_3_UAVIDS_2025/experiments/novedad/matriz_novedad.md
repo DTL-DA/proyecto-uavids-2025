@@ -1,6 +1,6 @@
 # Revisión de novedad del modelo original (sección 6.3)
 
-**Primera consulta:** 22/11/2026, en OpenAlex y arXiv, por programa (`buscar_novedad.py`; exportaciones en `exportaciones/`). Scopus y Web of Science se consultan con acceso institucional (Universidad del Norte) con las mismas cadenas; ver más abajo. **Repetición antes de la entrega:** 26/11/2026.
+**Primera consulta:** 22/11/2026, en OpenAlex y arXiv, por programa (`buscar_novedad.py`; exportaciones en `exportaciones/`). Scopus y Web of Science se consultan con acceso institucional (Universidad del Norte) con las mismas cadenas; ver más abajo. **Repetición antes de la entrega:** 23/11/2026, con el mismo programa (`exportaciones/2026-11-23_resumen_novedad.json`). Los conteos coinciden con los del 22/11 salvo OpenAlex N7, que pasa de 22 a 23 por BRIDGE (ICML 2025), una mezcla de expertos en un modelo fundacional de grafos con cotas de generalización; es otro problema y no cambia la declaración.
 
 ## Cadenas
 
@@ -72,7 +72,7 @@ Hecha el 23/11/2026 con `experiments/novedad/citacion_y_repositorios.py` (result
 - **Repositorios:** 27 repositorios en GitHub con seis consultas y ninguno pertinente en Hugging Face Hub. Las mezclas de expertos para intrusiones que aparecen usan expertos homogéneos y ninguna está aplicada a UAV.
 - **Evidencia convergente para el hallazgo alternativo:** PS-CAHE pierde su ventaja con nodos disjuntos, y Aksu y Gümüş (2026) muestran que las cifras altas en un benchmark público de UAV dependen de la forma de evaluar y de fugas de identificadores. Las dos refuerzan la conclusión de que en UAVIDS-2025 la partición pesa más que el modelo.
 
-## Declaración de novedad (provisional; confirmada en Scopus, Web of Science y con la búsqueda por citación; falta el verificador externo)
+## Declaración de novedad (confirmada en Scopus, Web of Science y con la búsqueda por citación)
 
 Al mejor de nuestro conocimiento y según la búsqueda descrita, no se encontraron estudios que apliquen a la detección de intrusiones en redes de UAV una compuerta por flujo entre un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, entrenada con un esquema cooperativo y con cota de Lipschitz demostrada. Los trabajos más cercanos son:
 
@@ -87,4 +87,4 @@ Frente a todos ellos, la diferencia es de mecanismo o de esquema de entrenamient
 
 ## Verificación por un tercero (D7)
 
-Imera Logreira, colega ajena al diseño, repite **N1 y N5** en OpenAlex (https://openalex.org, filtro "title and abstract") o en Scopus, anota la fecha y el número de resultados, revisa los títulos y confirma o refuta la declaración. Su concepto firmado se anexa al capítulo 4 del libro.
+Los profesores del curso indicaron el 23/11/2026 que esta verificación queda a su cargo, así que se omite en el informe. Las cadenas exactas están en `buscar_novedad.py` (OpenAlex y arXiv) y en `cadenas_scopus_wos.md` (Scopus, Web of Science y los enlaces directos de OpenAlex para N1 y N5).

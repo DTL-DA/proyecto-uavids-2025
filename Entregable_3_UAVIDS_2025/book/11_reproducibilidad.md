@@ -60,13 +60,15 @@ La *release* `entregable-3` del repositorio de GitHub se archiva en Zenodo, que 
 
 ## Reproducción independiente
 
-La reproducción la hace **Imera Logreira**, colega que no participó en el diseño ni en el código, en su propio equipo y sin ayuda técnica del autor. Recibe el paquete `paquete_reproduccion_e3.zip`, que contiene el repositorio, el CSV de UAVIDS-2025 y las probabilidades de prueba de las corridas definitivas, junto con su SHA-256, y sigue la guía `verificacion_externa/GUIA.md`:
+La reproducción por una persona ajena al código, que piden las secciones 11 y 14.5.7 del enunciado, no se hizo, y se declara como limitación (capítulo 10). El procedimiento queda listo para que lo repita cualquier persona, incluidos los profesores al calificar, con los pasos de la sección "Cómo reproducirlo" del `README.md` del Entregable 3:
 
-1. construye el contenedor con el `Dockerfile`;
-2. ejecuta `python verificacion_externa/reproducir.py`, que verifica el SHA-256 de los datos y de la prueba sellada, vuelve a correr el análisis confirmatorio y compara celda por celda la tabla regenerada con la publicada (capítulo 7). También reentrena desde cero tres corridas definitivas (Original, LightGBM y CNN 1D con la semilla 6001) y compara su F1 y sus probabilidades;
-3. corre las pruebas unitarias, compila este libro desde cero y hace la prueba de humo del dashboard.
+1. construir el contenedor con el `Dockerfile`;
+2. ejecutar `python verificacion_externa/reproducir.py`, que verifica el SHA-256 de los datos y de la prueba sellada, vuelve a correr el análisis confirmatorio y compara celda por celda la tabla regenerada con la publicada (capítulo 7). También reentrena desde cero tres corridas definitivas (Original, LightGBM y CNN 1D con la semilla 6001) y compara su F1 y sus probabilidades;
+3. correr las pruebas unitarias, compilar este libro desde cero y hacer la prueba de humo del dashboard.
 
-Su reporte firmado (`verificacion_externa/reporte_reproduccion.md`), con la discrepancia máxima observada, y su concepto sobre la novedad (`verificacion_externa/concepto_novedad.md`, capítulo 4) se anexan aquí.
+El script necesita las probabilidades de prueba de las corridas definitivas, que no se versionan por su tamaño. Vienen, junto con el repositorio y el CSV de UAVIDS-2025, en `paquete_reproduccion_e3.zip`, que se publica con la *release* `entregable-3`.
+
+La corrida del autor con ese script (22/11/2026, Python 3.13.14 y PyTorch 2.6.0 en CPU, 10,4 minutos) encontró los datos íntegros, una discrepancia máxima de 0 en las 465 celdas de la tabla principal, ninguna decisión distinta y el mismo F1, bit a bit, en las tres corridas reentrenadas. Así mismo, el contenedor se construyó en frío desde el paquete de reproducción el 23/11/2026, y en él pasaron las 36 pruebas unitarias y arrancó el dashboard. Esto muestra que el procedimiento funciona de principio a fin, pero no reemplaza la verificación de un tercero.
 
 ## Declaración de autoría, contribuciones y uso de herramientas
 

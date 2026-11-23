@@ -1,4 +1,4 @@
-"""Arma el paquete de reproducción independiente para la verificadora externa.
+"""Arma el paquete de reproducción que se publica con la release entregable-3.
 
     python verificacion_externa/empaquetar.py      ->   ../paquete_reproduccion_e3.zip  (+ .sha256)
 
