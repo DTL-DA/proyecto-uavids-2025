@@ -33,7 +33,7 @@ def layout():
         html.H1("Detección de intrusiones en enjambres de drones", className="mb-3"),
         html.P("Un enjambre de UAV se comunica por una red ad hoc sin infraestructura fija. Un nodo comprometido puede descartar paquetes "
                "(Blackhole), tunelizarlos (Wormhole), suplantar identidades (Sybil) o saturar la red (Flooding). Este tablero compara 15 modelos "
-               "y un modelo original sobre 122 171 flujos simulados de UAVIDS-2025, con un protocolo preregistrado.", className="lead"),
+               "y un modelo original, MoE-ES, sobre 122 171 flujos simulados de UAVIDS-2025, con un protocolo preregistrado.", className="lead"),
         dbc.Row([
             dbc.Col(_stat(f"{len(df):,}".replace(",", " "), "flujos de red (5 clases, 16 atributos)"), md=3, xs=6, className="mb-2"),
             dbc.Col(_stat(num(t.loc[mejor_rival, "F1 macro"], 3), f"F1 macro en prueba del mejor rival ({mejor_rival})"), md=3, xs=6, className="mb-2"),
@@ -70,7 +70,7 @@ def layout():
         _paso("bi-database-check", "Datos", "Deduplicación, log(1 + x) y partición por bloques"),
         _paso("bi-shield-check", "Auditoría", "Fuga, escenarios y determinismo"),
         _paso("bi-diagram-3", "Benchmark", "15 modelos y 20 a 48 semillas, mismo presupuesto"),
-        _paso("bi-cpu", "Modelo original", "Compuerta entre escalones suaves y un experto suave"),
+        _paso("bi-cpu", "Modelo original (MoE-ES)", "Compuerta entre escalones suaves y un experto suave"),
         _paso("bi-clipboard-data", "Protocolo", "Preregistrado con etiqueta de Git"),
         _paso("bi-graph-up", "Pruebas", "3 pruebas por contraste, Holm y potencia"),
         _paso("bi-globe", "Ampliada", "3 conjuntos adicionales y robustez"),

@@ -88,7 +88,7 @@ def layout():
                         dcc.Graph(figure=plots.rangos_friedman(r["rangos medios (1 = mejor)"], r.get("cd_nemenyi")) if r.get("rangos medios (1 = mejor)")
                                   else plots.vacia("Diagrama de diferencia crítica: pendiente de las corridas definitivas", 200), config=plots.CONFIG))
     f = ficha_original()
-    ficha = _card(html.H3("Ficha del modelo original", className="h5"), dbc.Row([
+    ficha = _card(html.H3("Ficha del modelo original (MoE-ES)", className="h5"), dbc.Row([
         dbc.Col([html.P([html.B("Mecanismo: "), "compuerta por flujo entre un experto de escalones suaves (umbrales y temperaturas aprendibles, sesgo de árbol) "
                          "y un experto neuronal suave, con entrenamiento cooperativo y regularizador de balance."]),
                  html.P([html.B("Procedencia: "), "propio, con piezas de Jacobs et al. (1991), Gorishniy et al. (2022) y Shazeer et al. (2017), reimplementadas desde "
