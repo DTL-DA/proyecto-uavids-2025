@@ -8,6 +8,7 @@ repositorio con todas las salidas, como los cuadernos de los Entregables 1 y 2. 
 carpeta del libro, igual que al compilarlo, así que leen los mismos resultados versionados.
 """
 import argparse
+import ast
 import codecs
 import re
 import sys
@@ -44,7 +45,7 @@ PORTADA = """# Entregable 3 · Modelo original y validación rigurosa para detec
 | **Dashboard** | <https://uavids-2025-dashboard.onrender.com> (plan gratuito de Render: la primera visita tras 15 minutos sin uso tarda cerca de un minuto) |
 | **Repositorio** | <https://github.com/DTL-DA/proyecto-uavids-2025>, carpeta `Entregable_3_UAVIDS_2025/` |
 
-Este cuaderno reúne, en el orden del libro, el texto y todo el código de la introducción y de los once capítulos del Jupyter Book, y se entrega ejecutado con todas las salidas. Se genera con `Entregable_3_UAVIDS_2025/book/crear_cuaderno.py` a partir de las mismas fuentes del libro, así que su contenido coincide con la versión publicada.
+Este cuaderno reúne, en el orden del libro, el texto y todo el código de la introducción y de los once capítulos del Jupyter Book, y se entrega ejecutado con todas las salidas: sus celdas de código corrieron en orden, sin errores, como lo muestran sus números de ejecución consecutivos, y las de preparación de cada capítulo terminan con una línea que imprime lo que dejaron definido. Se genera con `Entregable_3_UAVIDS_2025/book/crear_cuaderno.py` a partir de las mismas fuentes del libro, así que su contenido coincide con la versión publicada.
 
 Las corridas costosas, que son las semillas de cada modelo, los conjuntos adicionales, la robustez y la exportación a ONNX, se precalculan con los scripts de `training/` y `experiments/`. Aquí, igual que al compilar el libro, se leen sus resultados versionados y se regeneran todas las tablas, pruebas y figuras. Para ejecutarlo de nuevo desde la raíz del repositorio basta con `python Entregable_3_UAVIDS_2025/book/crear_cuaderno.py`, o con *Run All* en Jupyter, en el entorno de `Entregable_3_UAVIDS_2025/requirements-train.txt`. Las citas aparecen como autor y año, y la lista de referencias está al final, en el capítulo 11."""
 
@@ -168,6 +169,22 @@ def leer_capitulo(ruta: Path, titulo: str, citadas: set) -> list[tuple[str, str]
     return celdas
 
 
+def confirmar_preparacion(codigo: str, capitulo: int) -> str:
+    """Agrega a una celda que no mostró salida (las de preparación: importan y definen) una línea que imprime lo que
+    dejó definido, para que en el cuaderno toda celda ejecutada muestre una salida."""
+    arbol = ast.parse(codigo)
+    nombres = []
+    for nodo in arbol.body:
+        if isinstance(nodo, (ast.Import, ast.ImportFrom)):
+            nombres += [a.asname or a.name.split(".")[0] for a in nodo.names]
+        elif isinstance(nodo, ast.Assign):
+            nombres += [t.id for t in nodo.targets if isinstance(t, ast.Name)]
+        elif isinstance(nodo, (ast.FunctionDef, ast.ClassDef)):
+            nombres.append(nodo.name)
+    lista = ", ".join(dict.fromkeys(nombres))
+    return codigo + f'\nprint("Preparación del capítulo {capitulo} ejecutada. Quedan definidos: {lista}")'
+
+
 def capitulos() -> list[str]:
     toc = (LIBRO / "_toc.yml").read_text(encoding="utf-8")
     return [re.search(r"^root:\s*(\S+)", toc, re.M).group(1)] + re.findall(r"^\s*- file:\s*(\S+)", toc, re.M)
@@ -212,6 +229,13 @@ if __name__ == "__main__":
     cuaderno = armar()
     if not args.sin_ejecutar:
         ejecutar(cuaderno)
+        vacias = [c for c in cuaderno.cells if c.cell_type == "code" and not c.outputs]
+        if vacias:
+            # Segunda ejecución completa, en un núcleo nuevo, para que los números de ejecución sigan consecutivos
+            for c in vacias:
+                c.source = confirmar_preparacion(c.source, int(c.id[1:3]))
+            print(f"{len(vacias)} celdas de preparación sin salida: se les agrega la confirmación y se ejecuta de nuevo")
+            ejecutar(cuaderno)
     nbformat.validate(cuaderno)
     nbformat.write(cuaderno, DESTINO)
     codigo = [c for c in cuaderno.cells if c.cell_type == "code"]
