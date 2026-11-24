@@ -1,4 +1,4 @@
-# Entregable 3 · El escenario pesa más que la arquitectura: validación preregistrada de una mezcla de expertos con escalones suaves para detectar intrusiones en redes de drones (UAVIDS-2025)
+# Entregable 3 · El escenario pesa más que la arquitectura en la detección de intrusiones en drones (UAVIDS-2025)
 
 Proyecto Final de Deep Learning, Maestría en Analítica de Datos, Universidad del Norte. Autor: Donny Torres.
 
