@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introducción &#8212; Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</title>
+    <title>Introducción &#8212; El escenario pesa más que la arquitectura: validación preregistrada de una mezcla de expertos con escalones suaves para detectar intrusiones en redes de drones (UAVIDS-2025)</title>
   
   
   
@@ -197,7 +197,7 @@
   
   
   
-    <p class="title logo__title">Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones</p>
+    <p class="title logo__title">El escenario pesa más que la arquitectura: validación preregistrada de una mezcla de expertos con escalones suaves para detectar intrusiones en redes de drones (UAVIDS-2025)</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -222,8 +222,8 @@
 <li class="toctree-l1"><a class="reference internal" href="02_datos.html">Datos: EDA, auditoría y ficha de datos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_benchmarks.html">Benchmarks: Top 10, baselines y exportación</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_literatura.html">Revisión de literatura y evidencia de novedad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_modelo_diseno.html">Modelo original: limitación, fuente, hipótesis, teoría y diseño</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modelo_implementacion.html">Modelo original: implementación, pruebas, ablación e interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelo_diseno.html">Modelo original (MoE-ES): limitación, fuente, hipótesis, teoría y diseño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelo_implementacion.html">Modelo original (MoE-ES): implementación, pruebas, ablación e interpretabilidad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_validacion.html">Validación: protocolo y pruebas de hipótesis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_evaluacion_ampliada.html">Evaluación ampliada: conjuntos adicionales, robustez y adecuación</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_dashboard.html">Dashboard y despliegue</a></li>
@@ -394,10 +394,11 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduccion">
 <h1>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
-<p><strong>Entregable 3 · Proyecto Final de Deep Learning</strong> · Donny Torres · Maestría en Analítica de Datos, Universidad del Norte · Noviembre de 2026</p>
+<p><strong>El escenario pesa más que la arquitectura: validación preregistrada de una mezcla de expertos con escalones suaves para detectar intrusiones en redes de drones (UAVIDS-2025)</strong></p>
+<p>Proyecto Final de Deep Learning, Entregable 3 · Donny Torres · Maestría en Analítica de Datos, Universidad del Norte · Noviembre de 2026</p>
 <section id="resumen-ejecutivo">
 <h2>Resumen ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Link to this heading">#</a></h2>
-<p>Este entregable propone, implementa y valida un modelo original para detectar intrusiones en redes de drones con UAVIDS-2025: una compuerta que, flujo por flujo, combina un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, con entrenamiento cooperativo y una cota de Lipschitz demostrada. Se comparó con los 10 mejores modelos del Entregable 2, LightGBM y CNN 1D, con un protocolo preregistrado y el mismo presupuesto de ajuste, en la prueba sellada y en tres conjuntos adicionales.</p>
+<p>Este entregable propone, implementa y valida un modelo original, <strong>MoE-ES</strong> (mezcla de expertos con escalones suaves), para detectar intrusiones en redes de drones con UAVIDS-2025: una compuerta que, flujo por flujo, combina un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, con entrenamiento cooperativo y una cota de Lipschitz demostrada. Se comparó con los 10 mejores modelos del Entregable 2, LightGBM y CNN 1D, con un protocolo preregistrado y el mismo presupuesto de ajuste, en la prueba sellada y en tres conjuntos adicionales.</p>
 <p>Con 48 semillas, el original obtiene un F1 macro de 0,850 ± 0,012, frente a 0,875 de LightGBM y 0,859 de CNN-LSTM. Su media es menor que la de 8 de los 12 rivales y ningún contraste rechaza con tres pruebas, de modo que no cumple la condición de superioridad R3 y el tope de calificación es 4,0. Tampoco es el mejor en ningún conjunto adicional. Sí es el más robusto ante ruido (caída de 0,18 frente a 0,32 de LightGBM con σ = 0,5) y ante atributos faltantes.</p>
 <p>El hallazgo principal es otro: en UAVIDS-2025 el escenario de simulación pesa más que la arquitectura. El 70,5 % de la prueba comparte escenario con el entrenamiento, ningún modelo reconoce un escenario no visto (acierto menor del 10 %) y la ventaja de LightGBM desaparece en la validación cruzada 5 × 2. Los 16 modelos se publican en un dashboard con ONNX y en este libro reproducible.</p>
 </section>

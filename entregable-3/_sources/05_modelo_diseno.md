@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 ---
 
-# Modelo original: limitación, fuente, hipótesis, teoría y diseño
+# Modelo original (MoE-ES): limitación, fuente, hipótesis, teoría y diseño
 
 Este capítulo explica por qué se propone el modelo, de dónde viene su mecanismo, qué hipótesis pone a prueba, qué propiedad se demuestra y cómo se tomaron las decisiones de diseño sin tocar los datos de confirmación.
 
@@ -67,7 +67,7 @@ Las predicciones secundarias declaradas a priori son cinco:
 
 ## Formulación
 
-Sea $x \in \mathbb{R}^{d}$ el flujo transformado con $\log(1+x)$ y estandarizado ($d = 16$), y $K_c = 5$ el número de clases. El **experto de umbrales** codifica cada atributo con $T$ escalones suaves:
+El modelo original se llama **MoE-ES**, por mezcla de expertos con escalones suaves; en el código es `ModeloOriginal` y en las tablas, "Original". Sea $x \in \mathbb{R}^{d}$ el flujo transformado con $\log(1+x)$ y estandarizado ($d = 16$), y $K_c = 5$ el número de clases. El **experto de umbrales** codifica cada atributo con $T$ escalones suaves:
 
 $$
 s_{j,t}(x) = \sigma\!\left(\frac{x_j - \theta_{j,t}}{\tau_j}\right), \qquad \tau_j = \tau_{\min} + \operatorname{softplus}(\rho_j), \qquad t = 1,\dots,T,
