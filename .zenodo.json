@@ -8,7 +8,7 @@
       "affiliation": "Maestría en Analítica de Datos, Universidad del Norte"
     }
   ],
-  "license": "MIT",
+  "license": "mit",
   "language": "spa",
   "version": "1.0.0",
   "keywords": ["intrusion detection", "UAV", "mixture of experts", "deep learning", "UAVIDS-2025"],
