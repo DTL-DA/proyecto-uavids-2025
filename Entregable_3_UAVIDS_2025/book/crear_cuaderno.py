@@ -43,7 +43,8 @@ PORTADA = """# Entregable 3 · Modelo original y validación rigurosa para detec
 | **Preregistro** | `Entregable_3_UAVIDS_2025/experiments/protocolo.md`, etiqueta `e3-protocolo` del repositorio, congelado el 22/11/2026 |
 | **Jupyter Book** | <https://dtl-da.github.io/proyecto-uavids-2025/entregable-3/> |
 | **Dashboard** | <https://uavids-2025-dashboard.onrender.com> (plan gratuito de Render: la primera visita tras 15 minutos sin uso tarda cerca de un minuto) |
-| **Repositorio** | <https://github.com/DTL-DA/proyecto-uavids-2025>, carpeta `Entregable_3_UAVIDS_2025/` |
+| **Repositorio** | <https://github.com/DTL-DA/proyecto-uavids-2025>, carpeta `Entregable_3_UAVIDS_2025/`, etiqueta `entregable-3` |
+| **Archivo en Zenodo** | DOI <https://doi.org/10.5281/zenodo.24486475> (versión 1.0.0) |
 
 Este cuaderno reúne, en el orden del libro, el texto y todo el código de la introducción y de los once capítulos del Jupyter Book, y se entrega ejecutado con todas las salidas: sus celdas de código corrieron en orden, sin errores, como lo muestran sus números de ejecución consecutivos, y las de preparación de cada capítulo terminan con una línea que imprime lo que dejaron definido. Se genera con `Entregable_3_UAVIDS_2025/book/crear_cuaderno.py` a partir de las mismas fuentes del libro, así que su contenido coincide con la versión publicada.
 

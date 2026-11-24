@@ -6,7 +6,7 @@ Proyecto final de Deep Learning (Maestría en Analítica de Datos, Universidad d
 |---|---|---|---|
 | 1 | Estado del arte, EDA y baseline con tres modelos | `Entregable 1 - UAVIDS-2025.ipynb` y `Entregable_1_UAVIDS_2025/` | etiqueta `entregable-1` |
 | 2 | Benchmark de 16 modelos con inferencia estadística | `Entregable 2 - UAVIDS-2025.ipynb` y `Entregable_2_UAVIDS_2025/` | etiqueta `entregable-2` y su [release](https://github.com/DTL-DA/proyecto-uavids-2025/releases/tag/entregable-2) |
-| 3 | Modelo original, validación preregistrada en cuatro conjuntos de datos y dashboard desplegado | `Entregable 3 - UAVIDS-2025.ipynb` y `Entregable_3_UAVIDS_2025/` (ver su [README](Entregable_3_UAVIDS_2025/README.md)) | rama `entregable-3`; etiqueta `entregable-3` al entregar |
+| 3 | Modelo original, validación preregistrada en cuatro conjuntos de datos y dashboard desplegado | `Entregable 3 - UAVIDS-2025.ipynb` y `Entregable_3_UAVIDS_2025/` (ver su [README](Entregable_3_UAVIDS_2025/README.md)) | etiqueta `entregable-3`, su [release](https://github.com/DTL-DA/proyecto-uavids-2025/releases/tag/entregable-3) y DOI [10.5281/zenodo.24486475](https://doi.org/10.5281/zenodo.24486475) |
 
 ## Entregable 3: modelo original y validación rigurosa
 

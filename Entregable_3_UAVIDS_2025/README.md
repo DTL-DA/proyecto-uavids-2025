@@ -12,6 +12,8 @@ Este entregable propone un modelo original para detectar intrusiones en redes de
 
 El detalle está en el libro, publicado en **https://dtl-da.github.io/proyecto-uavids-2025/entregable-3/**, y el dashboard está desplegado en **https://uavids-2025-dashboard.onrender.com** (plan gratuito de Render: la primera visita tras 15 minutos sin uso tarda cerca de un minuto). Su fuente es `book/`, que se compila ejecutando todas las celdas sobre los resultados versionados, y se publica con `python book/publicar.py` en la rama `gh-pages`.
 
+La versión entregada es la etiqueta `entregable-3`, con su [release](https://github.com/DTL-DA/proyecto-uavids-2025/releases/tag/entregable-3), que trae el paquete de reproducción, y está archivada en Zenodo con el DOI [10.5281/zenodo.24486475](https://doi.org/10.5281/zenodo.24486475) (versión 1.0.0). El DOI [10.5281/zenodo.24486474](https://doi.org/10.5281/zenodo.24486474) reúne todas las versiones.
+
 ## Estructura
 
 | Carpeta o archivo | Contenido |

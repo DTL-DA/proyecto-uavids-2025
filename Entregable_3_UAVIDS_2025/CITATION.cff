@@ -7,7 +7,15 @@ authors:
     given-names: Donny
     affiliation: "Maestría en Analítica de Datos, Universidad del Norte"
 version: "1.0.0"
-date-released: "2026-11-26"
+date-released: "2026-11-23"
+doi: "10.5281/zenodo.24486475"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24486475"
+    description: "Versión 1.0.0 (release entregable-3)"
+  - type: doi
+    value: "10.5281/zenodo.24486474"
+    description: "Todas las versiones"
 license: MIT
 repository-code: "https://github.com/DTL-DA/proyecto-uavids-2025"
 keywords:
