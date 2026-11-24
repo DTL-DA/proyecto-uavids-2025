@@ -4,7 +4,7 @@ Formato de Mitchell et al. (2019), *Model Cards for Model Reporting*. Todas las 
 
 ## Detalles del modelo
 
-- **Nombre:** modelo original del Entregable 3, una mezcla de dos expertos con compuerta por flujo.
+- **Nombre:** MoE-ES (mezcla de expertos con escalones suaves), el modelo original del Entregable 3: una mezcla de dos expertos con compuerta por flujo. En el código es `ModeloOriginal` y en las tablas y el dashboard, "Original".
 - **Autor:** Donny Torres, Maestría en Analítica de Datos, Universidad del Norte. Noviembre de 2026. Versión 1.0.0.
 - **Arquitectura:**
   - **Experto de umbrales:** un codificador de escalones suaves, s = σ((x − θ)/τ), con T = 8 umbrales aprendibles por atributo y temperatura τ ≥ τ_min = 0,05, seguido de un MLP(64).

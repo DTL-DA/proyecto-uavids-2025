@@ -1,8 +1,8 @@
-# Entregable 3 · Modelo original y validación rigurosa (UAVIDS-2025)
+# Entregable 3 · El escenario pesa más que la arquitectura: validación preregistrada de una mezcla de expertos con escalones suaves para detectar intrusiones en redes de drones (UAVIDS-2025)
 
 Proyecto Final de Deep Learning, Maestría en Analítica de Datos, Universidad del Norte. Autor: Donny Torres.
 
-Este entregable propone un modelo original para detectar intrusiones en redes de drones: una **compuerta por flujo entre un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave**, con entrenamiento cooperativo y una cota de Lipschitz demostrada. El modelo se compara con el Top 10 del Entregable 2, LightGBM y CNN 1D bajo un protocolo preregistrado, en la prueba sellada de UAVIDS-2025 y en tres conjuntos adicionales (UAV-NIDD, UNSW-NB15 y UNR-IDD), y se despliega en un dashboard junto con los demás modelos.
+Este entregable propone un modelo original, **MoE-ES** (mezcla de expertos con escalones suaves), para detectar intrusiones en redes de drones: una **compuerta por flujo entre un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave**, con entrenamiento cooperativo y una cota de Lipschitz demostrada. El modelo se compara con el Top 10 del Entregable 2, LightGBM y CNN 1D bajo un protocolo preregistrado, en la prueba sellada de UAVIDS-2025 y en tres conjuntos adicionales (UAV-NIDD, UNSW-NB15 y UNR-IDD), y se despliega en un dashboard junto con los demás modelos.
 
 ## Resultados principales
 

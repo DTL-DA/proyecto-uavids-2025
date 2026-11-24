@@ -1,10 +1,12 @@
 # Introducción
 
-**Entregable 3 · Proyecto Final de Deep Learning** · Donny Torres · Maestría en Analítica de Datos, Universidad del Norte · Noviembre de 2026
+**El escenario pesa más que la arquitectura: validación preregistrada de una mezcla de expertos con escalones suaves para detectar intrusiones en redes de drones (UAVIDS-2025)**
+
+Proyecto Final de Deep Learning, Entregable 3 · Donny Torres · Maestría en Analítica de Datos, Universidad del Norte · Noviembre de 2026
 
 ## Resumen ejecutivo
 
-Este entregable propone, implementa y valida un modelo original para detectar intrusiones en redes de drones con UAVIDS-2025: una compuerta que, flujo por flujo, combina un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, con entrenamiento cooperativo y una cota de Lipschitz demostrada. Se comparó con los 10 mejores modelos del Entregable 2, LightGBM y CNN 1D, con un protocolo preregistrado y el mismo presupuesto de ajuste, en la prueba sellada y en tres conjuntos adicionales.
+Este entregable propone, implementa y valida un modelo original, **MoE-ES** (mezcla de expertos con escalones suaves), para detectar intrusiones en redes de drones con UAVIDS-2025: una compuerta que, flujo por flujo, combina un experto de escalones suaves con umbrales aprendibles y un experto neuronal suave, con entrenamiento cooperativo y una cota de Lipschitz demostrada. Se comparó con los 10 mejores modelos del Entregable 2, LightGBM y CNN 1D, con un protocolo preregistrado y el mismo presupuesto de ajuste, en la prueba sellada y en tres conjuntos adicionales.
 
 Con 48 semillas, el original obtiene un F1 macro de 0,850 ± 0,012, frente a 0,875 de LightGBM y 0,859 de CNN-LSTM. Su media es menor que la de 8 de los 12 rivales y ningún contraste rechaza con tres pruebas, de modo que no cumple la condición de superioridad R3 y el tope de calificación es 4,0. Tampoco es el mejor en ningún conjunto adicional. Sí es el más robusto ante ruido (caída de 0,18 frente a 0,32 de LightGBM con σ = 0,5) y ante atributos faltantes.
 

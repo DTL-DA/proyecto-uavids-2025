@@ -158,7 +158,9 @@ def indice(identificador: str | None) -> str:
     enlaces["DOI de Zenodo"] = f"https://doi.org/{identificador}" if identificador else "se asigna al publicar la release `entregable-3`"
     filas_enlaces = "".join(f"| {k} | {v} |\n" for k, v in enlaces.items())
     filas = "".join(f"| `{c}/` | {d} |\n" for c, (d, _) in PRODUCTOS.items())
-    return f"""# Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones (UAVIDS-2025)
+    return f"""# El escenario pesa más que la arquitectura: validación preregistrada de una mezcla de expertos con escalones suaves para detectar intrusiones en redes de drones (UAVIDS-2025)
+
+**Proyecto Final de Deep Learning, Entregable 3** · Modelo original MoE-ES (mezcla de expertos con escalones suaves)
 
 **Autor:** Donny Torres · Maestría en Analítica de Datos, Universidad del Norte · Deep Learning · Noviembre de 2026
 

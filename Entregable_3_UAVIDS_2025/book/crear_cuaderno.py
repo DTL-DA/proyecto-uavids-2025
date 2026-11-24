@@ -29,9 +29,9 @@ INICIO_CELDA = re.compile(r"^```\{code-cell\}")
 CITA = re.compile(r"\{cite:([pt])\}`([^`]+)`")
 ETIQUETA_ECUACION = re.compile(r"^\$\$\s*\(.+\)\s*$")
 
-PORTADA = """# Entregable 3 · Modelo original y validación rigurosa para detectar intrusiones en redes de drones
+PORTADA = """# El escenario pesa más que la arquitectura: validación preregistrada de una mezcla de expertos con escalones suaves para detectar intrusiones en redes de drones (UAVIDS-2025)
 
-**Compuerta por flujo entre un experto de escalones suaves y un experto neuronal, protocolo preregistrado, evaluación ampliada en tres conjuntos adicionales y despliegue en un dashboard**
+**Proyecto Final de Deep Learning, Entregable 3 · Modelo original MoE-ES (mezcla de expertos con escalones suaves), protocolo preregistrado, evaluación ampliada en tres conjuntos adicionales y despliegue en un dashboard**
 
 | | |
 |---|---|

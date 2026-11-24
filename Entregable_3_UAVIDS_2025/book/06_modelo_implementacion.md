@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 ---
 
-# Modelo original: implementación, pruebas, ablación e interpretabilidad
+# Modelo original (MoE-ES): implementación, pruebas, ablación e interpretabilidad
 
 ```{code-cell} ipython3
 :tags: [hide-input]
