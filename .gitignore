@@ -46,6 +46,7 @@ _build/
 /Entregable_3_UAVIDS_2025/data/raw/
 /Entregable_3_UAVIDS_2025/experiments/diseno/corridas/
 /Entregable_3_UAVIDS_2025/book/_build/
+/Entregable_3_UAVIDS_2025/entregables/
 /Entregable_3_UAVIDS_2025/experiments/**/*.npy
 /Entregable_3_UAVIDS_2025/experiments/**/*.pt
 /Entregable_3_UAVIDS_2025/experiments/**/*.tmp

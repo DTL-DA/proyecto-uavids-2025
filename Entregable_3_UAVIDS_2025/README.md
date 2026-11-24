@@ -25,6 +25,7 @@ El detalle está en el libro, publicado en **https://dtl-da.github.io/proyecto-u
 | `book/` | Jupyter Book: introducción y capítulos 1 a 11; `crear_cuaderno.py` arma con ellos el cuaderno ejecutado `Entregable 3 - UAVIDS-2025.ipynb` de la raíz |
 | `tests/` | Pruebas unitarias del modelo y del dashboard |
 | `verificacion_externa/` | Scripts de reproducción (`reproducir.py`), del paquete de reproducción (`empaquetar.py`) y de la prueba de humo del dashboard (`humo_dashboard.py`) |
+| `organizar_entregables.py` | Reúne los productos de la sección 12 del enunciado en `entregables/` (sin versionar), imprime el libro en PDF y arma `Entregable_3_UAVIDS-2025.zip` y `Jupyter_Book_E3_sitio_web.zip` en la raíz |
 | `MODEL_CARD.md`, `DATA_STATEMENT.md`, `CITATION.cff`, `LICENSE` | Ficha del modelo, declaración de los datos, cita y licencia |
 | `Dockerfile`, `requirements.txt`, `requirements-train.txt`, `render.yaml` | Entorno del dashboard, entorno completo y despliegue en Render |
 
