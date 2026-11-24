@@ -30,7 +30,7 @@ RAIZ = Path("..").resolve()
 | Rangos de hiperparámetros | lr ∈ {10⁻⁴, 3·10⁻⁴, 10⁻³, 3·10⁻³}, weight_decay ∈ {0, 10⁻⁵, 10⁻⁴}, lote ∈ {128, 256, 512}: las mismas 12 configuraciones para todos los modelos profundos | `configuracion/experimento.json` del E2 |
 | Número de ejecuciones y dispersión | De 20 a 48 semillas por modelo en el problema principal y 10 en cada conjunto adicional; media ± DE e IC 95 % | Capítulos 3, 7 y 8 |
 | Datos | UAVIDS-2025 (Zenodo, CC BY 4.0) verificado con SHA-256; tres conjuntos adicionales con procedencia, licencia y SHA-256 | `data/procedencia_conjuntos_adicionales.md` |
-| Código | Repositorio de GitHub `DTL-DA/proyecto-uavids-2025`, rama `entregable-3`, etiquetas `e3-estandar` y `e3-protocolo`. Licencia MIT, confirmada por el autor el 23/11/2026; los datos conservan sus licencias (`DATA_STATEMENT.md`) | Raíz del repositorio, `LICENSE` |
+| Código | Repositorio de GitHub `DTL-DA/proyecto-uavids-2025`, rama `entregable-3`, etiquetas `e3-estandar`, `e3-protocolo` y `entregable-3`; archivo en Zenodo con el DOI 10.5281/zenodo.24486475. Licencia MIT, confirmada por el autor el 23/11/2026; los datos conservan sus licencias (`DATA_STATEMENT.md`) | Raíz del repositorio, `LICENSE` |
 | Contenedor | `Dockerfile` (python:3.13-slim con `requirements-train.txt`) | `Entregable_3_UAVIDS_2025/Dockerfile` |
 | Integración continua | GitHub Actions ejecuta `pytest` en cada *push* | `.github/workflows/entregable3-pruebas.yml` |
 
@@ -56,7 +56,7 @@ tiempo.round(2)
 
 ## Archivo versionado con identificador persistente
 
-La *release* `entregable-3` del repositorio de GitHub se archiva en Zenodo, que le asigna un DOI. El DOI se cita aquí cuando se publique la *release* (sección 12, entregable 11).
+La *release* `entregable-3` del repositorio de GitHub, publicada el 23/11/2026, está archivada en Zenodo con el DOI [10.5281/zenodo.24486475](https://doi.org/10.5281/zenodo.24486475), versión 1.0.0 {cite:p}`torres2026uavidse3`. El DOI [10.5281/zenodo.24486474](https://doi.org/10.5281/zenodo.24486474) reúne todas las versiones y apunta siempre a la más reciente. La *release* trae además el paquete de reproducción `paquete_reproduccion_e3.zip` con su SHA-256 (sección 12, entregable 11).
 
 ## Reproducción independiente
 
