@@ -29,7 +29,7 @@ INICIO_CELDA = re.compile(r"^```\{code-cell\}")
 CITA = re.compile(r"\{cite:([pt])\}`([^`]+)`")
 ETIQUETA_ECUACION = re.compile(r"^\$\$\s*\(.+\)\s*$")
 
-PORTADA = """# El escenario pesa más que la arquitectura en la detección de intrusiones en drones (UAVIDS-2025)
+PORTADA = """# Detección de intrusiones en redes de drones con Deep Learning (UAVIDS-2025): MoE-ES y validación preregistrada
 
 **Proyecto Final de Deep Learning, Entregable 3 · Modelo original MoE-ES (mezcla de expertos con escalones suaves), protocolo preregistrado, evaluación ampliada en tres conjuntos adicionales y despliegue en un dashboard**
 

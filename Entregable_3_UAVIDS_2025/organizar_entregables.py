@@ -158,7 +158,7 @@ def indice(identificador: str | None) -> str:
     enlaces["DOI de Zenodo"] = f"https://doi.org/{identificador}" if identificador else "se asigna al publicar la release `entregable-3`"
     filas_enlaces = "".join(f"| {k} | {v} |\n" for k, v in enlaces.items())
     filas = "".join(f"| `{c}/` | {d} |\n" for c, (d, _) in PRODUCTOS.items())
-    return f"""# El escenario pesa más que la arquitectura en la detección de intrusiones en drones (UAVIDS-2025)
+    return f"""# Detección de intrusiones en redes de drones con Deep Learning (UAVIDS-2025): MoE-ES y validación preregistrada
 
 **Proyecto Final de Deep Learning, Entregable 3** · Modelo original MoE-ES (mezcla de expertos con escalones suaves)
 

@@ -1,6 +1,6 @@
 # Introducción
 
-**El escenario pesa más que la arquitectura en la detección de intrusiones en drones (UAVIDS-2025)**
+**Detección de intrusiones en redes de drones con Deep Learning (UAVIDS-2025): MoE-ES y validación preregistrada**
 
 Proyecto Final de Deep Learning, Entregable 3 · Donny Torres · Maestría en Analítica de Datos, Universidad del Norte · Noviembre de 2026
 
